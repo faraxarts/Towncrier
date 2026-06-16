@@ -1,4 +1,4 @@
-const Course = require("../models/Course");
+const Course = require("../models/course");
 const AssignmentSubmission = require("../models/AssignmentSubmission");
 const UserLevelAccess = require("../models/UserLevelAccess");
 

@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const Course = require("../models/Course");
+const Course = require("../models/course");
 const Level = require("../models/Level");
 const Academy = require("../models/Academy");
 const { createCourseNotificationIfNeeded } = require("../services/notificationService");

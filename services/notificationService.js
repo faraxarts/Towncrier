@@ -1,5 +1,5 @@
 const Notification = require("../models/Notification");
-const Course = require("../models/Course");
+const Course = require("../models/course");
 const Event = require("../models/Event");
 
 async function createCourseNotificationIfNeeded(courseId) {

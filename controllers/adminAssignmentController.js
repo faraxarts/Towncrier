@@ -1,5 +1,5 @@
 const Academy = require("../models/Academy");
-const Course = require("../models/Course");
+const Course = require("../models/course");
 const AssignmentSubmission = require("../models/AssignmentSubmission");
 
 exports.getAllAssignmentSubmissions = async (req, res) => {

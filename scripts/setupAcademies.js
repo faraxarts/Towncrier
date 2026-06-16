@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const Academy = require("../models/Academy");
 const Level = require("../models/Level");
-const Course = require("../models/Course");
+const Course = require("../models/course");
 
 async function run() {
   try {
