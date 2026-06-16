@@ -1,7 +1,7 @@
 const Academy = require("../models/Academy");
 const AcademyEnrollment = require("../models/AcademyEnrollment");
 const Level = require("../models/Level");
-const Course = require("../models/Course");
+const Course = require("../models/course");
 const UserLevelAccess = require("../models/UserLevelAccess");
 const ManualPaymentRequest = require("../models/ManualPaymentRequest");
 
