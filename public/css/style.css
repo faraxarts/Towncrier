@@ -7,6 +7,7 @@
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
 */
 
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap');
 *,
 ::before,
 ::after {
@@ -2839,4 +2840,13 @@ video,
 iframe,
 svg {
   max-width: 100%;
+}
+
+.house-of-bread {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #6B46C1;
+  text-transform: uppercase;
 }
