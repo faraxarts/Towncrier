@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Levels | Admin</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="bg-[#f7f7f8] text-gray-900">
+
+  <div class="min-h-screen lg:grid lg:grid-cols-[280px_1fr]">
+    <%- include("../partials/admin-sidebar") %>
+
+    <main class="px-6 py-8 md:px-10 lg:px-12">
+      <section>
+        <div class="max-w-7xl mx-auto">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+            <div>
+              <h1 class="text-4xl font-extrabold text-gray-950 mb-2">Manage Levels</h1>
+              <p class="text-lg text-slate-600">Create and manage academy levels.</p>
+            </div>
+
+            <div class="flex gap-3 flex-wrap">
+              <a href="/admin" class="rounded-2xl bg-white border border-gray-200 px-5 py-3 font-semibold text-gray-800 hover:border-[#6B46C1] hover:text-[#6B46C1] transition">Back to Dashboard</a>
+              <a href="/admin/levels/new" class="rounded-2xl bg-[#6B46C1] text-white px-5 py-3 font-semibold hover:bg-purple-700 transition">Add New Level</a>
+            </div>
+          </div>
+
+          <form method="GET" action="/admin/levels" class="bg-white border border-gray-100 rounded-[24px] shadow-sm p-5 md:p-6 mb-8">
+            <div class="flex flex-col md:flex-row gap-4 md:items-end">
+              <div class="flex-1">
+                <label class="block text-sm font-semibold mb-2">Filter by Academy</label>
+                <select name="academy" class="w-full rounded-2xl border border-gray-200 px-4 py-3.5">
+                  <option value="">All academies</option>
+                  <% academies.forEach((academy) => { %>
+                    <option value="<%= academy._id %>" <%= String(selectedAcademy) === String(academy._id) ? "selected" : "" %>>
+                      <%= academy.name %>
+                    </option>
+                  <% }) %>
+                </select>
+              </div>
+
+              <div class="flex gap-3">
+                <button type="submit" class="rounded-2xl bg-[#6B46C1] text-white px-5 py-3 font-semibold hover:bg-purple-700 transition">
+                  Apply Filter
+                </button>
+                <a href="/admin/levels" class="rounded-2xl bg-white border border-gray-200 px-5 py-3 font-semibold text-gray-800">
+                  Clear
+                </a>
+              </div>
+            </div>
+          </form>
+
+          <div class="bg-white border border-gray-100 rounded-[24px] shadow-sm overflow-hidden">
+            <% if (!levels.length) { %>
+              <div class="p-10 text-center">
+                <p class="text-2xl font-semibold text-gray-900">No levels found</p>
+              </div>
+            <% } else { %>
+              <% levels.forEach((level, index) => { %>
+                <div class="p-8 <%= index !== levels.length - 1 ? 'border-b border-gray-100' : '' %>">
+                  <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
+                    <div>
+                      <div class="flex items-center gap-3 mb-3">
+                        <h2 class="text-2xl font-extrabold text-gray-950"><%= level.title %></h2>
+                        <span class="inline-flex rounded-full px-3 py-1 text-sm font-semibold <%= level.isPublished ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' %>">
+                          <%= level.isPublished ? 'Published' : 'Draft' %>
+                        </span>
+                      </div>
+
+                      <p class="text-base text-slate-500 mb-2"><strong>Academy:</strong> <%= level.academy ? level.academy.name : "Not assigned" %></p>
+                      <p class="text-base text-slate-500 mb-2"><strong>Order:</strong> <%= level.order %></p>
+                      <p class="text-base text-slate-500 mb-2"><strong>Display Price:</strong> <%= level.price || "Not set" %></p>
+                      <p class="text-base text-slate-500 mb-2"><strong>Naira:</strong> <%= level.priceNaira ? `₦${Number(level.priceNaira).toLocaleString()}` : "Not set" %></p>
+                      <p class="text-base text-slate-500 mb-2"><strong>Dollars:</strong> <%= level.priceUsd ? `$${Number(level.priceUsd).toLocaleString()}` : "Not set" %></p>
+                      <p class="text-base text-slate-500 mb-2"><strong>Slug:</strong> <%= level.slug %></p>
+                      <p class="text-base text-slate-700 mt-4"><%= level.description || "No description" %></p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3">
+                      <a href="/admin/levels/<%= level._id %>/edit<%= selectedAcademy ? `?academy=${selectedAcademy}` : '' %>" class="rounded-2xl bg-[#6B46C1] text-white px-5 py-3 font-semibold hover:bg-purple-700 transition">
+                        Edit
+                      </a>
+
+                      <form action="/admin/levels/<%= level._id %>/toggle-publish" method="POST">
+                        <input type="hidden" name="redirectAcademy" value="<%= selectedAcademy || '' %>">
+                        <button type="submit" class="rounded-2xl bg-white border border-gray-200 px-5 py-3 font-semibold text-gray-800 hover:border-[#6B46C1] hover:text-[#6B46C1] transition">
+                          <%= level.isPublished ? "Unpublish" : "Publish" %>
+                        </button>
+                      </form>
+
+                      <form action="/admin/levels/<%= level._id %>/delete" method="POST" onsubmit="return confirm('Delete this level?');">
+                        <input type="hidden" name="redirectAcademy" value="<%= selectedAcademy || '' %>">
+                        <button type="submit" class="rounded-2xl bg-white border border-red-200 px-5 py-3 font-semibold text-red-600 hover:bg-red-50 transition">
+                          Delete
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              <% }) %>
+            <% } %>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/admin-shell.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Messages | Admin</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="bg-[#f7f7f8] text-gray-900">
+
+  <div class="min-h-screen lg:grid lg:grid-cols-[280px_1fr]">
+    <%- include("partials/admin-sidebar") %>
+
+    <main class="px-6 py-8 md:px-10 lg:px-12">
+
+  <section class="py-10 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <h1 class="text-4xl font-extrabold text-gray-950 mb-2">Contact Messages</h1>
+          <p class="text-lg text-slate-600">All general contact submissions.</p>
+        </div>
+        <a href="/admin" class="rounded-2xl bg-[#6B46C1] text-white px-5 py-3 font-semibold hover:bg-purple-700 transition">
+          Back to Dashboard
+        </a>
+      </div>
+
+      <div class="bg-white border border-gray-100 rounded-[24px] shadow-sm overflow-hidden">
+        <% if (!messages.length) { %>
+          <div class="p-10 text-center">
+            <p class="text-2xl font-semibold text-gray-900">No contact messages yet</p>
+          </div>
+        <% } else { %>
+          <% messages.forEach((item, index) => { %>
+            <div class="p-8 <%= index !== messages.length - 1 ? 'border-b border-gray-100' : '' %>">
+              <h2 class="text-2xl font-extrabold text-gray-950 mb-2"><%= item.fullName %></h2>
+              <p class="text-lg text-slate-700 mb-1"><strong>Email:</strong> <%= item.email %></p>
+              <p class="text-lg text-slate-700 mb-1"><strong>Phone:</strong> <%= item.phone || "N/A" %></p>
+              <p class="text-lg text-slate-700 mb-1"><strong>Category:</strong> <%= item.category %></p>
+              <p class="text-lg text-slate-700 mb-1"><strong>Subject:</strong> <%= item.subject %></p>
+              <p class="text-lg text-slate-700 mb-1"><strong>Status:</strong> <%= item.status %></p>
+              <p class="text-lg text-slate-700 mt-4"><strong>Message:</strong> <%= item.message %></p>
+              <p class="text-sm text-slate-500 mt-4">
+                Submitted on <%= new Date(item.createdAt).toLocaleString() %>
+              </p>
+            </div>
+          <% }) %>
+        <% } %>
+      </div>
+    </div>
+  </section>
+
+    </main>
+  </div>
+
+  <script src="/js/admin-shell.js"></script>
+</body>
+</html>

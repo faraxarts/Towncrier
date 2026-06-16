@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= leadProfile.name %> | Town Crier</title>
+  <link rel="stylesheet" href="/css/style.css" />
+
+  <style>
+    .lead-profile-page {
+      background: #f7f7f8;
+    }
+
+    .lead-profile-shell {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 4rem;
+    }
+
+    .lead-profile-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+      align-items: start;
+    }
+
+    /* Mobile/default: image first */
+    .lead-media-column {
+      order: 1;
+    }
+
+    .lead-content-column {
+      order: 2;
+      min-width: 0;
+    }
+
+    .lead-sticky-wrap {
+      position: static;
+    }
+
+    .lead-sticky-media {
+      position: relative;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      background: #ffffff;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      box-shadow: 0 10px 35px rgba(15, 23, 42, 0.08);
+    }
+
+    .lead-sticky-media img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    .lead-sticky-overlay {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 1.2rem;
+      background: linear-gradient(
+        to top,
+        rgba(15, 23, 42, 0.84),
+        rgba(15, 23, 42, 0.18),
+        transparent
+      );
+      color: white;
+    }
+
+    .lead-kicker {
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #6b46c1;
+      margin-bottom: 1rem;
+    }
+
+    .lead-mobile-kicker {
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .lead-title {
+      font-size: clamp(2.2rem, 5vw, 4.8rem);
+      line-height: 1.05;
+      font-weight: 800;
+      color: #111827;
+      margin-bottom: 1rem;
+    }
+
+    .lead-role-line {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #6b46c1;
+      margin-bottom: 1.25rem;
+    }
+
+    .lead-intro {
+      font-size: 1.02rem;
+      line-height: 1.85;
+      color: #475569;
+      margin-bottom: 1.5rem;
+    }
+
+    .lead-content-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .lead-copy-block {
+      background: white;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+      padding: 1.25rem;
+    }
+
+    .lead-copy-block p {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: #475569;
+      margin-bottom: 1.15rem;
+    }
+
+    .lead-copy-block p:last-child {
+      margin-bottom: 0;
+    }
+
+    .lead-pills-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .lead-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      border: 1px solid rgba(15, 23, 42, 0.12);
+      background: #fff;
+      padding: 0.78rem 1rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #64748b;
+    }
+
+    .lead-pill--primary {
+      border-color: rgba(107, 70, 193, 0.2);
+      background: rgba(107, 70, 193, 0.06);
+      color: #6b46c1;
+    }
+
+    .lead-action-card {
+      background: white;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+      padding: 1.25rem;
+    }
+
+    .lead-action-card h3 {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: #111827;
+      margin-bottom: 0.85rem;
+    }
+
+    .lead-action-card p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #64748b;
+      margin-bottom: 1.5rem;
+    }
+
+    .lead-action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+    }
+
+    .lead-action-primary,
+    .lead-action-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 3.2rem;
+      border-radius: 1rem;
+      padding: 0.95rem 1.25rem;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .lead-action-primary {
+      background: #6b46c1;
+      color: white;
+    }
+
+    .lead-action-primary:hover {
+      background: #5b35b5;
+    }
+
+    .lead-action-secondary {
+      border: 1px solid #6b46c1;
+      color: #6b46c1;
+      background: white;
+    }
+
+    .lead-action-secondary:hover {
+      background: rgba(107, 70, 193, 0.06);
+    }
+
+    .lead-mobile-header {
+      display: block;
+    }
+
+    .lead-desktop-header {
+      display: none;
+    }
+
+    .lead-media-caption-name {
+      font-size: 1.45rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 0.25rem;
+    }
+
+    .lead-media-caption-role {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .lead-verse-section {
+      padding: 0 1rem 4rem;
+    }
+
+    .lead-verse-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .lead-verse-inner .verse-text {
+      font-size: clamp(1.2rem, 2.5vw, 2.2rem);
+      font-weight: 800;
+      color: #111827;
+      line-height: 1.45;
+      margin-bottom: 0.7rem;
+    }
+
+    .lead-verse-inner .verse-reference {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #6b46c1;
+    }
+
+    @media (min-width: 768px) {
+      .lead-profile-shell {
+        padding: 2rem 1.5rem 5rem;
+      }
+
+      .lead-copy-block,
+      .lead-action-card {
+        padding: 1.75rem;
+      }
+
+      .lead-verse-section {
+        padding: 0 1.5rem 5rem;
+      }
+
+      .lead-verse-inner {
+        padding: 2rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .lead-profile-shell {
+        padding: 3.5rem 2rem 6rem;
+      }
+
+      .lead-profile-grid {
+        grid-template-columns: minmax(360px, 0.92fr) minmax(0, 1.3fr);
+        gap: 3rem;
+        align-items: stretch;
+      }
+
+      .lead-media-column {
+        order: 1;
+        align-self: stretch;
+        min-height: 100%;
+      }
+
+      .lead-content-column {
+        order: 2;
+      }
+
+      /*
+        This is the key fix:
+        the left column now stretches to the full height of the entire profile section,
+        so the sticky image remains visible while the right column scrolls.
+      */
+      .lead-sticky-wrap {
+        position: sticky;
+        top: 7.25rem;
+      }
+
+      .lead-sticky-media {
+        height: calc(100vh - 9rem);
+        min-height: 620px;
+        max-height: 860px;
+        border-radius: 2rem;
+      }
+
+      .lead-sticky-media img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .lead-mobile-header {
+        display: none;
+      }
+
+      .lead-desktop-header {
+        display: block;
+      }
+
+      .lead-copy-block,
+      .lead-action-card {
+        padding: 2rem;
+        border-radius: 1.8rem;
+      }
+
+      .lead-content-stack {
+        gap: 1.75rem;
+      }
+
+      .lead-media-caption-name {
+        font-size: 1.75rem;
+      }
+
+      .lead-media-caption-role {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body class="lead-profile-page text-gray-900">
+  <%- include("partials/header") %>
+
+  <section class="lead-profile-shell">
+    <div class="lead-profile-grid">
+
+      <div class="lead-media-column">
+        <div class="lead-sticky-wrap">
+          <div class="lead-sticky-media">
+            <img src="/images/meet_lead2.JPG" alt="<%= leadProfile.name %>" />
+            <div class="lead-sticky-overlay">
+              <p class="lead-media-caption-name"><%= leadProfile.name %></p>
+              <p class="lead-media-caption-role"><%= leadProfile.role %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lead-content-column">
+        <div class="lead-mobile-header">
+          <p class="lead-kicker lead-mobile-kicker"><%= leadProfile.heroKicker %></p>
+          <h1 class="lead-title"><%= leadProfile.name %></h1>
+          <p class="lead-role-line"><%= leadProfile.role %></p>
+          <p class="lead-intro"><%= leadProfile.heroText %></p>
+        </div>
+
+        <div class="lead-content-stack">
+          <div class="lead-copy-block lead-desktop-header">
+            <p class="lead-kicker"><%= leadProfile.heroKicker %></p>
+            <h1 class="lead-title"><%= leadProfile.name %></h1>
+            <p class="lead-role-line"><%= leadProfile.role %></p>
+            <p class="lead-intro"><%= leadProfile.heroText %></p>
+          </div>
+
+          <div class="lead-copy-block">
+            <% leadProfile.paragraphs.forEach((paragraph) => { %>
+              <p><%= paragraph %></p>
+            <% }) %>
+          </div>
+
+          <div class="lead-copy-block">
+            <p class="lead-kicker">Ministry Focus</p>
+            <div class="lead-pills-wrap">
+              <% leadProfile.highlights.forEach((item, index) => { %>
+                <span class="lead-pill <%= index === 0 ? 'lead-pill--primary' : '' %>">
+                  <%= item %>
+                </span>
+              <% }) %>
+            </div>
+          </div>
+
+          <div class="lead-action-card">
+            <h3>Connect with Livingstone</h3>
+            <p><%= leadProfile.ctaText %></p>
+
+            <div class="lead-action-buttons">
+              <a href="/contact" class="lead-action-primary">
+                Get in Touch
+              </a>
+
+              <a href="/events" class="lead-action-secondary">
+                Explore Events
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="lead-verse-section">
+    <div class="lead-verse-inner">
+      <p class="verse-text">“For we are God’s handiwork, created in Christ Jesus to do good works.”</p>
+      <p class="verse-reference">Ephesians 2:10</p>
+    </div>
+  </section>
+
+  <%- include("partials/footer") %>
+</body>
+</html>

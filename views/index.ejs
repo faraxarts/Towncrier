@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Town Crier</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-[#f7f7f8] text-gray-900 home-rubber-shell">
+
+<%- include("partials/header") %>
+
+<section class="pt-6 md:pt-8 pb-10 md:pb-14">
+  <div class="max-w-7xl mx-auto px-4 md:px-8">
+    <div class="hero-shell relative overflow-hidden">
+      <div class="hero-slide absolute inset-0 opacity-100">
+        <img src="/images/hero11.jpg" class="w-full h-full object-cover" alt="Evangelical Missions" />
+        <div class="hero-overlay"></div>
+        <div class="hero-copy">
+          <span class="hero-kicker">Town Crier Evangelical Ministries</span>
+          <h1>Evangelical Missions</h1>
+          <p>Taking the Gospel beyond walls and borders with bold witness, compassionate service, and Christ-centred outreach.</p>
+        </div>
+      </div>
+
+      <div class="hero-slide absolute inset-0 opacity-0">
+        <img src="/images/hero21.jpg" class="w-full h-full object-cover" alt="Schools Outreaches" />
+        <div class="hero-overlay"></div>
+        <div class="hero-copy">
+          <span class="hero-kicker">Next Generation Focus</span>
+          <h1>Schools Outreaches</h1>
+          <p>Reaching students with the hope of Christ through campus visits, prayer, mentorship, and practical discipleship.</p>
+        </div>
+      </div>
+
+      <div class="hero-slide absolute inset-0 opacity-0">
+        <img src="/images/hero25.jpg" class="w-full h-full object-cover" alt="Discipleship" />
+        <div class="hero-overlay"></div>
+        <div class="hero-copy">
+          <span class="hero-kicker">Formation in Christ</span>
+          <h1>Discipleship</h1>
+          <p>Equipping believers to grow in truth, character, and spiritual discipline until Christ is formed in them.</p>
+        </div>
+      </div>
+
+      <div class="hero-slide absolute inset-0 opacity-0">
+        <img src="/images/hero20.jpg" class="w-full h-full object-cover" alt="Prayer and Intercession" />
+        <div class="hero-overlay"></div>
+        <div class="hero-copy">
+          <span class="hero-kicker">A People of Prayer</span>
+          <h1>Prayer &amp; Intercession</h1>
+          <p>Standing in the gap through worship, prayer, and consecration for lives, communities, and nations.</p>
+        </div>
+      </div>
+
+      <div class="hero-slide absolute inset-0 opacity-0">
+        <img src="/images/hero22.jpg" class="w-full h-full object-cover" alt="Community Transformation" />
+        <div class="hero-overlay"></div>
+        <div class="hero-copy">
+          <span class="hero-kicker">Kingdom Impact</span>
+          <h1>Community Transformation</h1>
+          <p>Serving people with the love of Jesus through practical compassion, evangelism, and consistent kingdom presence.</p>
+        </div>
+      </div>
+
+      <div class="hero-dots" aria-label="Hero slides">
+        <button class="hero-dot is-active" type="button" aria-label="Go to slide 1"></button>
+        <button class="hero-dot" type="button" aria-label="Go to slide 2"></button>
+        <button class="hero-dot" type="button" aria-label="Go to slide 3"></button>
+        <button class="hero-dot" type="button" aria-label="Go to slide 4"></button>
+        <button class="hero-dot" type="button" aria-label="Go to slide 5"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="w-full bg-white">
+  <div class="max-w-7xl mx-auto px-6 md:px-16 py-16 md:py-24">
+    <div class="flex flex-col md:flex-row md:items-center md:gap-12">
+      <div class="w-full md:w-1/2">
+        <img
+          src="/images/mission.jpg"
+          alt="Town Crier community"
+          class="w-full h-auto md:h-[500px] object-cover rounded-2xl"
+        >
+      </div>
+
+      <div class="w-full md:w-1/2 mt-8 md:mt-0">
+        <div id="mission-panel" class="mission-panel is-visible">
+          <p id="section-label" class="text-primary font-semibold uppercase tracking-wide mb-3">
+            OUR MISSION
+          </p>
+
+          <h2 id="section-title" class="text-3xl md:text-5xl font-bold mb-5 leading-tight">
+            Building Kingdom Leaders
+          </h2>
+
+          <p id="section-text" class="text-gray-600 text-base md:text-lg leading-relaxed mb-6">
+            Our mission is to develop Christ-centered leaders who will impact their communities and nations through biblical truth, prayer, and practical discipleship.
+          </p>
+
+          <div class="mission-indicators mb-6" aria-hidden="true">
+            <span class="mission-indicator is-active"></span>
+            <span class="mission-indicator"></span>
+            <span class="mission-indicator"></span>
+          </div>
+
+          <a href="/about" class="inline-flex items-center text-[#6B46C1] font-semibold hover:underline">
+            Learn about us
+            <span class="ml-2">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="verse-showcase">
+  <div class="max-w-7xl mx-auto px-6 md:px-16">
+    <div class="verse-swiper">
+      <p class="verse-kicker">Scripture Reflection</p>
+      <div class="verse-stage">
+        <div id="bible-verse-card" class="verse-card is-visible">
+          <p id="bible-verse-text" class="verse-text">“...that they might be called oaks of righteousness, the planting of the Lord, that He might be glorified.”</p>
+          <p id="bible-verse-reference" class="verse-reference">Isaiah 61:3</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-gray-50 py-20 px-6 md:px-16">
+  <div class="text-center mb-16">
+    <p class="text-purple-600 font-semibold uppercase tracking-wide mb-2">
+      Upcoming Events
+    </p>
+    <h2 class="text-3xl md:text-5xl font-bold text-gray-900">
+      Join Our Programs
+    </h2>
+  </div>
+
+  <div class="grid gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition duration-300">
+      <img src="/images/hero23.jpg" class="w-full h-56 object-cover" alt="Schools Outreaches">
+      <div class="p-6">
+        <p class="text-sm text-purple-600 font-semibold mb-2">March 25, 2026</p>
+        <h3 class="text-xl font-bold mb-3">Schools Outreaches</h3>
+        <p class="text-gray-600 mb-4">
+          A practical outreach expression bringing the love and truth of Christ to campuses and young minds.
+        </p>
+        <a href="/events" class="text-purple-600 font-semibold">
+          Learn More →
+        </a>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition duration-300">
+      <img src="/images/hero26.jpg" class="w-full h-56 object-cover" alt="Discipleship">
+      <div class="p-6">
+        <p class="text-sm text-purple-600 font-semibold mb-2">March 28, 2026</p>
+        <h3 class="text-xl font-bold mb-3">Discipleship</h3>
+        <p class="text-gray-600 mb-4">
+          Join a life-shaping discipleship gathering focused on spiritual growth, truth, and obedience to Christ.
+        </p>
+        <a href="/events" class="text-purple-600 font-semibold">
+          Learn More →
+        </a>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition duration-300">
+      <img src="/images/hero24.jpg" class="w-full h-56 object-cover" alt="Evangelical Missions">
+      <div class="p-6">
+        <p class="text-sm text-purple-600 font-semibold mb-2">April 2, 2026</p>
+        <h3 class="text-xl font-bold mb-3">Evangelical Missions</h3>
+        <p class="text-gray-600 mb-4">
+          Reaching communities with the Gospel through prayer, missions, and compassionate kingdom service.
+        </p>
+        <a href="/events" class="text-purple-600 font-semibold">
+          Learn More →
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center mt-12">
+    <a href="/events"
+       class="inline-block bg-purple-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-purple-700 transition duration-300">
+      View All Events →
+    </a>
+  </div>
+</section>
+
+<%- include("partials/footer") %>
+
+<script src="/js/heroSlider.js"></script>
+<script>
+  const sections = [
+    {
+      label: "OUR MISSION",
+      title: "Building Kingdom Leaders",
+      text: "Our mission is to develop Christ-centered leaders who will impact their communities and nations through biblical truth, prayer, and practical discipleship."
+    },
+    {
+      label: "OUR VISION",
+      title: "Raising a Gospel-Shaped Generation",
+      text: "We envision a people awakened to Christ, grounded in Scripture, and sent into communities with conviction, compassion, and courage."
+    },
+    {
+      label: "OUR MANDATE",
+      title: "Touching Lives Through Evangelical Missions",
+      text: "We are committed to proclaiming Jesus, strengthening believers, and carrying the message of hope through outreaches, worship, and Spirit-led service."
+    }
+  ];
+
+  const sectionLabel = document.getElementById("section-label");
+  const sectionTitle = document.getElementById("section-title");
+  const sectionText = document.getElementById("section-text");
+  const missionPanel = document.getElementById("mission-panel");
+  const missionIndicators = Array.from(document.querySelectorAll(".mission-indicator"));
+  let missionIndex = 0;
+
+  setInterval(() => {
+    missionPanel.classList.remove("is-visible");
+    missionPanel.classList.add("is-leaving");
+
+    setTimeout(() => {
+      missionIndex = (missionIndex + 1) % sections.length;
+      sectionLabel.textContent = sections[missionIndex].label;
+      sectionTitle.textContent = sections[missionIndex].title;
+      sectionText.textContent = sections[missionIndex].text;
+
+      missionIndicators.forEach((item, index) => {
+        item.classList.toggle("is-active", index === missionIndex);
+      });
+
+      missionPanel.classList.remove("is-leaving");
+      missionPanel.classList.add("is-visible");
+    }, 240);
+  }, 5000);
+
+  const bibleVerses = [
+    {
+      text: "“For we are God’s handiwork, created in Christ Jesus to do good works.”",
+      reference: "Ephesians 2:10"
+    },
+    {
+      text: "“Arise, shine; for your light has come, and the glory of the Lord rises upon you.”",
+      reference: "Isaiah 60:1"
+    },
+    {
+      text: "“Go into all the world and preach the gospel to all creation.”",
+      reference: "Mark 16:15"
+    },
+    {
+      text: "“Let your light shine before others, that they may see your good deeds and glorify your Father in heaven.”",
+      reference: "Matthew 5:16"
+    },
+    {
+      text: "“We are therefore Christ’s ambassadors, as though God were making his appeal through us.”",
+      reference: "2 Corinthians 5:20"
+    }
+  ];
+
+  for (let i = bibleVerses.length - 1; i > 0; i -= 1) {
+    const randomIndex = Math.floor(Math.random() * (i + 1));
+    [bibleVerses[i], bibleVerses[randomIndex]] = [bibleVerses[randomIndex], bibleVerses[i]];
+  }
+
+  const verseCard = document.getElementById("bible-verse-card");
+  const verseText = document.getElementById("bible-verse-text");
+  const verseReference = document.getElementById("bible-verse-reference");
+  let verseIndex = 0;
+
+  setInterval(() => {
+    verseCard.classList.remove("is-visible");
+    verseCard.classList.add("is-leaving");
+
+    setTimeout(() => {
+      verseIndex = (verseIndex + 1) % bibleVerses.length;
+      verseText.textContent = bibleVerses[verseIndex].text;
+      verseReference.textContent = bibleVerses[verseIndex].reference;
+
+      verseCard.classList.remove("is-leaving");
+      verseCard.classList.add("is-visible");
+    }, 260);
+  }, 4800);
+</script>
+
+</body>
+</html>

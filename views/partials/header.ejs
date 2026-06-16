@@ -1,0 +1,372 @@
+<%
+  const isConnectActive = ['/events', '/contact'].includes(currentPath);
+  const isMinistriesActive = ['/ministries/dbw', '/ministries/bootcamp', '/ministries/arrows'].includes(currentPath);
+%>
+
+<header class="sticky top-0 z-50 w-full bg-white/95 backdrop-blur border-b border-gray-100 shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8 h-20 flex items-center justify-between gap-3">
+
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-3 min-w-0 shrink">
+      <div class="bg-white h-11 w-11 flex items-center justify-center rounded-xl shadow-md overflow-hidden border border-gray-100 shrink-0">
+        <img
+          src="/images/tcem-logo.png"
+          alt="Town Crier Evangelical Ministries Logo"
+          class="h-full w-full object-contain"
+        />
+      </div>
+
+      <div class="min-w-0 leading-tight">
+        <p class="text-gray-900 font-extrabold text-[11px] sm:text-sm lg:text-base whitespace-nowrap">
+          TOWN CRIER EVANGELICAL MINISTRIES
+        </p>
+        <p class="text-slate-500 text-[9px] sm:text-[10px] lg:text-xs uppercase tracking-wide whitespace-nowrap">
+          THE HOUSE OF BREAD
+        </p>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden lg:flex items-center gap-1 xl:gap-2">
+      <a
+        href="/"
+        class="px-3 xl:px-4 py-2 rounded-xl text-sm xl:text-base font-medium transition <%= currentPath === '/' ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:text-[#6B46C1]' %>"
+      >
+        Home
+      </a>
+
+      <a
+        href="/about"
+        class="px-3 xl:px-4 py-2 rounded-xl text-sm xl:text-base font-medium transition <%= currentPath === '/about' ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:text-[#6B46C1]' %>"
+      >
+        About
+      </a>
+
+      <a
+        href="/livingstone-akinadewo"
+        class="px-3 xl:px-4 py-2 rounded-xl text-sm xl:text-base font-medium transition <%= ['/livingstone-akinadewo', '/ministry-lead'].includes(currentPath) ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:text-[#6B46C1]' %>"
+      >
+        Livingstone Akinadewo
+      </a>
+
+      <!-- Connect -->
+      <div class="relative group">
+        <button
+          type="button"
+          class="flex items-center gap-1 px-3 xl:px-4 py-2 rounded-xl text-sm xl:text-base font-medium transition <%= isConnectActive ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 group-hover:text-[#6B46C1]' %>"
+        >
+          Connect
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+
+        <div class="absolute left-0 top-full pt-2 w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+          <div class="bg-white border border-gray-100 rounded-2xl shadow-xl overflow-hidden">
+            <a href="/events" class="block px-4 py-3 text-gray-700 hover:bg-purple-50 hover:text-[#6B46C1]">
+              Events
+            </a>
+            <a href="/contact" class="block px-4 py-3 text-gray-700 hover:bg-purple-50 hover:text-[#6B46C1] border-t border-gray-50">
+              Contact
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ministries -->
+      <div class="relative group">
+        <button
+          type="button"
+          class="flex items-center gap-1 px-3 xl:px-4 py-2 rounded-xl text-sm xl:text-base font-medium transition <%= isMinistriesActive ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 group-hover:text-[#6B46C1]' %>"
+        >
+          Ministries
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+
+        <div class="absolute left-0 top-full pt-2 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+          <div class="bg-white border border-gray-100 rounded-2xl shadow-xl overflow-hidden">
+            <a href="/ministries/dbw" class="block px-4 py-3 text-gray-700 hover:bg-purple-50 hover:text-[#6B46C1]">
+              Discipleship by the Word
+            </a>
+            <a href="/ministries/bootcamp" class="block px-4 py-3 text-gray-700 hover:bg-purple-50 hover:text-[#6B46C1] border-t border-gray-50">
+              Discipleship Bootcamp
+            </a>
+            <a href="/ministries/arrows" class="block px-4 py-3 text-gray-700 hover:bg-purple-50 hover:text-[#6B46C1] border-t border-gray-50">
+              Arrows in the Quiver
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Desktop Right Side -->
+    <div class="hidden lg:flex items-center gap-2 xl:gap-3 shrink-0">
+      <a
+        href="/academy"
+        class="rounded-full <%= isLoggedIn ? 'border border-gray-200 bg-white text-gray-800 hover:border-[#6B46C1] hover:text-[#6B46C1]' : 'bg-[#6B46C1] text-white hover:bg-purple-700 shadow-md' %> px-4 xl:px-5 py-3 text-sm xl:text-base font-bold transition whitespace-nowrap"
+      >
+        Academy
+      </a>
+
+      <% if (isLoggedIn && isAdmin) { %>
+        <a
+          href="/admin"
+          class="rounded-full bg-[#6B46C1] text-white px-4 xl:px-5 py-3 text-sm xl:text-base font-bold hover:bg-purple-700 transition shadow-md whitespace-nowrap"
+        >
+          Admin
+        </a>
+      <% } %>
+
+      <% if (isLoggedIn) { %>
+        <a
+          href="/notifications"
+          class="relative inline-flex items-center justify-center h-12 w-12 rounded-full border border-gray-200 bg-white text-gray-800 hover:border-[#6B46C1] hover:text-[#6B46C1] transition"
+          aria-label="Notifications"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0a3 3 0 11-6 0m6 0H9" />
+          </svg>
+
+          <% if (unreadNotificationCount > 0) { %>
+            <span class="absolute -top-1 -right-1 min-w-[22px] h-[22px] px-1 inline-flex items-center justify-center rounded-full bg-red-500 text-white text-xs font-bold">
+              <%= unreadNotificationCount > 99 ? "99+" : unreadNotificationCount %>
+            </span>
+          <% } %>
+        </a>
+
+        <button
+          type="button"
+          id="desktop-logout-btn"
+          class="rounded-full border border-red-200 bg-white px-4 xl:px-5 py-3 text-sm xl:text-base font-semibold text-red-600 hover:bg-red-50 transition whitespace-nowrap"
+        >
+          Logout
+        </button>
+      <% } %>
+    </div>
+
+    <!-- Mobile / Tablet Menu Button -->
+    <button
+      id="mobile-menu-button"
+      type="button"
+      class="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-50 transition shrink-0"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <svg id="menu-open-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+
+      <svg id="menu-close-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile / Tablet Menu -->
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-gray-100 bg-white shadow-lg">
+    <div class="px-4 py-4 space-y-2">
+
+      <a
+        href="/"
+        class="block rounded-xl px-4 py-3 font-medium transition <%= currentPath === '/' ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:bg-gray-50' %>"
+      >
+        Home
+      </a>
+
+      <a
+        href="/about"
+        class="block rounded-xl px-4 py-3 font-medium transition <%= currentPath === '/about' ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:bg-gray-50' %>"
+      >
+        About
+      </a>
+
+      <a
+        href="/livingstone-akinadewo"
+        class="block rounded-xl px-4 py-3 font-medium transition <%= ['/livingstone-akinadewo', '/ministry-lead'].includes(currentPath) ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:bg-gray-50' %>"
+      >
+        Livingstone Akinadewo
+      </a>
+
+      <details class="group rounded-xl border border-gray-100 overflow-hidden" <%= isConnectActive ? 'open' : '' %>>
+        <summary class="list-none cursor-pointer px-4 py-3 flex items-center justify-between font-medium transition <%= isConnectActive ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:bg-gray-50' %>">
+          <span>Connect</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+
+        <div class="bg-white border-t border-gray-100">
+          <a
+            href="/events"
+            class="block px-6 py-3 transition <%= currentPath === '/events' ? 'text-[#6B46C1] bg-purple-50/60 font-medium' : 'text-gray-700 hover:bg-gray-50' %>"
+          >
+            Events
+          </a>
+          <a
+            href="/contact"
+            class="block px-6 py-3 transition border-t border-gray-50 <%= currentPath === '/contact' ? 'text-[#6B46C1] bg-purple-50/60 font-medium' : 'text-gray-700 hover:bg-gray-50' %>"
+          >
+            Contact
+          </a>
+        </div>
+      </details>
+
+      <details class="group rounded-xl border border-gray-100 overflow-hidden" <%= isMinistriesActive ? 'open' : '' %>>
+        <summary class="list-none cursor-pointer px-4 py-3 flex items-center justify-between font-medium transition <%= isMinistriesActive ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:bg-gray-50' %>">
+          <span>Ministries</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+
+        <div class="bg-white border-t border-gray-100">
+          <a
+            href="/ministries/dbw"
+            class="block px-6 py-3 transition <%= currentPath === '/ministries/dbw' ? 'text-[#6B46C1] bg-purple-50/60 font-medium' : 'text-gray-700 hover:bg-gray-50' %>"
+          >
+            Discipleship by the Word
+          </a>
+          <a
+            href="/ministries/bootcamp"
+            class="block px-6 py-3 transition border-t border-gray-50 <%= currentPath === '/ministries/bootcamp' ? 'text-[#6B46C1] bg-purple-50/60 font-medium' : 'text-gray-700 hover:bg-gray-50' %>"
+          >
+            Discipleship Bootcamp
+          </a>
+          <a
+            href="/ministries/arrows"
+            class="block px-6 py-3 transition border-t border-gray-50 <%= currentPath === '/ministries/arrows' ? 'text-[#6B46C1] bg-purple-50/60 font-medium' : 'text-gray-700 hover:bg-gray-50' %>"
+          >
+            Arrows in the Quiver
+          </a>
+        </div>
+      </details>
+
+      <a
+        href="/academy"
+        class="mt-3 inline-flex w-full items-center justify-center rounded-full bg-[#6B46C1] text-white px-6 py-3 font-bold hover:bg-purple-700 transition shadow-md"
+      >
+        Academy
+      </a>
+
+      <% if (isLoggedIn && isAdmin) { %>
+        <a
+          href="/admin"
+          class="inline-flex w-full items-center justify-center rounded-full bg-[#6B46C1] text-white px-6 py-3 font-bold hover:bg-purple-700 transition shadow-md"
+        >
+          Admin
+        </a>
+      <% } %>
+
+      <% if (isLoggedIn) { %>
+        <a
+          href="/notifications"
+          class="inline-flex w-full items-center justify-between rounded-full border border-gray-200 bg-white text-gray-800 px-6 py-3 font-bold hover:border-[#6B46C1] hover:text-[#6B46C1] transition"
+        >
+          <span>Notifications</span>
+
+          <% if (unreadNotificationCount > 0) { %>
+            <span class="min-w-[24px] h-[24px] px-1 inline-flex items-center justify-center rounded-full bg-red-500 text-white text-xs font-bold">
+              <%= unreadNotificationCount > 99 ? "99+" : unreadNotificationCount %>
+            </span>
+          <% } %>
+        </a>
+
+        <button
+          type="button"
+          id="mobile-logout-btn"
+          class="inline-flex w-full items-center justify-center rounded-full border border-red-200 bg-white text-red-600 px-6 py-3 font-bold hover:bg-red-50 transition"
+        >
+          Logout
+        </button>
+      <% } %>
+    </div>
+  </div>
+</header>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const button = document.getElementById("mobile-menu-button");
+    const menu = document.getElementById("mobile-menu");
+    const openIcon = document.getElementById("menu-open-icon");
+    const closeIcon = document.getElementById("menu-close-icon");
+
+    const desktopLogoutBtn = document.getElementById("desktop-logout-btn");
+    const mobileLogoutBtn = document.getElementById("mobile-logout-btn");
+
+    function openMenu() {
+      if (!menu || !openIcon || !closeIcon || !button) return;
+      menu.classList.remove("hidden");
+      openIcon.classList.add("hidden");
+      closeIcon.classList.remove("hidden");
+      button.setAttribute("aria-expanded", "true");
+    }
+
+    function closeMenu() {
+      if (!menu || !openIcon || !closeIcon || !button) return;
+      menu.classList.add("hidden");
+      openIcon.classList.remove("hidden");
+      closeIcon.classList.add("hidden");
+      button.setAttribute("aria-expanded", "false");
+    }
+
+    if (button && menu && openIcon && closeIcon) {
+      button.addEventListener("click", function () {
+        if (menu.classList.contains("hidden")) {
+          openMenu();
+        } else {
+          closeMenu();
+        }
+      });
+
+      document.addEventListener("click", function (event) {
+        const clickedInsideMenu = menu.contains(event.target);
+        const clickedButton = button.contains(event.target);
+
+        if (!menu.classList.contains("hidden") && !clickedInsideMenu && !clickedButton) {
+          closeMenu();
+        }
+      });
+
+      window.addEventListener("resize", function () {
+        if (window.innerWidth >= 1024) {
+          closeMenu();
+        }
+      });
+    }
+
+    async function handleLogout() {
+      try {
+        const response = await fetch("/auth/logout", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "same-origin",
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          alert(data.message || "Logout failed.");
+          return;
+        }
+
+        window.location.href = "/";
+      } catch (error) {
+        console.error("Logout error:", error);
+        alert("Something went wrong while logging out.");
+      }
+    }
+
+    if (desktopLogoutBtn) {
+      desktopLogoutBtn.addEventListener("click", handleLogout);
+    }
+
+    if (mobileLogoutBtn) {
+      mobileLogoutBtn.addEventListener("click", handleLogout);
+    }
+  });
+</script>

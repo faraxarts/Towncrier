@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manual Payment Requests | Admin</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="bg-[#f7f7f8] text-gray-900">
+
+  <div class="min-h-screen lg:grid lg:grid-cols-[280px_1fr]">
+    <%- include("../partials/admin-sidebar") %>
+
+    <main class="px-6 py-8 md:px-10 lg:px-12">
+
+  <section class="py-10 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+        <div>
+          <h1 class="text-4xl font-extrabold text-gray-950 mb-2">Manual Payment Requests</h1>
+          <p class="text-lg text-slate-600">Review and approve academy payment requests.</p>
+        </div>
+
+        <a href="/admin" class="rounded-2xl bg-white border border-gray-200 px-5 py-3 font-semibold text-gray-800">
+          Back to Dashboard
+        </a>
+      </div>
+
+      <form method="GET" action="/admin/manual-payments" class="bg-white border border-gray-100 rounded-[24px] shadow-sm p-5 md:p-6 mb-8">
+        <div class="flex flex-col md:flex-row gap-4 md:items-end">
+          <div class="flex-1">
+            <label class="block text-sm font-semibold mb-2">Filter by Academy</label>
+            <select name="academy" class="w-full rounded-2xl border border-gray-200 px-4 py-3.5">
+              <option value="">All academies</option>
+              <% academies.forEach((academy) => { %>
+                <option value="<%= academy._id %>" <%= String(selectedAcademy) === String(academy._id) ? "selected" : "" %>>
+                  <%= academy.name %>
+                </option>
+              <% }) %>
+            </select>
+          </div>
+
+          <div class="flex gap-3">
+            <button type="submit" class="rounded-2xl bg-[#6B46C1] text-white px-5 py-3 font-semibold hover:bg-purple-700 transition">
+              Apply Filter
+            </button>
+            <a href="/admin/manual-payments" class="rounded-2xl bg-white border border-gray-200 px-5 py-3 font-semibold text-gray-800">
+              Clear
+            </a>
+          </div>
+        </div>
+      </form>
+
+      <div class="bg-white border border-gray-100 rounded-[24px] shadow-sm overflow-hidden">
+        <% if (!requests.length) { %>
+          <div class="p-10 text-center">
+            <p class="text-2xl font-semibold text-gray-900">No payment requests found</p>
+          </div>
+        <% } else { %>
+          <% requests.forEach((item, index) => { %>
+            <div class="p-8 <%= index !== requests.length - 1 ? 'border-b border-gray-100' : '' %>">
+              <div class="flex flex-col xl:flex-row xl:items-start xl:justify-between gap-6">
+                <div class="space-y-2">
+                  <h2 class="text-2xl font-extrabold text-gray-950">
+                    <%= item.user ? item.user.name : "Unknown User" %>
+                  </h2>
+
+                  <p class="text-base text-slate-700"><strong>Email:</strong> <%= item.user ? item.user.email : "N/A" %></p>
+                  <p class="text-base text-slate-700"><strong>Academy:</strong> <%= item.level && item.level.academy ? item.level.academy.name : "N/A" %></p>
+                  <p class="text-base text-slate-700"><strong>Level:</strong> <%= item.level ? item.level.title : "Unknown Level" %></p>
+                  <p class="text-base text-slate-700"><strong>Amount:</strong> <%= item.amountLabel || (item.level ? item.level.price : "") %></p>
+                  <p class="text-base text-slate-700"><strong>Reference:</strong> <%= item.reference %></p>
+                  <p class="text-base text-slate-700"><strong>Payer Name:</strong> <%= item.payerName || "N/A" %></p>
+                  <p class="text-base text-slate-700"><strong>Submitted At:</strong> <%= new Date(item.createdAt).toLocaleString() %></p>
+                  <p class="text-base text-slate-700"><strong>Bank Transaction Reference / Session ID:</strong> <%= item.transactionNumber || "N/A" %></p>
+                  <p class="text-base text-slate-700"><strong>Status:</strong> <%= item.status %></p>
+
+                  <% if (item.note) { %>
+                    <p class="text-base text-slate-700"><strong>Note:</strong> <%= item.note %></p>
+                  <% } %>
+
+                  <% if (item.adminNote) { %>
+                    <p class="text-base text-slate-700"><strong>Admin Note:</strong> <%= item.adminNote %></p>
+                  <% } %>
+
+                  <% if (item.proofUrl) { %>
+                    <p>
+                      <a href="<%= item.proofUrl %>" target="_blank" class="text-[#6B46C1] font-semibold hover:underline">
+                        Open Payment Proof
+                      </a>
+                    </p>
+                  <% } %>
+                </div>
+
+                <div class="flex flex-col gap-3 min-w-[260px]">
+                  <% if (item.status !== "approved") { %>
+                    <form action="/admin/manual-payments/<%= item._id %>/approve" method="POST">
+                      <input type="hidden" name="redirectAcademy" value="<%= selectedAcademy || '' %>">
+                      <button type="submit" class="w-full rounded-2xl bg-[#6B46C1] text-white px-5 py-3 font-semibold hover:bg-purple-700 transition">
+                        Approve & Unlock Level
+                      </button>
+                    </form>
+                  <% } %>
+
+                  <% if (item.status !== "rejected") { %>
+                    <form action="/admin/manual-payments/<%= item._id %>/reject" method="POST" class="space-y-3">
+                      <input type="hidden" name="redirectAcademy" value="<%= selectedAcademy || '' %>">
+                      <textarea name="adminNote" rows="3" class="w-full rounded-2xl border border-gray-200 px-4 py-3.5" placeholder="Reason for rejection (optional)"></textarea>
+                      <button type="submit" class="w-full rounded-2xl bg-white border border-red-200 text-red-600 px-5 py-3 font-semibold hover:bg-red-50 transition">
+                        Reject
+                      </button>
+                    </form>
+                  <% } %>
+                </div>
+              </div>
+            </div>
+          <% }) %>
+        <% } %>
+      </div>
+    </div>
+  </section>
+
+    </main>
+  </div>
+
+  <script src="/js/admin-shell.js"></script>
+</body>
+</html>

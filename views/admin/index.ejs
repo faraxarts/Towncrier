@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | Town Crier</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="bg-[#f7f7f8] text-gray-900">
+
+  <div class="min-h-screen lg:grid lg:grid-cols-[280px_1fr]">
+    <%- include("partials/admin-sidebar") %>
+
+    <main class="px-6 py-8 md:px-10 lg:px-12">
+      <div class="lg:hidden mb-8">
+        <div class="flex flex-col gap-4">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#6B46C1] mb-2">
+              Admin Overview
+            </p>
+            <h1 class="text-4xl font-extrabold text-gray-950 mb-2">Dashboard</h1>
+            <p class="text-slate-600">
+              Manage courses, levels, payments, events, assignments, and ministry communication from one place.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-3">
+            <a
+              href="/"
+              class="rounded-2xl border border-gray-200 bg-white px-5 py-3 font-semibold text-gray-800"
+            >
+              View Site
+            </a>
+
+            <a
+              href="/admin/courses"
+              class="rounded-2xl bg-[#6B46C1] text-white px-5 py-3 font-semibold"
+            >
+              Manage Courses
+            </a>
+
+            <button
+              type="button"
+              class="admin-logout-btn rounded-2xl border border-red-200 bg-white px-5 py-3 font-semibold text-red-600"
+            >
+              Logout
+            </button>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 pt-2">
+            <a href="/admin/levels" class="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-center font-semibold text-gray-800">Levels</a>
+            <a href="/admin/manual-payments" class="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-center font-semibold text-gray-800">Payments</a>
+            <a href="/admin/assignments" class="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-center font-semibold text-gray-800">Assignments</a>
+            <a href="/admin/events" class="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-center font-semibold text-gray-800">Events</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hidden lg:flex items-start justify-between gap-6 mb-10">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#6B46C1] mb-3">
+            Admin Overview
+          </p>
+          <h1 class="text-5xl font-extrabold text-gray-950 mb-3">Dashboard</h1>
+          <p class="max-w-3xl text-lg text-slate-600">
+            Manage courses, levels, academy payments, assignments, events, and ministry communications from one organized workspace.
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-3 shrink-0">
+          <a
+            href="/"
+            class="rounded-2xl border border-gray-200 bg-white px-6 py-3 font-semibold text-gray-800 hover:border-[#6B46C1] hover:text-[#6B46C1] transition text-center"
+          >
+            View Site
+          </a>
+
+          <a
+            href="/admin/courses"
+            class="rounded-2xl bg-[#6B46C1] text-white px-6 py-3 font-semibold hover:bg-purple-700 transition text-center"
+          >
+            Manage Courses
+          </a>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-10">
+        <a href="/admin/courses" class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-7 hover:shadow-md transition">
+          <p class="text-sm font-semibold uppercase tracking-wide text-slate-500 mb-3">Courses</p>
+          <h2 class="text-4xl font-extrabold text-[#6B46C1] mb-2"><%= courseCount %></h2>
+          <p class="text-slate-600">Total academy courses</p>
+        </a>
+
+        <a href="/admin/levels" class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-7 hover:shadow-md transition">
+          <p class="text-sm font-semibold uppercase tracking-wide text-slate-500 mb-3">Levels</p>
+          <h2 class="text-4xl font-extrabold text-[#6B46C1] mb-2"><%= levelCount %></h2>
+          <p class="text-slate-600">Structured learning levels</p>
+        </a>
+
+        <a href="/admin/events" class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-7 hover:shadow-md transition">
+          <p class="text-sm font-semibold uppercase tracking-wide text-slate-500 mb-3">Events</p>
+          <h2 class="text-4xl font-extrabold text-[#6B46C1] mb-2"><%= eventCount %></h2>
+          <p class="text-slate-600">Published and draft events</p>
+        </a>
+
+        <a href="/admin/manual-payments" class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-7 hover:shadow-md transition">
+          <p class="text-sm font-semibold uppercase tracking-wide text-slate-500 mb-3">Pending Payments</p>
+          <h2 class="text-4xl font-extrabold text-[#6B46C1] mb-2"><%= pendingPaymentCount %></h2>
+          <p class="text-slate-600">Waiting for review</p>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 xl:grid-cols-[1.2fr_1fr] gap-8 mb-10">
+        <section class="bg-white border border-gray-100 rounded-[30px] shadow-sm p-8 md:p-10">
+          <div class="flex items-start justify-between gap-6 mb-8">
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#6B46C1] mb-3">
+                Platform Health
+              </p>
+              <h2 class="text-4xl font-extrabold text-gray-950 mb-3">Quick Overview</h2>
+              <p class="text-lg text-slate-600">
+                Keep track of academy operations, ministry communication, and student activity from one place.
+              </p>
+            </div>
+
+            <div class="text-right shrink-0">
+              <p class="text-sm text-slate-500 mb-2">Active Level Access</p>
+              <p class="text-5xl font-extrabold text-[#6B46C1]"><%= levelAccessCount %></p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div class="rounded-[24px] bg-purple-50 p-6 border border-purple-100">
+              <p class="text-sm font-semibold uppercase tracking-wide text-[#6B46C1] mb-2">Assignments</p>
+              <p class="text-3xl font-extrabold text-gray-950 mb-2"><%= assignmentCount %></p>
+              <p class="text-slate-600 mb-4">Student submissions received</p>
+              <a href="/admin/assignments" class="text-[#6B46C1] font-semibold hover:underline">
+                View assignments
+              </a>
+            </div>
+
+            <div class="rounded-[24px] bg-purple-50 p-6 border border-purple-100">
+              <p class="text-sm font-semibold uppercase tracking-wide text-[#6B46C1] mb-2">Registrations</p>
+              <p class="text-3xl font-extrabold text-gray-950 mb-2"><%= registrationCount %></p>
+              <p class="text-slate-600 mb-4">Program registrations submitted</p>
+              <a href="/admin/registrations" class="text-[#6B46C1] font-semibold hover:underline">
+                View registrations
+              </a>
+            </div>
+
+            <div class="rounded-[24px] bg-purple-50 p-6 border border-purple-100">
+              <p class="text-sm font-semibold uppercase tracking-wide text-[#6B46C1] mb-2">Contact Messages</p>
+              <p class="text-3xl font-extrabold text-gray-950 mb-2"><%= contactCount %></p>
+              <p class="text-slate-600 mb-4">Messages from site visitors</p>
+              <a href="/admin/contact-messages" class="text-[#6B46C1] font-semibold hover:underline">
+                View messages
+              </a>
+            </div>
+
+            <div class="rounded-[24px] bg-purple-50 p-6 border border-purple-100">
+              <p class="text-sm font-semibold uppercase tracking-wide text-[#6B46C1] mb-2">Prayer Requests</p>
+              <p class="text-3xl font-extrabold text-gray-950 mb-2"><%= prayerCount %></p>
+              <p class="text-slate-600 mb-4">Requests awaiting review</p>
+              <a href="/admin/prayer-requests" class="text-[#6B46C1] font-semibold hover:underline">
+                View prayer requests
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section class="bg-white border border-gray-100 rounded-[30px] shadow-sm p-8 md:p-10">
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#6B46C1] mb-3">
+            Quick Actions
+          </p>
+          <h2 class="text-4xl font-extrabold text-gray-950 mb-6">Manage Town Crier</h2>
+
+          <div class="space-y-4">
+            <a href="/admin/courses" class="block rounded-[22px] border border-gray-200 bg-white p-5 hover:border-[#6B46C1] hover:shadow-sm transition">
+              <h3 class="text-xl font-extrabold text-gray-950 mb-2">Manage Courses</h3>
+              <p class="text-slate-600">Create, edit, publish, and organize academy course content.</p>
+            </a>
+
+            <a href="/admin/levels" class="block rounded-[22px] border border-gray-200 bg-white p-5 hover:border-[#6B46C1] hover:shadow-sm transition">
+              <h3 class="text-xl font-extrabold text-gray-950 mb-2">Manage Levels</h3>
+              <p class="text-slate-600">Control academy level groupings, ordering, and pricing.</p>
+            </a>
+
+            <a href="/admin/manual-payments" class="block rounded-[22px] border border-gray-200 bg-white p-5 hover:border-[#6B46C1] hover:shadow-sm transition">
+              <h3 class="text-xl font-extrabold text-gray-950 mb-2">Review Manual Payments</h3>
+              <p class="text-slate-600">Approve or reject payment requests and unlock paid levels.</p>
+            </a>
+
+            <a href="/admin/events" class="block rounded-[22px] border border-gray-200 bg-white p-5 hover:border-[#6B46C1] hover:shadow-sm transition">
+              <h3 class="text-xl font-extrabold text-gray-950 mb-2">Manage Events</h3>
+              <p class="text-slate-600">Create new ministry events and update upcoming activities.</p>
+            </a>
+          </div>
+        </section>
+      </div>
+
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+        <section class="bg-white border border-gray-100 rounded-[30px] shadow-sm p-8 md:p-10">
+          <div class="flex items-center justify-between gap-4 mb-6">
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#6B46C1] mb-3">
+                Recent Activity
+              </p>
+              <h2 class="text-3xl font-extrabold text-gray-950">Pending Payments</h2>
+            </div>
+
+            <a href="/admin/manual-payments" class="text-[#6B46C1] font-semibold hover:underline">
+              View All
+            </a>
+          </div>
+
+          <% if (!recentPayments.length) { %>
+            <div class="rounded-[24px] border border-dashed border-gray-300 bg-gray-50 p-8 text-center">
+              <p class="text-lg font-semibold text-gray-900 mb-2">No pending payments</p>
+              <p class="text-slate-600">New manual payment requests will appear here.</p>
+            </div>
+          <% } else { %>
+            <div class="space-y-4">
+              <% recentPayments.forEach((item) => { %>
+                <div class="rounded-[22px] border border-gray-200 p-5">
+                  <div class="flex items-start justify-between gap-4">
+                    <div>
+                      <p class="text-lg font-bold text-gray-950">
+                        <%= item.user ? item.user.name : "Unknown User" %>
+                      </p>
+                      <p class="text-sm text-slate-500 mt-1">
+                        <%= item.level ? item.level.title : "Unknown Level" %>
+                        <% if (item.level && item.level.academy) { %>
+                          • <%= item.level.academy.name %>
+                        <% } %>
+                      </p>
+                      <p class="text-sm text-slate-500 mt-1">
+                        <%= new Date(item.createdAt).toLocaleString() %>
+                      </p>
+                    </div>
+
+                    <span class="inline-flex rounded-full bg-yellow-100 text-yellow-700 px-3 py-1 text-sm font-semibold">
+                      Pending
+                    </span>
+                  </div>
+                </div>
+              <% }) %>
+            </div>
+          <% } %>
+        </section>
+
+        <section class="bg-white border border-gray-100 rounded-[30px] shadow-sm p-8 md:p-10">
+          <div class="flex items-center justify-between gap-4 mb-6">
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#6B46C1] mb-3">
+                Student Activity
+              </p>
+              <h2 class="text-3xl font-extrabold text-gray-950">Recent Assignments</h2>
+            </div>
+
+            <a href="/admin/assignments" class="text-[#6B46C1] font-semibold hover:underline">
+              View All
+            </a>
+          </div>
+
+          <% if (!recentAssignments.length) { %>
+            <div class="rounded-[24px] border border-dashed border-gray-300 bg-gray-50 p-8 text-center">
+              <p class="text-lg font-semibold text-gray-900 mb-2">No assignments yet</p>
+              <p class="text-slate-600">Student assignment submissions will appear here.</p>
+            </div>
+          <% } else { %>
+            <div class="space-y-4">
+              <% recentAssignments.forEach((item) => { %>
+                <div class="rounded-[22px] border border-gray-200 p-5">
+                  <div class="flex items-start justify-between gap-4">
+                    <div>
+                      <p class="text-lg font-bold text-gray-950">
+                        <%= item.assignmentTitle %>
+                      </p>
+                      <p class="text-sm text-slate-500 mt-1">
+                        <%= item.user ? item.user.name : "Unknown User" %>
+                        <% if (item.course) { %>
+                          • <%= item.course.title %>
+                        <% } %>
+                      </p>
+                      <p class="text-sm text-slate-500 mt-1">
+                        <% if (item.course && item.course.academy) { %>
+                          <%= item.course.academy.name %> •
+                        <% } %>
+                        <%= new Date(item.createdAt).toLocaleString() %>
+                      </p>
+                    </div>
+
+                    <span class="inline-flex rounded-full bg-blue-100 text-blue-700 px-3 py-1 text-sm font-semibold">
+                      Submitted
+                    </span>
+                  </div>
+                </div>
+              <% }) %>
+            </div>
+          <% } %>
+        </section>
+      </div>
+
+      <section class="mt-8 bg-white border border-gray-100 rounded-[30px] shadow-sm p-8 md:p-10">
+        <div class="flex items-center justify-between gap-4 mb-6">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#6B46C1] mb-3">
+              Ministry Updates
+            </p>
+            <h2 class="text-3xl font-extrabold text-gray-950">Recent Events</h2>
+          </div>
+
+          <a href="/admin/events" class="text-[#6B46C1] font-semibold hover:underline">
+            Manage Events
+          </a>
+        </div>
+
+        <% if (!recentEvents.length) { %>
+          <div class="rounded-[24px] border border-dashed border-gray-300 bg-gray-50 p-8 text-center">
+            <p class="text-lg font-semibold text-gray-900 mb-2">No events yet</p>
+            <p class="text-slate-600">Newly created events will appear here.</p>
+          </div>
+        <% } else { %>
+          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+            <% recentEvents.forEach((event) => { %>
+              <div class="rounded-[24px] border border-gray-200 p-5">
+                <p class="text-lg font-extrabold text-gray-950 mb-2"><%= event.title %></p>
+                <p class="text-sm text-slate-600 mb-2"><%= event.category || "General Event" %></p>
+                <p class="text-sm text-slate-500"><%= event.eventDate || "Date not set" %></p>
+                <p class="text-sm text-slate-500"><%= event.eventTime || "Time not set" %></p>
+              </div>
+            <% }) %>
+          </div>
+        <% } %>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/admin-shell.js"></script>
+</body>
+</html>

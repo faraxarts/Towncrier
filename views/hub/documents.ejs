@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= academy.name %> Documents</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="bg-[#f7f7f8] text-gray-900">
+
+  <%- include("../partials/header") %>
+
+  <%
+    const assignmentSubmissions =
+      typeof submissions !== "undefined" && Array.isArray(submissions)
+        ? submissions
+        : [];
+  %>
+
+  <section class="bg-gradient-to-r from-[#4F46E5] via-[#7C3AED] to-[#C026D3] text-white">
+    <div class="max-w-7xl mx-auto px-6 md:px-16 py-10 md:py-12">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+        <div>
+          <h1 class="text-3xl md:text-5xl font-extrabold mb-3"><%= academy.name %></h1>
+          <p class="text-lg md:text-2xl text-white/90">Assignment Submission Center</p>
+        </div>
+
+        <a
+          href="/academy/<%= academy.slug %>/courses"
+          class="inline-flex items-center justify-center rounded-2xl bg-white text-[#4F46E5] px-8 py-4 text-lg font-semibold shadow-sm hover:shadow-md transition self-start lg:self-auto"
+        >
+          My Courses
+        </a>
+      </div>
+    </div>
+
+    <div class="border-t border-white/15">
+      <div class="max-w-7xl mx-auto px-6 md:px-16">
+        <div class="flex items-center gap-8 overflow-x-auto">
+          <a href="/academy/<%= academy.slug %>/courses" class="inline-flex h-14 items-center border-b-2 border-transparent text-white/70 font-medium whitespace-nowrap hover:text-white transition">
+            <span class="mr-2">📖</span>
+            Courses
+          </a>
+          <a href="/academy/<%= academy.slug %>/documents" class="inline-flex h-14 items-center border-b-2 border-white text-white font-semibold whitespace-nowrap">
+            <span class="mr-2">📄</span>
+            Documents
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pt-12 md:pt-14 pb-10">
+    <div class="max-w-7xl mx-auto px-6 md:px-16">
+      <h2 class="text-4xl md:text-5xl font-extrabold text-gray-950 mb-4">
+        Upload Assignment
+      </h2>
+      <p class="text-lg md:text-2xl text-slate-600 max-w-5xl">
+        Submit your completed assignment documents for <%= academy.name %> and keep track of all your previous submissions.
+      </p>
+    </div>
+  </section>
+
+  <section class="pb-16 md:pb-20">
+    <div class="max-w-7xl mx-auto px-6 md:px-16">
+      <div class="grid grid-cols-1 xl:grid-cols-5 gap-8">
+
+        <div class="xl:col-span-3 bg-white border border-gray-100 rounded-[28px] shadow-sm p-8 md:p-10">
+          <% if (typeof submitted !== "undefined" && submitted === "success") { %>
+            <div class="mb-6 rounded-2xl border border-green-200 bg-green-50 px-5 py-4 text-green-700 font-medium">
+              Assignment uploaded successfully.
+            </div>
+          <% } %>
+
+          <div class="mb-8">
+            <h3 class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-3">
+              Submit New Assignment
+            </h3>
+            <p class="text-lg text-slate-600 leading-relaxed">
+              Choose the course, add a title if needed, and upload your answer document.
+            </p>
+          </div>
+
+          <form action="/academy/<%= academy.slug %>/documents/submit-assignment" method="POST" enctype="multipart/form-data" class="space-y-6">
+            <div>
+              <label for="courseId" class="block text-sm font-semibold text-gray-800 mb-2">Select Course</label>
+              <select
+                id="courseId"
+                name="courseId"
+                class="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3.5 text-gray-900 outline-none focus:border-[#6B46C1] focus:ring-2 focus:ring-purple-100 transition"
+                required
+              >
+                <option value="">Choose a course</option>
+                <% if (courses && courses.length) { %>
+                  <% courses.forEach((course) => { %>
+                    <option value="<%= course._id || course.slug %>"><%= course.title %></option>
+                  <% }) %>
+                <% } %>
+              </select>
+            </div>
+
+            <div>
+              <label for="assignmentTitle" class="block text-sm font-semibold text-gray-800 mb-2">Assignment Title</label>
+              <input
+                type="text"
+                id="assignmentTitle"
+                name="assignmentTitle"
+                class="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3.5 text-gray-900 outline-none focus:border-[#6B46C1] focus:ring-2 focus:ring-purple-100 transition"
+                placeholder="Example: Week 1 Assignment Answers"
+                required
+              />
+            </div>
+
+            <div>
+              <label for="submissionNote" class="block text-sm font-semibold text-gray-800 mb-2">Short Note</label>
+              <textarea
+                id="submissionNote"
+                name="submissionNote"
+                rows="4"
+                class="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3.5 text-gray-900 outline-none focus:border-[#6B46C1] focus:ring-2 focus:ring-purple-100 transition resize-none"
+                placeholder="Add any short note for your submission..."
+              ></textarea>
+            </div>
+
+            <div>
+              <label for="assignmentFile" class="block text-sm font-semibold text-gray-800 mb-2">Upload Document</label>
+              <input
+                type="file"
+                id="assignmentFile"
+                name="assignmentFile"
+                accept=".pdf,.doc,.docx"
+                class="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3.5 text-gray-900 outline-none focus:border-[#6B46C1] focus:ring-2 focus:ring-purple-100 transition"
+                required
+              />
+              <p class="mt-2 text-sm text-slate-500">
+                Accepted formats: PDF, DOC, DOCX
+              </p>
+            </div>
+
+            <button
+              type="submit"
+              class="inline-flex items-center justify-center rounded-full bg-[#6B46C1] text-white px-8 py-4 font-bold text-lg shadow-md hover:bg-purple-700 transition"
+            >
+              Upload Assignment
+            </button>
+          </form>
+        </div>
+
+        <div class="xl:col-span-2 space-y-8">
+          <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8">
+            <h3 class="text-2xl md:text-3xl font-extrabold text-gray-950 mb-4">
+              Submission Guide
+            </h3>
+
+            <div class="space-y-4 text-lg text-slate-700 leading-relaxed">
+              <p>1. Select the course the assignment belongs to.</p>
+              <p>2. Upload your completed answer document.</p>
+              <p>3. Check your submission history below after upload.</p>
+            </div>
+          </div>
+
+          <div class="bg-gradient-to-r from-[#4F46E5] via-[#A855F7] to-[#EC4899] rounded-[28px] p-8 text-white shadow-sm">
+            <h3 class="text-2xl md:text-3xl font-extrabold mb-4">
+              Keep Your Work Organized
+            </h3>
+            <p class="text-lg leading-relaxed text-white/95">
+              Every submitted assignment in <%= academy.name %> will appear in your history, making it easy to track what you have already turned in.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="pb-20 md:pb-24">
+    <div class="max-w-7xl mx-auto px-6 md:px-16">
+      <div class="mb-8">
+        <h3 class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-3">
+          Submission History
+        </h3>
+        <p class="text-lg text-slate-600">
+          View your previously uploaded assignment documents here.
+        </p>
+      </div>
+
+      <% if (!assignmentSubmissions.length) { %>
+        <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-10 text-center">
+          <h4 class="text-2xl font-extrabold text-gray-950 mb-3">
+            No submissions yet
+          </h4>
+          <p class="text-lg text-slate-600">
+            Your uploaded assignment documents will appear here after submission.
+          </p>
+        </div>
+      <% } else { %>
+        <div class="space-y-6">
+          <% assignmentSubmissions.forEach((item) => { %>
+            <article class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8">
+              <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
+                <div>
+                  <h4 class="text-2xl font-extrabold text-gray-950 mb-2">
+                    <%= item.assignmentTitle %>
+                  </h4>
+                  <p class="text-lg text-slate-700 mb-2">
+                    <strong>Course:</strong> <%= item.courseTitle %>
+                  </p>
+
+                  <div class="mb-2">
+                    <span class="font-semibold text-slate-700">Status:</span>
+                    <span class="inline-flex rounded-full px-3 py-1 text-sm font-semibold
+                      <%= item.status === 'Submitted' ? 'bg-blue-100 text-blue-700' : '' %>
+                      <%= item.status === 'Reviewed' ? 'bg-yellow-100 text-yellow-700' : '' %>
+                      <%= item.status === 'Accepted' ? 'bg-green-100 text-green-700' : '' %>
+                      <%= item.status === 'Needs Revision' ? 'bg-red-100 text-red-700' : '' %>
+                    ">
+                      <%= item.status || "Submitted" %>
+                    </span>
+                  </div>
+
+                  <p class="text-lg text-slate-700 mb-2">
+                    <strong>Submitted:</strong> <%= item.submittedAt %>
+                  </p>
+
+                  <% if (item.submissionNote) { %>
+                    <p class="text-base text-slate-600 mt-4">
+                      <strong>Note:</strong> <%= item.submissionNote %>
+                    </p>
+                  <% } %>
+                </div>
+
+                <div class="flex flex-wrap gap-3">
+                  <a
+                    href="<%= item.fileUrl %>"
+                    target="_blank"
+                    class="inline-flex items-center justify-center rounded-2xl bg-[#6B46C1] text-white px-6 py-3 font-semibold hover:bg-purple-700 transition"
+                  >
+                    Open File
+                  </a>
+                </div>
+              </div>
+            </article>
+          <% }) %>
+        </div>
+      <% } %>
+    </div>
+  </section>
+
+  <%- include("../partials/footer") %>
+</body>
+</html>

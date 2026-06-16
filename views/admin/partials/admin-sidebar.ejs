@@ -1,0 +1,135 @@
+<aside class="hidden lg:flex flex-col border-r border-gray-200 bg-white px-6 py-8 min-h-screen">
+  <div class="mb-10">
+    <a href="/admin" class="flex items-center gap-3">
+      <div class="bg-[#6B46C1] h-12 w-12 flex items-center justify-center rounded-2xl text-white font-extrabold text-lg shadow-md">
+        TC
+      </div>
+
+      <div>
+        <p class="text-xl font-extrabold text-gray-950">Town Crier</p>
+        <p class="text-sm text-slate-500">Admin Workspace</p>
+      </div>
+    </a>
+  </div>
+
+  <div class="space-y-8">
+    <div>
+      <p class="px-4 mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+        Overview
+      </p>
+
+      <nav class="space-y-2">
+        <a
+          href="/admin"
+          class="block rounded-2xl px-4 py-3 font-semibold transition <%= currentPath === '/admin' ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:bg-gray-50' %>"
+        >
+          Dashboard
+        </a>
+      </nav>
+    </div>
+
+    <div>
+      <p class="px-4 mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+        Academy Management
+      </p>
+
+      <nav class="space-y-2">
+        <a
+          href="/admin/courses"
+          class="block rounded-2xl px-4 py-3 font-medium transition <%= currentPath.startsWith('/admin/courses') ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:bg-gray-50' %>"
+        >
+          Manage Courses
+        </a>
+
+        <a
+          href="/admin/levels"
+          class="block rounded-2xl px-4 py-3 font-medium transition <%= currentPath.startsWith('/admin/levels') ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:bg-gray-50' %>"
+        >
+          Manage Levels
+        </a>
+
+        <a
+          href="/admin/manual-payments"
+          class="block rounded-2xl px-4 py-3 font-medium transition <%= currentPath.startsWith('/admin/manual-payments') ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:bg-gray-50' %>"
+        >
+          Manual Payments
+        </a>
+
+        <a
+          href="/admin/level-access"
+          class="block rounded-2xl px-4 py-3 font-medium transition <%= currentPath.startsWith('/admin/level-access') ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:bg-gray-50' %>"
+        >
+          Level Access
+        </a>
+
+        <a
+          href="/admin/assignments"
+          class="block rounded-2xl px-4 py-3 font-medium transition <%= currentPath.startsWith('/admin/assignments') ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:bg-gray-50' %>"
+        >
+          Assignments
+        </a>
+      </nav>
+    </div>
+
+    <div>
+      <p class="px-4 mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+        Ministry Operations
+      </p>
+
+      <nav class="space-y-2">
+        <a
+          href="/admin/events"
+          class="block rounded-2xl px-4 py-3 font-medium transition <%= currentPath.startsWith('/admin/events') ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:bg-gray-50' %>"
+        >
+          Manage Events
+        </a>
+
+        <a
+          href="/admin/registrations"
+          class="block rounded-2xl px-4 py-3 font-medium transition <%= currentPath.startsWith('/admin/registrations') ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:bg-gray-50' %>"
+        >
+          Registrations
+        </a>
+
+        <a
+          href="/admin/contact-messages"
+          class="block rounded-2xl px-4 py-3 font-medium transition <%= currentPath.startsWith('/admin/contact-messages') ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:bg-gray-50' %>"
+        >
+          Contact Messages
+        </a>
+
+        <a
+          href="/admin/prayer-requests"
+          class="block rounded-2xl px-4 py-3 font-medium transition <%= currentPath.startsWith('/admin/prayer-requests') ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:bg-gray-50' %>"
+        >
+          Prayer Requests
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="mt-auto pt-8">
+    <div class="rounded-[24px] border border-gray-200 bg-[#fafafa] p-5">
+      <p class="text-sm text-slate-500 mb-1">Signed in as</p>
+      <p class="text-lg font-bold text-gray-950 mb-4">
+        <%= currentUser && currentUser.name ? currentUser.name : "Admin User" %>
+      </p>
+
+      <div class="flex flex-col gap-3">
+        <a
+          href="/"
+          class="inline-flex items-center justify-center rounded-2xl border border-gray-200 bg-white px-4 py-3 font-semibold text-gray-800 hover:border-[#6B46C1] hover:text-[#6B46C1] transition"
+        >
+          Back to Website
+        </a>
+
+        <button
+          type="button"
+          class="admin-logout-btn inline-flex items-center justify-center rounded-2xl border border-red-200 bg-white px-4 py-3 font-semibold text-red-600 hover:bg-red-50 transition"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</aside>

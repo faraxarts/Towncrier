@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Town Crier</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="bg-[#f7f7f8] text-gray-900">
+
+  <%- include("partials/header") %>
+
+  <section class="bg-gradient-to-r from-[#4F46E5] via-[#A855F7] to-[#EC4899]">
+    <div class="max-w-7xl mx-auto px-6 md:px-16 py-20 md:py-24 text-center text-white">
+      <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
+        About Town Crier Evangelical Ministries
+      </h1>
+      <p class="max-w-4xl mx-auto text-lg md:text-2xl font-medium leading-relaxed text-white/95">
+        This is an Oak of Righteousness, the planting of the Lord, that He might be glorified. 
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-20">
+    <div class="max-w-7xl mx-auto px-6 md:px-16">
+      <div class="max-w-4xl mx-auto bg-white border border-gray-100 rounded-[28px] shadow-sm p-8 md:p-12">
+        <h2 class="text-3xl md:text-5xl font-extrabold text-gray-950 mb-8">
+          Who We Are
+        </h2>
+
+        <div class="space-y-8 text-lg md:text-[1.45rem] leading-relaxed text-slate-700">
+          <p>
+            Town Crier Evangelical Ministries is a para-church organisation with the mandate of discipling true christians, stewarding revival and undertaking evangelistic missions across the Nations! This is an oak of righteousness; a planting of the Lord. We operate mainly through the systematic teaching of the Word via sound doctrine, discipling teenagers and adults both locally and internationally. 
+          </p>
+
+          <p>
+            Founded on the unchanging truth of God's Word, we believe that the hope of God, creation and human-kind lies in the emergence of sons; men and women who are christians at heart and in character. To achieve this end, we employ the intense workings of the Spirit of Life, prayer regimens and evangelistic field works, making use of both onsite and online media as a catalyst to raise accurate christians, setting generations ablaze for Jesus!  
+            Our ministry is characterized by authentic worship, sound doctrine, genuine fellowship,
+            and compassionate service.
+          </p>
+           <p>
+            This is Bethlehem; The House Of Bread. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pb-16 md:pb-20">
+    <div class="max-w-7xl mx-auto px-6 md:px-16">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-white border border-gray-100 rounded-[28px] shadow-sm overflow-hidden">
+        <div class="p-8 md:p-12 order-2 lg:order-1">
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#6B46C1] mb-3">
+            Lead Evangelist / President
+          </p>
+          <h2 class="text-3xl md:text-5xl font-extrabold text-gray-950 mb-5">
+            Meet <%= leadProfile.name %>
+          </h2>
+          <p class="text-lg md:text-xl leading-relaxed text-slate-700 mb-6">
+            <%= leadProfile.excerpt %>
+          </p>
+
+          <a
+            href="/livingstone-akinadewo"
+            class="inline-flex items-center rounded-2xl bg-[#6B46C1] text-white px-6 py-3 font-semibold hover:bg-purple-700 transition"
+          >
+            Meet Livingstone Akinadewo
+          </a>
+        </div>
+
+        <div class="order-1 lg:order-2 h-full min-h-[340px] bg-gradient-to-br from-purple-50 to-white flex items-center justify-center p-8">
+          <div class="lead-photo-card">
+            <img src="/images/meet_lead.jpg" alt="Town Crier ministry lead" class="lead-photo-image" />
+            <div class="lead-photo-overlay">
+              
+              <p class="lead-photo-caption">Livingstone F. Akinadewo</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pb-16 md:pb-20">
+    <div class="max-w-7xl mx-auto px-6 md:px-16">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="bg-white border border-gray-100 rounded-[26px] shadow-sm p-8 md:p-10">
+          <div class="w-14 h-14 rounded-2xl bg-indigo-100 flex items-center justify-center mb-8">
+            <span class="text-2xl">🎯</span>
+          </div>
+
+          <h3 class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-6">
+            Our Mission
+          </h3>
+
+          <p class="text-lg md:text-[1.35rem] leading-relaxed text-slate-700">
+            Under the leadership of our Lord Jesus Christ and the stewardship of the President, TCEM is ran by a committee of leaders; devout men and women who believes in the Heavenly vision, striving together with the head for its accomplishment, giving themselves thoroughly to the minsitry of the Word and prayer as the Holy Spirit enables them to multiply the God-kind. 
+          </p>
+          <p class="text-lg md:text-[1.35rem] leading-relaxed text-slate-700">2 Timothy 2:2 says, "And the things that thou hast heard of me among many witnesses, the same commit thou to faithful men, who shall be able to teach others also." The above Scripture is the clear revelation of our mission, and the true secret to fruitfulness and multiplication. With the help of a team of willing, yielded and faifthful men, we birth this mission into reality.</p>   
+        </div>
+
+        <div class="bg-white border border-gray-100 rounded-[26px] shadow-sm p-8 md:p-10">
+          <div class="w-14 h-14 rounded-2xl bg-purple-100 flex items-center justify-center mb-8">
+            <span class="text-2xl">👁️</span>
+          </div>
+
+          <h3 class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-6">
+            Our Vision
+          </h3>
+
+          <p class="text-lg md:text-[1.35rem] leading-relaxed text-slate-700">
+            Striving to attain multiplication of the God-kind by raising leaders who will be fruitful with their training and in turn begin to multiple their (our) kind. Altogether, fruitfulness with the seed of eternal life and multiplication of the God-kind nature is our overall goal.   
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-8 md:py-12">
+    <div class="max-w-7xl mx-auto px-6 md:px-16">
+      <div class="text-center mb-12">
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#6B46C1] mb-3">
+          What Shapes Our Ministry
+        </p>
+        <h2 class="text-3xl md:text-5xl font-extrabold text-gray-950">
+          Our Core Values
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+        <div class="bg-white border border-gray-100 rounded-[26px] shadow-sm p-8 text-center">
+          <div class="text-4xl mb-6">📖</div>
+          <h3 class="text-2xl font-extrabold text-gray-950 mb-4">Sound Doctrine</h3>
+          <p class="text-lg leading-relaxed text-slate-600">
+            God's Word is our final authority in all matters of faith and practice. 
+          </p>
+        </div>
+
+        <div class="bg-white border border-gray-100 rounded-[26px] shadow-sm p-8 text-center">
+          <div class="text-4xl mb-6">🙏</div>
+          <h3 class="text-2xl font-extrabold text-gray-950 mb-4">Discipleship & Mentorship</h3>
+          <p class="text-lg leading-relaxed text-slate-600">
+            As living epistles, we believe in thorough transformation by preaching and living the Word. 
+          </p>
+        </div>
+
+        <div class="bg-white border border-gray-100 rounded-[26px] shadow-sm p-8 text-center">
+          <div class="text-4xl mb-6">❤️</div>
+          <h3 class="text-2xl font-extrabold text-gray-950 mb-4">Righteousness & Purity</h3>
+          <p class="text-lg leading-relaxed text-slate-600">
+            We uphold righteousness and purity as the peri-center of all our businesses.  
+          </p>
+        </div>
+
+        <div class="bg-white border border-gray-100 rounded-[26px] shadow-sm p-8 text-center">
+          <div class="text-4xl mb-6">🌍</div>
+          <h3 class="text-2xl font-extrabold text-gray-950 mb-4">Evangelism</h3>
+          <p class="text-lg leading-relaxed text-slate-600">
+            We are passionate about sharing the Gospel and making disciples of all Nations. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<%
+  const safeVideoTitle =
+    typeof ministryVideoTitle !== "undefined" && ministryVideoTitle
+      ? ministryVideoTitle
+      : "Learn More About the Ministry";
+
+  const safeVideoText =
+    typeof ministryVideoText !== "undefined" && ministryVideoText
+      ? ministryVideoText
+      : "Watch these videos to learn more about the ministry.";
+
+  const safeVideos =
+    typeof ministryVideos !== "undefined" && Array.isArray(ministryVideos)
+      ? ministryVideos
+      : [];
+%>
+
+<section class="py-16 md:py-20 bg-white overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 md:px-16">
+    <div class="text-center max-w-3xl mx-auto mb-10">
+      <p class="text-sm font-semibold uppercase tracking-wide text-[#6B46C1] mb-3">
+        Ministry Story
+      </p>
+
+      <h2 class="text-3xl md:text-5xl font-extrabold text-gray-950 mb-5 leading-tight">
+        <%= safeVideoTitle %>
+      </h2>
+
+      <p class="text-lg md:text-xl leading-relaxed text-slate-700">
+        <%= safeVideoText %>
+      </p>
+    </div>
+
+    <% if (safeVideos.length) { %>
+      <div class="about-video-wrapper">
+        <div id="about-video-carousel" class="about-video-stage">
+          <% safeVideos.forEach((video, index) => { %>
+            <div
+              class="about-video-slide <%= index === 0 ? 'is-active' : '' %>"
+              data-index="<%= index %>"
+            >
+              <div class="about-video-card">
+                <div class="about-video-frame">
+                  <iframe
+                    src="<%= video.embedUrl %>"
+                    title="<%= video.title %>"
+                    class="about-video-iframe"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    loading="lazy"
+                  ></iframe>
+                </div>
+
+                <div class="about-video-caption">
+                  <p class="text-base md:text-lg font-bold text-gray-900">
+                    <%= video.title %>
+                  </p>
+                </div>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+
+        <div class="about-video-dots">
+          <% safeVideos.forEach((video, index) => { %>
+            <button
+              type="button"
+              class="about-video-dot <%= index === 0 ? 'is-active' : '' %>"
+              data-index="<%= index %>"
+              aria-label="Go to video <%= index + 1 %>"
+            ></button>
+          <% }) %>
+        </div>
+      </div>
+    <% } else { %>
+      <div class="rounded-[28px] border border-dashed border-gray-300 bg-gray-50 p-10 text-center">
+        <p class="text-lg text-slate-600">
+          Ministry videos will appear here once added.
+        </p>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<style>
+  .about-video-wrapper {
+    position: relative;
+  }
+
+  .about-video-stage {
+    position: relative;
+    min-height: 340px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .about-video-slide {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: min(88vw, 680px);
+    transform: translateX(-50%) scale(0.78);
+    opacity: 0.35;
+    z-index: 1;
+    pointer-events: none;
+    transition: transform 0.7s ease, opacity 0.7s ease;
+  }
+
+  .about-video-slide.is-active {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+    z-index: 3;
+    pointer-events: auto;
+  }
+
+  .about-video-slide.is-prev {
+    transform: translateX(-118%) scale(0.82);
+    opacity: 0.7;
+    z-index: 2;
+  }
+
+  .about-video-slide.is-next {
+    transform: translateX(18%) scale(0.82);
+    opacity: 0.7;
+    z-index: 2;
+  }
+
+  .about-video-slide.is-hidden-left {
+    transform: translateX(-165%) scale(0.65);
+    opacity: 0;
+    z-index: 0;
+  }
+
+  .about-video-slide.is-hidden-right {
+    transform: translateX(65%) scale(0.65);
+    opacity: 0;
+    z-index: 0;
+  }
+
+  .about-video-card {
+    background: #fff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+  }
+
+  .about-video-frame {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    background: #000;
+  }
+
+  .about-video-iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .about-video-caption {
+    padding: 1rem 1.25rem 1.1rem;
+  }
+
+  .about-video-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .about-video-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 9999px;
+    background: #d1d5db;
+    transition: all 0.3s ease;
+  }
+
+  .about-video-dot.is-active {
+    width: 32px;
+    background: #6b46c1;
+  }
+
+  @media (min-width: 768px) {
+    .about-video-stage {
+      min-height: 500px;
+    }
+
+    .about-video-slide {
+      width: min(58vw, 720px);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .about-video-stage {
+      min-height: 290px;
+    }
+
+    .about-video-slide,
+    .about-video-slide.is-prev,
+    .about-video-slide.is-next,
+    .about-video-slide.is-hidden-left,
+    .about-video-slide.is-hidden-right {
+      width: 100%;
+      transform: translateX(-50%) scale(0.96);
+      opacity: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .about-video-slide.is-active {
+      width: 100%;
+      transform: translateX(-50%) scale(1);
+      opacity: 1;
+      z-index: 3;
+      pointer-events: auto;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const carousel = document.getElementById("about-video-carousel");
+    if (!carousel) return;
+
+    const slides = Array.from(carousel.querySelectorAll(".about-video-slide"));
+    const dots = Array.from(document.querySelectorAll(".about-video-dot"));
+    const total = slides.length;
+
+    if (!total) return;
+
+    let activeIndex = 0;
+    let autoPlay = null;
+
+    function getWrappedIndex(index) {
+      if (index < 0) return total - 1;
+      if (index >= total) return 0;
+      return index;
+    }
+
+    function updateCarousel(index) {
+      activeIndex = getWrappedIndex(index);
+
+      slides.forEach((slide, i) => {
+        slide.classList.remove(
+          "is-active",
+          "is-prev",
+          "is-next",
+          "is-hidden-left",
+          "is-hidden-right"
+        );
+
+        const prevIndex = getWrappedIndex(activeIndex - 1);
+        const nextIndex = getWrappedIndex(activeIndex + 1);
+
+        if (i === activeIndex) {
+          slide.classList.add("is-active");
+        } else if (window.innerWidth >= 768 && i === prevIndex) {
+          slide.classList.add("is-prev");
+        } else if (window.innerWidth >= 768 && i === nextIndex) {
+          slide.classList.add("is-next");
+        } else if (window.innerWidth >= 768) {
+          if (i < activeIndex && !(activeIndex === 0 && i === total - 1)) {
+            slide.classList.add("is-hidden-left");
+          } else {
+            slide.classList.add("is-hidden-right");
+          }
+        }
+      });
+
+      dots.forEach((dot, i) => {
+        if (i === activeIndex) {
+          dot.classList.add("is-active");
+        } else {
+          dot.classList.remove("is-active");
+        }
+      });
+    }
+
+    function stopAutoPlay() {
+      if (autoPlay) {
+        clearInterval(autoPlay);
+        autoPlay = null;
+      }
+    }
+
+    function startAutoPlay() {
+      stopAutoPlay();
+      autoPlay = setInterval(() => {
+        updateCarousel(activeIndex + 1);
+      }, 5000);
+    }
+
+    dots.forEach((dot) => {
+      dot.addEventListener("click", function () {
+        const index = Number(this.dataset.index);
+        updateCarousel(index);
+        startAutoPlay();
+      });
+    });
+
+    window.addEventListener("resize", function () {
+      updateCarousel(activeIndex);
+    });
+
+    updateCarousel(0);
+    startAutoPlay();
+  });
+</script>
+  <%- include("partials/footer") %>
+
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= course.title %> | <%= academy.name %></title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="bg-[#f7f7f8] text-gray-900">
+
+  <%- include("../partials/header") %>
+
+  <section class="bg-gradient-to-r from-[#4F46E5] via-[#7C3AED] to-[#C026D3] text-white">
+    <div class="max-w-7xl mx-auto px-6 md:px-16 py-10 md:py-12">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+        <div>
+          <p class="text-white/80 text-sm md:text-base mb-3">
+            <a href="/academy" class="hover:text-white transition">Academy</a>
+            <span class="mx-2">/</span>
+            <a href="/academy/<%= academy.slug %>" class="hover:text-white transition"><%= academy.name %></a>
+            <span class="mx-2">/</span>
+            <a href="/academy/<%= academy.slug %>/courses" class="hover:text-white transition">Courses</a>
+            <span class="mx-2">/</span>
+            <span class="text-white font-semibold"><%= course.title %></span>
+          </p>
+
+          <h1 class="text-3xl md:text-5xl font-extrabold mb-3"><%= course.title %></h1>
+          <p class="text-lg md:text-2xl text-white/90 max-w-4xl">
+            <%= course.description %>
+          </p>
+        </div>
+
+        <% if (isLoggedIn) { %>
+          <a
+            href="/academy/<%= academy.slug %>/documents"
+            class="inline-flex items-center justify-center rounded-2xl bg-white text-[#4F46E5] px-8 py-4 text-lg font-semibold shadow-sm hover:shadow-md transition self-start lg:self-auto"
+          >
+            My Documents
+          </a>
+        <% } else { %>
+          <a
+            href="/academy/<%= academy.slug %>"
+            class="inline-flex items-center justify-center rounded-2xl bg-white text-[#4F46E5] px-8 py-4 text-lg font-semibold shadow-sm hover:shadow-md transition self-start lg:self-auto"
+          >
+            Back to Academy
+          </a>
+        <% } %>
+      </div>
+    </div>
+
+    <div class="border-t border-white/15">
+      <div class="max-w-7xl mx-auto px-6 md:px-16">
+        <div class="flex items-center gap-8 overflow-x-auto">
+          <a href="/academy/<%= academy.slug %>/courses" class="inline-flex h-14 items-center border-b-2 border-white text-white font-semibold whitespace-nowrap">
+            <span class="mr-2">📖</span>
+            Courses
+          </a>
+          <a href="/academy/<%= academy.slug %>/documents" class="inline-flex h-14 items-center border-b-2 border-transparent text-white/70 font-medium whitespace-nowrap hover:text-white transition">
+            <span class="mr-2">📄</span>
+            Documents
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 md:py-14">
+    <div class="max-w-7xl mx-auto px-6 md:px-16">
+      <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+
+        <div class="xl:col-span-2 space-y-8">
+
+          <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm overflow-hidden">
+            <img
+              src="<%= course.image || '/images/event1.jpg' %>"
+              alt="<%= course.title %>"
+              class="w-full h-[280px] md:h-[420px] object-cover"
+            />
+          </div>
+
+          <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8 md:p-10">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-5">
+              Course Overview
+            </h2>
+            <p class="text-lg md:text-[1.15rem] leading-relaxed text-slate-700 whitespace-pre-line">
+              <%= course.overview || course.description %>
+            </p>
+          </div>
+
+          <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8 md:p-10">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-6">
+              What You Will Learn
+            </h2>
+
+            <% if (course.whatYouWillLearn && course.whatYouWillLearn.length) { %>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <% course.whatYouWillLearn.forEach((item) => { %>
+                  <div class="flex items-start gap-3 rounded-2xl bg-indigo-50/70 px-5 py-4">
+                    <span class="text-[#4F46E5] text-xl mt-0.5">✓</span>
+                    <p class="text-base md:text-lg text-slate-700"><%= item %></p>
+                  </div>
+                <% }) %>
+              </div>
+            <% } else { %>
+              <p class="text-lg text-slate-600">No learning outcomes added yet.</p>
+            <% } %>
+          </div>
+
+          <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8 md:p-10">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-6">
+              Course Modules
+            </h2>
+
+            <% if (course.modules && course.modules.length) { %>
+              <div class="space-y-4">
+                <% course.modules.forEach((module, index) => { %>
+                  <div class="rounded-2xl border border-gray-100 bg-gray-50/80 px-5 py-5">
+                    <div class="flex items-center justify-between gap-4">
+                      <div>
+                        <p class="text-sm font-semibold text-[#6B46C1] mb-1">
+                          Module <%= index + 1 %>
+                        </p>
+                        <h3 class="text-xl md:text-2xl font-bold text-gray-950">
+                          <%= module.title %>
+                        </h3>
+                      </div>
+                      <span class="text-sm md:text-base font-semibold text-slate-600 whitespace-nowrap">
+                        <%= module.lessons %> lesson<%= module.lessons === 1 ? '' : 's' %>
+                      </span>
+                    </div>
+                  </div>
+                <% }) %>
+              </div>
+            <% } else { %>
+              <p class="text-lg text-slate-600">No modules added yet.</p>
+            <% } %>
+          </div>
+
+          <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8 md:p-10">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-6">
+              Requirements
+            </h2>
+
+            <% if (course.requirements && course.requirements.length) { %>
+              <ul class="space-y-3">
+                <% course.requirements.forEach((item) => { %>
+                  <li class="flex items-start gap-3 text-lg text-slate-700">
+                    <span class="text-[#6B46C1] mt-1">•</span>
+                    <span><%= item %></span>
+                  </li>
+                <% }) %>
+              </ul>
+            <% } else { %>
+              <p class="text-lg text-slate-600">No requirements added yet.</p>
+            <% } %>
+          </div>
+
+          <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8 md:p-10">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-6">
+              Who This Course Is For
+            </h2>
+
+            <% if (course.audience && course.audience.length) { %>
+              <ul class="space-y-3">
+                <% course.audience.forEach((item) => { %>
+                  <li class="flex items-start gap-3 text-lg text-slate-700">
+                    <span class="text-[#6B46C1] mt-1">•</span>
+                    <span><%= item %></span>
+                  </li>
+                <% }) %>
+              </ul>
+            <% } else { %>
+              <p class="text-lg text-slate-600">No audience details added yet.</p>
+            <% } %>
+          </div>
+        </div>
+
+        <aside class="space-y-8">
+
+          <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8">
+            <h2 class="text-2xl md:text-3xl font-extrabold text-gray-950 mb-6">
+              Course Details
+            </h2>
+
+            <div class="space-y-4 text-base md:text-lg text-slate-700">
+              <div class="flex items-center justify-between gap-4">
+                <span class="font-semibold">Duration</span>
+                <span><%= course.duration || "Not specified" %></span>
+              </div>
+
+              <div class="flex items-center justify-between gap-4">
+                <span class="font-semibold">Lessons</span>
+                <span><%= course.lessons || "Not specified" %></span>
+              </div>
+
+              <div class="flex items-center justify-between gap-4">
+                <span class="font-semibold">Instructor</span>
+                <span><%= course.instructor || "Not assigned" %></span>
+              </div>
+
+              <div class="flex items-center justify-between gap-4">
+                <span class="font-semibold">Price</span>
+                <span><%= course.price || "Free / Not set" %></span>
+              </div>
+
+              <div class="flex items-center justify-between gap-4">
+                <span class="font-semibold">Students</span>
+                <span><%= course.students || 0 %></span>
+              </div>
+
+              <div class="flex items-center justify-between gap-4">
+                <span class="font-semibold">Rating</span>
+                <span><%= course.rating || 0 %></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8">
+            <h2 class="text-2xl md:text-3xl font-extrabold text-gray-950 mb-6">
+              Course Documents
+            </h2>
+
+            <% if (course.courseDocuments && course.courseDocuments.length) { %>
+              <div class="space-y-4">
+                <% course.courseDocuments.forEach((doc, index) => { %>
+                  <a
+                    href="<%= doc.fileUrl %>"
+                    target="_blank"
+                    class="flex items-center justify-between gap-4 rounded-2xl border border-gray-100 bg-gray-50/80 px-5 py-4 hover:border-[#6B46C1] hover:bg-purple-50/40 transition"
+                  >
+                    <div class="flex items-center gap-3">
+                      <span class="text-2xl">📄</span>
+                      <div>
+                        <p class="font-semibold text-gray-900">Document <%= index + 1 %></p>
+                        <p class="text-sm text-slate-600"><%= doc.originalName %></p>
+                      </div>
+                    </div>
+                    <span class="text-[#6B46C1] font-semibold">Open</span>
+                  </a>
+                <% }) %>
+              </div>
+            <% } else { %>
+              <p class="text-lg text-slate-600">No course documents uploaded yet.</p>
+            <% } %>
+          </div>
+
+          <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8">
+            <h2 class="text-2xl md:text-3xl font-extrabold text-gray-950 mb-6">
+              Course Audios
+            </h2>
+
+            <% if (course.courseAudios && course.courseAudios.length) { %>
+              <div class="space-y-5">
+                <% course.courseAudios.forEach((audio, index) => { %>
+                  <div class="rounded-2xl border border-gray-100 bg-gray-50/80 px-5 py-4">
+                    <div class="flex items-center gap-3 mb-3">
+                      <span class="text-2xl">🎧</span>
+                      <div>
+                        <p class="font-semibold text-gray-900">Audio <%= index + 1 %></p>
+                        <p class="text-sm text-slate-600"><%= audio.originalName %></p>
+                      </div>
+                    </div>
+
+                    <audio controls class="w-full">
+                      <source src="<%= audio.fileUrl %>">
+                      Your browser does not support the audio player.
+                    </audio>
+                  </div>
+                <% }) %>
+              </div>
+            <% } else { %>
+              <p class="text-lg text-slate-600">No course audios uploaded yet.</p>
+            <% } %>
+          </div>
+
+          <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8">
+            <h2 class="text-2xl md:text-3xl font-extrabold text-gray-950 mb-6">
+              Assignment
+            </h2>
+
+            <% if (course.assignmentDocument && course.assignmentDocument.fileUrl) { %>
+              <a
+                href="<%= course.assignmentDocument.fileUrl %>"
+                target="_blank"
+                class="flex items-center justify-between gap-4 rounded-2xl border border-gray-100 bg-gray-50/80 px-5 py-4 hover:border-[#6B46C1] hover:bg-purple-50/40 transition"
+              >
+                <div class="flex items-center gap-3">
+                  <span class="text-2xl">📝</span>
+                  <div>
+                    <p class="font-semibold text-gray-900">Assignment Document</p>
+                    <p class="text-sm text-slate-600"><%= course.assignmentDocument.originalName %></p>
+                  </div>
+                </div>
+                <span class="text-[#6B46C1] font-semibold">Open</span>
+              </a>
+            <% } else { %>
+              <p class="text-lg text-slate-600">No assignment document uploaded yet.</p>
+            <% } %>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <%- include("../partials/footer") %>
+</body>
+</html>

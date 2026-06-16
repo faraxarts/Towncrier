@@ -1,0 +1,128 @@
+<div id="auth-modal" class="fixed inset-0 z-[90] hidden items-center justify-center bg-black/50 px-4 py-8">
+  <div
+    id="auth-modal-panel"
+    class="w-full max-w-xl rounded-[28px] bg-white shadow-2xl border border-gray-100 p-6 md:p-8 relative"
+  >
+    <button
+      type="button"
+      id="auth-modal-close"
+      class="absolute top-4 right-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 text-gray-600 hover:bg-gray-50 transition"
+      aria-label="Close"
+    >
+      ✕
+    </button>
+
+    <div
+      id="auth-feedback"
+      class="hidden mb-5 rounded-2xl border px-4 py-3 text-sm font-medium"
+    ></div>
+
+    <div id="login-view">
+      <h2 class="text-3xl font-extrabold text-gray-950 mb-2">Sign In</h2>
+      <p class="text-slate-600 mb-6">Access your account and continue your learning journey.</p>
+
+      <form id="login-form" class="space-y-5">
+        <input type="hidden" id="login-academy-slug" name="academySlug" value="">
+        <input type="hidden" id="login-redirect-after-auth" name="redirectAfterAuth" value="/">
+
+        <div>
+          <label class="block text-sm font-semibold mb-2">Email</label>
+          <input
+            type="email"
+            name="email"
+            class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+            required
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold mb-2">Password</label>
+          <input
+            type="password"
+            name="password"
+            class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+            required
+          />
+        </div>
+
+        <button
+          id="login-submit-btn"
+          type="submit"
+          class="w-full rounded-2xl bg-[#6B46C1] text-white px-6 py-4 font-semibold hover:bg-purple-700 transition"
+        >
+          Sign In
+        </button>
+      </form>
+
+      <p class="mt-5 text-sm text-slate-600">
+        Don’t have an account?
+        <button
+          type="button"
+          id="switch-to-register"
+          class="font-semibold text-[#6B46C1] hover:underline"
+        >
+          Register
+        </button>
+      </p>
+    </div>
+
+    <div id="register-view" class="hidden">
+      <h2 class="text-3xl font-extrabold text-gray-950 mb-2">Register</h2>
+      <p class="text-slate-600 mb-6">Create your account to get started.</p>
+
+      <form id="register-form" class="space-y-5">
+        <input type="hidden" id="register-academy-slug" name="academySlug" value="">
+        <input type="hidden" id="register-redirect-after-auth" name="redirectAfterAuth" value="/">
+
+        <div>
+          <label class="block text-sm font-semibold mb-2">Full Name</label>
+          <input
+            type="text"
+            name="name"
+            class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+            required
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold mb-2">Email</label>
+          <input
+            type="email"
+            name="email"
+            class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+            required
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold mb-2">Password</label>
+          <input
+            type="password"
+            name="password"
+            class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+            required
+          />
+        </div>
+
+        <button
+          id="register-submit-btn"
+          type="submit"
+          class="w-full rounded-2xl bg-[#6B46C1] text-white px-6 py-4 font-semibold hover:bg-purple-700 transition"
+        >
+          Register
+        </button>
+      </form>
+
+      <p class="mt-5 text-sm text-slate-600">
+        Already have an account?
+        <button
+          type="button"
+          id="switch-to-login"
+          class="font-semibold text-[#6B46C1] hover:underline"
+        >
+          Sign In
+        </button>
+      </p>
+    </div>
+  </div>
+</div>

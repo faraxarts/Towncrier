@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Course | Admin</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="bg-[#f7f7f8] text-gray-900">
+
+  <div class="min-h-screen lg:grid lg:grid-cols-[280px_1fr]">
+    <%- include("../partials/admin-sidebar") %>
+
+    <main class="px-6 py-8 md:px-10 lg:px-12">
+      <section>
+        <div class="max-w-5xl mx-auto">
+          <div class="flex items-center justify-between mb-8">
+            <div>
+              <h1 class="text-4xl font-extrabold text-gray-950 mb-2">Add New Course</h1>
+              <p class="text-lg text-slate-600">Create a course with image, documents, audio, and assignment file.</p>
+            </div>
+
+            <a href="/admin/courses" class="rounded-2xl bg-white border border-gray-200 px-5 py-3 font-semibold text-gray-800 hover:border-[#6B46C1] hover:text-[#6B46C1] transition">
+              Back
+            </a>
+          </div>
+
+          <form action="/admin/courses" method="POST" enctype="multipart/form-data" class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8 md:p-10 space-y-6">
+            <div>
+              <label class="block text-sm font-semibold mb-2">Academy</label>
+              <select id="academy-select" name="academy" class="w-full rounded-2xl border border-gray-200 px-4 py-3.5" required>
+                <option value="">Select academy</option>
+                <% academies.forEach((academy) => { %>
+                  <option value="<%= academy._id %>"><%= academy.name %></option>
+                <% }) %>
+              </select>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-semibold mb-2">Course Title</label>
+                <input name="title" type="text" class="w-full rounded-2xl border border-gray-200 px-4 py-3.5" required>
+              </div>
+
+              <div>
+                <label class="block text-sm font-semibold mb-2">Slug</label>
+                <input name="slug" type="text" class="w-full rounded-2xl border border-gray-200 px-4 py-3.5" placeholder="leave blank to auto-generate">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold mb-2">Short Description</label>
+              <textarea name="description" rows="4" class="w-full rounded-2xl border border-gray-200 px-4 py-3.5" required></textarea>
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold mb-2">Overview</label>
+              <textarea name="overview" rows="5" class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"></textarea>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <div>
+                <label class="block text-sm font-semibold mb-2">Duration</label>
+                <input name="duration" type="text" class="w-full rounded-2xl border border-gray-200 px-4 py-3.5" placeholder="6 weeks">
+              </div>
+
+              <div>
+                <label class="block text-sm font-semibold mb-2">Lessons</label>
+                <input name="lessons" type="text" class="w-full rounded-2xl border border-gray-200 px-4 py-3.5" placeholder="12 lessons">
+              </div>
+
+              <div>
+                <label class="block text-sm font-semibold mb-2">Instructor</label>
+                <input name="instructor" type="text" class="w-full rounded-2xl border border-gray-200 px-4 py-3.5">
+              </div>
+
+              <div>
+                <label class="block text-sm font-semibold mb-2">Price</label>
+                <input name="price" type="text" class="w-full rounded-2xl border border-gray-200 px-4 py-3.5" placeholder="₦4,500">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold mb-2">Featured Image</label>
+              <input name="featuredImage" type="file" accept=".jpg,.jpeg,.png,.webp" class="w-full rounded-2xl border border-gray-200 px-4 py-3.5">
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold mb-2">Course Documents</label>
+              <input name="courseDocuments" type="file" accept=".pdf,.doc,.docx" multiple class="w-full rounded-2xl border border-gray-200 px-4 py-3.5">
+              <p class="text-sm text-slate-500 mt-2">Upload all main study documents here.</p>
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold mb-2">Course Audios</label>
+              <input name="courseAudios" type="file" accept=".mp3,.wav,.mpeg,.ogg" multiple class="w-full rounded-2xl border border-gray-200 px-4 py-3.5">
+              <p class="text-sm text-slate-500 mt-2">Upload all teaching audios here.</p>
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold mb-2">Assignment Document</label>
+              <input name="assignmentDocument" type="file" accept=".pdf,.doc,.docx" class="w-full rounded-2xl border border-gray-200 px-4 py-3.5">
+              <p class="text-sm text-slate-500 mt-2">Upload the document that contains the assignment questions.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-semibold mb-2">Assign Level</label>
+                <select id="level-select" name="level" class="w-full rounded-2xl border border-gray-200 px-4 py-3.5">
+                  <option value="">Select level</option>
+                  <% if (levels && levels.length) { %>
+                    <% levels.forEach((level) => { %>
+                      <option
+                        value="<%= level._id %>"
+                        data-academy-id="<%= level.academy ? level.academy._id : '' %>"
+                      >
+                        <%= level.title %> — <%= level.academy ? level.academy.name : "No Academy" %>
+                      </option>
+                    <% }) %>
+                  <% } %>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-sm font-semibold mb-2">Position in Level</label>
+                <input name="levelPosition" type="number" min="1" value="1" class="w-full rounded-2xl border border-gray-200 px-4 py-3.5">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold mb-2">Button Text</label>
+              <input name="buttonText" type="text" class="w-full rounded-2xl border border-gray-200 px-4 py-3.5" value="View Course">
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold mb-2">Button Class</label>
+              <input name="buttonClass" type="text" class="w-full rounded-2xl border border-gray-200 px-4 py-3.5" value="bg-[#4F46E5] hover:bg-indigo-700">
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold mb-2">What You Will Learn</label>
+              <textarea name="whatYouWillLearn" rows="5" class="w-full rounded-2xl border border-gray-200 px-4 py-3.5" placeholder="One item per line"></textarea>
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold mb-2">Modules</label>
+              <textarea name="modules" rows="5" class="w-full rounded-2xl border border-gray-200 px-4 py-3.5" placeholder="Format: Module Title | 4"></textarea>
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold mb-2">Requirements</label>
+              <textarea name="requirements" rows="4" class="w-full rounded-2xl border border-gray-200 px-4 py-3.5" placeholder="One item per line"></textarea>
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold mb-2">Audience</label>
+              <textarea name="audience" rows="4" class="w-full rounded-2xl border border-gray-200 px-4 py-3.5" placeholder="One item per line"></textarea>
+            </div>
+
+            <div class="flex flex-wrap gap-6">
+              <label class="inline-flex items-center gap-3">
+                <input type="checkbox" name="isPublished" checked>
+                <span>Published</span>
+              </label>
+            </div>
+
+            <button type="submit" class="rounded-2xl bg-[#6B46C1] text-white px-8 py-4 font-semibold hover:bg-purple-700 transition">
+              Create Course
+            </button>
+          </form>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/admin-shell.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const academySelect = document.getElementById("academy-select");
+      const levelSelect = document.getElementById("level-select");
+
+      function filterLevelOptions() {
+        const selectedAcademy = academySelect.value;
+        const options = Array.from(levelSelect.options);
+
+        options.forEach((option, index) => {
+          if (index === 0) {
+            option.hidden = false;
+            option.disabled = false;
+            return;
+          }
+
+          const optionAcademyId = option.dataset.academyId || "";
+          const shouldShow = !!selectedAcademy && optionAcademyId === selectedAcademy;
+
+          option.hidden = !shouldShow;
+          option.disabled = !shouldShow;
+        });
+
+        const currentOption = levelSelect.options[levelSelect.selectedIndex];
+        if (currentOption && currentOption.disabled) {
+          levelSelect.value = "";
+        }
+      }
+
+      academySelect.addEventListener("change", filterLevelOptions);
+      filterLevelOptions();
+    });
+  </script>
+
+</body>
+</html>

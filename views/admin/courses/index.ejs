@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Courses | Admin</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="bg-[#f7f7f8] text-gray-900">
+
+  <div class="min-h-screen lg:grid lg:grid-cols-[280px_1fr]">
+    <%- include("../partials/admin-sidebar") %>
+
+    <main class="px-6 py-8 md:px-10 lg:px-12">
+      <section>
+        <div class="max-w-7xl mx-auto">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+            <div>
+              <h1 class="text-4xl font-extrabold text-gray-950 mb-2">Manage Courses</h1>
+              <p class="text-lg text-slate-600">Create, edit, publish, and manage academy courses.</p>
+            </div>
+
+            <div class="flex gap-3 flex-wrap">
+              <a href="/admin" class="rounded-2xl bg-white border border-gray-200 px-5 py-3 font-semibold text-gray-800 hover:border-[#6B46C1] hover:text-[#6B46C1] transition">
+                Back to Dashboard
+              </a>
+              <a href="/admin/courses/new" class="rounded-2xl bg-[#6B46C1] text-white px-5 py-3 font-semibold hover:bg-purple-700 transition">
+                Add New Course
+              </a>
+            </div>
+          </div>
+
+          <form method="GET" action="/admin/courses" class="bg-white border border-gray-100 rounded-[24px] shadow-sm p-5 md:p-6 mb-8">
+            <div class="flex flex-col md:flex-row gap-4 md:items-end">
+              <div class="flex-1">
+                <label class="block text-sm font-semibold mb-2">Filter by Academy</label>
+                <select name="academy" class="w-full rounded-2xl border border-gray-200 px-4 py-3.5">
+                  <option value="">All academies</option>
+                  <% academies.forEach((academy) => { %>
+                    <option value="<%= academy._id %>" <%= String(selectedAcademy) === String(academy._id) ? "selected" : "" %>>
+                      <%= academy.name %>
+                    </option>
+                  <% }) %>
+                </select>
+              </div>
+
+              <div class="flex gap-3">
+                <button type="submit" class="rounded-2xl bg-[#6B46C1] text-white px-5 py-3 font-semibold hover:bg-purple-700 transition">
+                  Apply Filter
+                </button>
+                <a href="/admin/courses" class="rounded-2xl bg-white border border-gray-200 px-5 py-3 font-semibold text-gray-800">
+                  Clear
+                </a>
+              </div>
+            </div>
+          </form>
+
+          <div class="bg-white border border-gray-100 rounded-[24px] shadow-sm overflow-hidden">
+            <% if (!courses.length) { %>
+              <div class="p-10 text-center">
+                <p class="text-2xl font-semibold text-gray-900">No courses found</p>
+              </div>
+            <% } else { %>
+              <% courses.forEach((course, index) => { %>
+                <div class="p-8 <%= index !== courses.length - 1 ? 'border-b border-gray-100' : '' %>">
+                  <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
+                    <div>
+                      <div class="flex flex-wrap items-center gap-3 mb-3">
+                        <h2 class="text-2xl font-extrabold text-gray-950"><%= course.title %></h2>
+                        <span class="inline-flex rounded-full px-3 py-1 text-sm font-semibold <%= course.isPublished ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' %>">
+                          <%= course.isPublished ? 'Published' : 'Draft' %>
+                        </span>
+                      </div>
+
+                      <p class="text-base text-slate-500 mb-2"><strong>Academy:</strong> <%= course.academy ? course.academy.name : "Not assigned" %></p>
+                      <p class="text-base text-slate-500 mb-2"><strong>Level:</strong> <%= course.level ? course.level.title : "Not assigned" %></p>
+                      <p class="text-base text-slate-500 mb-2"><strong>Level Position:</strong> <%= course.levelPosition || 1 %></p>
+                      <p class="text-base text-slate-500 mb-2"><strong>Slug:</strong> <%= course.slug %></p>
+                      <p class="text-base text-slate-500 mb-2"><strong>Instructor:</strong> <%= course.instructor || "N/A" %></p>
+                      <p class="text-base text-slate-500 mb-2"><strong>Price:</strong> <%= course.price || "Not set" %></p>
+                      <p class="text-base text-slate-500 mb-2"><strong>Documents:</strong> <%= course.courseDocuments.length %></p>
+                      <p class="text-base text-slate-500 mb-2"><strong>Audios:</strong> <%= course.courseAudios.length %></p>
+                      <p class="text-base text-slate-500 mb-2"><strong>Students:</strong> <%= course.studentsCount %></p>
+                      <p class="text-base text-slate-500 mb-2"><strong>Average Rating:</strong> <%= course.averageRating %></p>
+                      <p class="text-base text-slate-700 mt-4 max-w-4xl"><%= course.description %></p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3">
+                      <a
+                        href="/admin/courses/<%= course._id %>/edit<%= selectedAcademy ? `?academy=${selectedAcademy}` : '' %>"
+                        class="rounded-2xl bg-[#6B46C1] text-white px-5 py-3 font-semibold hover:bg-purple-700 transition"
+                      >
+                        Edit
+                      </a>
+
+                      <form action="/admin/courses/<%= course._id %>/toggle-publish" method="POST">
+                        <input type="hidden" name="redirectAcademy" value="<%= selectedAcademy || '' %>">
+                        <button
+                          type="submit"
+                          class="rounded-2xl bg-white border border-gray-200 px-5 py-3 font-semibold text-gray-800 hover:border-[#6B46C1] hover:text-[#6B46C1] transition"
+                        >
+                          <%= course.isPublished ? "Unpublish" : "Publish" %>
+                        </button>
+                      </form>
+
+                      <form action="/admin/courses/<%= course._id %>/delete" method="POST" onsubmit="return confirm('Delete this course?');">
+                        <input type="hidden" name="redirectAcademy" value="<%= selectedAcademy || '' %>">
+                        <button
+                          type="submit"
+                          class="rounded-2xl bg-white border border-red-200 px-5 py-3 font-semibold text-red-600 hover:bg-red-50 transition"
+                        >
+                          Delete
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              <% }) %>
+            <% } %>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/admin-shell.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Academy | Town Crier</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="bg-[#f7f7f8] text-gray-900">
+
+  <%- include("../partials/header") %>
+
+  <section class="py-16 md:py-20">
+    <div class="max-w-7xl mx-auto px-6 md:px-16">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-gray-950 mb-4">
+          Ministries' Academy
+        </h1>
+        <p class="text-lg md:text-2xl text-slate-600 max-w-3xl mx-auto">
+          Explore our academies and choose the one that aligns with your learning journey.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <% if (academies && academies.length) { %>
+          <% academies.forEach((academy) => { %>
+            <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8 md:p-10">
+              <h2 class="text-3xl font-extrabold text-gray-950 mb-4">
+                <%= academy.name %>
+              </h2>
+
+              <p class="text-lg text-slate-700 mb-6">
+                <%= academy.shortDescription || "Ministry academy training platform." %>
+              </p>
+
+              <a
+                href="/academy/<%= academy.slug %>"
+                class="inline-flex items-center justify-center rounded-2xl bg-[#6B46C1] text-white px-8 py-4 font-semibold hover:bg-purple-700 transition"
+              >
+                Enter Academy
+              </a>
+            </div>
+          <% }) %>
+        <% } else { %>
+          <div class="md:col-span-2 bg-white border border-gray-100 rounded-[28px] shadow-sm p-10 text-center">
+            <p class="text-2xl font-semibold text-gray-900 mb-2">No academies available yet</p>
+            <p class="text-slate-600">Please add academies from the database or seed script.</p>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </section>
+
+  <%- include("../partials/footer") %>
+</body>
+</html>

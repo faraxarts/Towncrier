@@ -1,0 +1,467 @@
+<%
+  const featuredTracks = [
+    {
+      title: "Foundation Track",
+      duration: "3 Months",
+      description: "Build a strong biblical foundation with core teachings on salvation, prayer, worship, Christian character, and Bible study methods.",
+      tag: "Beginner",
+      color: "indigo"
+    },
+    {
+      title: "Growth Track",
+      duration: "6 Months",
+      description: "Go deeper in theology, spiritual gifts, ministry skills, evangelism, and practical discipleship for everyday kingdom impact.",
+      tag: "Intermediate",
+      color: "purple"
+    },
+    {
+      title: "Leadership Track",
+      duration: "6 Months",
+      description: "Advanced biblical and ministry training designed to prepare leaders, teachers, mentors, and ministry workers.",
+      tag: "Advanced",
+      color: "pink"
+    }
+  ];
+
+  const courses = [
+    {
+      title: "Biblical Foundations",
+      level: "Beginner",
+      lessons: "12 Lessons",
+      duration: "6 Weeks",
+      description: "An introduction to essential Christian beliefs, salvation, spiritual growth, and practical discipleship.",
+      badge: "Popular"
+    },
+    {
+      title: "Prayer & Spiritual Disciplines",
+      level: "Beginner",
+      lessons: "10 Lessons",
+      duration: "5 Weeks",
+      description: "Learn how to develop a consistent prayer life, study Scripture deeply, and grow in spiritual discipline.",
+      badge: "New"
+    },
+    {
+      title: "Evangelism & Discipleship",
+      level: "Intermediate",
+      lessons: "14 Lessons",
+      duration: "8 Weeks",
+      description: "Practical training for sharing the Gospel, following up converts, and making faithful disciples.",
+      badge: "Featured"
+    },
+    {
+      title: "Theology Essentials",
+      level: "Intermediate",
+      lessons: "16 Lessons",
+      duration: "8 Weeks",
+      description: "Explore core theological doctrines and learn how they shape faith, worship, and ministry.",
+      badge: "Core"
+    },
+    {
+      title: "Ministry Leadership",
+      level: "Advanced",
+      lessons: "18 Lessons",
+      duration: "10 Weeks",
+      description: "A focused course for developing godly leadership, teaching skills, and ministry responsibility.",
+      badge: "Advanced"
+    },
+    {
+      title: "Teaching the Word",
+      level: "Advanced",
+      lessons: "15 Lessons",
+      duration: "8 Weeks",
+      description: "Develop confidence in studying, teaching, and communicating biblical truth with clarity and faithfulness.",
+      badge: "Recommended"
+    }
+  ];
+%>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DBW HUB | Town Crier</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="bg-[#f7f7f8] text-gray-900">
+
+  <%- include("../partials/header") %>
+
+  <!-- HUB SUB NAV -->
+  <section class="border-b border-gray-200 bg-transparent">
+    <div class="max-w-7xl mx-auto px-6 md:px-16">
+      <div class="flex items-center gap-8 overflow-x-auto">
+        <a href="/hub" class="inline-flex h-14 items-center border-b-2 border-[#4F46E5] text-[#4F46E5] font-semibold whitespace-nowrap">
+          Overview
+        </a>
+        <a href="#tracks" class="inline-flex h-14 items-center border-b-2 border-transparent text-gray-700 font-medium hover:text-[#4F46E5] whitespace-nowrap transition">
+          Learning Tracks
+        </a>
+        <a href="#courses" class="inline-flex h-14 items-center border-b-2 border-transparent text-gray-700 font-medium hover:text-[#4F46E5] whitespace-nowrap transition">
+          Courses
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HERO -->
+  <section class="py-12 md:py-14">
+    <div class="max-w-7xl mx-auto px-6 md:px-16">
+      <div class="rounded-[30px] bg-gradient-to-r from-[#4F46E5] via-[#7C3AED] to-[#EC4899] px-8 md:px-12 py-12 md:py-16 text-white shadow-sm">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+          <div>
+            <span class="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm md:text-base font-semibold mb-6">
+              <span class="text-base">🎓</span>
+              Digital Learning Platform
+            </span>
+
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-5">
+              Welcome to DBW HUB
+            </h1>
+
+            <p class="text-lg md:text-2xl leading-relaxed text-white/95 mb-8">
+              Your online discipleship and biblical learning platform for structured growth, ministry preparation, and Christ-centered transformation.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4">
+              <% if (!isLoggedIn) { %>
+                <a
+                  href="#"
+                  class="open-auth-modal inline-flex items-center justify-center gap-3 rounded-2xl bg-white text-[#4F46E5] px-8 py-4 text-lg font-semibold shadow-sm hover:shadow-md transition"
+                  data-modal-mode="login"
+                  data-redirect-after-auth="/hub/courses"
+                >
+                  Sign In / Register
+                  <span class="text-2xl leading-none">→</span>
+                </a>
+              <% } else { %>
+                <a
+                  href="/hub/courses"
+                  class="inline-flex items-center justify-center gap-3 rounded-2xl bg-white text-[#4F46E5] px-8 py-4 text-lg font-semibold shadow-sm hover:shadow-md transition"
+                >
+                  Explore Courses
+                  <span class="text-2xl leading-none">→</span>
+                </a>
+              <% } %>
+
+              <a
+                href="#tracks"
+                class="inline-flex items-center justify-center gap-3 rounded-2xl border border-white/20 bg-white/10 text-white px-8 py-4 text-lg font-semibold hover:bg-white/15 transition"
+              >
+                View Tracks
+                <span class="text-2xl leading-none">→</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div class="rounded-[24px] bg-white/10 backdrop-blur p-6">
+              <p class="text-3xl md:text-4xl font-extrabold mb-2">50+</p>
+              <p class="text-white/90 text-base md:text-lg">Bible-based lessons</p>
+            </div>
+            <div class="rounded-[24px] bg-white/10 backdrop-blur p-6">
+              <p class="text-3xl md:text-4xl font-extrabold mb-2">3</p>
+              <p class="text-white/90 text-base md:text-lg">Structured learning tracks</p>
+            </div>
+            <div class="rounded-[24px] bg-white/10 backdrop-blur p-6">
+              <p class="text-3xl md:text-4xl font-extrabold mb-2">100%</p>
+              <p class="text-white/90 text-base md:text-lg">Biblically grounded content</p>
+            </div>
+            <div class="rounded-[24px] bg-white/10 backdrop-blur p-6">
+              <p class="text-3xl md:text-4xl font-extrabold mb-2">24/7</p>
+              <p class="text-white/90 text-base md:text-lg">Flexible access anywhere</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT HUB -->
+  <section class="pb-12 md:pb-14">
+    <div class="max-w-7xl mx-auto px-6 md:px-16">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8 md:p-10">
+          <div class="w-14 h-14 rounded-2xl bg-indigo-100 flex items-center justify-center mb-7">
+            <span class="text-2xl">📚</span>
+          </div>
+
+          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-5">
+            What is DBW HUB?
+          </h2>
+
+          <p class="text-lg md:text-[1.18rem] leading-relaxed text-slate-700">
+            DBW HUB is the digital learning platform of Town Crier Evangelical Ministries. It gives believers access to well-structured discipleship resources, Bible teaching, ministry training, and guided learning paths for spiritual growth.
+          </p>
+        </div>
+
+        <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8 md:p-10">
+          <div class="w-14 h-14 rounded-2xl bg-purple-100 flex items-center justify-center mb-7">
+            <span class="text-2xl">🚀</span>
+          </div>
+
+          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-5">
+            Why It Matters
+          </h2>
+
+          <p class="text-lg md:text-[1.18rem] leading-relaxed text-slate-700">
+            Whether you are a new believer, growing disciple, or ministry leader, DBW HUB helps you learn at your pace while staying rooted in sound doctrine, practical ministry, and everyday obedience to Christ.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEARNING TRACKS -->
+  <section id="tracks" class="py-8 md:py-10 scroll-mt-28">
+    <div class="max-w-7xl mx-auto px-6 md:px-16">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-950 mb-4">
+          Learning Tracks
+        </h2>
+        <p class="text-lg md:text-2xl text-slate-600">
+          Follow a clear pathway for your discipleship journey
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <% featuredTracks.forEach((track) => { %>
+          <article class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8 md:p-10">
+            <div class="flex items-center justify-between gap-4 mb-6">
+              <span class="inline-flex rounded-full px-4 py-1.5 text-sm font-semibold
+                <%= track.color === 'indigo' ? 'bg-indigo-100 text-indigo-700' : '' %>
+                <%= track.color === 'purple' ? 'bg-purple-100 text-purple-700' : '' %>
+                <%= track.color === 'pink' ? 'bg-pink-100 text-pink-700' : '' %>
+              ">
+                <%= track.tag %>
+              </span>
+
+              <span class="text-base font-semibold text-slate-600">
+                <%= track.duration %>
+              </span>
+            </div>
+
+            <h3 class="text-3xl font-extrabold text-gray-950 mb-5">
+              <%= track.title %>
+            </h3>
+
+            <p class="text-lg leading-relaxed text-slate-700 mb-8">
+              <%= track.description %>
+            </p>
+
+            <% if (!isLoggedIn) { %>
+              <a
+                href="#"
+                class="open-auth-modal inline-flex items-center gap-3 text-[#4F46E5] font-semibold text-lg hover:gap-4 transition-all"
+                data-modal-mode="login"
+                data-redirect-after-auth="/hub/courses"
+              >
+                Sign In / Register
+                <span class="text-2xl leading-none">→</span>
+              </a>
+            <% } else { %>
+              <a
+                href="/hub/courses"
+                class="inline-flex items-center gap-3 text-[#4F46E5] font-semibold text-lg hover:gap-4 transition-all"
+              >
+                Browse Courses
+                <span class="text-2xl leading-none">→</span>
+              </a>
+            <% } %>
+          </article>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED COURSES -->
+  <section id="courses" class="pt-12 md:pt-14 pb-8 scroll-mt-28">
+    <div class="max-w-7xl mx-auto px-6 md:px-16">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-950 mb-4">
+          Featured Courses
+        </h2>
+        <p class="text-lg md:text-2xl text-slate-600">
+          Start learning with these carefully curated discipleship courses
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+        <% courses.forEach((course) => { %>
+          <article class="bg-white border border-gray-100 rounded-[28px] shadow-sm overflow-hidden hover:-translate-y-1 transition duration-300">
+            <div class="h-40 bg-gradient-to-r from-[#4F46E5] via-[#7C3AED] to-[#EC4899]"></div>
+
+            <div class="p-7 md:p-8">
+              <div class="flex items-center justify-between gap-4 mb-5">
+                <span class="inline-flex rounded-full bg-purple-100 text-purple-700 px-4 py-1.5 text-sm font-semibold">
+                  <%= course.badge %>
+                </span>
+
+                <span class="text-sm font-semibold text-slate-600">
+                  <%= course.level %>
+                </span>
+              </div>
+
+              <h3 class="text-2xl font-extrabold text-gray-950 mb-4">
+                <%= course.title %>
+              </h3>
+
+              <p class="text-lg leading-relaxed text-slate-700 mb-6">
+                <%= course.description %>
+              </p>
+
+              <div class="flex items-center justify-between text-base text-slate-600 mb-7">
+                <span><%= course.lessons %></span>
+                <span><%= course.duration %></span>
+              </div>
+
+              <% if (!isLoggedIn) { %>
+                <a
+                  href="#"
+                  class="open-auth-modal inline-flex items-center gap-3 rounded-2xl bg-[#6B46C1] text-white px-6 py-3 font-semibold hover:bg-purple-700 transition"
+                  data-modal-mode="login"
+                  data-redirect-after-auth="/hub/courses"
+                >
+                  Sign In / Register
+                  <span class="text-xl leading-none">→</span>
+                </a>
+              <% } else { %>
+                <a
+                  href="/hub/courses"
+                  class="inline-flex items-center gap-3 rounded-2xl bg-[#6B46C1] text-white px-6 py-3 font-semibold hover:bg-purple-700 transition"
+                >
+                  View Course
+                  <span class="text-xl leading-none">→</span>
+                </a>
+              <% } %>
+            </div>
+          </article>
+        <% }) %>
+      </div>
+
+      <div class="flex justify-center mt-12">
+        <% if (!isLoggedIn) { %>
+          <a
+            href="#"
+            class="open-auth-modal inline-flex items-center justify-center gap-3 rounded-full bg-[#6B46C1] text-white px-8 py-4 text-lg font-semibold shadow-md hover:bg-purple-700 transition"
+            data-modal-mode="login"
+            data-redirect-after-auth="/hub/courses"
+          >
+            Sign In / Register
+            <span class="text-2xl leading-none">→</span>
+          </a>
+        <% } else { %>
+          <a
+            href="/hub/courses"
+            class="inline-flex items-center justify-center gap-3 rounded-full bg-[#6B46C1] text-white px-8 py-4 text-lg font-semibold shadow-md hover:bg-purple-700 transition"
+          >
+            View All Courses
+            <span class="text-2xl leading-none">→</span>
+          </a>
+        <% } %>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="py-12 md:py-14">
+    <div class="max-w-7xl mx-auto px-6 md:px-16">
+      <div class="rounded-[30px] border border-indigo-100 bg-indigo-50/70 p-8 md:p-10">
+        <div class="text-center mb-10">
+          <h2 class="text-4xl md:text-5xl font-extrabold text-gray-950 mb-4">
+            Why Learn on DBW HUB?
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+          <div class="bg-white rounded-[24px] p-6 shadow-sm">
+            <div class="text-3xl mb-4">⏱️</div>
+            <h3 class="text-2xl font-extrabold text-gray-950 mb-3">Flexible Learning</h3>
+            <p class="text-lg leading-relaxed text-slate-700">
+              Learn at your own pace and revisit lessons whenever you need them.
+            </p>
+          </div>
+
+          <div class="bg-white rounded-[24px] p-6 shadow-sm">
+            <div class="text-3xl mb-4">📖</div>
+            <h3 class="text-2xl font-extrabold text-gray-950 mb-3">Sound Doctrine</h3>
+            <p class="text-lg leading-relaxed text-slate-700">
+              Every course is rooted in biblical truth and practical discipleship.
+            </p>
+          </div>
+
+          <div class="bg-white rounded-[24px] p-6 shadow-sm">
+            <div class="text-3xl mb-4">🧭</div>
+            <h3 class="text-2xl font-extrabold text-gray-950 mb-3">Clear Pathways</h3>
+            <p class="text-lg leading-relaxed text-slate-700">
+              Follow structured tracks from foundation to leadership growth.
+            </p>
+          </div>
+
+          <div class="bg-white rounded-[24px] p-6 shadow-sm">
+            <div class="text-3xl mb-4">🌍</div>
+            <h3 class="text-2xl font-extrabold text-gray-950 mb-3">Anywhere Access</h3>
+            <p class="text-lg leading-relaxed text-slate-700">
+              Access discipleship resources from anywhere on desktop or mobile.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="pt-4 pb-20 md:pb-24">
+    <div class="max-w-7xl mx-auto px-6 md:px-16">
+      <div class="rounded-[30px] bg-gradient-to-r from-[#4F46E5] via-[#7C3AED] to-[#C026D3] px-8 md:px-12 py-12 md:py-14 text-white text-center shadow-sm">
+        <h2 class="text-4xl md:text-5xl font-extrabold mb-5">
+          Ready to Start Learning?
+        </h2>
+
+        <p class="max-w-4xl mx-auto text-lg md:text-2xl leading-relaxed text-white/95 mb-8">
+          Join DBW HUB and begin a structured journey of biblical growth, discipleship, and ministry development.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <% if (!isLoggedIn) { %>
+            <a
+              href="#"
+              class="open-auth-modal inline-flex items-center justify-center gap-3 rounded-2xl bg-white text-[#4F46E5] px-8 py-4 text-lg font-semibold shadow-sm hover:shadow-md transition min-w-[190px]"
+              data-modal-mode="login"
+              data-redirect-after-auth="/hub/courses"
+            >
+              Sign In / Register
+              <span class="text-2xl leading-none">→</span>
+            </a>
+          <% } else { %>
+            <a
+              href="/hub/courses"
+              class="inline-flex items-center justify-center gap-3 rounded-2xl bg-white text-[#4F46E5] px-8 py-4 text-lg font-semibold shadow-sm hover:shadow-md transition min-w-[190px]"
+            >
+              Browse Courses
+              <span class="text-2xl leading-none">→</span>
+            </a>
+          <% } %>
+
+          <a
+            href="/ministries/dbw"
+            class="inline-flex items-center justify-center gap-3 rounded-2xl border border-white/20 bg-white/10 text-white px-8 py-4 text-lg font-semibold hover:bg-white/15 transition min-w-[220px]"
+          >
+            Explore Ministry
+            <span class="text-2xl leading-none">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%- include("../partials/auth-modal") %>
+  <script src="/js/auth-modal.js"></script>
+
+</body>
+</html>
