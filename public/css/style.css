@@ -2823,3 +2823,20 @@ body {
     bottom: 1rem;
   }
 }
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+}
+
+img,
+video,
+iframe,
+svg {
+  max-width: 100%;
+}

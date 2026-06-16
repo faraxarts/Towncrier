@@ -1,14 +1,15 @@
 <%
-  const isConnectActive = ['/events', '/contact'].includes(currentPath);
-  const isMinistriesActive = ['/ministries/dbw', '/ministries/bootcamp', '/ministries/arrows'].includes(currentPath);
+  const isConnectActive = ["/events", "/contact"].includes(currentPath);
+  const isMinistriesActive = ["/ministries/dbw", "/ministries/bootcamp", "/ministries/arrows"].includes(currentPath);
+  const isLeadActive = ["/livingstone-akinadewo", "/ministry-lead"].includes(currentPath);
 %>
 
-<header class="sticky top-0 z-50 w-full bg-white/95 backdrop-blur border-b border-gray-100 shadow-sm">
-  <div class="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8 h-20 flex items-center justify-between gap-3">
+<header class="sticky top-0 z-50 w-full overflow-x-hidden bg-white/95 backdrop-blur border-b border-gray-100 shadow-sm">
+  <div class="max-w-7xl mx-auto h-20 px-3 sm:px-4 md:px-5 lg:px-8 flex items-center justify-between gap-2 lg:gap-4">
 
-    <!-- Logo -->
-    <a href="/" class="flex items-center gap-3 min-w-0 shrink">
-      <div class="bg-white h-11 w-11 flex items-center justify-center rounded-xl shadow-md overflow-hidden border border-gray-100 shrink-0">
+    <!-- Logo / Ministry Name -->
+    <a href="/" class="min-w-0 flex-1 flex items-start gap-2 sm:gap-3 pr-2">
+      <div class="bg-white h-10 w-10 sm:h-11 sm:w-11 flex items-center justify-center rounded-xl shadow-md overflow-hidden border border-gray-100 shrink-0">
         <img
           src="/images/tcem-logo.png"
           alt="Town Crier Evangelical Ministries Logo"
@@ -16,47 +17,46 @@
         />
       </div>
 
-      <div class="min-w-0 leading-tight">
-        <p class="text-gray-900 font-extrabold text-[11px] sm:text-sm lg:text-base whitespace-nowrap">
+      <div class="min-w-0 flex-1 leading-tight">
+        <p class="text-gray-900 font-extrabold text-[10px] sm:text-[11px] md:text-xs lg:text-sm xl:text-base leading-[1.12] whitespace-normal break-words max-w-full">
           TOWN CRIER EVANGELICAL MINISTRIES
         </p>
-        <p class="text-slate-500 text-[9px] sm:text-[10px] lg:text-xs uppercase tracking-wide whitespace-nowrap">
+        <p class="text-slate-500 text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs uppercase tracking-wide whitespace-normal break-words mt-0.5">
           THE HOUSE OF BREAD
         </p>
       </div>
     </a>
 
-    <!-- Desktop Navigation -->
-    <nav class="hidden lg:flex items-center gap-1 xl:gap-2">
+    <!-- Desktop Nav -->
+    <nav class="hidden lg:flex items-center gap-0.5 xl:gap-1 shrink-0">
       <a
         href="/"
-        class="px-3 xl:px-4 py-2 rounded-xl text-sm xl:text-base font-medium transition <%= currentPath === '/' ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:text-[#6B46C1]' %>"
+        class="px-2.5 xl:px-4 py-2 rounded-xl text-sm xl:text-base font-medium transition <%= currentPath === '/' ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:text-[#6B46C1]' %>"
       >
         Home
       </a>
 
       <a
         href="/about"
-        class="px-3 xl:px-4 py-2 rounded-xl text-sm xl:text-base font-medium transition <%= currentPath === '/about' ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:text-[#6B46C1]' %>"
+        class="px-2.5 xl:px-4 py-2 rounded-xl text-sm xl:text-base font-medium transition <%= currentPath === '/about' ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:text-[#6B46C1]' %>"
       >
         About
       </a>
 
       <a
         href="/livingstone-akinadewo"
-        class="px-3 xl:px-4 py-2 rounded-xl text-sm xl:text-base font-medium transition <%= ['/livingstone-akinadewo', '/ministry-lead'].includes(currentPath) ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:text-[#6B46C1]' %>"
+        class="px-2.5 xl:px-4 py-2 rounded-xl text-sm xl:text-base font-medium transition <%= isLeadActive ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:text-[#6B46C1]' %>"
       >
         Livingstone Akinadewo
       </a>
 
-      <!-- Connect -->
       <div class="relative group">
         <button
           type="button"
-          class="flex items-center gap-1 px-3 xl:px-4 py-2 rounded-xl text-sm xl:text-base font-medium transition <%= isConnectActive ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 group-hover:text-[#6B46C1]' %>"
+          class="flex items-center gap-1 px-2.5 xl:px-4 py-2 rounded-xl text-sm xl:text-base font-medium transition <%= isConnectActive ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 group-hover:text-[#6B46C1]' %>"
         >
           Connect
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
           </svg>
         </button>
@@ -73,14 +73,13 @@
         </div>
       </div>
 
-      <!-- Ministries -->
       <div class="relative group">
         <button
           type="button"
-          class="flex items-center gap-1 px-3 xl:px-4 py-2 rounded-xl text-sm xl:text-base font-medium transition <%= isMinistriesActive ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 group-hover:text-[#6B46C1]' %>"
+          class="flex items-center gap-1 px-2.5 xl:px-4 py-2 rounded-xl text-sm xl:text-base font-medium transition <%= isMinistriesActive ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 group-hover:text-[#6B46C1]' %>"
         >
           Ministries
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
           </svg>
         </button>
@@ -101,7 +100,7 @@
       </div>
     </nav>
 
-    <!-- Desktop Right Side -->
+    <!-- Desktop Right -->
     <div class="hidden lg:flex items-center gap-2 xl:gap-3 shrink-0">
       <a
         href="/academy"
@@ -146,20 +145,20 @@
       <% } %>
     </div>
 
-    <!-- Mobile / Tablet Menu Button -->
+    <!-- Mobile Menu Button -->
     <button
       id="mobile-menu-button"
       type="button"
-      class="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-50 transition shrink-0"
+      class="lg:hidden inline-flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-50 transition shrink-0"
       aria-label="Toggle menu"
       aria-expanded="false"
       aria-controls="mobile-menu"
     >
-      <svg id="menu-open-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg id="menu-open-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
 
-      <svg id="menu-close-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg id="menu-close-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
@@ -168,7 +167,6 @@
   <!-- Mobile / Tablet Menu -->
   <div id="mobile-menu" class="hidden lg:hidden border-t border-gray-100 bg-white shadow-lg">
     <div class="px-4 py-4 space-y-2">
-
       <a
         href="/"
         class="block rounded-xl px-4 py-3 font-medium transition <%= currentPath === '/' ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:bg-gray-50' %>"
@@ -185,7 +183,7 @@
 
       <a
         href="/livingstone-akinadewo"
-        class="block rounded-xl px-4 py-3 font-medium transition <%= ['/livingstone-akinadewo', '/ministry-lead'].includes(currentPath) ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:bg-gray-50' %>"
+        class="block rounded-xl px-4 py-3 font-medium transition <%= isLeadActive ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:bg-gray-50' %>"
       >
         Livingstone Akinadewo
       </a>
