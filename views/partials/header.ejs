@@ -2,14 +2,192 @@
   const isConnectActive = ["/events", "/contact"].includes(currentPath);
   const isMinistriesActive = ["/ministries/dbw", "/ministries/bootcamp", "/ministries/arrows"].includes(currentPath);
   const isLeadActive = ["/livingstone-akinadewo", "/ministry-lead"].includes(currentPath);
+  const isAboutActive = currentPath === "/about";
+  const isHomeActive = currentPath === "/";
+  const isAcademyActive =
+    currentPath === "/academy" ||
+    currentPath.startsWith("/academy/");
 %>
 
-<header class="sticky top-0 z-50 w-full overflow-x-hidden bg-white/95 backdrop-blur border-b border-gray-100 shadow-sm">
+<style>
+  .site-header {
+    background: #6b46c1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 10px 30px rgba(76, 29, 149, 0.16);
+  }
+
+  .site-header__brand-name {
+    color: #ffffff;
+  }
+
+  .site-header__brand-tag {
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .site-header__nav-link,
+  .site-header__nav-button {
+    position: relative;
+    color: #ffffff;
+    transition: color 180ms ease;
+  }
+
+  .site-header__nav-link::after,
+  .site-header__nav-button::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.28rem;
+    width: 100%;
+    height: 2px;
+    background: #ffffff;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 260ms ease;
+    border-radius: 999px;
+  }
+
+  .site-header__nav-link:hover::after,
+  .site-header__nav-button:hover::after,
+  .site-header__nav-link.is-active::after,
+  .site-header__nav-button.is-active::after {
+    transform: scaleX(1);
+  }
+
+  .site-header__nav-link:hover,
+  .site-header__nav-button:hover,
+  .site-header__nav-link.is-active,
+  .site-header__nav-button.is-active {
+    color: #ffffff;
+  }
+
+  .site-header__academy-btn {
+    border: 1.5px solid rgba(255, 255, 255, 0.75);
+    color: #ffffff;
+    background: transparent;
+    box-shadow: none;
+    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+  }
+
+  .site-header__academy-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #ffffff;
+    color: #ffffff;
+  }
+
+  .site-header__icon-btn {
+    border-color: rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+  }
+
+  .site-header__icon-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.55);
+    color: #ffffff;
+  }
+
+  .site-header__logout-btn {
+    border-color: rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+  }
+
+  .site-header__logout-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.55);
+    color: #ffffff;
+  }
+
+  .site-header__mobile-toggle {
+    border-color: rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+  }
+
+  .site-header__mobile-toggle:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .site-header__mobile-panel {
+    background: #6b46c1;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .site-header__mobile-link {
+    color: #ffffff;
+    background: transparent;
+    border: 1px solid transparent;
+  }
+
+  .site-header__mobile-link:hover,
+  .site-header__mobile-link.is-active {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .site-header__mobile-details {
+    border-color: rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .site-header__mobile-summary {
+    color: #ffffff;
+  }
+
+  .site-header__mobile-summary:hover,
+  .site-header__mobile-summary.is-active {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+  }
+
+  .site-header__mobile-submenu {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .site-header__mobile-submenu a {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .site-header__mobile-submenu a:hover,
+  .site-header__mobile-submenu a.is-active {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+  }
+
+  .site-header__dropdown-card {
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+  }
+
+  .site-header__dropdown-card a {
+    color: #374151;
+  }
+
+  .site-header__dropdown-card a:hover {
+    background: rgba(107, 70, 193, 0.08);
+    color: #6b46c1;
+  }
+
+  @media (max-width: 767px) {
+    .site-header__brand-name {
+      font-size: 10px;
+      line-height: 1.1;
+    }
+
+    .site-header__brand-tag {
+      font-size: 9px;
+      line-height: 1.1;
+    }
+  }
+</style>
+
+<header class="site-header sticky top-0 z-50 w-full overflow-x-hidden backdrop-blur">
   <div class="max-w-7xl mx-auto h-20 px-4 sm:px-5 md:px-6 lg:px-8 flex items-center justify-between gap-3 lg:gap-8">
 
     <!-- Logo / Ministry Name -->
     <a href="/" class="min-w-0 flex items-center gap-3 overflow-hidden flex-1 lg:flex-none lg:min-w-[360px] xl:min-w-[430px]">
-      <div class="bg-white h-10 w-10 sm:h-11 sm:w-11 flex items-center justify-center rounded-xl shadow-md overflow-hidden border border-gray-100 shrink-0">
+      <div class="bg-white/10 h-10 w-10 sm:h-11 sm:w-11 flex items-center justify-center rounded-xl shadow-md overflow-hidden border border-white/20 shrink-0">
         <img
           src="/images/tcem-logo.png"
           alt="Town Crier Evangelical Ministries Logo"
@@ -18,10 +196,10 @@
       </div>
 
       <div class="min-w-0 flex-1 leading-tight overflow-hidden">
-        <p class="text-gray-900 font-extrabold text-[10px] sm:text-[11px] md:text-xs lg:text-sm xl:text-base leading-[1.12] break-words max-w-full">
+        <p class="site-header__brand-name font-extrabold text-[10px] sm:text-[11px] md:text-xs lg:text-sm xl:text-base leading-[1.12] break-words max-w-full">
           TOWN CRIER EVANGELICAL MINISTRIES
         </p>
-        <p class="house-of-bread text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs break-words mt-0.5">
+        <p class="site-header__brand-tag house-of-bread text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs break-words mt-0.5">
           THE HOUSE OF BREAD
         </p>
       </div>
@@ -31,21 +209,21 @@
     <nav class="hidden lg:flex flex-1 items-center justify-center gap-5 xl:gap-7 min-w-0">
       <a
         href="/"
-        class="inline-flex items-center px-3 py-2 rounded-xl text-sm xl:text-base font-medium transition whitespace-nowrap <%= currentPath === '/' ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:text-[#6B46C1]' %>"
+        class="site-header__nav-link inline-flex items-center px-1 py-2 text-sm xl:text-base font-medium whitespace-nowrap <%= isHomeActive ? 'is-active' : '' %>"
       >
         Home
       </a>
 
       <a
         href="/about"
-        class="inline-flex items-center px-3 py-2 rounded-xl text-sm xl:text-base font-medium transition whitespace-nowrap <%= currentPath === '/about' ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:text-[#6B46C1]' %>"
+        class="site-header__nav-link inline-flex items-center px-1 py-2 text-sm xl:text-base font-medium whitespace-nowrap <%= isAboutActive ? 'is-active' : '' %>"
       >
         About
       </a>
 
       <a
         href="/livingstone-akinadewo"
-        class="inline-flex items-center px-3 py-2 rounded-xl text-sm xl:text-base font-medium transition whitespace-nowrap <%= isLeadActive ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:text-[#6B46C1]' %>"
+        class="site-header__nav-link inline-flex items-center px-1 py-2 text-sm xl:text-base font-medium whitespace-nowrap <%= isLeadActive ? 'is-active' : '' %>"
       >
         Livingstone Akinadewo
       </a>
@@ -53,7 +231,7 @@
       <div class="relative group">
         <button
           type="button"
-          class="inline-flex items-center gap-1 px-3 py-2 rounded-xl text-sm xl:text-base font-medium transition whitespace-nowrap <%= isConnectActive ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 group-hover:text-[#6B46C1]' %>"
+          class="site-header__nav-button inline-flex items-center gap-1 px-1 py-2 text-sm xl:text-base font-medium whitespace-nowrap <%= isConnectActive ? 'is-active' : '' %>"
         >
           Connect
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -61,12 +239,12 @@
           </svg>
         </button>
 
-        <div class="absolute left-0 top-full pt-2 w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-          <div class="bg-white border border-gray-100 rounded-2xl shadow-xl overflow-hidden">
-            <a href="/events" class="block px-4 py-3 text-gray-700 hover:bg-purple-50 hover:text-[#6B46C1]">
+        <div class="absolute left-0 top-full pt-3 w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+          <div class="site-header__dropdown-card rounded-2xl shadow-xl overflow-hidden">
+            <a href="/events" class="block px-4 py-3">
               Events
             </a>
-            <a href="/contact" class="block px-4 py-3 text-gray-700 hover:bg-purple-50 hover:text-[#6B46C1] border-t border-gray-50">
+            <a href="/contact" class="block px-4 py-3 border-t border-gray-100">
               Contact
             </a>
           </div>
@@ -76,7 +254,7 @@
       <div class="relative group">
         <button
           type="button"
-          class="inline-flex items-center gap-1 px-3 py-2 rounded-xl text-sm xl:text-base font-medium transition whitespace-nowrap <%= isMinistriesActive ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 group-hover:text-[#6B46C1]' %>"
+          class="site-header__nav-button inline-flex items-center gap-1 px-1 py-2 text-sm xl:text-base font-medium whitespace-nowrap <%= isMinistriesActive ? 'is-active' : '' %>"
         >
           Ministries
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -84,15 +262,15 @@
           </svg>
         </button>
 
-        <div class="absolute left-0 top-full pt-2 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-          <div class="bg-white border border-gray-100 rounded-2xl shadow-xl overflow-hidden">
-            <a href="/ministries/dbw" class="block px-4 py-3 text-gray-700 hover:bg-purple-50 hover:text-[#6B46C1]">
+        <div class="absolute left-0 top-full pt-3 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+          <div class="site-header__dropdown-card rounded-2xl shadow-xl overflow-hidden">
+            <a href="/ministries/dbw" class="block px-4 py-3">
               Discipleship by the Word
             </a>
-            <a href="/ministries/bootcamp" class="block px-4 py-3 text-gray-700 hover:bg-purple-50 hover:text-[#6B46C1] border-t border-gray-50">
+            <a href="/ministries/bootcamp" class="block px-4 py-3 border-t border-gray-100">
               Discipleship Bootcamp
             </a>
-            <a href="/ministries/arrows" class="block px-4 py-3 text-gray-700 hover:bg-purple-50 hover:text-[#6B46C1] border-t border-gray-50">
+            <a href="/ministries/arrows" class="block px-4 py-3 border-t border-gray-100">
               Arrows in the Quiver
             </a>
           </div>
@@ -104,7 +282,7 @@
     <div class="hidden lg:flex items-center gap-3 xl:gap-4 shrink-0">
       <a
         href="/academy"
-        class="rounded-full <%= isLoggedIn ? 'border border-gray-200 bg-white text-gray-800 hover:border-[#6B46C1] hover:text-[#6B46C1]' : 'bg-[#6B46C1] text-white hover:bg-purple-700 shadow-md' %> px-4 xl:px-5 py-3 text-sm xl:text-base font-bold transition whitespace-nowrap"
+        class="site-header__academy-btn rounded-full px-5 xl:px-6 py-3 text-sm xl:text-base font-bold whitespace-nowrap <%= isAcademyActive ? 'bg-white/10' : '' %>"
       >
         Academy
       </a>
@@ -112,7 +290,7 @@
       <% if (isLoggedIn && isAdmin) { %>
         <a
           href="/admin"
-          class="rounded-full bg-[#6B46C1] text-white px-4 xl:px-5 py-3 text-sm xl:text-base font-bold hover:bg-purple-700 transition shadow-md whitespace-nowrap"
+          class="site-header__academy-btn rounded-full px-5 xl:px-6 py-3 text-sm xl:text-base font-bold whitespace-nowrap"
         >
           Admin
         </a>
@@ -121,7 +299,7 @@
       <% if (isLoggedIn) { %>
         <a
           href="/notifications"
-          class="relative inline-flex items-center justify-center h-12 w-12 rounded-full border border-gray-200 bg-white text-gray-800 hover:border-[#6B46C1] hover:text-[#6B46C1] transition"
+          class="site-header__icon-btn relative inline-flex items-center justify-center h-12 w-12 rounded-full border transition"
           aria-label="Notifications"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -138,7 +316,7 @@
         <button
           type="button"
           id="desktop-logout-btn"
-          class="rounded-full border border-red-200 bg-white px-4 xl:px-5 py-3 text-sm xl:text-base font-semibold text-red-600 hover:bg-red-50 transition whitespace-nowrap"
+          class="site-header__logout-btn rounded-full border px-4 xl:px-5 py-3 text-sm xl:text-base font-semibold transition whitespace-nowrap"
         >
           Logout
         </button>
@@ -149,7 +327,7 @@
     <button
       id="mobile-menu-button"
       type="button"
-      class="lg:hidden inline-flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-50 transition shrink-0"
+      class="site-header__mobile-toggle lg:hidden inline-flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-xl transition shrink-0"
       aria-label="Toggle menu"
       aria-expanded="false"
       aria-controls="mobile-menu"
@@ -165,77 +343,77 @@
   </div>
 
   <!-- Mobile / Tablet Menu -->
-  <div id="mobile-menu" class="hidden lg:hidden border-t border-gray-100 bg-white shadow-lg">
+  <div id="mobile-menu" class="site-header__mobile-panel hidden lg:hidden shadow-lg">
     <div class="px-4 py-4 space-y-2">
       <a
         href="/"
-        class="block rounded-xl px-4 py-3 font-medium transition <%= currentPath === '/' ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:bg-gray-50' %>"
+        class="site-header__mobile-link block rounded-xl px-4 py-3 font-medium <%= isHomeActive ? 'is-active' : '' %>"
       >
         Home
       </a>
 
       <a
         href="/about"
-        class="block rounded-xl px-4 py-3 font-medium transition <%= currentPath === '/about' ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:bg-gray-50' %>"
+        class="site-header__mobile-link block rounded-xl px-4 py-3 font-medium <%= isAboutActive ? 'is-active' : '' %>"
       >
         About
       </a>
 
       <a
         href="/livingstone-akinadewo"
-        class="block rounded-xl px-4 py-3 font-medium transition <%= isLeadActive ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:bg-gray-50' %>"
+        class="site-header__mobile-link block rounded-xl px-4 py-3 font-medium <%= isLeadActive ? 'is-active' : '' %>"
       >
         Livingstone Akinadewo
       </a>
 
-      <details class="group rounded-xl border border-gray-100 overflow-hidden" <%= isConnectActive ? 'open' : '' %>>
-        <summary class="list-none cursor-pointer px-4 py-3 flex items-center justify-between font-medium transition <%= isConnectActive ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:bg-gray-50' %>">
+      <details class="site-header__mobile-details group rounded-xl overflow-hidden" <%= isConnectActive ? 'open' : '' %>>
+        <summary class="site-header__mobile-summary list-none cursor-pointer px-4 py-3 flex items-center justify-between font-medium <%= isConnectActive ? 'is-active' : '' %>">
           <span>Connect</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
           </svg>
         </summary>
 
-        <div class="bg-white border-t border-gray-100">
+        <div class="site-header__mobile-submenu">
           <a
             href="/events"
-            class="block px-6 py-3 transition <%= currentPath === '/events' ? 'text-[#6B46C1] bg-purple-50/60 font-medium' : 'text-gray-700 hover:bg-gray-50' %>"
+            class="block px-6 py-3 <%= currentPath === '/events' ? 'is-active' : '' %>"
           >
             Events
           </a>
           <a
             href="/contact"
-            class="block px-6 py-3 transition border-t border-gray-50 <%= currentPath === '/contact' ? 'text-[#6B46C1] bg-purple-50/60 font-medium' : 'text-gray-700 hover:bg-gray-50' %>"
+            class="block px-6 py-3 border-t border-white/10 <%= currentPath === '/contact' ? 'is-active' : '' %>"
           >
             Contact
           </a>
         </div>
       </details>
 
-      <details class="group rounded-xl border border-gray-100 overflow-hidden" <%= isMinistriesActive ? 'open' : '' %>>
-        <summary class="list-none cursor-pointer px-4 py-3 flex items-center justify-between font-medium transition <%= isMinistriesActive ? 'bg-purple-50 text-[#6B46C1]' : 'text-gray-700 hover:bg-gray-50' %>">
+      <details class="site-header__mobile-details group rounded-xl overflow-hidden" <%= isMinistriesActive ? 'open' : '' %>>
+        <summary class="site-header__mobile-summary list-none cursor-pointer px-4 py-3 flex items-center justify-between font-medium <%= isMinistriesActive ? 'is-active' : '' %>">
           <span>Ministries</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
           </svg>
         </summary>
 
-        <div class="bg-white border-t border-gray-100">
+        <div class="site-header__mobile-submenu">
           <a
             href="/ministries/dbw"
-            class="block px-6 py-3 transition <%= currentPath === '/ministries/dbw' ? 'text-[#6B46C1] bg-purple-50/60 font-medium' : 'text-gray-700 hover:bg-gray-50' %>"
+            class="block px-6 py-3 <%= currentPath === '/ministries/dbw' ? 'is-active' : '' %>"
           >
             Discipleship by the Word
           </a>
           <a
             href="/ministries/bootcamp"
-            class="block px-6 py-3 transition border-t border-gray-50 <%= currentPath === '/ministries/bootcamp' ? 'text-[#6B46C1] bg-purple-50/60 font-medium' : 'text-gray-700 hover:bg-gray-50' %>"
+            class="block px-6 py-3 border-t border-white/10 <%= currentPath === '/ministries/bootcamp' ? 'is-active' : '' %>"
           >
             Discipleship Bootcamp
           </a>
           <a
             href="/ministries/arrows"
-            class="block px-6 py-3 transition border-t border-gray-50 <%= currentPath === '/ministries/arrows' ? 'text-[#6B46C1] bg-purple-50/60 font-medium' : 'text-gray-700 hover:bg-gray-50' %>"
+            class="block px-6 py-3 border-t border-white/10 <%= currentPath === '/ministries/arrows' ? 'is-active' : '' %>"
           >
             Arrows in the Quiver
           </a>
@@ -244,7 +422,7 @@
 
       <a
         href="/academy"
-        class="mt-3 inline-flex w-full items-center justify-center rounded-full bg-[#6B46C1] text-white px-6 py-3 font-bold hover:bg-purple-700 transition shadow-md"
+        class="site-header__academy-btn mt-3 inline-flex w-full items-center justify-center rounded-full px-6 py-3 font-bold <%= isAcademyActive ? 'bg-white/10' : '' %>"
       >
         Academy
       </a>
@@ -252,7 +430,7 @@
       <% if (isLoggedIn && isAdmin) { %>
         <a
           href="/admin"
-          class="inline-flex w-full items-center justify-center rounded-full bg-[#6B46C1] text-white px-6 py-3 font-bold hover:bg-purple-700 transition shadow-md"
+          class="site-header__academy-btn inline-flex w-full items-center justify-center rounded-full px-6 py-3 font-bold"
         >
           Admin
         </a>
@@ -261,7 +439,7 @@
       <% if (isLoggedIn) { %>
         <a
           href="/notifications"
-          class="inline-flex w-full items-center justify-between rounded-full border border-gray-200 bg-white text-gray-800 px-6 py-3 font-bold hover:border-[#6B46C1] hover:text-[#6B46C1] transition"
+          class="site-header__mobile-link inline-flex w-full items-center justify-between rounded-full px-6 py-3 font-bold"
         >
           <span>Notifications</span>
 
@@ -275,7 +453,7 @@
         <button
           type="button"
           id="mobile-logout-btn"
-          class="inline-flex w-full items-center justify-center rounded-full border border-red-200 bg-white text-red-600 px-6 py-3 font-bold hover:bg-red-50 transition"
+          class="site-header__mobile-link inline-flex w-full items-center justify-center rounded-full px-6 py-3 font-bold"
         >
           Logout
         </button>
@@ -339,9 +517,7 @@
       try {
         const response = await fetch("/auth/logout", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           credentials: "same-origin",
         });
 
