@@ -3322,3 +3322,11 @@ svg {
     font-size: 1.25rem;
   }
 }
+/* Mission / Vision / Mandate title serif styling */
+#section-title {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+  color: #111827;
+}
