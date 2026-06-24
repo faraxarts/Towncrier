@@ -85,13 +85,15 @@
       margin-bottom: 1rem;
     }
 
-    .lead-title {
-      font-size: clamp(2.2rem, 5vw, 4.8rem);
-      line-height: 1.05;
-      font-weight: 800;
-      color: #111827;
-      margin-bottom: 1rem;
-    }
+.lead-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2.35rem, 5vw, 5rem);
+  line-height: 0.96;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #111827;
+  margin-bottom: 1rem;
+}
 
     .lead-role-line {
       font-size: 1rem;
@@ -161,13 +163,15 @@
       color: #6b46c1;
     }
 
-    .lead-action-card {
-      background: white;
-      border: 1px solid rgba(15, 23, 42, 0.08);
-      border-radius: 1.5rem;
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
-      padding: 1.25rem;
-    }
+.lead-action-card h3 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2rem, 3vw, 2.7rem);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #111827;
+  margin-bottom: 0.85rem;
+}
 
     .lead-action-card h3 {
       font-size: 1.7rem;
@@ -294,74 +298,75 @@
     }
 
     @media (min-width: 1024px) {
-      .lead-profile-shell {
-        padding: 3.5rem 2rem 6rem;
-      }
+  .lead-profile-shell {
+    padding: 3.5rem 2rem 6rem;
+  }
 
-      .lead-profile-grid {
-        grid-template-columns: minmax(360px, 0.92fr) minmax(0, 1.3fr);
-        gap: 3rem;
-        align-items: stretch;
-      }
+  .lead-profile-grid {
+    grid-template-columns: minmax(360px, 0.92fr) minmax(0, 1.3fr);
+    gap: 3rem;
+    align-items: stretch;
+  }
 
-      .lead-media-column {
-        order: 1;
-        align-self: stretch;
-        min-height: 100%;
-      }
+  .lead-media-column {
+    order: 1;
+    position: relative;
+    align-self: stretch;
+    min-height: 100%;
+  }
 
-      .lead-content-column {
-        order: 2;
-      }
+  .lead-content-column {
+    order: 2;
+    min-width: 0;
+  }
 
-      /*
-        This is the key fix:
-        the left column now stretches to the full height of the entire profile section,
-        so the sticky image remains visible while the right column scrolls.
-      */
-      .lead-sticky-wrap {
-        position: sticky;
-        top: 7.25rem;
-      }
+  .lead-sticky-wrap {
+    position: sticky;
+    top: 7.5rem;
+    height: fit-content;
+  }
 
-      .lead-sticky-media {
-        height: calc(100vh - 9rem);
-        min-height: 620px;
-        max-height: 860px;
-        border-radius: 2rem;
-      }
+  .lead-sticky-media {
+    height: min(86vh, 860px);
+    min-height: 640px;
+    border-radius: 2rem;
+  }
 
-      .lead-sticky-media img {
-        width: 100%;
-        height: 100%;
-      }
+  .lead-sticky-media img {
+    width: 100%;
+    height: 100%;
+  }
 
-      .lead-mobile-header {
-        display: none;
-      }
+  .lead-mobile-header {
+    display: none;
+  }
 
-      .lead-desktop-header {
-        display: block;
-      }
+  .lead-desktop-header {
+    display: block;
+  }
 
-      .lead-copy-block,
-      .lead-action-card {
-        padding: 2rem;
-        border-radius: 1.8rem;
-      }
+  .lead-copy-block,
+  .lead-action-card {
+    padding: 2rem;
+    border-radius: 1.8rem;
+  }
 
-      .lead-content-stack {
-        gap: 1.75rem;
-      }
+  .lead-content-stack {
+    gap: 1.75rem;
+  }
 
-      .lead-media-caption-name {
-        font-size: 1.75rem;
-      }
+  .lead-media-caption-name {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 2rem;
+    line-height: 0.95;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
 
-      .lead-media-caption-role {
-        font-size: 0.85rem;
-      }
-    }
+  .lead-media-caption-role {
+    font-size: 0.85rem;
+  }
+}
   </style>
 </head>
 <body class="lead-profile-page text-gray-900">
