@@ -16,16 +16,28 @@
 
   <%- include("partials/header") %>
 
-  <section class="bg-gradient-to-r from-[#4F46E5] via-[#A855F7] to-[#EC4899]">
-    <div class="max-w-7xl mx-auto px-6 md:px-16 py-20 md:py-24 text-center text-white">
-      <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
-        About Town Crier Evangelical Ministries
-      </h1>
-      <p class="max-w-4xl mx-auto text-lg md:text-2xl font-medium leading-relaxed text-white/95">
-        This is an Oak of Righteousness, the planting of the Lord, that He might be glorified. 
-      </p>
+  <section class="about-page-hero">
+  <div class="max-w-7xl mx-auto px-6 md:px-16">
+    <div
+      class="about-page-hero__panel"
+      style="background-image: url('/images/REPLACE-ABOUT-HERO.jpg');"
+    >
+      <div class="about-page-hero__overlay"></div>
+
+      <div class="about-page-hero__content">
+        <p class="about-page-hero__kicker">About</p>
+
+        <h1 class="about-page-hero__title">
+          About Town Crier Evangelical Ministries
+        </h1>
+
+        <p class="about-page-hero__text">
+          This is an Oak of Righteousness, the planting of the Lord, that He might be glorified.
+        </p>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <section class="py-16 md:py-20">
     <div class="max-w-7xl mx-auto px-6 md:px-16">
@@ -52,122 +64,84 @@
     </div>
   </section>
 
-  <section class="pb-16 md:pb-20">
-    <div class="max-w-7xl mx-auto px-6 md:px-16">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-white border border-gray-100 rounded-[28px] shadow-sm overflow-hidden">
-        <div class="p-8 md:p-12 order-2 lg:order-1">
-          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#6B46C1] mb-3">
-            Lead Evangelist / President
-          </p>
-          <h2 class="text-3xl md:text-5xl font-extrabold text-gray-950 mb-5">
-            Meet <%= leadProfile.name %>
-          </h2>
-          <p class="text-lg md:text-xl leading-relaxed text-slate-700 mb-6">
-            <%= leadProfile.excerpt %>
-          </p>
+<section class="pb-16 md:pb-20">
+  <div class="max-w-7xl mx-auto px-6 md:px-16">
+    <div class="about-lead-shell">
+      <div class="about-lead-media">
+        <div class="about-lead-image-card">
+          <img
+            src="/images/meet_lead.JPG"
+            alt="Livingstone Akinadewo"
+            class="about-lead-image"
+          />
 
-          <a
-            href="/livingstone-akinadewo"
-            class="inline-flex items-center rounded-2xl bg-[#6B46C1] text-white px-6 py-3 font-semibold hover:bg-purple-700 transition"
-          >
-            Meet Livingstone Akinadewo
-          </a>
-        </div>
-
-        <div class="order-1 lg:order-2 h-full min-h-[340px] bg-gradient-to-br from-purple-50 to-white flex items-center justify-center p-8">
-          <div class="lead-photo-card">
-            <img src="/images/meet_lead.JPG" alt="Town Crier ministry lead" class="lead-photo-image" />
-            <div class="lead-photo-overlay">
-              
-              <p class="lead-photo-caption">Livingstone F. Akinadewo</p>
-            </div>
+          <div class="about-lead-image-overlay">
+            <p class="about-lead-image-caption">Livingstone F. Akinadewo</p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="pb-16 md:pb-20">
-    <div class="max-w-7xl mx-auto px-6 md:px-16">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div class="bg-white border border-gray-100 rounded-[26px] shadow-sm p-8 md:p-10">
-          <div class="w-14 h-14 rounded-2xl bg-indigo-100 flex items-center justify-center mb-8">
-            <span class="text-2xl">🎯</span>
-          </div>
+      <div class="about-lead-copy">
+        <p class="about-lead-kicker">Ministry Lead</p>
 
-          <h3 class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-6">
-            Our Mission
-          </h3>
-
-          <p class="text-lg md:text-[1.35rem] leading-relaxed text-slate-700">
-            Under the leadership of our Lord Jesus Christ and the stewardship of the President, TCEM is ran by a committee of leaders; devout men and women who believes in the Heavenly vision, striving together with the head for its accomplishment, giving themselves thoroughly to the minsitry of the Word and prayer as the Holy Spirit enables them to multiply the God-kind. 
-          </p>
-          <p class="text-lg md:text-[1.35rem] leading-relaxed text-slate-700">2 Timothy 2:2 says, "And the things that thou hast heard of me among many witnesses, the same commit thou to faithful men, who shall be able to teach others also." The above Scripture is the clear revelation of our mission, and the true secret to fruitfulness and multiplication. With the help of a team of willing, yielded and faifthful men, we birth this mission into reality.</p>   
-        </div>
-
-        <div class="bg-white border border-gray-100 rounded-[26px] shadow-sm p-8 md:p-10">
-          <div class="w-14 h-14 rounded-2xl bg-purple-100 flex items-center justify-center mb-8">
-            <span class="text-2xl">👁️</span>
-          </div>
-
-          <h3 class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-6">
-            Our Vision
-          </h3>
-
-          <p class="text-lg md:text-[1.35rem] leading-relaxed text-slate-700">
-            Striving to attain multiplication of the God-kind by raising leaders who will be fruitful with their training and in turn begin to multiple their (our) kind. Altogether, fruitfulness with the seed of eternal life and multiplication of the God-kind nature is our overall goal.   
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="py-8 md:py-12">
-    <div class="max-w-7xl mx-auto px-6 md:px-16">
-      <div class="text-center mb-12">
-        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#6B46C1] mb-3">
-          What Shapes Our Ministry
-        </p>
-        <h2 class="text-3xl md:text-5xl font-extrabold text-gray-950">
-          Our Core Values
+        <h2 class="home-serif-title about-lead-title">
+          Meet <%= leadProfile.name %>
         </h2>
+
+        <p class="about-lead-role">Lead Evangelist / President</p>
+
+        <p class="about-lead-text">
+          <%= leadProfile.excerpt %>
+        </p>
+
+        <a
+          href="/livingstone-akinadewo"
+          class="home-primary-button"
+        >
+          Meet Livingstone Akinadewo →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <section class="pb-16 md:pb-20">
+  <div class="max-w-7xl mx-auto px-6 md:px-16">
+    <div class="about-purpose-shell">
+      <div class="about-purpose-vision">
+        <p class="about-purpose-label">Our Vision</p>
+        <div class="about-purpose-accent"></div>
+
+        <div class="about-purpose-quote-wrap">
+          <span class="about-purpose-quote-mark">“</span>
+
+          <p class="about-purpose-vision-text">
+            Striving to attain multiplication of the God-kind by raising leaders who will be fruitful with their training and in turn begin to multiple their (our) kind. Altogether, fruitfulness with the seed of eternal life and multiplication of the God-kind nature is our overall goal.
+          </p>
+
+          <span class="about-purpose-quote-mark about-purpose-quote-mark--end">”</span>
+        </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-        <div class="bg-white border border-gray-100 rounded-[26px] shadow-sm p-8 text-center">
-          <div class="text-4xl mb-6">📖</div>
-          <h3 class="text-2xl font-extrabold text-gray-950 mb-4">Sound Doctrine</h3>
-          <p class="text-lg leading-relaxed text-slate-600">
-            God's Word is our final authority in all matters of faith and practice. 
-          </p>
-        </div>
+      <div class="about-purpose-mission">
+        <p class="about-purpose-label">Our Mission</p>
+        <div class="about-purpose-accent"></div>
 
-        <div class="bg-white border border-gray-100 rounded-[26px] shadow-sm p-8 text-center">
-          <div class="text-4xl mb-6">🙏</div>
-          <h3 class="text-2xl font-extrabold text-gray-950 mb-4">Discipleship & Mentorship</h3>
-          <p class="text-lg leading-relaxed text-slate-600">
-            As living epistles, we believe in thorough transformation by preaching and living the Word. 
+        <div class="about-purpose-mission-body">
+          <p>
+            Under the leadership of our Lord Jesus Christ and the stewardship of the President, TCEM is ran by a committee of leaders; devout men and women who believes in the Heavenly vision, striving together with the head for its accomplishment, giving themselves thoroughly to the minsitry of the Word and prayer as the Holy Spirit enables them to multiply the God-kind.
           </p>
-        </div>
 
-        <div class="bg-white border border-gray-100 rounded-[26px] shadow-sm p-8 text-center">
-          <div class="text-4xl mb-6">❤️</div>
-          <h3 class="text-2xl font-extrabold text-gray-950 mb-4">Righteousness & Purity</h3>
-          <p class="text-lg leading-relaxed text-slate-600">
-            We uphold righteousness and purity as the peri-center of all our businesses.  
-          </p>
-        </div>
-
-        <div class="bg-white border border-gray-100 rounded-[26px] shadow-sm p-8 text-center">
-          <div class="text-4xl mb-6">🌍</div>
-          <h3 class="text-2xl font-extrabold text-gray-950 mb-4">Evangelism</h3>
-          <p class="text-lg leading-relaxed text-slate-600">
-            We are passionate about sharing the Gospel and making disciples of all Nations. 
+          <p>
+            2 Timothy 2:2 says, "And the things that thou hast heard of me among many witnesses, the same commit thou to faithful men, who shall be able to teach others also." The above Scripture is the clear revelation of our mission, and the true secret to fruitfulness and multiplication. With the help of a team of willing, yielded and faifthful men, we birth this mission into reality.
           </p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+  
 
 <%
   const safeVideoTitle =
@@ -255,6 +229,253 @@
 </section>
 
 <style>
+  .about-page-hero {
+  padding: 2rem 0 4rem;
+  background: #f7f7f8;
+}
+
+.about-page-hero__panel {
+  position: relative;
+  min-height: 420px;
+  border-radius: 34px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 22px 50px rgba(15, 23, 42, 0.08);
+}
+
+.about-page-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.14) 0%, rgba(15, 23, 42, 0.26) 42%, rgba(107, 70, 193, 0.72) 100%),
+    linear-gradient(90deg, rgba(107, 70, 193, 0.48) 0%, rgba(107, 70, 193, 0.12) 20%, rgba(107, 70, 193, 0) 34%),
+    linear-gradient(270deg, rgba(107, 70, 193, 0.34) 0%, rgba(107, 70, 193, 0) 18%);
+}
+
+.about-page-hero__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: #ffffff;
+  max-width: 860px;
+  padding: 2.5rem 1.5rem;
+}
+
+.about-page-hero__kicker {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  margin-bottom: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.about-page-hero__title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2.4rem, 5vw, 4.7rem);
+  line-height: 0.98;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.about-page-hero__text {
+  max-width: 760px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.94);
+}
+
+.about-purpose-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 2.5rem;
+  align-items: start;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 30px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+  padding: 2rem;
+}
+
+.about-purpose-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #6B46C1;
+}
+
+.about-purpose-accent {
+  width: 92px;
+  height: 4px;
+  border-radius: 999px;
+  margin: 0.9rem 0 1.2rem;
+  background: linear-gradient(90deg, rgba(107, 70, 193, 0.18), #6B46C1, rgba(107, 70, 193, 0.18));
+}
+
+.about-purpose-quote-wrap {
+  position: relative;
+}
+
+.about-purpose-quote-mark {
+  display: block;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 3.8rem;
+  line-height: 1;
+  color: #6B46C1;
+  font-weight: 700;
+}
+
+.about-purpose-quote-mark--end {
+  text-align: right;
+  margin-top: 0.35rem;
+}
+
+.about-purpose-vision-text {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.7rem, 3vw, 2.55rem);
+  line-height: 1.14;
+  font-weight: 700;
+  font-style: italic;
+  color: #4a2c67;
+  max-width: 480px;
+}
+
+.about-purpose-mission-body {
+  border-left: 4px solid rgba(107, 70, 193, 0.78);
+  padding-left: 1.2rem;
+}
+
+.about-purpose-mission-body p {
+  color: #475569;
+  font-size: 1rem;
+  line-height: 1.9;
+  margin-bottom: 1rem;
+}
+
+.about-purpose-mission-body p:last-child {
+  margin-bottom: 0;
+}
+
+.about-lead-shell {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.88fr) minmax(0, 1.12fr);
+  gap: 2.2rem;
+  align-items: center;
+  background: #fffdf9;
+  border: 1px solid rgba(107, 70, 193, 0.1);
+  border-radius: 30px;
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.06);
+  padding: 2rem;
+}
+
+.about-lead-image-card {
+  position: relative;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+}
+
+.about-lead-image {
+  width: 100%;
+  height: 460px;
+  object-fit: cover;
+}
+
+.about-lead-image-overlay {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 1.2rem 1.3rem;
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.08), transparent);
+}
+
+.about-lead-image-caption {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.about-lead-kicker {
+  color: #b3834d;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.about-lead-title {
+  margin-bottom: 0.8rem;
+}
+
+.about-lead-role {
+  color: #6B46C1;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.about-lead-text {
+  color: #4b5563;
+  font-size: 1rem;
+  line-height: 1.95;
+  margin-bottom: 1.4rem;
+  max-width: 640px;
+}
+
+@media (max-width: 1023px) {
+  .about-purpose-shell,
+  .about-lead-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .about-lead-image {
+    height: 360px;
+  }
+}
+
+@media (max-width: 767px) {
+  .about-page-hero {
+    padding: 1.25rem 0 3rem;
+  }
+
+  .about-page-hero__panel {
+    min-height: 320px;
+    border-radius: 24px;
+  }
+
+  .about-page-hero__content {
+    padding: 2rem 1rem;
+  }
+
+  .about-page-hero__text {
+    font-size: 0.95rem;
+  }
+
+  .about-purpose-shell,
+  .about-lead-shell {
+    padding: 1.35rem;
+    border-radius: 24px;
+  }
+
+  .about-purpose-vision-text {
+    font-size: 1.55rem;
+  }
+
+  .about-lead-image {
+    height: 300px;
+  }
+}
+
+
   .about-video-wrapper {
     position: relative;
   }
