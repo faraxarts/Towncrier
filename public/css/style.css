@@ -3147,9 +3147,7 @@ svg {
 }
 
 .site-footer {
-  background:
-    linear-gradient(180deg, rgba(107, 70, 193, 0.09) 0%, rgba(11, 20, 44, 0) 7%),
-    linear-gradient(135deg, #0d1833 0%, #111f45 58%, #0a142d 100%);
+  background: linear-gradient(135deg, #5b35b5 0%, #6B46C1 52%, #7c5ad6 100%);
   color: #f8f8fb;
   padding-top: 2.4rem;
 }
