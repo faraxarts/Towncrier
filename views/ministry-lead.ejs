@@ -85,7 +85,7 @@
       margin-bottom: 1rem;
     }
 
-.lead-title {
+    .lead-title {
   font-family: "Cormorant Garamond", serif;
   font-size: clamp(2.35rem, 5vw, 5rem);
   line-height: 0.96;
@@ -163,7 +163,7 @@
       color: #6b46c1;
     }
 
-.lead-action-card h3 {
+    .lead-action-card h3 {
   font-family: "Cormorant Garamond", serif;
   font-size: clamp(2rem, 3vw, 2.7rem);
   line-height: 1;
@@ -305,14 +305,15 @@
   .lead-profile-grid {
     grid-template-columns: minmax(360px, 0.92fr) minmax(0, 1.3fr);
     gap: 3rem;
-    align-items: stretch;
+    align-items: start;
+    overflow: visible;
   }
 
   .lead-media-column {
     order: 1;
     position: relative;
-    align-self: stretch;
-    min-height: 100%;
+    align-self: start;
+    min-height: auto;
   }
 
   .lead-content-column {
@@ -323,12 +324,13 @@
   .lead-sticky-wrap {
     position: sticky;
     top: 7.5rem;
-    height: fit-content;
+    align-self: start;
   }
 
   .lead-sticky-media {
-    height: min(86vh, 860px);
-    min-height: 640px;
+    height: calc(100vh - 9rem);
+    min-height: 620px;
+    max-height: 860px;
     border-radius: 2rem;
   }
 
