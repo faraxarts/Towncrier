@@ -5,14 +5,175 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Events | Town Crier</title>
   <link rel="icon" type="image/png" href="/images/tcem-logo.png" />
-<link rel="apple-touch-icon" href="/images/tcem-logo.png" />
+  <link rel="apple-touch-icon" href="/images/tcem-logo.png" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="/css/style.css" />
+
+  <style>
+    .events-page {
+      font-family: "Inter", sans-serif;
+      background: #f7f7f8;
+      color: #111827;
+    }
+
+    .events-connect-link {
+      font-family: "Inter", sans-serif;
+    }
+
+    .events-hero-label {
+      display: inline-block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #b3834d;
+      margin-bottom: 0.9rem;
+    }
+
+    .events-hero-heading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      line-height: 0.95;
+      margin-bottom: 1.2rem;
+    }
+
+    .events-hero-heading span {
+      display: block;
+    }
+
+    .events-hero-heading .events-hero-upcoming {
+      font-family: "Inter", sans-serif;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 800;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: #b3834d;
+      margin-bottom: 0.75rem;
+    }
+
+    .events-hero-heading .events-hero-events {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(3.1rem, 7vw, 5.4rem);
+      line-height: 0.9;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #111827;
+    }
+
+    .events-hero-subtext {
+      font-size: 1.08rem;
+      line-height: 1.85;
+      color: #64748b;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .events-empty-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #111827;
+      margin-bottom: 0.8rem;
+    }
+
+    .event-card {
+      background: #ffffff;
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      border-radius: 28px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.06);
+      overflow: hidden;
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+    }
+
+    .event-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 22px 48px rgba(15, 23, 42, 0.11);
+    }
+
+    .event-card-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2rem, 3vw, 2.45rem);
+      line-height: 0.98;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #111827;
+      margin-bottom: 1rem;
+    }
+
+    .event-card-description {
+      font-size: 1.02rem;
+      line-height: 1.8;
+      color: #475569;
+      margin-bottom: 1.4rem;
+    }
+
+    .event-card-meta {
+      font-size: 0.98rem;
+      line-height: 1.8;
+      color: #64748b;
+      margin-bottom: 1.5rem;
+    }
+
+    .event-card-meta strong {
+      color: #1f2937;
+      font-weight: 700;
+    }
+
+    .event-category-badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: rgba(107, 70, 193, 0.1);
+      color: #6B46C1;
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .event-cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-radius: 18px;
+      background: #6B46C1;
+      color: #ffffff;
+      padding: 0.9rem 1.3rem;
+      font-weight: 700;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .event-cta-button:hover {
+      background: #5b35b5;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 767px) {
+      .events-hero-heading .events-hero-upcoming {
+        margin-bottom: 0.55rem;
+      }
+
+      .events-hero-subtext {
+        font-size: 1rem;
+        line-height: 1.75;
+      }
+
+      .event-card-title {
+        font-size: 1.9rem;
+      }
+    }
+  </style>
 </head>
-<body class="bg-[#f7f7f8] text-gray-900">
+<body class="events-page">
 
   <%- include("partials/header") %>
 
@@ -20,10 +181,10 @@
   <section class="border-b border-gray-200 bg-transparent">
     <div class="max-w-7xl mx-auto px-6 md:px-16">
       <div class="flex items-center gap-8 overflow-x-auto">
-        <a href="/events" class="inline-flex h-14 items-center border-b-2 border-[#4F46E5] text-[#4F46E5] font-semibold whitespace-nowrap">
+        <a href="/events" class="events-connect-link inline-flex h-14 items-center border-b-2 border-[#6B46C1] text-[#6B46C1] font-semibold whitespace-nowrap">
           Events
         </a>
-        <a href="/contact" class="inline-flex h-14 items-center border-b-2 border-transparent text-gray-700 font-medium hover:text-[#4F46E5] whitespace-nowrap transition">
+        <a href="/contact" class="events-connect-link inline-flex h-14 items-center border-b-2 border-transparent text-gray-700 font-medium hover:text-[#6B46C1] whitespace-nowrap transition">
           Contact
         </a>
       </div>
@@ -31,12 +192,16 @@
   </section>
 
   <!-- HERO -->
-  <section class="pt-10 md:pt-14 pb-14 md:pb-16">
+  <section class="pt-12 md:pt-16 pb-14 md:pb-16">
     <div class="max-w-7xl mx-auto px-6 md:px-16 text-center">
-      <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-950 mb-5">
-        Upcoming Events
+      <p class="events-hero-label">Stay Connected</p>
+
+      <h1 class="events-hero-heading" aria-label="Upcoming Events">
+        <span class="events-hero-upcoming">Upcoming</span>
+        <span class="events-hero-events">Events</span>
       </h1>
-      <p class="text-lg md:text-2xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
+
+      <p class="events-hero-subtext">
         Stay connected with our conferences, meetings, discipleship gatherings, and ministry events.
       </p>
     </div>
@@ -47,17 +212,17 @@
     <div class="max-w-7xl mx-auto px-6 md:px-16">
       <% if (!events || !events.length) { %>
         <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-10 text-center">
-          <h2 class="text-2xl md:text-3xl font-extrabold text-gray-950 mb-4">
+          <h2 class="events-empty-title">
             No events available yet
           </h2>
           <p class="text-lg text-slate-600">
-            upcoming events will appear here.
+            Upcoming events will appear here.
           </p>
         </div>
       <% } else { %>
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
           <% events.forEach((event) => { %>
-            <article class="bg-white border border-gray-100 rounded-[28px] shadow-sm overflow-hidden hover:-translate-y-1 transition duration-300">
+            <article class="event-card">
               <div class="h-56 overflow-hidden">
                 <img
                   src="<%= event.featuredImage || '/images/event1.jpg' %>"
@@ -68,20 +233,20 @@
 
               <div class="p-7 md:p-8">
                 <div class="flex items-center justify-between gap-4 mb-4">
-                  <span class="inline-flex rounded-full bg-purple-100 text-purple-700 px-4 py-1.5 text-sm font-semibold">
+                  <span class="event-category-badge">
                     <%= event.category || "General Event" %>
                   </span>
                 </div>
 
-                <h2 class="text-2xl font-extrabold text-gray-950 mb-4 leading-snug">
+                <h2 class="event-card-title">
                   <%= event.title %>
                 </h2>
 
-                <p class="text-lg leading-relaxed text-slate-700 mb-6">
+                <p class="event-card-description">
                   <%= event.shortDescription %>
                 </p>
 
-                <div class="space-y-2 text-base text-slate-600 mb-7">
+                <div class="event-card-meta">
                   <p><strong>Date:</strong> <%= event.eventDate || "To be announced" %></p>
                   <p><strong>Time:</strong> <%= event.eventTime || "To be announced" %></p>
                   <p><strong>Location:</strong> <%= event.location || "To be announced" %></p>
@@ -89,7 +254,7 @@
 
                 <a
                   href="/events/<%= event.slug %>"
-                  class="inline-flex items-center gap-3 rounded-2xl bg-[#6B46C1] text-white px-6 py-3 font-semibold hover:bg-purple-700 transition"
+                  class="event-cta-button"
                 >
                   <%= event.buttonText || "Learn More" %>
                   <span class="text-xl leading-none">→</span>
