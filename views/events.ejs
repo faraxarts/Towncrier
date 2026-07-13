@@ -34,37 +34,39 @@
       margin-bottom: 0.9rem;
     }
 
-    .events-hero-heading {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      line-height: 0.95;
-      margin-bottom: 1.2rem;
-    }
+
 
     .events-hero-heading span {
       display: block;
     }
 
-    .events-hero-heading .events-hero-upcoming {
-      font-family: "Inter", sans-serif;
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      font-weight: 800;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      color: #b3834d;
-      margin-bottom: 0.75rem;
-    }
+    .events-hero-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  line-height: 1;
+  margin-bottom: 1.2rem;
+}
 
-    .events-hero-heading .events-hero-events {
-      font-family: "Cormorant Garamond", serif;
-      font-size: clamp(3.1rem, 7vw, 5.4rem);
-      line-height: 0.9;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      color: #111827;
-    }
+.events-hero-heading .events-hero-upcoming {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(3rem, 6.4vw, 5.1rem);
+  line-height: 0.92;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #6B46C1;
+}
+
+.events-hero-heading .events-hero-events {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(3rem, 6.4vw, 5.1rem);
+  line-height: 0.92;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #111827;
+}
 
     .events-hero-subtext {
       font-size: 1.08rem;
@@ -157,20 +159,20 @@
       transform: translateY(-1px);
     }
 
-    @media (max-width: 767px) {
-      .events-hero-heading .events-hero-upcoming {
-        margin-bottom: 0.55rem;
-      }
+@media (max-width: 767px) {
+  .events-hero-heading {
+    gap: 0.3rem;
+  }
 
-      .events-hero-subtext {
-        font-size: 1rem;
-        line-height: 1.75;
-      }
+  .events-hero-subtext {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
 
-      .event-card-title {
-        font-size: 1.9rem;
-      }
-    }
+  .event-card-title {
+    font-size: 1.9rem;
+  }
+}
   </style>
 </head>
 <body class="events-page">
@@ -196,10 +198,10 @@
     <div class="max-w-7xl mx-auto px-6 md:px-16 text-center">
       <p class="events-hero-label">Stay Connected</p>
 
-      <h1 class="events-hero-heading" aria-label="Upcoming Events">
-        <span class="events-hero-upcoming">Upcoming</span>
-        <span class="events-hero-events">Events</span>
-      </h1>
+      <h1 class="events-hero-heading events-hero-heading--inline" aria-label="Upcoming Events">
+  <span class="events-hero-upcoming">Upcoming</span>
+  <span class="events-hero-events">Events</span>
+</h1>
 
       <p class="events-hero-subtext">
         Stay connected with our conferences, meetings, discipleship gatherings, and ministry events.
