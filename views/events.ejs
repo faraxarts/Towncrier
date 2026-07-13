@@ -40,11 +40,11 @@
       display: block;
     }
 
-    .events-hero-heading {
+.events-hero-heading {
   display: flex;
   align-items: baseline;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
   flex-wrap: wrap;
   line-height: 1;
   margin-bottom: 1.2rem;
@@ -52,22 +52,22 @@
 
 .events-hero-heading .events-hero-upcoming {
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(3rem, 6.4vw, 5.1rem);
+  font-size: clamp(3rem, 6.3vw, 5rem);
   line-height: 0.92;
   font-weight: 700;
+  font-style: italic;
   letter-spacing: -0.03em;
   color: #6B46C1;
 }
 
 .events-hero-heading .events-hero-events {
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(3rem, 6.4vw, 5.1rem);
+  font-family: "Inter", sans-serif;
+  font-size: clamp(3rem, 6vw, 5rem);
   line-height: 0.92;
-  font-weight: 700;
-  letter-spacing: -0.03em;
+  font-weight: 800;
+  letter-spacing: -0.04em;
   color: #111827;
 }
-
     .events-hero-subtext {
       font-size: 1.08rem;
       line-height: 1.85;
@@ -161,7 +161,7 @@
 
 @media (max-width: 767px) {
   .events-hero-heading {
-    gap: 0.3rem;
+    gap: 0.28rem;
   }
 
   .events-hero-subtext {
@@ -198,7 +198,7 @@
     <div class="max-w-7xl mx-auto px-6 md:px-16 text-center">
       <p class="events-hero-label">Stay Connected</p>
 
-      <h1 class="events-hero-heading events-hero-heading--inline" aria-label="Upcoming Events">
+<h1 class="events-hero-heading" aria-label="Upcoming Events">
   <span class="events-hero-upcoming">Upcoming</span>
   <span class="events-hero-events">Events</span>
 </h1>
