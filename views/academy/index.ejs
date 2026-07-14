@@ -5,51 +5,306 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Academy | Town Crier</title>
   <link rel="icon" type="image/png" href="/images/tcem-logo.png" />
-<link rel="apple-touch-icon" href="/images/tcem-logo.png" />
+  <link rel="apple-touch-icon" href="/images/tcem-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css" />
 </head>
-<body class="bg-[#f7f7f8] text-gray-900">
+<body class="academy-page bg-[#f7f7f8] text-gray-900">
 
   <%- include("../partials/header") %>
 
-  <section class="py-16 md:py-20">
+  <%
+    function getAcademyMeta(academy) {
+      const slug = (academy.slug || "").toLowerCase();
+      const name = (academy.name || "").toLowerCase();
+
+      if (slug === "dbw-hub" || slug === "dbw" || name.includes("dbw")) {
+        return {
+          title: academy.name || "DBW Hub",
+          subtitle: "Discipleship by the Word",
+          description:
+            academy.shortDescription ||
+            "Deepen your understanding of Scripture through structured study and community engagement.",
+          button: "Enter DBW Hub"
+        };
+      }
+
+      if (slug === "davidic-harp" || name.includes("davidic")) {
+        return {
+          title: academy.name || "Davidic Harp",
+          subtitle: "Worship and Music Discipleship",
+          description:
+            academy.shortDescription ||
+            "Learn to lead worship and grow spiritually through music, song, and praise.",
+          button: "Enter Davidic Harp"
+        };
+      }
+
+      return {
+        title: academy.name || "Academy",
+        subtitle: "Ministry Learning Path",
+        description:
+          academy.shortDescription ||
+          "Grow in truth, character, and ministry through guided spiritual formation.",
+        button: `Enter ${academy.name || "Academy"}`
+      };
+    }
+  %>
+
+  <style>
+    .academy-page {
+      font-family: "Inter", sans-serif;
+    }
+
+    .academy-shell {
+      padding-top: 4rem;
+      padding-bottom: 5.5rem;
+    }
+
+    .academy-kicker {
+      font-size: 0.82rem;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #b3834d;
+      margin-bottom: 1rem;
+    }
+
+    .academy-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(3rem, 5vw, 4.7rem);
+      line-height: 0.95;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #1f2240;
+      margin-bottom: 1rem;
+    }
+
+    .academy-subtitle {
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #475569;
+    }
+
+    .academy-grid {
+      margin-top: 3rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+
+    .academy-card {
+      position: relative;
+      background: linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(250,247,255,0.92) 100%);
+      border: 2px solid rgba(139, 92, 246, 0.28);
+      border-radius: 2rem;
+      padding: 2.25rem 2rem 1.8rem;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.05);
+      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+      overflow: hidden;
+    }
+
+    .academy-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(107, 70, 193, 0.08), transparent 45%);
+      pointer-events: none;
+    }
+
+    .academy-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 24px 50px rgba(15, 23, 42, 0.08);
+      border-color: rgba(107, 70, 193, 0.42);
+    }
+
+    .academy-card__content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .academy-card__title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      line-height: 0.98;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #23253f;
+      margin-bottom: 0.35rem;
+    }
+
+    .academy-card__subtitle {
+      font-size: 1rem;
+      line-height: 1.4;
+      font-weight: 700;
+      color: #5b2d91;
+      margin-bottom: 1rem;
+    }
+
+    .academy-card__description {
+      max-width: 460px;
+      margin: 0 auto 1.35rem;
+      font-size: 0.98rem;
+      line-height: 1.75;
+      color: #4b5563;
+    }
+
+    .academy-card__rule {
+      width: 90px;
+      height: 1px;
+      background: rgba(31, 34, 64, 0.18);
+      margin: 0 auto 1.4rem;
+    }
+
+    .academy-card__cta {
+      display: inline-flex;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      min-height: 3.4rem;
+      border-radius: 0.9rem;
+      background: #6B46C1;
+      color: #ffffff;
+      font-weight: 700;
+      padding: 0.95rem 1.2rem;
+      transition: background-color 180ms ease, transform 180ms ease;
+    }
+
+    .academy-card__cta:hover {
+      background: #5b35b5;
+      transform: translateY(-1px);
+    }
+
+    .academy-footnote {
+      margin-top: 1.45rem;
+      text-align: center;
+      font-size: 0.98rem;
+      color: #4b5563;
+    }
+
+    .academy-footnote a {
+      color: #1f2937;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .academy-empty {
+      background: #ffffff;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 2rem;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.05);
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+
+    .academy-empty__title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.2rem, 4vw, 3.1rem);
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #23253f;
+      margin-bottom: 0.8rem;
+    }
+
+    .academy-empty__text {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #64748b;
+    }
+
+    @media (min-width: 768px) {
+      .academy-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5rem;
+      }
+
+      .academy-card {
+        padding: 2.6rem 2rem 1.9rem;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .academy-shell {
+        padding-top: 3.25rem;
+        padding-bottom: 4.5rem;
+      }
+
+      .academy-title {
+        font-size: clamp(2.5rem, 12vw, 3.4rem);
+      }
+
+      .academy-subtitle {
+        font-size: 1rem;
+        line-height: 1.75;
+      }
+
+      .academy-card__title {
+        font-size: 2.4rem;
+      }
+
+      .academy-card__description {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+
+  <section class="academy-shell">
     <div class="max-w-7xl mx-auto px-6 md:px-16">
-      <div class="text-center mb-12">
-        <h1 class="text-4xl md:text-6xl font-extrabold text-gray-950 mb-4">
-          Ministries' Academy
-        </h1>
-        <p class="text-lg md:text-2xl text-slate-600 max-w-3xl mx-auto">
-          Explore our academies and choose the one that aligns with your learning journey.
+      <div class="text-center">
+        <p class="academy-kicker">Enter the Academy</p>
+        <h1 class="academy-title">Choose Your Learning Path</h1>
+        <p class="academy-subtitle">
+          Explore our Academy’s specialized pathways designed to deepen your understanding and walk with God.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <% if (academies && academies.length) { %>
-          <% academies.forEach((academy) => { %>
-            <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8 md:p-10">
-              <h2 class="text-3xl font-extrabold text-gray-950 mb-4">
-                <%= academy.name %>
-              </h2>
+      <% if (academies && academies.length) { %>
+        <div class="academy-grid">
+          <% academies.forEach((academy) => { 
+               const meta = getAcademyMeta(academy);
+          %>
+            <article class="academy-card">
+              <div class="academy-card__content">
+                <h2 class="academy-card__title"><%= meta.title %></h2>
+                <p class="academy-card__subtitle"><%= meta.subtitle %></p>
+                <p class="academy-card__description"><%= meta.description %></p>
+                <div class="academy-card__rule"></div>
 
-              <p class="text-lg text-slate-700 mb-6">
-                <%= academy.shortDescription || "Ministry academy training platform." %>
-              </p>
-
-              <a
-                href="/academy/<%= academy.slug %>"
-                class="inline-flex items-center justify-center rounded-2xl bg-[#6B46C1] text-white px-8 py-4 font-semibold hover:bg-purple-700 transition"
-              >
-                Enter Academy
-              </a>
-            </div>
+                <a
+                  href="/academy/<%= academy.slug %>"
+                  class="academy-card__cta"
+                >
+                  <span><%= meta.button %></span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </article>
           <% }) %>
-        <% } else { %>
-          <div class="md:col-span-2 bg-white border border-gray-100 rounded-[28px] shadow-sm p-10 text-center">
-            <p class="text-2xl font-semibold text-gray-900 mb-2">No academies available yet</p>
-            <p class="text-slate-600">Please add academies from the database or seed script.</p>
+        </div>
+
+        <p class="academy-footnote">
+          Not sure which to choose?
+          <a href="/contact">Contact us.</a>
+        </p>
+      <% } else { %>
+        <div class="academy-grid">
+          <div class="md:col-span-2 academy-empty">
+            <h2 class="academy-empty__title">No academies available yet</h2>
+            <p class="academy-empty__text">
+              Please add academies from the database or seed script.
+            </p>
           </div>
-        <% } %>
-      </div>
+        </div>
+      <% } %>
     </div>
   </section>
 
