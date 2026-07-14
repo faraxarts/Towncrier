@@ -4,16 +4,116 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Discipleship Bootcamp | Town Crier</title>
-  
+
   <link rel="icon" type="image/png" href="/images/tcem-logo.png" />
-<link rel="apple-touch-icon" href="/images/tcem-logo.png" />
+  <link rel="apple-touch-icon" href="/images/tcem-logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="/css/style.css" />
+
+  <style>
+    .bootcamp-page {
+      background: #f7f7f8;
+      color: #111827;
+      font-family: "Inter", sans-serif;
+    }
+
+    .bootcamp-subnav-link {
+      font-family: "Inter", sans-serif;
+    }
+
+    .bootcamp-hero-label {
+      font-family: "Inter", sans-serif;
+      font-size: 0.88rem;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .bootcamp-hero-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(3.2rem, 6vw, 5.6rem);
+      line-height: 0.92;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+    }
+
+    .bootcamp-hero-text {
+      font-family: "Inter", sans-serif;
+      font-size: clamp(1.05rem, 2vw, 1.45rem);
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.96);
+    }
+
+    .bootcamp-section-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      line-height: 0.96;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #111827;
+    }
+
+    .bootcamp-card-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2rem, 3vw, 2.7rem);
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #111827;
+    }
+
+    .bootcamp-day-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2rem, 3vw, 2.5rem);
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #111827;
+    }
+
+    .bootcamp-body-text {
+      font-family: "Inter", sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: #475569;
+    }
+
+    .bootcamp-meta-text {
+      font-family: "Inter", sans-serif;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #64748b;
+    }
+
+    .bootcamp-button-text {
+      font-family: "Inter", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    @media (max-width: 767px) {
+      .bootcamp-hero-title {
+        font-size: clamp(2.7rem, 12vw, 4rem);
+      }
+
+      .bootcamp-hero-text {
+        font-size: 1rem;
+        line-height: 1.75;
+      }
+
+      .bootcamp-body-text {
+        font-size: 1rem;
+        line-height: 1.75;
+      }
+    }
+  </style>
 </head>
-<body class="bg-[#f7f7f8] text-gray-900">
+<body class="bootcamp-page">
 
   <%- include("../partials/header") %>
 
@@ -21,13 +121,13 @@
   <section class="border-b border-gray-200">
     <div class="max-w-7xl mx-auto px-6 md:px-16">
       <div class="flex items-center gap-8 overflow-x-auto">
-        <a href="/ministries/dbw" class="inline-flex h-14 items-center border-b-2 border-transparent text-gray-700 font-medium hover:text-[#4F46E5] whitespace-nowrap transition">
+        <a href="/ministries/dbw" class="bootcamp-subnav-link inline-flex h-14 items-center border-b-2 border-transparent text-gray-700 font-medium hover:text-[#4F46E5] whitespace-nowrap transition">
           Discipleship by the Word
         </a>
-        <a href="/ministries/bootcamp" class="inline-flex h-14 items-center border-b-2 border-[#4F46E5] text-[#4F46E5] font-semibold whitespace-nowrap">
+        <a href="/ministries/bootcamp" class="bootcamp-subnav-link inline-flex h-14 items-center border-b-2 border-[#4F46E5] text-[#4F46E5] font-semibold whitespace-nowrap">
           Discipleship Bootcamp
         </a>
-        <a href="/ministries/arrows" class="inline-flex h-14 items-center border-b-2 border-transparent text-gray-700 font-medium hover:text-[#4F46E5] whitespace-nowrap transition">
+        <a href="/ministries/arrows" class="bootcamp-subnav-link inline-flex h-14 items-center border-b-2 border-transparent text-gray-700 font-medium hover:text-[#4F46E5] whitespace-nowrap transition">
           Arrows in the Quiver
         </a>
       </div>
@@ -39,16 +139,16 @@
     <div class="max-w-7xl mx-auto px-6 md:px-16">
       <div class="rounded-[30px] bg-gradient-to-r from-[#FF6A00] via-[#FF4D4D] to-[#EC4899] px-8 md:px-12 py-12 md:py-16 text-white shadow-sm">
         <div class="max-w-4xl">
-          <span class="inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-2 text-sm md:text-base font-semibold mb-6">
+          <span class="bootcamp-hero-label inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-2 mb-6">
             <span class="text-base">⚡</span>
             Intensive Training
           </span>
 
-          <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-5">
+          <h1 class="bootcamp-hero-title">
             Discipleship Bootcamp
           </h1>
 
-          <p class="text-lg md:text-2xl leading-relaxed text-white/95">
+          <p class="bootcamp-hero-text">
             Holy Ghost Bootcamp, also referred to as HBC KWASU, is a bootcamp-style discipleship and revival meeting organized by Town Crier Evangelical Ministries. It reflects TCEM’s mandate of discipleship, revival, and evangelical missions, bringing believers together for concentrated sessions of prayer, teaching, consecration, and spiritual awakening.
           </p>
         </div>
@@ -60,57 +160,57 @@
   <section class="pb-12 md:pb-14">
     <div class="max-w-7xl mx-auto px-6 md:px-16">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        
+
         <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8 md:p-10">
-          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-6">
+          <h2 class="bootcamp-section-title mb-6">
             What is Bootcamp?
           </h2>
 
-          <div class="space-y-6 text-lg md:text-[1.15rem] leading-relaxed text-slate-700">
-            <p>
+          <div class="space-y-6">
+            <p class="bootcamp-body-text">
               Discipleship Bootcamp is an intensive, concentrated training experience where participants are immersed in biblical teaching, worship, prayer, and practical ministry exercises over three consecutive days.
             </p>
 
-            <p>
+            <p class="bootcamp-body-text">
               Unlike regular classes that meet weekly, Bootcamp provides focused, uninterrupted time to dive deep into God's Word and develop critical ministry skills in a supportive, high-energy environment.
             </p>
           </div>
         </div>
 
         <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8 md:p-10">
-          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-6">
+          <h2 class="bootcamp-section-title mb-6">
             Why Attend?
           </h2>
 
           <div class="space-y-4">
             <div class="flex items-start gap-4">
               <span class="text-2xl text-green-500 mt-0.5">✅</span>
-              <p class="text-lg md:text-[1.12rem] text-slate-700">Accelerated spiritual growth in just 3 days</p>
+              <p class="bootcamp-body-text">Accelerated spiritual growth in just 3 days</p>
             </div>
 
             <div class="flex items-start gap-4">
               <span class="text-2xl text-green-500 mt-0.5">✅</span>
-              <p class="text-lg md:text-[1.12rem] text-slate-700">Intensive biblical teaching from experienced leaders</p>
+              <p class="bootcamp-body-text">Intensive biblical teaching from experienced leaders</p>
             </div>
 
             <div class="flex items-start gap-4">
               <span class="text-2xl text-green-500 mt-0.5">✅</span>
-              <p class="text-lg md:text-[1.12rem] text-slate-700">Hands-on ministry practice and activation</p>
+              <p class="bootcamp-body-text">Hands-on ministry practice and activation</p>
             </div>
 
             <div class="flex items-start gap-4">
               <span class="text-2xl text-green-500 mt-0.5">✅</span>
-              <p class="text-lg md:text-[1.12rem] text-slate-700">Deep fellowship with like-minded believers</p>
+              <p class="bootcamp-body-text">Deep fellowship with like-minded believers</p>
             </div>
 
             <div class="flex items-start gap-4">
               <span class="text-2xl text-green-500 mt-0.5">✅</span>
-              <p class="text-lg md:text-[1.12rem] text-slate-700">Breakthrough in prayer and worship</p>
+              <p class="bootcamp-body-text">Breakthrough in prayer and worship</p>
             </div>
 
             <div class="flex items-start gap-4">
               <span class="text-2xl text-green-500 mt-0.5">✅</span>
-              <p class="text-lg md:text-[1.12rem] text-slate-700">Practical tools for effective ministry</p>
+              <p class="bootcamp-body-text">Practical tools for effective ministry</p>
             </div>
           </div>
         </div>
@@ -123,19 +223,19 @@
   <section class="py-8 md:py-10">
     <div class="max-w-7xl mx-auto px-6 md:px-16">
       <div class="text-center mb-10">
-        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-950">
+        <h2 class="bootcamp-section-title">
           Daily Schedule
         </h2>
       </div>
 
       <div class="overflow-hidden rounded-[28px] border border-gray-100 bg-white shadow-sm">
         <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-100">
-          
+
           <div class="p-8 md:p-10">
-            <h3 class="text-3xl font-extrabold text-gray-950 text-center mb-1">Day 1</h3>
+            <h3 class="bootcamp-day-title text-center mb-1">Day 1</h3>
             <p class="text-center text-[#4F46E5] text-xl font-semibold mb-6">Foundations</p>
 
-            <ul class="space-y-4 text-lg text-slate-700">
+            <ul class="space-y-4 bootcamp-body-text">
               <li class="flex items-start gap-3"><span class="text-[#4F46E5] mt-1">•</span> Biblical Identity</li>
               <li class="flex items-start gap-3"><span class="text-[#4F46E5] mt-1">•</span> Prayer Life</li>
               <li class="flex items-start gap-3"><span class="text-[#4F46E5] mt-1">•</span> Hearing God's Voice</li>
@@ -143,10 +243,10 @@
           </div>
 
           <div class="p-8 md:p-10">
-            <h3 class="text-3xl font-extrabold text-gray-950 text-center mb-1">Day 2</h3>
+            <h3 class="bootcamp-day-title text-center mb-1">Day 2</h3>
             <p class="text-center text-[#4F46E5] text-xl font-semibold mb-6">Growth</p>
 
-            <ul class="space-y-4 text-lg text-slate-700">
+            <ul class="space-y-4 bootcamp-body-text">
               <li class="flex items-start gap-3"><span class="text-[#4F46E5] mt-1">•</span> Spiritual Disciplines</li>
               <li class="flex items-start gap-3"><span class="text-[#4F46E5] mt-1">•</span> Ministry Gifts</li>
               <li class="flex items-start gap-3"><span class="text-[#4F46E5] mt-1">•</span> Evangelism Skills</li>
@@ -154,10 +254,10 @@
           </div>
 
           <div class="p-8 md:p-10">
-            <h3 class="text-3xl font-extrabold text-gray-950 text-center mb-1">Day 3</h3>
+            <h3 class="bootcamp-day-title text-center mb-1">Day 3</h3>
             <p class="text-center text-[#4F46E5] text-xl font-semibold mb-6">Activation</p>
 
-            <ul class="space-y-4 text-lg text-slate-700">
+            <ul class="space-y-4 bootcamp-body-text">
               <li class="flex items-start gap-3"><span class="text-[#4F46E5] mt-1">•</span> Leadership Training</li>
               <li class="flex items-start gap-3"><span class="text-[#4F46E5] mt-1">•</span> Ministry Practice</li>
               <li class="flex items-start gap-3"><span class="text-[#4F46E5] mt-1">•</span> Commissioning</li>
@@ -171,10 +271,10 @@
         <div class="flex items-start gap-4">
           <span class="text-2xl text-[#4F46E5]">🕒</span>
           <div>
-            <h3 class="text-2xl font-extrabold text-gray-950 mb-2">
+            <h3 class="bootcamp-card-title mb-2">
               Time: 10:00 AM - 4:00 PM Daily
             </h3>
-            <p class="text-lg leading-relaxed text-slate-700">
+            <p class="bootcamp-body-text">
               Includes morning worship, teaching sessions, lunch, workshops, and evening activation
             </p>
           </div>
@@ -187,17 +287,17 @@
   <section class="pt-12 md:pt-14 pb-8">
     <div class="max-w-7xl mx-auto px-6 md:px-16">
       <div class="text-center mb-10">
-        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-950">
+        <h2 class="bootcamp-section-title">
           2026 Bootcamp Dates
         </h2>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
-        
+
         <div class="bg-white border border-orange-200 rounded-[26px] shadow-sm p-8 text-center">
           <div class="w-14 h-14 mx-auto rounded-full bg-orange-100 flex items-center justify-center text-2xl mb-6">📅</div>
-          <h3 class="text-2xl font-extrabold text-gray-950 mb-2">Q1 Bootcamp</h3>
-          <p class="text-lg text-slate-700 mb-5">March 15-17, 2026</p>
+          <h3 class="bootcamp-card-title mb-2">Q1 Bootcamp</h3>
+          <p class="bootcamp-body-text mb-5">March 15-17, 2026</p>
           <span class="inline-flex rounded-full bg-green-100 text-green-700 px-4 py-1.5 text-sm font-semibold">
             Upcoming
           </span>
@@ -205,8 +305,8 @@
 
         <div class="bg-white border border-gray-100 rounded-[26px] shadow-sm p-8 text-center">
           <div class="w-14 h-14 mx-auto rounded-full bg-orange-100 flex items-center justify-center text-2xl mb-6">📅</div>
-          <h3 class="text-2xl font-extrabold text-gray-950 mb-2">Q2 Bootcamp</h3>
-          <p class="text-lg text-slate-700 mb-5">June 10-12, 2026</p>
+          <h3 class="bootcamp-card-title mb-2">Q2 Bootcamp</h3>
+          <p class="bootcamp-body-text mb-5">June 10-12, 2026</p>
           <span class="inline-flex rounded-full bg-green-100 text-green-700 px-4 py-1.5 text-sm font-semibold">
             Open
           </span>
@@ -214,8 +314,8 @@
 
         <div class="bg-white border border-gray-100 rounded-[26px] shadow-sm p-8 text-center">
           <div class="w-14 h-14 mx-auto rounded-full bg-orange-100 flex items-center justify-center text-2xl mb-6">📅</div>
-          <h3 class="text-2xl font-extrabold text-gray-950 mb-2">Q3 Bootcamp</h3>
-          <p class="text-lg text-slate-700 mb-5">September 5-7, 2026</p>
+          <h3 class="bootcamp-card-title mb-2">Q3 Bootcamp</h3>
+          <p class="bootcamp-body-text mb-5">September 5-7, 2026</p>
           <span class="inline-flex rounded-full bg-green-100 text-green-700 px-4 py-1.5 text-sm font-semibold">
             Open
           </span>
@@ -223,8 +323,8 @@
 
         <div class="bg-white border border-gray-100 rounded-[26px] shadow-sm p-8 text-center">
           <div class="w-14 h-14 mx-auto rounded-full bg-orange-100 flex items-center justify-center text-2xl mb-6">📅</div>
-          <h3 class="text-2xl font-extrabold text-gray-950 mb-2">Q4 Bootcamp</h3>
-          <p class="text-lg text-slate-700 mb-5">December 1-3, 2026</p>
+          <h3 class="bootcamp-card-title mb-2">Q4 Bootcamp</h3>
+          <p class="bootcamp-body-text mb-5">December 1-3, 2026</p>
           <span class="inline-flex rounded-full bg-green-100 text-green-700 px-4 py-1.5 text-sm font-semibold">
             Open
           </span>
@@ -238,13 +338,13 @@
   <section class="py-12 md:py-14">
     <div class="max-w-7xl mx-auto px-6 md:px-16">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        
+
         <div class="rounded-[28px] border border-indigo-200 bg-indigo-50/70 p-8 md:p-10">
-          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-6">
+          <h2 class="bootcamp-section-title mb-6">
             What to Bring
           </h2>
 
-          <ul class="space-y-4 text-lg md:text-[1.15rem] text-slate-700">
+          <ul class="space-y-4 bootcamp-body-text">
             <li>• Your Bible and notebook</li>
             <li>• Pen and highlighters</li>
             <li>• Open heart and expectant faith</li>
@@ -254,16 +354,16 @@
         </div>
 
         <div class="rounded-[28px] border border-orange-100 bg-orange-50/40 p-8 md:p-10">
-          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-6">
+          <h2 class="bootcamp-section-title mb-6">
             Registration
           </h2>
 
-          <div class="space-y-6 text-lg md:text-[1.15rem] text-slate-700 leading-relaxed">
-            <p>
+          <div class="space-y-6">
+            <p class="bootcamp-body-text">
               Early bird registration closes 2 weeks before each bootcamp. Space is limited to ensure quality interaction.
             </p>
 
-            <p class="font-bold text-gray-950">
+            <p class="bootcamp-card-title">
               Fee: ₦5,000 (includes materials &amp; lunch)
             </p>
           </div>
@@ -277,26 +377,27 @@
   <section class="pt-4 pb-20 md:pb-24">
     <div class="max-w-7xl mx-auto px-6 md:px-16">
       <div class="rounded-[30px] bg-gradient-to-r from-[#FF6A00] via-[#FF5A4D] to-[#EC4899] px-8 md:px-12 py-12 md:py-14 text-white text-center shadow-sm">
-        <h2 class="text-4xl md:text-5xl font-extrabold mb-5">
+        <h2 class="bootcamp-section-title text-white mb-5">
           Register for Next Bootcamp
         </h2>
-        <p class="max-w-4xl mx-auto text-lg md:text-2xl leading-relaxed text-white/95 mb-8">
+
+        <p class="bootcamp-hero-text max-w-4xl mx-auto mb-8">
           Don't miss this transformative experience. Secure your spot today!
         </p>
 
         <a
-            href="/contact?type=registration&target=Discipleship%20Bootcamp#contact-form-section"
-            class="inline-flex items-center justify-center gap-3 rounded-2xl bg-white text-[#FF5A00] px-8 py-4 text-lg font-semibold shadow-sm hover:shadow-md transition min-w-[190px]"
+          href="/contact?type=registration&target=Discipleship%20Bootcamp#contact-form-section"
+          class="bootcamp-button-text inline-flex items-center justify-center gap-3 rounded-2xl bg-white text-[#FF5A00] px-8 py-4 text-lg shadow-sm hover:shadow-md transition min-w-[190px]"
         >
-  Register Now
-  <span class="text-2xl leading-none">→</span>
-</a>
+          Register Now
+          <span class="text-2xl leading-none">→</span>
+        </a>
       </div>
     </div>
   </section>
 
   <%- include("../partials/auth-modal") %>
-<script src="/js/auth-modal.js"></script>
+  <script src="/js/auth-modal.js"></script>
 
 </body>
 </html>
