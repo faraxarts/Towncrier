@@ -5,14 +5,133 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Arrows in the Quiver | Town Crier</title>
   <link rel="icon" type="image/png" href="/images/tcem-logo.png" />
-<link rel="apple-touch-icon" href="/images/tcem-logo.png" />
+  <link rel="apple-touch-icon" href="/images/tcem-logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="/css/style.css" />
+
+  <style>
+    .arrows-page {
+      background: #f7f7f8;
+      color: #111827;
+      font-family: "Inter", sans-serif;
+    }
+
+    .arrows-subnav-link {
+      font-family: "Inter", sans-serif;
+    }
+
+    .arrows-hero-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(3.2rem, 6vw, 5.6rem);
+      line-height: 0.92;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .arrows-hero-subtitle {
+      font-family: "Inter", sans-serif;
+      font-size: clamp(1.05rem, 2vw, 1.4rem);
+      line-height: 1.45;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.96);
+      margin-bottom: 1.1rem;
+    }
+
+    .arrows-hero-text {
+      font-family: "Inter", sans-serif;
+      font-size: clamp(1.05rem, 2vw, 1.4rem);
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.96);
+    }
+
+    .arrows-hero-quote {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.45rem, 2.8vw, 2.2rem);
+      line-height: 1.2;
+      font-style: italic;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.98);
+    }
+
+    .arrows-section-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      line-height: 0.96;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #111827;
+    }
+
+    .arrows-section-title--light {
+      color: #ffffff !important;
+    }
+
+    .arrows-card-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2rem, 3vw, 2.7rem);
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #111827;
+    }
+
+    .arrows-card-title--center {
+      text-align: center;
+    }
+
+    .arrows-body-text {
+      font-family: "Inter", sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: #475569;
+    }
+
+    .arrows-meta-text {
+      font-family: "Inter", sans-serif;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #64748b;
+    }
+
+    .arrows-list-text {
+      font-family: "Inter", sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: #475569;
+    }
+
+    .arrows-button-text {
+      font-family: "Inter", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    @media (max-width: 767px) {
+      .arrows-hero-title {
+        font-size: clamp(2.7rem, 12vw, 4rem);
+      }
+
+      .arrows-hero-subtitle,
+      .arrows-hero-text,
+      .arrows-body-text,
+      .arrows-list-text {
+        font-size: 1rem;
+        line-height: 1.75;
+      }
+
+      .arrows-hero-quote {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
 </head>
-<body class="bg-[#f7f7f8] text-gray-900">
+<body class="arrows-page">
 
   <%- include("../partials/header") %>
 
@@ -20,13 +139,13 @@
   <section class="border-b border-gray-200">
     <div class="max-w-7xl mx-auto px-6 md:px-16">
       <div class="flex items-center gap-8 overflow-x-auto">
-        <a href="/ministries/dbw" class="inline-flex h-14 items-center border-b-2 border-transparent text-gray-700 font-medium hover:text-[#4F46E5] whitespace-nowrap transition">
+        <a href="/ministries/dbw" class="arrows-subnav-link inline-flex h-14 items-center border-b-2 border-transparent text-gray-700 font-medium hover:text-[#4F46E5] whitespace-nowrap transition">
           Discipleship by the Word
         </a>
-        <a href="/ministries/bootcamp" class="inline-flex h-14 items-center border-b-2 border-transparent text-gray-700 font-medium hover:text-[#4F46E5] whitespace-nowrap transition">
+        <a href="/ministries/bootcamp" class="arrows-subnav-link inline-flex h-14 items-center border-b-2 border-transparent text-gray-700 font-medium hover:text-[#4F46E5] whitespace-nowrap transition">
           Discipleship Bootcamp
         </a>
-        <a href="/ministries/arrows" class="inline-flex h-14 items-center border-b-2 border-[#4F46E5] text-[#4F46E5] font-semibold whitespace-nowrap">
+        <a href="/ministries/arrows" class="arrows-subnav-link inline-flex h-14 items-center border-b-2 border-[#4F46E5] text-[#4F46E5] font-semibold whitespace-nowrap">
           Arrows in the Quiver
         </a>
       </div>
@@ -38,20 +157,21 @@
     <div class="max-w-7xl mx-auto px-6 md:px-16">
       <div class="rounded-[30px] bg-gradient-to-r from-[#08C443] to-[#14B8A6] px-8 md:px-12 py-12 md:py-16 text-white shadow-sm">
         <div class="max-w-4xl">
-          <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-5">
+          <h1 class="arrows-hero-title">
             Arrows in the Quiver
           </h1>
 
-          <p class="text-xl md:text-3xl font-semibold text-white/95 mb-6">
+          <p class="arrows-hero-subtitle">
             Children &amp; Youth Ministry
           </p>
 
-          <p class="text-lg md:text-2xl leading-relaxed text-white/95 mb-6">
+          <p class="arrows-hero-text mb-6">
             Arrows in the Quiver is a youth-focused outreach and discipleship initiative of Town Crier Evangelical Ministries, created to rescue and raise teenagers as godly, purposeful, and well-formed vessels for Christ. The project reflects the biblical picture of children and young people as “arrows” in God’s hand, prepared, sharpened, and released for divine purpose.
           </p>
 
-          <p class="text-lg md:text-2xl leading-relaxed text-white/95"> "Like arrows in the hands of a warrior, so are children born in one's youth" - Psalm 127:4</p>
-            
+          <p class="arrows-hero-quote">
+            "Like arrows in the hands of a warrior, so are children born in one's youth" - Psalm 127:4
+          </p>
         </div>
       </div>
     </div>
@@ -67,11 +187,11 @@
             <span class="text-2xl">🎯</span>
           </div>
 
-          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-5">
+          <h2 class="arrows-section-title mb-5">
             Our Vision
           </h2>
 
-          <p class="text-lg md:text-[1.2rem] leading-relaxed text-slate-700">
+          <p class="arrows-body-text">
             To raise a generation of children and youth who love God passionately, know His Word deeply, live with purpose, and impact their world for Christ.
           </p>
         </div>
@@ -81,11 +201,11 @@
             <span class="text-2xl">💚</span>
           </div>
 
-          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-5">
+          <h2 class="arrows-section-title mb-5">
             Our Mission
           </h2>
 
-          <p class="text-lg md:text-[1.2rem] leading-relaxed text-slate-700">
+          <p class="arrows-body-text">
             To partner with parents in nurturing children and teens spiritually, providing biblical education, character development, and opportunities for ministry involvement.
           </p>
         </div>
@@ -98,7 +218,7 @@
   <section class="py-8 md:py-10">
     <div class="max-w-7xl mx-auto px-6 md:px-16">
       <div class="text-center mb-12">
-        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-950">
+        <h2 class="arrows-section-title">
           Age Groups &amp; Programs
         </h2>
       </div>
@@ -107,10 +227,10 @@
 
         <div class="rounded-[28px] border border-yellow-200 bg-yellow-50/70 p-8 md:p-10 shadow-sm">
           <div class="text-5xl mb-6 text-center">🌱</div>
-          <h3 class="text-3xl font-extrabold text-gray-950 text-center mb-2">Little Arrows</h3>
-          <p class="text-center text-xl text-slate-600 mb-8">Ages 3-6</p>
+          <h3 class="arrows-card-title arrows-card-title--center mb-2">Little Arrows</h3>
+          <p class="text-center arrows-meta-text mb-8">Ages 3-6</p>
 
-          <ul class="space-y-4 text-lg text-slate-700">
+          <ul class="space-y-4 arrows-list-text">
             <li class="flex items-start gap-3"><span class="text-green-600 mt-1">•</span> Bible Stories</li>
             <li class="flex items-start gap-3"><span class="text-green-600 mt-1">•</span> Songs &amp; Rhymes</li>
             <li class="flex items-start gap-3"><span class="text-green-600 mt-1">•</span> Creative Play</li>
@@ -120,10 +240,10 @@
 
         <div class="rounded-[28px] border border-indigo-200 bg-indigo-50/70 p-8 md:p-10 shadow-sm">
           <div class="text-5xl mb-6 text-center">⭐</div>
-          <h3 class="text-3xl font-extrabold text-gray-950 text-center mb-2">Junior Arrows</h3>
-          <p class="text-center text-xl text-slate-600 mb-8">Ages 7-12</p>
+          <h3 class="arrows-card-title arrows-card-title--center mb-2">Junior Arrows</h3>
+          <p class="text-center arrows-meta-text mb-8">Ages 7-12</p>
 
-          <ul class="space-y-4 text-lg text-slate-700">
+          <ul class="space-y-4 arrows-list-text">
             <li class="flex items-start gap-3"><span class="text-green-600 mt-1">•</span> Bible Study</li>
             <li class="flex items-start gap-3"><span class="text-green-600 mt-1">•</span> Memory Verses</li>
             <li class="flex items-start gap-3"><span class="text-green-600 mt-1">•</span> Games &amp; Activities</li>
@@ -133,10 +253,10 @@
 
         <div class="rounded-[28px] border border-emerald-200 bg-emerald-50/70 p-8 md:p-10 shadow-sm">
           <div class="text-5xl mb-6 text-center">🎯</div>
-          <h3 class="text-3xl font-extrabold text-gray-950 text-center mb-2">Teen Arrows</h3>
-          <p class="text-center text-xl text-slate-600 mb-8">Ages 13-17</p>
+          <h3 class="arrows-card-title arrows-card-title--center mb-2">Teen Arrows</h3>
+          <p class="text-center arrows-meta-text mb-8">Ages 13-17</p>
 
-          <ul class="space-y-4 text-lg text-slate-700">
+          <ul class="space-y-4 arrows-list-text">
             <li class="flex items-start gap-3"><span class="text-green-600 mt-1">•</span> Deep Bible Study</li>
             <li class="flex items-start gap-3"><span class="text-green-600 mt-1">•</span> Leadership Training</li>
             <li class="flex items-start gap-3"><span class="text-green-600 mt-1">•</span> Mentorship</li>
@@ -148,160 +268,30 @@
     </div>
   </section>
 
-  <!-- WEEKLY ACTIVITIES -->
-  <section class="pt-12 md:pt-14 pb-8">
-    <div class="max-w-7xl mx-auto px-6 md:px-16">
-      <div class="text-center mb-10">
-        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-950">
-          Weekly Activities
-        </h2>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-
-        <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-7 md:p-8">
-          <div class="flex items-start gap-5">
-            <div class="w-12 h-12 rounded-2xl bg-purple-100 flex items-center justify-center text-2xl shrink-0">
-              📖
-            </div>
-            <div>
-              <h3 class="text-2xl font-extrabold text-gray-950 mb-1">Sunday Children's Church</h3>
-              <p class="text-lg text-slate-600 mb-4">Every Sunday, 9:00 AM</p>
-              <p class="text-lg leading-relaxed text-slate-700">
-                Age-appropriate Bible teaching, worship, and activities during main service
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-7 md:p-8">
-          <div class="flex items-start gap-5">
-            <div class="w-12 h-12 rounded-2xl bg-green-100 flex items-center justify-center text-2xl shrink-0">
-              👥
-            </div>
-            <div>
-              <h3 class="text-2xl font-extrabold text-gray-950 mb-1">Friday Teen Fellowship</h3>
-              <p class="text-lg text-slate-600 mb-4">Every Friday, 5:00 PM</p>
-              <p class="text-lg leading-relaxed text-slate-700">
-                Worship, Bible study, games, and fellowship specifically for teenagers
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-7 md:p-8">
-          <div class="flex items-start gap-5">
-            <div class="w-12 h-12 rounded-2xl bg-blue-100 flex items-center justify-center text-2xl shrink-0">
-              🎵
-            </div>
-            <div>
-              <h3 class="text-2xl font-extrabold text-gray-950 mb-1">Saturday Kids' Club</h3>
-              <p class="text-lg text-slate-600 mb-4">Every Saturday, 10:00 AM</p>
-              <p class="text-lg leading-relaxed text-slate-700">
-                Fun activities, life skills, crafts, and biblical values for ages 7-12
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-7 md:p-8">
-          <div class="flex items-start gap-5">
-            <div class="w-12 h-12 rounded-2xl bg-orange-100 flex items-center justify-center text-2xl shrink-0">
-              🧡
-            </div>
-            <div>
-              <h3 class="text-2xl font-extrabold text-gray-950 mb-1">Monthly Parents' Forum</h3>
-              <p class="text-lg text-slate-600 mb-4">Last Saturday, 2:00 PM</p>
-              <p class="text-lg leading-relaxed text-slate-700">
-                Parenting workshops, prayer, and partnership meetings for parents
-              </p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- SPECIAL PROGRAMS -->
-  <section class="py-12 md:py-14">
-    <div class="max-w-7xl mx-auto px-6 md:px-16">
-      <div class="rounded-[30px] border border-emerald-100 bg-emerald-50/60 p-8 md:p-10">
-        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-950 mb-8">
-          Special Programs &amp; Events
-        </h2>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div class="bg-white rounded-[22px] p-6 shadow-sm">
-            <h3 class="text-2xl font-extrabold text-gray-950 mb-3">Summer Camp</h3>
-            <p class="text-lg text-slate-700 leading-relaxed">
-              Week-long outdoor adventure with biblical teaching and team building
-            </p>
-          </div>
-
-          <div class="bg-white rounded-[22px] p-6 shadow-sm">
-            <h3 class="text-2xl font-extrabold text-gray-950 mb-3">Teen Leadership Academy</h3>
-            <p class="text-lg text-slate-700 leading-relaxed">
-              Quarterly training for young leaders ages 14-17
-            </p>
-          </div>
-
-          <div class="bg-white rounded-[22px] p-6 shadow-sm">
-            <h3 class="text-2xl font-extrabold text-gray-950 mb-3">Children's Crusade</h3>
-            <p class="text-lg text-slate-700 leading-relaxed">
-              Annual outreach program where kids minister to other kids
-            </p>
-          </div>
-
-          <div class="bg-white rounded-[22px] p-6 shadow-sm">
-            <h3 class="text-2xl font-extrabold text-gray-950 mb-3">Talent Discovery</h3>
-            <p class="text-lg text-slate-700 leading-relaxed">
-              Platform for children to discover and develop their God-given talents
-            </p>
-          </div>
-
-          <div class="bg-white rounded-[22px] p-6 shadow-sm lg:col-span-1">
-            <h3 class="text-2xl font-extrabold text-gray-950 mb-3">Bible Quiz Competition</h3>
-            <p class="text-lg text-slate-700 leading-relaxed">
-              Quarterly competitions to encourage Scripture memorization
-            </p>
-          </div>
-
-          <div class="bg-white rounded-[22px] p-6 shadow-sm lg:col-span-1">
-            <h3 class="text-2xl font-extrabold text-gray-950 mb-3">Service Projects</h3>
-            <p class="text-lg text-slate-700 leading-relaxed">
-              Community service opportunities teaching compassion and giving
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- CTA -->
   <section class="pt-4 pb-20 md:pb-24">
     <div class="max-w-7xl mx-auto px-6 md:px-16">
       <div class="rounded-[30px] bg-[#08C443] px-8 md:px-12 py-12 md:py-14 text-white text-center shadow-sm">
-        <h2 class="text-4xl md:text-5xl font-extrabold mb-5">
+        <h2 class="arrows-section-title arrows-section-title--light mb-5">
           Get Involved
         </h2>
 
-        <p class="max-w-4xl mx-auto text-lg md:text-2xl leading-relaxed text-white/95 mb-8">
+        <p class="arrows-hero-text max-w-4xl mx-auto mb-8">
           Partner with us in raising godly children. Whether you're a parent, volunteer, or supporter, there's a place for you!
         </p>
 
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-              href="/contact?type=registration&target=Arrows%20in%20the%20Quiver#contact-form-section"
-              class="inline-flex items-center justify-center gap-3 rounded-2xl bg-white text-[#08A53B] px-8 py-4 text-lg font-semibold shadow-sm hover:shadow-md transition min-w-[190px]"
+            href="/contact?type=registration&target=Arrows%20in%20the%20Quiver#contact-form-section"
+            class="arrows-button-text inline-flex items-center justify-center gap-3 rounded-2xl bg-white text-[#08A53B] px-8 py-4 text-lg shadow-sm hover:shadow-md transition min-w-[190px]"
           >
-              Join Our Team
-                  <span class="text-2xl leading-none">→</span>
+            Join Our Team
+            <span class="text-2xl leading-none">→</span>
           </a>
 
           <a
             href="/events"
-            class="inline-flex items-center justify-center gap-3 rounded-2xl border border-white/20 bg-white/10 text-white px-8 py-4 text-lg font-semibold hover:bg-white/15 transition min-w-[230px]"
+            class="arrows-button-text inline-flex items-center justify-center gap-3 rounded-2xl border border-white/20 bg-white/10 text-white px-8 py-4 text-lg hover:bg-white/15 transition min-w-[230px]"
           >
             View Upcoming Events
             <span class="text-2xl leading-none">→</span>
@@ -311,8 +301,8 @@
     </div>
   </section>
 
- <%- include("../partials/auth-modal") %>
-<script src="/js/auth-modal.js"></script>
+  <%- include("../partials/auth-modal") %>
+  <script src="/js/auth-modal.js"></script>
 
 </body>
 </html>
