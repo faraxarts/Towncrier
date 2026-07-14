@@ -10,7 +10,6 @@
         overviewTitle: "About DBW HUB",
         overviewText:
           "Discipleship by the Word [DBW] is presented as the discipleship arm/program of Town Crier Evangelical Ministries. The DBW syllabus says it was established in September 2022 by Livingstone Favour Akinadewo as a discipleship work “inspired out of fervent zeal and love for God.” It also says that, by the time the syllabus was written, DBW had been actively discipling teenagers, men, and women for about three years.",
-          
         tracksTitle: "Learning Tracks",
         featuredTitle: "Featured Courses",
         statsText: "Structured, guided, and spiritually focused learning.",
@@ -45,16 +44,58 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title><%= academy.name %> | Academy</title>
-  
+
   <link rel="icon" type="image/png" href="/images/tcem-logo.png" />
-<link rel="apple-touch-icon" href="/images/tcem-logo.png" />
+  <link rel="apple-touch-icon" href="/images/tcem-logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="/css/style.css" />
+
+  <style>
+    .academy-detail-page {
+      font-family: "Inter", sans-serif;
+    }
+
+    .academy-hero-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(3rem, 6vw, 5.3rem);
+      line-height: 0.92;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .academy-section-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.35rem, 4vw, 3.7rem);
+      line-height: 0.96;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #111827;
+    }
+
+    .academy-card-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.9rem, 3vw, 2.5rem);
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #111827;
+    }
+
+    .academy-section-title--light {
+      color: #ffffff !important;
+    }
+
+    @media (max-width: 767px) {
+      .academy-hero-title {
+        font-size: clamp(2.6rem, 11vw, 4rem);
+      }
+    }
+  </style>
 </head>
-<body class="bg-[#f7f7f8] text-gray-900">
+<body class="academy-detail-page bg-[#f7f7f8] text-gray-900">
 
   <%- include("../partials/header") %>
 
@@ -64,7 +105,7 @@
         <div>
           <p class="text-white/80 text-sm md:text-base font-medium mb-4">Ministry Academy</p>
 
-          <h1 class="text-4xl md:text-6xl font-extrabold mb-4">
+          <h1 class="academy-hero-title mb-4">
             <%= academyContent.heroTitle %>
           </h1>
 
@@ -161,7 +202,7 @@
   <section class="py-14 md:py-16">
     <div class="max-w-7xl mx-auto px-6 md:px-16">
       <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8 md:p-10">
-        <h2 class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-5">
+        <h2 class="academy-section-title mb-5">
           <%= academyContent.overviewTitle %>
         </h2>
         <p class="text-lg md:text-[1.15rem] leading-relaxed text-slate-700 max-w-5xl">
@@ -175,7 +216,7 @@
     <div class="max-w-7xl mx-auto px-6 md:px-16">
       <div class="flex items-center justify-between gap-4 mb-8">
         <div>
-          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-2">
+          <h2 class="academy-section-title mb-2">
             <%= academyContent.tracksTitle %>
           </h2>
           <p class="text-lg text-slate-600">
@@ -193,7 +234,7 @@
           <% learningTracks.forEach((track) => { %>
             <article class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8">
               <div class="flex items-center justify-between gap-4 mb-4">
-                <h3 class="text-2xl font-extrabold text-gray-950"><%= track.title %></h3>
+                <h3 class="academy-card-title"><%= track.title %></h3>
                 <% if (track.price) { %>
                   <span class="inline-flex rounded-full bg-purple-100 text-purple-700 px-4 py-2 text-sm font-semibold">
                     <%= track.price %>
@@ -220,7 +261,7 @@
     <div class="max-w-7xl mx-auto px-6 md:px-16">
       <div class="flex items-center justify-between gap-4 mb-8">
         <div>
-          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-2">
+          <h2 class="academy-section-title mb-2">
             <%= academyContent.featuredTitle %>
           </h2>
           <p class="text-lg text-slate-600">
@@ -261,7 +302,7 @@
               </div>
 
               <div class="p-6 md:p-7">
-                <h3 class="text-2xl font-extrabold text-gray-950 mb-4 leading-snug">
+                <h3 class="academy-card-title mb-4 leading-snug">
                   <%= course.title %>
                 </h3>
 
@@ -341,7 +382,7 @@
   <section class="pb-20 md:pb-24">
     <div class="max-w-7xl mx-auto px-6 md:px-16">
       <div class="rounded-[30px] bg-gradient-to-r from-[#4F46E5] via-[#7C3AED] to-[#C026D3] text-white p-8 md:p-12 shadow-sm">
-        <h2 class="text-3xl md:text-5xl font-extrabold mb-4">
+        <h2 class="academy-section-title academy-section-title--light mb-4">
           <%= academyContent.ctaTitle %>
         </h2>
         <p class="text-lg md:text-[1.2rem] text-white/90 leading-relaxed max-w-4xl mb-8">
