@@ -10,11 +10,17 @@
 %>
 
 <style>
-  .site-header {
-    background: #6b46c1;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
-    box-shadow: 0 10px 30px rgba(76, 29, 149, 0.16);
-  }
+  :root {
+  --tcem-header-purple: #6b46c1;
+}
+
+.site-header {
+  background: var(--tcem-header-purple);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
 
   .site-header__brand-name {
     color: #ffffff;
@@ -109,9 +115,9 @@
   }
 
   .site-header__mobile-panel {
-    background: #6b46c1;
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
-  }
+  background: var(--tcem-header-purple);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
 
   .site-header__mobile-link {
     color: #ffffff;
@@ -171,8 +177,8 @@
 
   @media (max-width: 767px) {
     .site-header__brand-name {
-      font-size: 10px;
-      line-height: 1.1;
+      font-size: 12px;
+      line-height: 1.13;
     }
 
     .site-header__brand-tag {
@@ -182,7 +188,7 @@
   }
 </style>
 
-<header class="site-header sticky top-0 z-50 w-full overflow-x-hidden backdrop-blur">
+<header class="site-header sticky top-0 z-50 w-full overflow-x-hidden">
   <div class="max-w-7xl mx-auto h-20 px-4 sm:px-5 md:px-6 lg:px-8 flex items-center justify-between gap-3 lg:gap-8">
 
     <!-- Logo / Ministry Name -->

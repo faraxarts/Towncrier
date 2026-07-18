@@ -3146,10 +3146,15 @@ svg {
   transform: translateY(-1px);
 }
 
+:root {
+  --tcem-header-purple: #6b46c1;
+}
+
 .site-footer {
-  background: linear-gradient(135deg, #5b35b5 0%, #6B46C1 52%, #7c5ad6 100%);
+  background: var(--tcem-header-purple);
   color: #f8f8fb;
   padding-top: 2.4rem;
+  border-top: 1px solid rgba(255,255,255,0.14);
 }
 
 .site-footer__inner {
@@ -3176,7 +3181,7 @@ svg {
   height: 58px;
   border-radius: 16px;
   background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.16);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3197,7 +3202,7 @@ svg {
 }
 
 .site-footer__brand-tag {
-  color: rgba(255,255,255,0.74);
+  color: rgba(255,255,255,0.82);
   font-size: 0.78rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -3205,7 +3210,7 @@ svg {
 
 .site-footer__brand-copy {
   max-width: 420px;
-  color: rgba(255,255,255,0.72);
+  color: rgba(255,255,255,0.88);
   line-height: 1.8;
   font-size: 0.95rem;
 }
@@ -3230,7 +3235,7 @@ svg {
 }
 
 .site-footer__list a {
-  color: rgba(255,255,255,0.76);
+  color: rgba(255,255,255,0.88);
   font-size: 0.95rem;
   transition: color 160ms ease;
 }
@@ -3246,9 +3251,21 @@ svg {
 }
 
 .site-footer__bottom p {
-  color: rgba(255,255,255,0.62);
+  color: rgba(255,255,255,0.8);
   font-size: 0.82rem;
   letter-spacing: 0.04em;
+}
+
+@media (max-width: 1023px) {
+  .site-footer__top {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .site-footer__links-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }
 
 @media (max-width: 1023px) {
