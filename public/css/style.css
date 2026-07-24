@@ -3464,3 +3464,29 @@ svg {
     line-height: 1.75;
   }
 }
+
+.site-footer__socials {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-top: 1.2rem;
+}
+
+.site-footer__socials a {
+  width: 42px;
+  height: 42px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.88);
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.08);
+  transition: all 180ms ease;
+}
+
+.site-footer__socials a:hover {
+  color: #ffffff;
+  background: rgba(255,255,255,0.14);
+  transform: translateY(-1px);
+}

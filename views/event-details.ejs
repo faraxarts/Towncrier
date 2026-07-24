@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title><%= event.title %> | Town Crier</title>
+  <meta name="description" content="<%= metaDescription %>" />
+<link rel="canonical" href="<%= canonicalUrl %>" />
+<% if (noindex) { %>
+  <meta name="robots" content="noindex, nofollow" />
+<% } %>
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-icon.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="/images/favicon-icon.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-icon.png" />

@@ -29,6 +29,80 @@ const User = require("./models/user");
 const ministryLead = require("./data/ministryLead");
 
 const app = express();
+const SITE_URL = process.env.SITE_URL || "https://towncrier-jtbc.onrender.com";
+
+app.set("trust proxy", 1);
+
+// Force HTTPS in production
+app.use((req, res, next) => {
+  if (process.env.NODE_ENV === "production") {
+    const proto = req.headers["x-forwarded-proto"];
+    if (proto && proto !== "https") {
+      return res.redirect(301, `https://${req.headers.host}${req.originalUrl}`);
+    }
+  }
+  next();
+});
+
+// Redirect uppercase page URLs to lowercase, but do not touch assets/files
+app.use((req, res, next) => {
+  const hasFileExtension = /\.[a-z0-9]+$/i.test(req.path);
+  const isAssetPath =
+    req.path.startsWith("/images/") ||
+    req.path.startsWith("/css/") ||
+    req.path.startsWith("/js/") ||
+    req.path.startsWith("/uploads/") ||
+    hasFileExtension;
+
+  if (!isAssetPath && /[A-Z]/.test(req.path)) {
+    const loweredPath = req.path.toLowerCase();
+    const query = req.url.includes("?") ? req.url.slice(req.url.indexOf("?")) : "";
+    return res.redirect(301, `${loweredPath}${query}`);
+  }
+
+  next();
+});
+
+// Shared SEO locals + basic security headers
+app.use((req, res, next) => {
+  const noisyQueryParams = ["type", "target", "auth", "joined"];
+  const hasNoisyQuery = Object.keys(req.query).some((key) =>
+    noisyQueryParams.includes(key)
+  );
+
+  res.locals.siteUrl = SITE_URL;
+  res.locals.pathWithoutQuery = req.originalUrl.split("?")[0];
+  res.locals.canonicalUrl = `${SITE_URL}${req.path}`;
+  res.locals.metaDescription =
+    res.locals.metaDescription ||
+    "Town Crier Evangelical Ministries exists to proclaim Christ, raise disciples, and serve communities through prayer, sound doctrine, and evangelistic missions.";
+  res.locals.noindex = hasNoisyQuery;
+
+  res.setHeader(
+    "Strict-Transport-Security",
+    "max-age=31536000; includeSubDomains; preload"
+  );
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("X-Frame-Options", "SAMEORIGIN");
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  res.setHeader("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+  res.setHeader(
+    "Content-Security-Policy",
+    [
+      "default-src 'self'",
+      "img-src 'self' data: https:",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "font-src 'self' https://fonts.gstatic.com data:",
+      "script-src 'self' 'unsafe-inline'",
+      "object-src 'none'",
+      "base-uri 'self'",
+      "form-action 'self'",
+      "frame-ancestors 'self'"
+    ].join("; ")
+  );
+
+  next();
+});
 
 // App config
 app.set("view engine", "ejs");

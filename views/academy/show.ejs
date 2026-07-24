@@ -44,7 +44,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title><%= academy.name %> | Academy</title>
-
+  <meta name="description" content="<%= metaDescription %>" />
+<link rel="canonical" href="<%= canonicalUrl %>" />
+<% if (noindex) { %>
+  <meta name="robots" content="noindex, nofollow" />
+<% } %>
   <link rel="icon" type="image/png" href="/images/tcem-logo.png" />
   <link rel="apple-touch-icon" href="/images/tcem-logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -146,12 +150,33 @@
               </a>
             <% } %>
 
-            <a
-              href="/academy/<%= academy.slug %>/courses"
-              class="inline-flex items-center justify-center rounded-2xl border border-white/30 text-white px-8 py-4 text-lg font-semibold hover:bg-white/10 transition"
-            >
-              Browse Courses
-            </a>
+           <% if (isLoggedIn && (isEnrolledInAcademy || isAdmin)) { %>
+  <a
+    href="/academy/<%= academy.slug %>/courses"
+    class="inline-flex items-center justify-center rounded-2xl border border-white/30 text-white px-8 py-4 text-lg font-semibold hover:bg-white/10 transition"
+  >
+    Browse Courses
+  </a>
+<% } else if (!isLoggedIn) { %>
+  <a
+    href="#"
+    class="open-auth-modal inline-flex items-center justify-center rounded-2xl border border-white/30 text-white px-8 py-4 text-lg font-semibold hover:bg-white/10 transition"
+    data-modal-mode="login"
+    data-academy-slug="<%= academy.slug %>"
+    data-redirect-after-auth="/academy/<%= academy.slug %>"
+  >
+    Sign In to Browse Courses
+  </a>
+<% } else { %>
+  <form action="/academy/<%= academy.slug %>/join" method="POST">
+    <button
+      type="submit"
+      class="inline-flex items-center justify-center rounded-2xl border border-white/30 text-white px-8 py-4 text-lg font-semibold hover:bg-white/10 transition"
+    >
+      Join to Browse Courses
+    </button>
+  </form>
+<% } %>
           </div>
         </div>
 
@@ -269,12 +294,37 @@
           </p>
         </div>
 
-        <a
-          href="/academy/<%= academy.slug %>/courses"
-          class="hidden md:inline-flex items-center justify-center rounded-2xl bg-[#4F46E5] text-white px-6 py-3 font-semibold hover:bg-indigo-700 transition"
-        >
-          View All Courses
-        </a>
+        <% if (isLoggedIn && (isEnrolledInAcademy || isAdmin)) { %>
+  <a
+    href="/academy/<%= academy.slug %>/courses"
+    class="hidden md:inline-flex items-center justify-center rounded-2xl bg-[#4F46E5] text-white px-6 py-3 font-semibold hover:bg-indigo-700 transition"
+  >
+    View All Courses
+  </a>
+<% } else if (!isLoggedIn) { %>
+  <a
+    href="#"
+    class="open-auth-modal hidden md:inline-flex items-center justify-center rounded-2xl bg-[#4F46E5] text-white px-6 py-3 font-semibold hover:bg-indigo-700 transition"
+    data-modal-mode="login"
+    data-academy-slug="<%= academy.slug %>"
+    data-redirect-after-auth="/academy/<%= academy.slug %>"
+  >
+    Sign In to View Courses
+  </a>
+<% } else { %>
+  <form
+    action="/academy/<%= academy.slug %>/join"
+    method="POST"
+    class="hidden md:block"
+  >
+    <button
+      type="submit"
+      class="inline-flex items-center justify-center rounded-2xl bg-[#4F46E5] text-white px-6 py-3 font-semibold hover:bg-indigo-700 transition"
+    >
+      Join to View Courses
+    </button>
+  </form>
+<% } %>
       </div>
 
       <% if (!featuredCourses || !featuredCourses.length) { %>
@@ -418,12 +468,33 @@
             </a>
           <% } %>
 
-          <a
-            href="/academy/<%= academy.slug %>/courses"
-            class="inline-flex items-center justify-center rounded-2xl border border-white/30 text-white px-8 py-4 text-lg font-semibold hover:bg-white/10 transition"
-          >
-            Browse Courses
-          </a>
+          <% if (isLoggedIn && (isEnrolledInAcademy || isAdmin)) { %>
+  <a
+    href="/academy/<%= academy.slug %>/courses"
+    class="inline-flex items-center justify-center rounded-2xl border border-white/30 text-white px-8 py-4 text-lg font-semibold hover:bg-white/10 transition"
+  >
+    Browse Courses
+  </a>
+<% } else if (!isLoggedIn) { %>
+  <a
+    href="#"
+    class="open-auth-modal inline-flex items-center justify-center rounded-2xl border border-white/30 text-white px-8 py-4 text-lg font-semibold hover:bg-white/10 transition"
+    data-modal-mode="login"
+    data-academy-slug="<%= academy.slug %>"
+    data-redirect-after-auth="/academy/<%= academy.slug %>"
+  >
+    Sign In to Browse Courses
+  </a>
+<% } else { %>
+  <form action="/academy/<%= academy.slug %>/join" method="POST">
+    <button
+      type="submit"
+      class="inline-flex items-center justify-center rounded-2xl border border-white/30 text-white px-8 py-4 text-lg font-semibold hover:bg-white/10 transition"
+    >
+      Join to Browse Courses
+    </button>
+  </form>
+<% } %>
         </div>
       </div>
     </div>
