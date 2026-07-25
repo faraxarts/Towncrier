@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://towncrier-jtbc.onrender.com/sitemap.xml

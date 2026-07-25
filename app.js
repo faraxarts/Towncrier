@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const path = require("path");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo").default;
@@ -29,6 +30,7 @@ const User = require("./models/user");
 const ministryLead = require("./data/ministryLead");
 
 const app = express();
+app.disable("x-powered-by");
 const SITE_URL = process.env.SITE_URL || "https://towncrier-jtbc.onrender.com";
 
 app.set("trust proxy", 1);
@@ -87,19 +89,20 @@ app.use((req, res, next) => {
   res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
   res.setHeader("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
   res.setHeader(
-    "Content-Security-Policy",
-    [
-      "default-src 'self'",
-      "img-src 'self' data: https:",
-      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-      "font-src 'self' https://fonts.gstatic.com data:",
-      "script-src 'self' 'unsafe-inline'",
-      "object-src 'none'",
-      "base-uri 'self'",
-      "form-action 'self'",
-      "frame-ancestors 'self'"
-    ].join("; ")
-  );
+  "Content-Security-Policy",
+  [
+    "default-src 'self'",
+    "img-src 'self' data: https:",
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+    "font-src 'self' https://fonts.gstatic.com data:",
+    "script-src 'self' 'unsafe-inline'",
+    "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    "frame-ancestors 'self'"
+  ].join("; ")
+);
 
   next();
 });
@@ -108,6 +111,12 @@ app.use((req, res, next) => {
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
+const isProduction = process.env.NODE_ENV === "production";
+
+if (isProduction && !process.env.SESSION_SECRET) {
+  throw new Error("SESSION_SECRET must be configured in production.");
+}
+
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -115,16 +124,22 @@ app.use(express.static("public"));
 
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || "keyboardcat",
+    secret:
+      process.env.SESSION_SECRET ||
+      "development-only-session-secret-change-me",
+
     resave: false,
     saveUninitialized: false,
+
     store: MongoStore.create({
       mongoUrl: process.env.MONGO_URI,
     }),
+
     cookie: {
       maxAge: 1000 * 60 * 60 * 24,
       httpOnly: true,
-      secure: false,
+      secure: isProduction,
+      sameSite: "lax",
     },
   })
 );
@@ -236,15 +251,25 @@ app.use(async (req, res, next) => {
 
 // Website pages
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("index", {
+    metaDescription:
+      "Discover Town Crier Evangelical Ministries, its evangelical missions, discipleship ministries, upcoming events, academy programmes, and ministry leadership.",
+  });
 });
 
 app.get("/about", (req, res) => {
   res.render("about", {
+    metaDescription:
+      "Learn about Town Crier Evangelical Ministries, its mission, vision, discipleship mandate, ministry history, and evangelical outreach.",
+
     leadProfile: ministryLead,
-    ministryVideoTitle: "Discover the Heart of Town Crier Ministry",
+
+    ministryVideoTitle:
+      "Discover the Heart of Town Crier Ministry",
+
     ministryVideoText:
       "Watch these videos to learn more about the history, vision, mission, and spiritual burden of the ministry.",
+
     ministryVideos: [
       {
         title: "Ministry Story",
@@ -264,6 +289,8 @@ app.get("/about", (req, res) => {
 
 app.get("/livingstone-akinadewo", (req, res) => {
   res.render("ministry-lead", {
+    metaDescription:
+      "Meet Livingstone Akinadewo, Lead Evangelist and President of Town Crier Evangelical Ministries, and learn about his ministry focus and calling.",
     leadProfile: ministryLead,
   });
 });
@@ -271,7 +298,11 @@ app.get("/livingstone-akinadewo", (req, res) => {
 app.get("/events", async (req, res) => {
   try {
     const events = await Event.find({ isPublished: true }).sort({ createdAt: -1 });
-    res.render("events", { events });
+    res.render("events", {
+  events,
+  metaDescription:
+    "Explore upcoming conferences, prayer meetings, discipleship gatherings, outreach programmes, and ministry events organised by Town Crier Evangelical Ministries.",
+});
   } catch (error) {
     console.error("Error loading events:", error);
     res.status(500).render("500", {
@@ -289,10 +320,21 @@ app.get("/events/:slug", async (req, res) => {
     });
 
     if (!event) {
-      return res.status(404).render("404", { message: "Event not found" });
-    }
+  return res.status(404).render("404", {
+    pageTitle: "Event Not Found",
+    message: "The requested event could not be found.",
+    metaDescription:
+      "The requested event could not be found on the Town Crier Evangelical Ministries website.",
+    noindex: true,
+  });
+}
 
-    res.render("event-details", { event });
+    res.render("event-details", {
+  event,
+  metaDescription:
+    event.shortDescription ||
+    `View details for ${event.title}, including its date, time, location, and programme information.`,
+});
   } catch (error) {
     console.error("Error loading event details:", error);
     res.status(500).render("500", {
@@ -305,66 +347,54 @@ app.get("/events/:slug", async (req, res) => {
 app.get("/contact", (req, res) => {
   res.render("contact", {
     submitted: req.query.submitted || "",
+    metaDescription:
+      "Contact Town Crier Evangelical Ministries for enquiries, fellowship, academy registration, ministry support, and prayer requests.",
   });
 });
 
 app.get("/ministries/dbw", (req, res) => {
-  res.render("ministries/dbw");
+  res.render("ministries/dbw", {
+    metaDescription:
+      "Learn about Discipleship by the Word, a structured Town Crier ministry for biblical study, prayer, spiritual growth, and practical discipleship.",
+  });
 });
 
 app.get("/ministries/bootcamp", (req, res) => {
-  res.render("ministries/bootcamp");
+  res.render("ministries/bootcamp", {
+    metaDescription:
+      "Discover the Town Crier Discipleship Bootcamp, an intensive programme of biblical teaching, prayer, consecration, revival, and ministry training.",
+  });
 });
 
 app.get("/ministries/arrows", (req, res) => {
-  res.render("ministries/arrows");
+  res.render("ministries/arrows", {
+    metaDescription:
+      "Learn about Arrows in the Quiver, Town Crier Evangelical Ministries’ outreach and discipleship initiative for children and teenagers.",
+  });
 });
 
 // Legacy redirects
 app.get("/hub", (req, res) => {
-  res.redirect("/academy/dbw-hub");
+  return res.redirect(301, "/academy/dbw-hub");
 });
 
 app.get("/hub/courses", (req, res) => {
-  res.redirect("/academy/dbw-hub/courses");
+  return res.redirect(301, "/academy/dbw-hub/courses");
 });
 
 app.get("/hub/documents", (req, res) => {
-  res.redirect("/academy/dbw-hub/documents");
+  return res.redirect(301, "/academy/dbw-hub/documents");
 });
 
 app.get("/hub/courses/:slug", (req, res) => {
-  res.redirect(`/academy/dbw-hub/courses/${req.params.slug}`);
+  return res.redirect(
+    301,
+    `/academy/dbw-hub/courses/${encodeURIComponent(req.params.slug)}`
+  );
 });
 
 app.get("/ministry-lead", (req, res) => {
-  res.render("ministry-lead", {
-    leadProfile: {
-      name: "Livingstone Akinadewo",
-      role: "Lead Evangelist / President",
-      heroKicker: "Meet Our Ministry Lead",
-      heroText:
-        "Discover the heart, burden, and vision behind the ministry through the story, calling, and leadership journey of Livingstone Akinadewo.",
-      paragraphs: [
-        "Livingstone F. Akinadewo, popularly known as TheTownCrier was born in Lagos State, Nigeria. He is a missionary and Bible teacher. He is committed to proclaimin a message centered on the restoration of true Christian living as reflected in the Apostles' doctrine; a calling he has faithfully stewarded since his days as an on-campus revivalist.",
-        "He is an alumnus of the renowned Kwara State University, where he graduated from the Deartment of Aeronautical and Astronautical Engineering, Class of 2023. Now, with great enthusiasm, he ventures into the world of agriculture as he futhers his academic journey.",
-        "He is the President and Lead Evangelist of Town Crier Evangelical Ministries (TCEM), and umbrella body overseeing several sub-ministries, including DBW Academy, Cast The Net Worldwide (C.T.N.W), Davidic Harp, The Deborahs, and Discipleship Hub Network. He is also the Chief Executive Officer of Egghead Research & Analytics, a consultancy focused on academic and research development.",
-        "A profilic writer with so many arcticles, artist, and clergyman, he continues to impact livies through ministry, scholorship, and creative expressions. He ministers the Word with a strong prphetic anoiting, raising genuine mission-minded Christians across campuses and cities in Western Nigeria through evangelism and the systematic teaching of sound doctrine."
-      ],
-      highlights: [
-        "Lead Evangelist",
-        "Ministry President",
-        "Discipleship Teacher",
-        "Kingdom Builder",
-        "Revival Burden",
-        "Prayer Advocate",
-        "Evangelism Focus",
-        "Leadership Development"
-      ],
-      ctaText:
-        "Want to connect with the ministry, invite Livingstone Akinadewo, or learn more about Town Crier’s mission and vision? Reach out through the contact page or explore upcoming ministry events."
-    }
-  });
+  return res.redirect(301, "/livingstone-akinadewo");
 });
 
 // Public academy routes
@@ -385,6 +415,73 @@ app.use("/admin/levels", adminLevelRoutes);
 app.use("/admin/level-access", adminLevelAccessRoutes);
 app.use("/admin/manual-payments", adminManualPaymentRoutes);
 
+app.get("/sitemap.xml", async (req, res, next) => {
+  try {
+    const [academies, events] = await Promise.all([
+      Academy.find({ isPublished: true })
+        .select("slug updatedAt")
+        .lean(),
+
+      Event.find({ isPublished: true })
+        .select("slug updatedAt")
+        .lean(),
+    ]);
+
+    const staticPages = [
+      "/",
+      "/about",
+      "/livingstone-akinadewo",
+      "/events",
+      "/contact",
+      "/ministries/dbw",
+      "/ministries/bootcamp",
+      "/ministries/arrows",
+      "/academy",
+    ];
+
+    const urlEntries = [
+      ...staticPages.map((pagePath) => ({
+        url: `${SITE_URL}${pagePath}`,
+        lastModified: null,
+      })),
+
+      ...academies.map((academy) => ({
+        url: `${SITE_URL}/academy/${encodeURIComponent(academy.slug)}`,
+        lastModified: academy.updatedAt,
+      })),
+
+      ...events.map((event) => ({
+        url: `${SITE_URL}/events/${encodeURIComponent(event.slug)}`,
+        lastModified: event.updatedAt,
+      })),
+    ];
+
+    const sitemapItems = urlEntries
+      .map(({ url, lastModified }) => {
+        const lastmod = lastModified
+          ? `<lastmod>${new Date(lastModified).toISOString()}</lastmod>`
+          : "";
+
+        return `
+  <url>
+    <loc>${url}</loc>
+    ${lastmod}
+  </url>`;
+      })
+      .join("");
+
+    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapItems}
+</urlset>`;
+
+    res.type("application/xml");
+    return res.send(sitemap);
+  } catch (error) {
+    return next(error);
+  }
+});
+
 app.get("/healthz", (req, res) => {
   res.status(200).send("ok");
 });
@@ -392,17 +489,25 @@ app.get("/healthz", (req, res) => {
 // 404 handler
 app.use((req, res) => {
   res.status(404).render("404", {
+    pageTitle: "Page Not Found",
     message: "The page you are looking for could not be found.",
+    metaDescription:
+      "The requested page could not be found on the Town Crier Evangelical Ministries website.",
+    noindex: true,
   });
 });
 
 // Error handler
 app.use((err, req, res, next) => {
   console.error("Unhandled server error:", err);
+
   res.status(err.status || 500).render("500", {
     pageTitle: "Server Error",
     message:
       "Something unexpected happened while loading this page. Please refresh or try again shortly.",
+    metaDescription:
+      "An unexpected error occurred while loading the Town Crier Evangelical Ministries website.",
+    noindex: true,
   });
 });
 
