@@ -1,9 +1,20 @@
 <%
   const isConnectActive = ["/events", "/contact"].includes(currentPath);
-  const isMinistriesActive = ["/ministries/dbw", "/ministries/bootcamp", "/ministries/arrows"].includes(currentPath);
-  const isLeadActive = ["/livingstone-akinadewo", "/ministry-lead"].includes(currentPath);
+
+  const isMinistriesActive = [
+    "/ministries/dbw",
+    "/ministries/bootcamp",
+    "/ministries/arrows"
+  ].includes(currentPath);
+
+  const isLeadActive = [
+    "/livingstone-akinadewo",
+    "/ministry-lead"
+  ].includes(currentPath);
+
   const isAboutActive = currentPath === "/about";
   const isHomeActive = currentPath === "/";
+
   const isAcademyActive =
     currentPath === "/academy" ||
     currentPath.startsWith("/academy/");
@@ -11,16 +22,16 @@
 
 <style>
   :root {
-  --tcem-header-purple: #6b46c1;
-}
+    --tcem-header-purple: #6b46c1;
+  }
 
-.site-header {
-  background: var(--tcem-header-purple);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
+  .site-header {
+    background: var(--tcem-header-purple);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 
   .site-header__brand-name {
     color: #ffffff;
@@ -71,7 +82,10 @@
     color: #ffffff;
     background: transparent;
     box-shadow: none;
-    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+    transition:
+      background-color 180ms ease,
+      border-color 180ms ease,
+      color 180ms ease;
   }
 
   .site-header__academy-btn:hover {
@@ -104,20 +118,39 @@
     color: #ffffff;
   }
 
+  /*
+   * Mobile menu button base styling
+   */
   .site-header__mobile-toggle {
-    border-color: rgba(255, 255, 255, 0.28);
-    background: rgba(255, 255, 255, 0.06);
     color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 22px rgba(40, 20, 90, 0.18);
+    transition:
+      background-color 180ms ease,
+      border-color 180ms ease,
+      transform 180ms ease;
   }
 
   .site-header__mobile-toggle:hover {
-    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.42);
+  }
+
+  .site-header__mobile-toggle:active {
+    transform: scale(0.97);
+  }
+
+  .site-header__mobile-toggle:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 3px;
   }
 
   .site-header__mobile-panel {
-  background: var(--tcem-header-purple);
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-}
+    background: var(--tcem-header-purple);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
 
   .site-header__mobile-link {
     color: #ffffff;
@@ -133,7 +166,7 @@
   }
 
   .site-header__mobile-details {
-    border-color: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.14);
     background: rgba(255, 255, 255, 0.03);
   }
 
@@ -175,44 +208,113 @@
     color: #6b46c1;
   }
 
-  @media (max-width: 767px) {
-    .site-header__brand-name {
-      font-size: 12px;
-      line-height: 1.13;
+  /*
+   * Mobile and tablet header.
+   * This applies while the hamburger navigation is active.
+   */
+  @media (max-width: 1023px) {
+    /*
+     * Temporarily hide the ministry name and tagline on
+     * mobile and tablet without removing them from desktop.
+     */
+    .site-header__brand-copy {
+      display: none;
     }
 
-    .site-header__brand-tag {
-      font-size: 9px;
-      line-height: 1.1;
+    /*
+     * Remove the box around the logo on mobile.
+     */
+    .site-header__logo-wrap {
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      overflow: visible;
+    }
+
+    .site-header__logo-wrap img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /*
+     * Rounded mobile hamburger button.
+     */
+    .site-header__mobile-toggle {
+      width: 50px;
+      height: 50px;
+      padding: 0;
+      border-radius: 16px;
+    }
+
+    .site-header__mobile-toggle svg {
+      width: 26px;
+      height: 26px;
+      color: #ffffff;
+    }
+  }
+
+  /*
+   * Restore the ministry name on desktop.
+   */
+  @media (min-width: 1024px) {
+    .site-header__brand-copy {
+      display: block;
     }
   }
 </style>
 
 <header class="site-header sticky top-0 z-50 w-full overflow-x-hidden">
-  <div class="max-w-7xl mx-auto h-20 px-4 sm:px-5 md:px-6 lg:px-8 flex items-center justify-between gap-3 lg:gap-8">
+  <div
+    class="max-w-7xl mx-auto h-16 lg:h-20 px-4 sm:px-5 md:px-6 lg:px-8 flex items-center justify-between gap-3 lg:gap-8"
+  >
 
     <!-- Logo / Ministry Name -->
-    <a href="/" class="min-w-0 flex items-center gap-3 overflow-hidden flex-1 lg:flex-none lg:min-w-[360px] xl:min-w-[430px]">
-      <div class="bg-white/10 h-10 w-10 sm:h-11 sm:w-11 flex items-center justify-center rounded-xl shadow-md overflow-hidden border border-white/20 shrink-0">
+    <a
+      href="/"
+      class="min-w-0 flex items-center gap-3 overflow-hidden flex-1 lg:flex-none lg:min-w-[360px] xl:min-w-[430px]"
+      aria-label="Town Crier Evangelical Ministries home"
+    >
+      <div
+        class="site-header__logo-wrap bg-white/10 h-10 w-10 sm:h-11 sm:w-11 flex items-center justify-center rounded-xl shadow-md overflow-hidden border border-white/20 shrink-0"
+      >
         <img
-          src="/images/tcem-logo.png"
+          src="/images/tcem22.png"
           alt="Town Crier Evangelical Ministries Logo"
+          width="48"
+          height="48"
           class="h-full w-full object-contain"
         />
       </div>
 
-      <div class="min-w-0 flex-1 leading-tight overflow-hidden">
-        <p class="site-header__brand-name font-extrabold text-[10px] sm:text-[11px] md:text-xs lg:text-sm xl:text-base leading-[1.12] break-words max-w-full">
+      <!-- Hidden on mobile and tablet; visible on desktop -->
+      <div
+        class="site-header__brand-copy min-w-0 flex-1 leading-tight overflow-hidden"
+      >
+        <p
+          class="site-header__brand-name font-extrabold text-[10px] sm:text-[11px] md:text-xs lg:text-sm xl:text-base leading-[1.12] break-words max-w-full"
+        >
           TOWN CRIER EVANGELICAL MINISTRIES
         </p>
-        <p class="site-header__brand-tag house-of-bread text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs break-words mt-0.5">
+
+        <p
+          class="site-header__brand-tag house-of-bread text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs break-words mt-0.5"
+        >
           THE HOUSE OF BREAD
         </p>
       </div>
     </a>
 
-    <!-- Desktop Nav -->
-    <nav class="hidden lg:flex flex-1 items-center justify-center gap-5 xl:gap-7 min-w-0">
+    <!-- Desktop Navigation -->
+    <nav
+      class="hidden lg:flex flex-1 items-center justify-center gap-5 xl:gap-7 min-w-0"
+      aria-label="Main navigation"
+    >
       <a
         href="/"
         class="site-header__nav-link inline-flex items-center px-1 py-2 text-sm xl:text-base font-medium whitespace-nowrap <%= isHomeActive ? 'is-active' : '' %>"
@@ -234,49 +336,105 @@
         Livingstone Akinadewo
       </a>
 
+      <!-- Connect Dropdown -->
       <div class="relative group">
         <button
           type="button"
           class="site-header__nav-button inline-flex items-center gap-1 px-1 py-2 text-sm xl:text-base font-medium whitespace-nowrap <%= isConnectActive ? 'is-active' : '' %>"
+          aria-haspopup="true"
         >
           Connect
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4 shrink-0"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"
+            />
           </svg>
         </button>
 
-        <div class="absolute left-0 top-full pt-3 w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-          <div class="site-header__dropdown-card rounded-2xl shadow-xl overflow-hidden">
-            <a href="/events" class="block px-4 py-3">
+        <div
+          class="absolute left-0 top-full pt-3 w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
+        >
+          <div
+            class="site-header__dropdown-card rounded-2xl shadow-xl overflow-hidden"
+          >
+            <a
+              href="/events"
+              class="block px-4 py-3"
+            >
               Events
             </a>
-            <a href="/contact" class="block px-4 py-3 border-t border-gray-100">
+
+            <a
+              href="/contact"
+              class="block px-4 py-3 border-t border-gray-100"
+            >
               Contact
             </a>
           </div>
         </div>
       </div>
 
+      <!-- Ministries Dropdown -->
       <div class="relative group">
         <button
           type="button"
           class="site-header__nav-button inline-flex items-center gap-1 px-1 py-2 text-sm xl:text-base font-medium whitespace-nowrap <%= isMinistriesActive ? 'is-active' : '' %>"
+          aria-haspopup="true"
         >
           Ministries
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4 shrink-0"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"
+            />
           </svg>
         </button>
 
-        <div class="absolute left-0 top-full pt-3 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-          <div class="site-header__dropdown-card rounded-2xl shadow-xl overflow-hidden">
-            <a href="/ministries/dbw" class="block px-4 py-3">
+        <div
+          class="absolute left-0 top-full pt-3 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
+        >
+          <div
+            class="site-header__dropdown-card rounded-2xl shadow-xl overflow-hidden"
+          >
+            <a
+              href="/ministries/dbw"
+              class="block px-4 py-3"
+            >
               Discipleship by the Word
             </a>
-            <a href="/ministries/bootcamp" class="block px-4 py-3 border-t border-gray-100">
+
+            <a
+              href="/ministries/bootcamp"
+              class="block px-4 py-3 border-t border-gray-100"
+            >
               Discipleship Bootcamp
             </a>
-            <a href="/ministries/arrows" class="block px-4 py-3 border-t border-gray-100">
+
+            <a
+              href="/ministries/arrows"
+              class="block px-4 py-3 border-t border-gray-100"
+            >
               Arrows in the Quiver
             </a>
           </div>
@@ -284,7 +442,7 @@
       </div>
     </nav>
 
-    <!-- Desktop Right -->
+    <!-- Desktop Right Section -->
     <div class="hidden lg:flex items-center gap-3 xl:gap-4 shrink-0">
       <a
         href="/academy"
@@ -308,13 +466,29 @@
           class="site-header__icon-btn relative inline-flex items-center justify-center h-12 w-12 rounded-full border transition"
           aria-label="Notifications"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0a3 3 0 11-6 0m6 0H9" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0a3 3 0 11-6 0m6 0H9"
+            />
           </svg>
 
           <% if (unreadNotificationCount > 0) { %>
-            <span class="absolute -top-1 -right-1 min-w-[22px] h-[22px] px-1 inline-flex items-center justify-center rounded-full bg-red-500 text-white text-xs font-bold">
-              <%= unreadNotificationCount > 99 ? "99+" : unreadNotificationCount %>
+            <span
+              class="absolute -top-1 -right-1 min-w-[22px] h-[22px] px-1 inline-flex items-center justify-center rounded-full bg-red-500 text-white text-xs font-bold"
+            >
+              <%= unreadNotificationCount > 99
+                ? "99+"
+                : unreadNotificationCount %>
             </span>
           <% } %>
         </a>
@@ -333,24 +507,73 @@
     <button
       id="mobile-menu-button"
       type="button"
-      class="site-header__mobile-toggle lg:hidden inline-flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-xl transition shrink-0"
-      aria-label="Toggle menu"
+      class="site-header__mobile-toggle lg:hidden inline-flex items-center justify-center shrink-0"
+      aria-label="Open navigation menu"
       aria-expanded="false"
       aria-controls="mobile-menu"
     >
-      <svg id="menu-open-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      <!-- Hamburger Icon -->
+      <svg
+        id="menu-open-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          d="M5 7H19"
+          stroke-width="2.6"
+          stroke-linecap="round"
+        />
+
+        <path
+          d="M5 12H19"
+          stroke-width="2.6"
+          stroke-linecap="round"
+        />
+
+        <path
+          d="M5 17H19"
+          stroke-width="2.6"
+          stroke-linecap="round"
+        />
       </svg>
 
-      <svg id="menu-close-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      <!-- Close Icon -->
+      <svg
+        id="menu-close-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        class="hidden"
+        aria-hidden="true"
+      >
+        <path
+          d="M6.5 6.5L17.5 17.5"
+          stroke-width="2.6"
+          stroke-linecap="round"
+        />
+
+        <path
+          d="M17.5 6.5L6.5 17.5"
+          stroke-width="2.6"
+          stroke-linecap="round"
+        />
       </svg>
     </button>
   </div>
 
   <!-- Mobile / Tablet Menu -->
-  <div id="mobile-menu" class="site-header__mobile-panel hidden lg:hidden shadow-lg">
-    <div class="px-4 py-4 space-y-2">
+  <div
+    id="mobile-menu"
+    class="site-header__mobile-panel hidden lg:hidden shadow-lg"
+  >
+    <nav
+      class="px-4 py-4 space-y-2"
+      aria-label="Mobile navigation"
+    >
       <a
         href="/"
         class="site-header__mobile-link block rounded-xl px-4 py-3 font-medium <%= isHomeActive ? 'is-active' : '' %>"
@@ -372,11 +595,30 @@
         Livingstone Akinadewo
       </a>
 
-      <details class="site-header__mobile-details group rounded-xl overflow-hidden" <%= isConnectActive ? 'open' : '' %>>
-        <summary class="site-header__mobile-summary list-none cursor-pointer px-4 py-3 flex items-center justify-between font-medium <%= isConnectActive ? 'is-active' : '' %>">
+      <!-- Mobile Connect Dropdown -->
+      <details
+        class="site-header__mobile-details group rounded-xl overflow-hidden"
+        <%= isConnectActive ? "open" : "" %>
+      >
+        <summary
+          class="site-header__mobile-summary list-none cursor-pointer px-4 py-3 flex items-center justify-between font-medium <%= isConnectActive ? 'is-active' : '' %>"
+        >
           <span>Connect</span>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4 transition group-open:rotate-180"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"
+            />
           </svg>
         </summary>
 
@@ -387,6 +629,7 @@
           >
             Events
           </a>
+
           <a
             href="/contact"
             class="block px-6 py-3 border-t border-white/10 <%= currentPath === '/contact' ? 'is-active' : '' %>"
@@ -396,11 +639,30 @@
         </div>
       </details>
 
-      <details class="site-header__mobile-details group rounded-xl overflow-hidden" <%= isMinistriesActive ? 'open' : '' %>>
-        <summary class="site-header__mobile-summary list-none cursor-pointer px-4 py-3 flex items-center justify-between font-medium <%= isMinistriesActive ? 'is-active' : '' %>">
+      <!-- Mobile Ministries Dropdown -->
+      <details
+        class="site-header__mobile-details group rounded-xl overflow-hidden"
+        <%= isMinistriesActive ? "open" : "" %>
+      >
+        <summary
+          class="site-header__mobile-summary list-none cursor-pointer px-4 py-3 flex items-center justify-between font-medium <%= isMinistriesActive ? 'is-active' : '' %>"
+        >
           <span>Ministries</span>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4 transition group-open:rotate-180"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"
+            />
           </svg>
         </summary>
 
@@ -411,12 +673,14 @@
           >
             Discipleship by the Word
           </a>
+
           <a
             href="/ministries/bootcamp"
             class="block px-6 py-3 border-t border-white/10 <%= currentPath === '/ministries/bootcamp' ? 'is-active' : '' %>"
           >
             Discipleship Bootcamp
           </a>
+
           <a
             href="/ministries/arrows"
             class="block px-6 py-3 border-t border-white/10 <%= currentPath === '/ministries/arrows' ? 'is-active' : '' %>"
@@ -450,8 +714,12 @@
           <span>Notifications</span>
 
           <% if (unreadNotificationCount > 0) { %>
-            <span class="min-w-[24px] h-[24px] px-1 inline-flex items-center justify-center rounded-full bg-red-500 text-white text-xs font-bold">
-              <%= unreadNotificationCount > 99 ? "99+" : unreadNotificationCount %>
+            <span
+              class="min-w-[24px] h-[24px] px-1 inline-flex items-center justify-center rounded-full bg-red-500 text-white text-xs font-bold"
+            >
+              <%= unreadNotificationCount > 99
+                ? "99+"
+                : unreadNotificationCount %>
             </span>
           <% } %>
         </a>
@@ -464,7 +732,7 @@
           Logout
         </button>
       <% } %>
-    </div>
+    </nav>
   </div>
 </header>
 
@@ -475,23 +743,36 @@
     const openIcon = document.getElementById("menu-open-icon");
     const closeIcon = document.getElementById("menu-close-icon");
 
-    const desktopLogoutBtn = document.getElementById("desktop-logout-btn");
-    const mobileLogoutBtn = document.getElementById("mobile-logout-btn");
+    const desktopLogoutBtn =
+      document.getElementById("desktop-logout-btn");
+
+    const mobileLogoutBtn =
+      document.getElementById("mobile-logout-btn");
 
     function openMenu() {
-      if (!menu || !openIcon || !closeIcon || !button) return;
+      if (!menu || !openIcon || !closeIcon || !button) {
+        return;
+      }
+
       menu.classList.remove("hidden");
       openIcon.classList.add("hidden");
       closeIcon.classList.remove("hidden");
+
       button.setAttribute("aria-expanded", "true");
+      button.setAttribute("aria-label", "Close navigation menu");
     }
 
     function closeMenu() {
-      if (!menu || !openIcon || !closeIcon || !button) return;
+      if (!menu || !openIcon || !closeIcon || !button) {
+        return;
+      }
+
       menu.classList.add("hidden");
       openIcon.classList.remove("hidden");
       closeIcon.classList.add("hidden");
+
       button.setAttribute("aria-expanded", "false");
+      button.setAttribute("aria-label", "Open navigation menu");
     }
 
     if (button && menu && openIcon && closeIcon) {
@@ -507,8 +788,22 @@
         const clickedInsideMenu = menu.contains(event.target);
         const clickedButton = button.contains(event.target);
 
-        if (!menu.classList.contains("hidden") && !clickedInsideMenu && !clickedButton) {
+        if (
+          !menu.classList.contains("hidden") &&
+          !clickedInsideMenu &&
+          !clickedButton
+        ) {
           closeMenu();
+        }
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (
+          event.key === "Escape" &&
+          !menu.classList.contains("hidden")
+        ) {
+          closeMenu();
+          button.focus();
         }
       });
 
@@ -523,8 +818,10 @@
       try {
         const response = await fetch("/auth/logout", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          credentials: "same-origin"
         });
 
         const data = await response.json();
@@ -537,16 +834,25 @@
         window.location.href = "/";
       } catch (error) {
         console.error("Logout error:", error);
-        alert("Something went wrong while logging out.");
+
+        alert(
+          "Something went wrong while logging out."
+        );
       }
     }
 
     if (desktopLogoutBtn) {
-      desktopLogoutBtn.addEventListener("click", handleLogout);
+      desktopLogoutBtn.addEventListener(
+        "click",
+        handleLogout
+      );
     }
 
     if (mobileLogoutBtn) {
-      mobileLogoutBtn.addEventListener("click", handleLogout);
+      mobileLogoutBtn.addEventListener(
+        "click",
+        handleLogout
+      );
     }
   });
 </script>
