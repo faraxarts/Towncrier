@@ -37,153 +37,297 @@
     box-shadow: none !important;
   }
 
+  /*
+   * Footer logo without a surrounding box.
+   * Applies on desktop, tablet and mobile.
+   */
+  .site-footer__logo-wrap {
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    padding: 0 !important;
+    margin: 0;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+
+  .site-footer__logo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: contain;
+
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  @media (max-width: 767px) {
+    .site-footer__logo-wrap {
+      width: 52px;
+      height: 52px;
+    }
+  }
+
   @media (min-width: 1024px) {
     .site-footer {
       background: var(--tcem-header-purple, #6b46c1);
     }
+
+    .site-footer__logo-wrap {
+      width: 62px;
+      height: 62px;
+    }
   }
 </style>
+
 <footer class="site-footer">
   <div class="site-footer__inner max-w-7xl mx-auto px-6 md:px-16">
+
     <div class="site-footer__top">
+
+      <!-- Footer Brand -->
       <div class="site-footer__brand">
         <div class="site-footer__brand-row">
+
+          <!-- Logo without background, border, corners or shadow -->
           <div class="site-footer__logo-wrap">
             <img
-              src="/images/tcem-logo.png"
+              src="/images/tcem22.png"
               alt="Town Crier Evangelical Ministries Logo"
+              width="62"
+              height="62"
+              loading="lazy"
+              decoding="async"
               class="site-footer__logo"
             />
           </div>
 
           <div>
-            <p class="site-footer__brand-name">T.C.E.M</p>
-            <p class="site-footer__brand-tag">THE HOUSE OF BREAD</p>
+            <p class="site-footer__brand-name">
+              T.C.E.M
+            </p>
+
+            <p class="site-footer__brand-tag">
+              THE HOUSE OF BREAD
+            </p>
           </div>
         </div>
 
         <p class="site-footer__brand-copy">
-          Town Crier Evangelical Ministries exists to proclaim Christ, raise disciples, and serve communities through prayer,
+          Town Crier Evangelical Ministries exists to proclaim Christ,
+          raise disciples, and serve communities through prayer,
           sound doctrine, and evangelistic missions.
         </p>
       </div>
 
-
-
+      <!-- Footer Navigation -->
       <div class="site-footer__links-grid">
+
         <div>
-          <h4 class="site-footer__heading">Quick Links</h4>
+          <h4 class="site-footer__heading">
+            Quick Links
+          </h4>
+
           <ul class="site-footer__list">
-            <li><a href="/about">About</a></li>
-            <li><a href="/livingstone-akinadewo">Livingstone Akinadewo</a></li>
-            <li><a href="/events">Events</a></li>
-            <li><a href="/contact">Contact</a></li>
+            <li>
+              <a href="/about">About</a>
+            </li>
+
+            <li>
+              <a href="/livingstone-akinadewo">
+                Livingstone Akinadewo
+              </a>
+            </li>
+
+            <li>
+              <a href="/events">Events</a>
+            </li>
+
+            <li>
+              <a href="/contact">Contact</a>
+            </li>
           </ul>
         </div>
 
         <div>
-          <h4 class="site-footer__heading">Ministries</h4>
+          <h4 class="site-footer__heading">
+            Ministries
+          </h4>
+
           <ul class="site-footer__list">
-            <li><a href="/ministries/dbw">Discipleship by the Word</a></li>
-            <li><a href="/ministries/bootcamp">Discipleship Bootcamp</a></li>
-            <li><a href="/ministries/arrows">Arrows in the Quiver</a></li>
+            <li>
+              <a href="/ministries/dbw">
+                Discipleship by the Word
+              </a>
+            </li>
+
+            <li>
+              <a href="/ministries/bootcamp">
+                Discipleship Bootcamp
+              </a>
+            </li>
+
+            <li>
+              <a href="/ministries/arrows">
+                Arrows in the Quiver
+              </a>
+            </li>
           </ul>
         </div>
 
         <div>
-          <h4 class="site-footer__heading">Learning</h4>
+          <h4 class="site-footer__heading">
+            Learning
+          </h4>
+
           <ul class="site-footer__list">
-            <li><a href="/academy/dbw-hub">DBW HUB</a></li>
-            <li><a href="/academy/davidic-harp">Davidic Harp</a></li>
+            <li>
+              <a href="/academy/dbw-hub">
+                DBW HUB
+              </a>
+            </li>
+
+            <li>
+              <a href="/academy/davidic-harp">
+                Davidic Harp
+              </a>
+            </li>
           </ul>
         </div>
+
       </div>
     </div>
-    
-    <div class="site-footer__socials" aria-label="Social media links">
 
-  <a
-    href="https://facebook.com/YOUR-PAGE"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Facebook"
-    title="Facebook"
-  >
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path
-        fill="currentColor"
-        d="M13.5 22v-9h3l.45-3.5H13.5V7.25c0-1.02.28-1.71 1.75-1.71H17V2.4c-.3-.04-1.32-.13-2.52-.13-2.5 0-4.21 1.53-4.21 4.34V9.5H7.45V13h2.82v9h3.23Z"
-      />
-    </svg>
-  </a>
+    <!-- Social Media Links -->
+    <div
+      class="site-footer__socials"
+      aria-label="Social media links"
+    >
 
-  <a
-    href="https://instagram.com/YOUR-PAGE"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Instagram"
-    title="Instagram"
-  >
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <rect
-        x="3"
-        y="3"
-        width="18"
-        height="18"
-        rx="5"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-      />
-      <circle
-        cx="12"
-        cy="12"
-        r="4"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-      />
-      <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
-    </svg>
-  </a>
+      <!-- Facebook -->
+      <a
+        href="https://facebook.com/YOUR-PAGE"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Town Crier Evangelical Ministries on Facebook"
+        title="Facebook"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            fill="currentColor"
+            d="M13.5 22v-9h3l.45-3.5H13.5V7.25c0-1.02.28-1.71 1.75-1.71H17V2.4c-.3-.04-1.32-.13-2.52-.13-2.5 0-4.21 1.53-4.21 4.34V9.5H7.45V13h2.82v9h3.23Z"
+          />
+        </svg>
+      </a>
 
-  <a
-    href="https://youtube.com/@YOUR-CHANNEL"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="YouTube"
-    title="YouTube"
-  >
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path
-        fill="currentColor"
-        d="M22 12c0-2.2-.27-4.23-.58-5.3a2.85 2.85 0 0 0-2-2C18.32 4.4 15.7 4 12 4s-6.32.4-7.42.7a2.85 2.85 0 0 0-2 2C2.27 7.77 2 9.8 2 12s.27 4.23.58 5.3a2.85 2.85 0 0 0 2 2C5.68 19.6 8.3 20 12 20s6.32-.4 7.42-.7a2.85 2.85 0 0 0 2-2C21.73 16.23 22 14.2 22 12Z"
-      />
-      <path fill="#6b46c1" d="m10 15.5 5-3.5-5-3.5v7Z" />
-    </svg>
-  </a>
+      <!-- Instagram -->
+      <a
+        href="https://instagram.com/YOUR-PAGE"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Town Crier Evangelical Ministries on Instagram"
+        title="Instagram"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <rect
+            x="3"
+            y="3"
+            width="18"
+            height="18"
+            rx="5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          />
 
-  <a
-    href="https://x.com/YOUR-PAGE"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="X"
-    title="X"
-  >
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path
-        fill="currentColor"
-        d="M18.9 2H22l-6.77 7.74L23.2 22h-6.24l-4.89-6.4L6.48 22H3.36l7.25-8.29L2.97 2h6.4l4.42 5.84L18.9 2Zm-1.1 17.84h1.72L8.43 4.05H6.58L17.8 19.84Z"
-      />
-    </svg>
-  </a>
+          <circle
+            cx="12"
+            cy="12"
+            r="4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          />
 
-</div>
+          <circle
+            cx="17.5"
+            cy="6.5"
+            r="1.2"
+            fill="currentColor"
+          />
+        </svg>
+      </a>
 
+      <!-- YouTube -->
+      <a
+        href="https://youtube.com/@YOUR-CHANNEL"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Town Crier Evangelical Ministries on YouTube"
+        title="YouTube"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            fill="currentColor"
+            d="M22 12c0-2.2-.27-4.23-.58-5.3a2.85 2.85 0 0 0-2-2C18.32 4.4 15.7 4 12 4s-6.32.4-7.42.7a2.85 2.85 0 0 0-2 2C2.27 7.77 2 9.8 2 12s.27 4.23.58 5.3a2.85 2.85 0 0 0 2 2C5.68 19.6 8.3 20 12 20s6.32-.4 7.42-.7a2.85 2.85 0 0 0 2-2C21.73 16.23 22 14.2 22 12Z"
+          />
+
+          <path
+            fill="#6b46c1"
+            d="m10 15.5 5-3.5-5-3.5v7Z"
+          />
+        </svg>
+      </a>
+
+      <!-- X / Twitter -->
+      <a
+        href="https://x.com/YOUR-PAGE"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Town Crier Evangelical Ministries on X"
+        title="X"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            fill="currentColor"
+            d="M18.9 2H22l-6.77 7.74L23.2 22h-6.24l-4.89-6.4L6.48 22H3.36l7.25-8.29L2.97 2h6.4l4.42 5.84L18.9 2Zm-1.1 17.84h1.72L8.43 4.05H6.58L17.8 19.84Z"
+          />
+        </svg>
+      </a>
+
+    </div>
+
+    <!-- Copyright -->
     <div class="site-footer__bottom">
       <p>
-        © 2026 Town Crier Evangelical Ministries. All rights reserved. Oaks of Righteousness Household.
+        © 2026 Town Crier Evangelical Ministries. All rights reserved.
+        Oaks of Righteousness Household.
       </p>
     </div>
+
   </div>
 </footer>

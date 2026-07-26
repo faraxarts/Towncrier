@@ -41,6 +41,26 @@
     color: rgba(255, 255, 255, 0.82);
   }
 
+  /*
+ * Logo wrapper without a surrounding box
+ * on both desktop and mobile.
+ */
+.site-header__logo-wrap {
+  padding: 0;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+.site-header__logo-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
   .site-header__nav-link,
   .site-header__nav-button {
     position: relative;
@@ -285,16 +305,16 @@
       aria-label="Town Crier Evangelical Ministries home"
     >
       <div
-        class="site-header__logo-wrap bg-white/10 h-10 w-10 sm:h-11 sm:w-11 flex items-center justify-center rounded-xl shadow-md overflow-hidden border border-white/20 shrink-0"
-      >
-        <img
-          src="/images/tcem22.png"
-          alt="Town Crier Evangelical Ministries Logo"
-          width="48"
-          height="48"
-          class="h-full w-full object-contain"
-        />
-      </div>
+  class="site-header__logo-wrap h-10 w-10 sm:h-11 sm:w-11 flex items-center justify-center shrink-0"
+>
+  <img
+    src="/images/tcem22.png"
+    alt="Town Crier Evangelical Ministries Logo"
+    width="48"
+    height="48"
+    class="h-full w-full object-contain"
+  />
+</div>
 
       <!-- Hidden on mobile/tablet; visible on desktop -->
       <div
