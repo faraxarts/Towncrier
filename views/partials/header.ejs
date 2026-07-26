@@ -119,32 +119,35 @@
   }
 
   /*
-   * Mobile menu button base styling
+   * Mobile menu button.
+   * No visible box, border, background or shadow.
    */
   .site-header__mobile-toggle {
     color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 8px 22px rgba(40, 20, 90, 0.18);
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
     transition:
-      background-color 180ms ease,
-      border-color 180ms ease,
+      opacity 180ms ease,
       transform 180ms ease;
   }
 
   .site-header__mobile-toggle:hover {
     color: #ffffff;
-    background: rgba(255, 255, 255, 0.14);
-    border-color: rgba(255, 255, 255, 0.42);
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    opacity: 0.78;
   }
 
   .site-header__mobile-toggle:active {
-    transform: scale(0.97);
+    transform: scale(0.94);
   }
 
   .site-header__mobile-toggle:focus-visible {
-    outline: 2px solid #ffffff;
-    outline-offset: 3px;
+    outline: 2px solid rgba(255, 255, 255, 0.9);
+    outline-offset: 4px;
   }
 
   .site-header__mobile-panel {
@@ -210,19 +213,17 @@
 
   /*
    * Mobile and tablet header.
-   * This applies while the hamburger navigation is active.
    */
   @media (max-width: 1023px) {
     /*
-     * Temporarily hide the ministry name and tagline on
-     * mobile and tablet without removing them from desktop.
+     * Hide ministry name and tagline only on mobile/tablet.
      */
     .site-header__brand-copy {
       display: none;
     }
 
     /*
-     * Remove the box around the logo on mobile.
+     * Remove the box around the mobile logo.
      */
     .site-header__logo-wrap {
       width: 46px;
@@ -243,24 +244,27 @@
     }
 
     /*
-     * Rounded mobile hamburger button.
+     * Hamburger icon container has no visible surrounding box.
      */
     .site-header__mobile-toggle {
-      width: 50px;
-      height: 50px;
+      width: 44px;
+      height: 44px;
       padding: 0;
-      border-radius: 16px;
+      border: none;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
     }
 
     .site-header__mobile-toggle svg {
-      width: 26px;
-      height: 26px;
+      width: 27px;
+      height: 27px;
       color: #ffffff;
     }
   }
 
   /*
-   * Restore the ministry name on desktop.
+   * Restore ministry name on desktop.
    */
   @media (min-width: 1024px) {
     .site-header__brand-copy {
@@ -271,7 +275,7 @@
 
 <header class="site-header sticky top-0 z-50 w-full overflow-x-hidden">
   <div
-    class="max-w-7xl mx-auto h-16 lg:h-20 px-4 sm:px-5 md:px-6 lg:px-8 flex items-center justify-between gap-3 lg:gap-8"
+    class="max-w-7xl mx-auto min-h-[76px] lg:min-h-[96px] px-4 sm:px-5 md:px-6 lg:px-8 pt-2 pb-3 lg:pt-3 lg:pb-4 flex items-center justify-between gap-3 lg:gap-8"
   >
 
     <!-- Logo / Ministry Name -->
@@ -292,7 +296,7 @@
         />
       </div>
 
-      <!-- Hidden on mobile and tablet; visible on desktop -->
+      <!-- Hidden on mobile/tablet; visible on desktop -->
       <div
         class="site-header__brand-copy min-w-0 flex-1 leading-tight overflow-hidden"
       >
