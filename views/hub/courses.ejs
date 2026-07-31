@@ -11,6 +11,31 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="/css/style.css" />
+  <style>
+  /*
+   * Leaves enough space above a targeted course card
+   * because the website header is sticky.
+   */
+  .course-scroll-target {
+    scroll-margin-top: 9rem;
+    transition:
+      border-color 250ms ease,
+      box-shadow 250ms ease,
+      transform 250ms ease;
+  }
+
+  /*
+   * Briefly distinguishes the course selected from
+   * the Featured Courses section.
+   */
+  .course-scroll-target:target {
+    border-color: #6b46c1;
+    box-shadow:
+      0 0 0 4px rgba(107, 70, 193, 0.14),
+      0 20px 45px rgba(15, 23, 42, 0.12);
+    transform: translateY(-3px);
+  }
+</style>
 </head>
 <body class="bg-[#f7f7f8] text-gray-900">
 
@@ -141,7 +166,7 @@
 
               <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                 <% level.courses.forEach((course) => { %>
-                  <article class="bg-white border border-indigo-100 rounded-[26px] shadow-sm overflow-hidden <%= !level.isUnlocked ? 'opacity-95' : '' %>">
+                  <article id="course-<%= course.slug %>" class="course-scroll-target bg-white border border-indigo-100 rounded-[26px] shadow-sm overflow-hidden <%= !level.isUnlocked ? 'opacity-95' : '' %>">
                     <div class="relative h-56 overflow-hidden">
                       <img
                         src="<%= course.image || '/images/event1.jpg' %>"

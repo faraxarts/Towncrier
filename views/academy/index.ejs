@@ -19,9 +19,13 @@
 <body class="academy-page bg-[#f7f7f8] text-gray-900">
 
   <%- include("../partials/header") %>
-
+  
   <%
-    function getAcademyMeta(academy) {
+  const viewerIsAdmin =
+    typeof isAdmin !== "undefined" &&
+    Boolean(isAdmin);
+
+  function getAcademyMeta(academy) {
       const slug = (academy.slug || "").toLowerCase();
       const name = (academy.name || "").toLowerCase();
 
@@ -263,6 +267,116 @@
         font-size: 0.95rem;
       }
     }
+    .academy-card--coming-soon {
+  border-color: rgba(107, 70, 193, 0.2);
+}
+
+.academy-card--coming-soon:hover {
+  transform: translateY(-3px);
+}
+
+.academy-card__cta--coming-soon {
+  border: none;
+  cursor: pointer;
+}
+
+.davidic-coming-soon-modal[hidden] {
+  display: none;
+}
+
+.davidic-coming-soon-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.davidic-coming-soon-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.davidic-coming-soon-modal__dialog {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 520px);
+  background: #ffffff;
+  border: 1px solid rgba(107, 70, 193, 0.14);
+  border-radius: 2rem;
+  box-shadow: 0 30px 80px rgba(15, 23, 42, 0.25);
+  padding: 2.3rem;
+  text-align: center;
+}
+
+.davidic-coming-soon-modal__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: #334155;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.davidic-coming-soon-modal__icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 1.3rem;
+  border-radius: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(107, 70, 193, 0.12);
+  font-size: 2rem;
+}
+
+.davidic-coming-soon-modal__title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2.4rem, 6vw, 3.3rem);
+  line-height: 0.98;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #1f2240;
+  margin-bottom: 1rem;
+}
+
+.davidic-coming-soon-modal__text {
+  color: #475569;
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 1.7rem;
+}
+
+.davidic-coming-soon-modal__button {
+  width: 100%;
+  min-height: 3.3rem;
+  border: none;
+  border-radius: 1rem;
+  background: #6b46c1;
+  color: #ffffff;
+  padding: 0.9rem 1.4rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.davidic-coming-soon-modal__button:hover {
+  background: #5b35b5;
+  transform: translateY(-1px);
+}
   </style>
 
   <section class="academy-shell">
@@ -279,26 +393,57 @@
 
       <% if (academies && academies.length) { %>
         <div class="academy-grid">
-          <% academies.forEach((academy) => { 
-               const meta = getAcademyMeta(academy);
-          %>
-            <article class="academy-card">
-              <div class="academy-card__content">
-                <h2 class="academy-card__title"><%= meta.title %></h2>
-                <p class="academy-card__subtitle"><%= meta.subtitle %></p>
-                <p class="academy-card__description"><%= meta.description %></p>
-                <div class="academy-card__rule"></div>
+          <% academies.forEach((academy) => {
+     const meta = getAcademyMeta(academy);
 
-                <a
-                  href="/academy/<%= academy.slug %>"
-                  class="academy-card__cta"
-                >
-                  <span><%= meta.button %></span>
-                  <span aria-hidden="true">→</span>
-                </a>
-              </div>
-            </article>
-          <% }) %>
+     const normalizedAcademySlug =
+       String(academy.slug || "").toLowerCase();
+
+     const isDavidicHarp =
+       normalizedAcademySlug === "davidic-harp";
+
+     const isDavidicHarpLocked =
+       isDavidicHarp && !viewerIsAdmin;
+%>
+  <article
+    class="academy-card <%= isDavidicHarpLocked ? 'academy-card--coming-soon' : '' %>"
+  >
+    <div class="academy-card__content">
+      <h2 class="academy-card__title">
+        <%= meta.title %>
+      </h2>
+
+      <p class="academy-card__subtitle">
+        <%= meta.subtitle %>
+      </p>
+
+      <p class="academy-card__description">
+        <%= meta.description %>
+      </p>
+
+      <div class="academy-card__rule"></div>
+
+      <% if (isDavidicHarpLocked) { %>
+        <button
+          type="button"
+          class="academy-card__cta academy-card__cta--coming-soon"
+          data-davidic-harp-coming-soon
+        >
+          <span>Coming Soon</span>
+          <span aria-hidden="true">⏳</span>
+        </button>
+      <% } else { %>
+        <a
+          href="/academy/<%= academy.slug %>"
+          class="academy-card__cta"
+        >
+          <span><%= meta.button %></span>
+          <span aria-hidden="true">→</span>
+        </a>
+      <% } %>
+    </div>
+  </article>
+<% }) %>
         </div>
 
         <p class="academy-footnote">
@@ -317,6 +462,138 @@
       <% } %>
     </div>
   </section>
+ 
+<!-- Davidic Harp Coming Soon Popup -->
+<div
+  id="davidic-harp-coming-soon-modal"
+  class="davidic-coming-soon-modal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="davidic-coming-soon-title"
+  hidden
+>
+  <div
+    class="davidic-coming-soon-modal__backdrop"
+    data-davidic-coming-soon-close
+  ></div>
+
+  <div class="davidic-coming-soon-modal__dialog">
+    <button
+      type="button"
+      class="davidic-coming-soon-modal__close"
+      aria-label="Close Coming Soon message"
+      data-davidic-coming-soon-close
+    >
+      ×
+    </button>
+
+    <div
+      class="davidic-coming-soon-modal__icon"
+      aria-hidden="true"
+    >
+      🎵
+    </div>
+
+    <h2
+      id="davidic-coming-soon-title"
+      class="davidic-coming-soon-modal__title"
+    >
+      Davidic Harp Is Coming Soon
+    </h2>
+
+    <p class="davidic-coming-soon-modal__text">
+      The Davidic Harp Academy is currently being prepared.
+      Its courses and learning materials will become available
+      once the programme is ready.
+    </p>
+
+    <button
+      type="button"
+      class="davidic-coming-soon-modal__button"
+      data-davidic-coming-soon-close
+    >
+      Return to the Academy
+    </button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const modal = document.getElementById(
+      "davidic-harp-coming-soon-modal"
+    );
+
+    if (!modal) {
+      return;
+    }
+
+    const openButtons = document.querySelectorAll(
+      "[data-davidic-harp-coming-soon]"
+    );
+
+    const closeButtons = modal.querySelectorAll(
+      "[data-davidic-coming-soon-close]"
+    );
+
+    const mainCloseButton = modal.querySelector(
+      ".davidic-coming-soon-modal__close"
+    );
+
+    function openComingSoonModal() {
+      modal.hidden = false;
+      document.body.style.overflow = "hidden";
+
+      if (mainCloseButton) {
+        mainCloseButton.focus();
+      }
+    }
+
+    function closeComingSoonModal() {
+      modal.hidden = true;
+      document.body.style.overflow = "";
+
+      if (
+        window.location.hash ===
+        "#davidic-harp-coming-soon"
+      ) {
+        history.replaceState(
+          null,
+          "",
+          window.location.pathname +
+            window.location.search
+        );
+      }
+    }
+
+    openButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        openComingSoonModal();
+      });
+    });
+
+    closeButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        closeComingSoonModal();
+      });
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (
+        event.key === "Escape" &&
+        !modal.hidden
+      ) {
+        closeComingSoonModal();
+      }
+    });
+
+    if (
+      window.location.hash ===
+      "#davidic-harp-coming-soon"
+    ) {
+      openComingSoonModal();
+    }
+  });
+</script>
 
   <%- include("../partials/footer") %>
 </body>

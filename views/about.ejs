@@ -13,7 +13,8 @@
 <link rel="apple-touch-icon" href="/images/tcem-logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600;1,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 
   <link rel="stylesheet" href="/css/style.css" />
 </head>
@@ -47,8 +48,9 @@
   <section class="py-16 md:py-20">
     <div class="max-w-7xl mx-auto px-6 md:px-16">
       <div class="max-w-4xl mx-auto bg-white border border-gray-100 rounded-[28px] shadow-sm p-8 md:p-12">
-        <h2 class="text-3xl md:text-5xl font-extrabold text-gray-950 mb-8">
-          Who We Are
+        <h2 class="about-who-title mb-8">
+         <span class="about-who-title__accent">Who</span>
+         <span class="about-who-title__main">We Are</span>
         </h2>
 
         <div class="space-y-8 text-lg md:text-[1.45rem] leading-relaxed text-slate-700">
@@ -172,9 +174,9 @@
         Ministry Story
       </p>
 
-      <h2 class="text-3xl md:text-5xl font-extrabold text-gray-950 mb-5 leading-tight">
-        <%= safeVideoTitle %>
-      </h2>
+      <h2 class="about-story-title mb-5">
+  <%= safeVideoTitle %>
+</h2>
 
       <p class="text-lg md:text-xl leading-relaxed text-slate-700">
         <%= safeVideoText %>
@@ -619,6 +621,54 @@
       pointer-events: auto;
     }
   }
+  .about-who-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.18em;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2.7rem, 5vw, 4.6rem);
+  line-height: 0.96;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  color: #111827;
+}
+
+.about-who-title__accent {
+  display: inline-block;
+  font-style: italic;
+  font-weight: 600;
+  color: #6b46c1;
+  transform: rotate(-1.5deg);
+  transform-origin: center bottom;
+}
+
+.about-who-title__main {
+  font-style: normal;
+  color: #111827;
+}
+
+.about-story-title {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2.7rem, 5vw, 4.8rem);
+  line-height: 0.96;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  color: #111827;
+}
+
+@media (max-width: 767px) {
+  .about-who-title {
+    font-size: clamp(2.45rem, 13vw, 3.4rem);
+  }
+
+  .about-story-title {
+    font-size: clamp(2.45rem, 12vw, 3.5rem);
+  }
+}
 </style>
 
 <script>

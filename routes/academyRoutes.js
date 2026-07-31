@@ -1,4 +1,5 @@
 const express = require("express");
+
 const {
   getAcademyIndex,
   getAcademyHome,
@@ -12,10 +13,29 @@ const {
   requireAcademyEnrollmentPage,
 } = require("../middleware/academyEnrollmentMiddleware");
 
+const {
+  restrictDavidicHarpAccess,
+} = require("../middleware/davidicHarpAccessMiddleware");
+
 const router = express.Router();
 
+/*
+ * Run the Davidic Harp restriction for every route
+ * in this router containing :academySlug.
+ */
+router.param(
+  "academySlug",
+  restrictDavidicHarpAccess
+);
+
+/*
+ * Public Academy listing page.
+ */
 router.get("/", getAcademyIndex);
 
+/*
+ * Individual course details.
+ */
 router.get(
   "/:academySlug/courses/:courseSlug",
   loadAcademyBySlug,
@@ -23,6 +43,9 @@ router.get(
   getAcademyCourseDetails
 );
 
+/*
+ * Academy course listing.
+ */
 router.get(
   "/:academySlug/courses",
   loadAcademyBySlug,
@@ -30,8 +53,22 @@ router.get(
   getAcademyCourses
 );
 
-router.post("/:academySlug/join", loadAcademyBySlug, postJoinAcademy);
+/*
+ * Join an academy.
+ */
+router.post(
+  "/:academySlug/join",
+  loadAcademyBySlug,
+  postJoinAcademy
+);
 
-router.get("/:academySlug", loadAcademyBySlug, getAcademyHome);
+/*
+ * Academy landing page.
+ */
+router.get(
+  "/:academySlug",
+  loadAcademyBySlug,
+  getAcademyHome
+);
 
 module.exports = router;
