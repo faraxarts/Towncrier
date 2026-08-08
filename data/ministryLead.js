@@ -14,7 +14,7 @@ module.exports = {
   paragraphs: [
     "Livingstone Akinadewo serves as the Lead Evangelist and President of Town Crier Evangelical Ministries. His leadership is shaped by a deep commitment to the Gospel, a passion for prayer, and a desire to see lives transformed by the power of God’s Word.",
     "Through Town Crier Evangelical Ministries, he is devoted to building a ministry culture that is Christ-centred, mission-minded, and deeply committed to discipleship. His heart is to see believers equipped for kingdom service, strengthened in biblical conviction, and active in sharing the love of Christ in everyday life.",
-    "His ministry emphasis spans around evangelical missions, schools outreaches, spiritual formation, worship, and practical teaching that helps people grow into maturity in Christ. He believes that true transformation happens when people encounter Jesus, understand Scripture, and are equipped to live out their faith with courage and compassion.",
+    "His ministry emphasis spans around evangelical missions, schools outreaches, spiritual formation, worship, and practical teaching that helps people grow into maturity in Christ. He believes that true transformation happens when people encounter Jesus, renewed by the Holy Sprirt, understand Scripture, and are equipped to live out their faith with courage and compassion.",
     "As Town Crier continues to grow, Livingstone remains focused on raising a people of prayer, purity, obedience, and spiritual hunger — a people ready to carry the message of Christ into churches, campuses, neighbourhoods, and nations."
   ],
   highlights: [
