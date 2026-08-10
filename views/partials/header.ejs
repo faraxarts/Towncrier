@@ -78,29 +78,44 @@
   }
 
   /*
-   * New designed Town Crier Evangelical Ministries wordmark.
+ * Designed Town Crier wordmark.
+ *
+ * The PNG contains a lot of transparent space,
+ * so the wrapper crops that unused area while
+ * the image itself is enlarged and repositioned.
+ */
+.site-header__wordmark-wrap {
+  position: relative;
+  width: 215px;
+  height: 62px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.site-header__wordmark {
+  position: absolute;
+
+  /*
+   * Enlarges the complete PNG so the actual
+   * lettering becomes much more visible.
    */
-  .site-header__wordmark-wrap {
-    display: flex;
-    align-items: center;
-    min-width: 0;
-    flex-shrink: 1;
-  }
+  width: 320px;
+  height: auto;
+  max-width: none;
 
-  .site-header__wordmark {
-    display: block;
+  /*
+   * Moves the visible artwork into the cropped area.
+   */
+  left: -12px;
+  top: -56px;
 
-    width: auto;
-    height: 48px;
-    max-width: 220px;
+  display: block;
+  object-fit: contain;
 
-    object-fit: contain;
-    object-position: left center;
-
-    background: transparent;
-    border: none;
-    box-shadow: none;
-  }
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
 
   /* =========================================
      DESKTOP NAVIGATION
@@ -292,26 +307,32 @@
      ========================================= */
 
   @media (max-width: 1023px) {
+    
     .site-header__brand {
-      gap: 0.45rem;
-      flex: 1;
-      max-width: calc(100% - 56px);
-      overflow: hidden;
-    }
+    gap: 0.5rem;
+    flex: 1;
+    max-width: calc(100% - 56px);
+    overflow: hidden;
+  }
 
-    .site-header__logo-wrap {
-      width: 42px;
-      height: 42px;
-    }
+  .site-header__logo-wrap {
+    width: 42px;
+    height: 42px;
+  }
 
-    /*
-     * Designed wordmark remains visible on mobile.
-     */
-    .site-header__wordmark {
-      height: 40px;
-      width: auto;
-      max-width: 170px;
-    }
+  .site-header__wordmark-wrap {
+    width: 170px;
+    height: 52px;
+    flex-shrink: 0;
+  }
+
+  .site-header__wordmark {
+    width: 265px;
+    height: auto;
+    max-width: none;
+    left: -10px;
+    top: -46px;
+  }
 
     .site-header__mobile-toggle {
       width: 44px;
@@ -334,44 +355,71 @@
   /*
    * Very small phones.
    */
-  @media (max-width: 430px) {
-    .site-header__logo-wrap {
-      width: 38px;
-      height: 38px;
-    }
-
-    .site-header__wordmark {
-      height: 36px;
-      max-width: 145px;
-    }
-
-    .site-header__brand {
-      gap: 0.35rem;
-    }
+    @media (max-width: 430px) {
+  .site-header__logo-wrap {
+    width: 38px;
+    height: 38px;
   }
+
+  .site-header__brand {
+    gap: 0.35rem;
+  }
+
+  .site-header__wordmark-wrap {
+    width: 145px;
+    height: 47px;
+  }
+
+  .site-header__wordmark {
+    width: 225px;
+    height: auto;
+    max-width: none;
+    left: -8px;
+    top: -39px;
+  }
+}
 
   /* =========================================
      DESKTOP BRAND SIZE
      ========================================= */
 
   @media (min-width: 1024px) {
-    .site-header__logo-wrap {
-      width: 48px;
-      height: 48px;
-    }
-
-    .site-header__wordmark {
-      height: 52px;
-      max-width: 225px;
-    }
+  .site-header__logo-wrap {
+    width: 52px;
+    height: 52px;
   }
 
-  @media (min-width: 1280px) {
-    .site-header__wordmark {
-      height: 56px;
-      max-width: 245px;
-    }
+  .site-header__wordmark-wrap {
+    width: 215px;
+    height: 62px;
   }
+
+  .site-header__wordmark {
+    width: 320px;
+    height: auto;
+    max-width: none;
+    left: -12px;
+    top: -56px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .site-header__logo-wrap {
+    width: 56px;
+    height: 56px;
+  }
+
+  .site-header__wordmark-wrap {
+    width: 235px;
+    height: 66px;
+  }
+
+  .site-header__wordmark {
+    width: 345px;
+    left: -13px;
+    top: -60px;
+  }
+}
 </style>
 
 
