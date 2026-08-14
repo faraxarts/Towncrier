@@ -67,42 +67,104 @@ app.use((req, res, next) => {
 
 // Shared SEO locals + basic security headers
 app.use((req, res, next) => {
-  const noisyQueryParams = ["type", "target", "auth", "joined"];
-  const hasNoisyQuery = Object.keys(req.query).some((key) =>
-    noisyQueryParams.includes(key)
-  );
+  const noisyQueryParams = [
+    "type",
+    "target",
+    "auth",
+    "joined"
+  ];
+
+  const hasNoisyQuery =
+    Object.keys(req.query).some((key) =>
+      noisyQueryParams.includes(key)
+    );
 
   res.locals.siteUrl = SITE_URL;
-  res.locals.pathWithoutQuery = req.originalUrl.split("?")[0];
-  res.locals.canonicalUrl = `${SITE_URL}${req.path}`;
+
+  res.locals.pathWithoutQuery =
+    req.originalUrl.split("?")[0];
+
+  res.locals.canonicalUrl =
+    `${SITE_URL}${req.path}`;
+
   res.locals.metaDescription =
     res.locals.metaDescription ||
     "Town Crier Evangelical Ministries exists to proclaim Christ, raise disciples, and serve communities through prayer, sound doctrine, and evangelistic missions.";
-  res.locals.noindex = hasNoisyQuery;
+
+  res.locals.noindex =
+    hasNoisyQuery;
+
+
+  /* =========================================
+     SECURITY HEADERS
+     ========================================= */
 
   res.setHeader(
     "Strict-Transport-Security",
     "max-age=31536000; includeSubDomains; preload"
   );
-  res.setHeader("X-Content-Type-Options", "nosniff");
-  res.setHeader("X-Frame-Options", "SAMEORIGIN");
-  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
-  res.setHeader("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+
   res.setHeader(
-  "Content-Security-Policy",
-  [
-    "default-src 'self'",
-    "img-src 'self' data: https:",
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-    "font-src 'self' https://fonts.gstatic.com data:",
-    "script-src 'self' 'unsafe-inline'",
-    "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com",
-    "object-src 'none'",
-    "base-uri 'self'",
-    "form-action 'self'",
-    "frame-ancestors 'self'"
-  ].join("; ")
-);
+    "X-Content-Type-Options",
+    "nosniff"
+  );
+
+  res.setHeader(
+    "X-Frame-Options",
+    "SAMEORIGIN"
+  );
+
+  res.setHeader(
+    "Referrer-Policy",
+    "strict-origin-when-cross-origin"
+  );
+
+  res.setHeader(
+    "Permissions-Policy",
+    "camera=(), microphone=(), geolocation=()"
+  );
+
+
+  /* =========================================
+     CONTENT SECURITY POLICY
+     ========================================= */
+
+  res.setHeader(
+    "Content-Security-Policy",
+    [
+      "default-src 'self'",
+
+      "img-src 'self' data: https:",
+
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+
+      "font-src 'self' https://fonts.gstatic.com data:",
+
+      /*
+       * YouTube IFrame API must be allowed here.
+       *
+       * Without https://www.youtube.com,
+       * /iframe_api is blocked and the carousel
+       * cannot detect play / pause events.
+       */
+      "script-src 'self' 'unsafe-inline' https://www.youtube.com",
+
+      /*
+       * Allows the actual embedded YouTube
+       * video players.
+       */
+      "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com",
+
+      "object-src 'none'",
+
+      "base-uri 'self'",
+
+      "form-action 'self'",
+
+      "frame-ancestors 'self'"
+    ].join("; ")
+  );
+
 
   next();
 });
