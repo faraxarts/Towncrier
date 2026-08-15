@@ -3502,3 +3502,643 @@ svg {
   height: 20px;
   display: block;
 }
+
+/* =========================================================
+   TCEM GLOBAL DARK MODE SYSTEM
+   =========================================================
+
+   Light mode remains untouched.
+
+   Everything below only activates when:
+
+   <html data-theme="dark">
+
+   The header theme button already controls this attribute.
+   ========================================================= */
+
+
+/* =========================================================
+   1. DARK MODE DESIGN TOKENS
+   ========================================================= */
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+
+  --tcem-dark-bg: #0f0f18;
+  --tcem-dark-bg-secondary: #12121c;
+
+  --tcem-dark-card: #1a1a23;
+  --tcem-dark-card-secondary: #20202a;
+
+  --tcem-dark-heading: #f8f7fb;
+  --tcem-dark-text: #d7d4df;
+  --tcem-dark-muted: #a9a5b4;
+
+  --tcem-dark-border:
+    rgba(255, 255, 255, 0.08);
+
+  --tcem-dark-border-strong:
+    rgba(255, 255, 255, 0.12);
+
+  --tcem-dark-purple: #8b5cf6;
+  --tcem-dark-purple-soft: #a78bfa;
+
+  --tcem-dark-gold: #d6a84b;
+}
+
+
+/* =========================================================
+   2. GLOBAL PAGE BACKGROUND
+   ========================================================= */
+
+html[data-theme="dark"],
+html[data-theme="dark"] body {
+  background-color:
+    var(--tcem-dark-bg) !important;
+
+  color:
+    var(--tcem-dark-text);
+
+  background-image:
+    none !important;
+}
+
+
+/*
+ * Smooth theme transition.
+ *
+ * Kept short so it does not feel animated.
+ */
+body,
+section,
+article,
+div,
+a,
+button,
+input,
+textarea,
+select {
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+
+/* =========================================================
+   3. COMMON TAILWIND BACKGROUND OVERRIDES
+   =========================================================
+
+   Many existing pages use Tailwind utility classes directly.
+
+   These rules allow those existing components to begin
+   respecting dark mode without rewriting every EJS file.
+   ========================================================= */
+
+html[data-theme="dark"] .bg-white {
+  background-color:
+    var(--tcem-dark-card) !important;
+}
+
+
+html[data-theme="dark"] .bg-gray-50,
+html[data-theme="dark"] .bg-slate-50,
+html[data-theme="dark"] .bg-\[\#f7f7f8\],
+html[data-theme="dark"] .bg-\[\#fafafa\] {
+  background-color:
+    var(--tcem-dark-bg-secondary) !important;
+}
+
+
+/*
+ * Pale coloured cards should become restrained dark cards.
+ */
+html[data-theme="dark"] .bg-indigo-50,
+html[data-theme="dark"] .bg-indigo-50\/70,
+html[data-theme="dark"] .bg-purple-50,
+html[data-theme="dark"] .bg-purple-50\/60,
+html[data-theme="dark"] .bg-purple-50\/70,
+html[data-theme="dark"] .bg-yellow-50\/70,
+html[data-theme="dark"] .bg-green-50,
+html[data-theme="dark"] .bg-emerald-50\/60,
+html[data-theme="dark"] .bg-emerald-50\/70,
+html[data-theme="dark"] .bg-orange-50\/40,
+html[data-theme="dark"] .bg-pink-50 {
+  background-color:
+    var(--tcem-dark-card) !important;
+}
+
+
+/* =========================================================
+   4. COMMON TEXT OVERRIDES
+   ========================================================= */
+
+html[data-theme="dark"] .text-gray-950,
+html[data-theme="dark"] .text-gray-900,
+html[data-theme="dark"] .text-gray-800,
+html[data-theme="dark"] .text-slate-800 {
+  color:
+    var(--tcem-dark-heading) !important;
+}
+
+
+html[data-theme="dark"] .text-gray-700,
+html[data-theme="dark"] .text-gray-600,
+html[data-theme="dark"] .text-gray-500,
+html[data-theme="dark"] .text-slate-700,
+html[data-theme="dark"] .text-slate-600,
+html[data-theme="dark"] .text-slate-500 {
+  color:
+    var(--tcem-dark-muted) !important;
+}
+
+
+/*
+ * Brand purple text becomes slightly lighter in dark mode
+ * so it remains readable against the dark background.
+ */
+html[data-theme="dark"] .text-\[\#6B46C1\],
+html[data-theme="dark"] .text-\[\#4F46E5\] {
+  color:
+    var(--tcem-dark-purple-soft) !important;
+}
+
+
+/* =========================================================
+   5. COMMON BORDER OVERRIDES
+   ========================================================= */
+
+html[data-theme="dark"] .border-gray-50,
+html[data-theme="dark"] .border-gray-100,
+html[data-theme="dark"] .border-gray-200,
+html[data-theme="dark"] .border-gray-300,
+html[data-theme="dark"] .border-indigo-100,
+html[data-theme="dark"] .border-indigo-200,
+html[data-theme="dark"] .border-purple-100,
+html[data-theme="dark"] .border-purple-200,
+html[data-theme="dark"] .border-yellow-200,
+html[data-theme="dark"] .border-green-200,
+html[data-theme="dark"] .border-emerald-100,
+html[data-theme="dark"] .border-emerald-200,
+html[data-theme="dark"] .border-orange-100,
+html[data-theme="dark"] .border-orange-200 {
+  border-color:
+    var(--tcem-dark-border) !important;
+}
+
+
+/* =========================================================
+   6. REMOVE GLOW-LIKE SHADOWS IN DARK MODE
+   =========================================================
+
+   User requirement:
+   no neon / purple glow effects.
+   ========================================================= */
+
+html[data-theme="dark"] .shadow,
+html[data-theme="dark"] .shadow-sm,
+html[data-theme="dark"] .shadow-md,
+html[data-theme="dark"] .shadow-lg,
+html[data-theme="dark"] .shadow-xl,
+html[data-theme="dark"] .shadow-2xl {
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.18) !important;
+}
+
+
+/* =========================================================
+   7. HOME PAGE GENERAL BACKGROUND
+   ========================================================= */
+
+html[data-theme="dark"] .home-events-section,
+html[data-theme="dark"] .home-lead-section {
+  background:
+    var(--tcem-dark-bg) !important;
+}
+
+
+/* =========================================================
+   8. HOME HERO
+   ========================================================= */
+
+/*
+ * The photograph remains untouched.
+ *
+ * We simply strengthen the bottom overlay slightly so
+ * white text stays legible against all carousel images.
+ */
+html[data-theme="dark"] .hero-overlay {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(10, 10, 18, 0.12) 0%,
+      rgba(10, 10, 18, 0.36) 42%,
+      rgba(10, 10, 18, 0.88) 100%
+    );
+}
+
+
+html[data-theme="dark"] .hero-shell {
+  box-shadow:
+    0 18px 36px rgba(0, 0, 0, 0.24);
+}
+
+
+/*
+ * Do not change hero text to grey.
+ * Text on photographs remains white.
+ */
+html[data-theme="dark"] .hero-copy,
+html[data-theme="dark"] .hero-copy h1 {
+  color:
+    #ffffff !important;
+}
+
+
+html[data-theme="dark"] .hero-copy p {
+  color:
+    rgba(255, 255, 255, 0.88) !important;
+}
+
+
+html[data-theme="dark"] .hero-kicker {
+  background:
+    rgba(15, 15, 24, 0.62);
+
+  color:
+    rgba(255, 255, 255, 0.94);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.1);
+}
+
+
+/* Hero carousel dots */
+
+html[data-theme="dark"] .hero-dot {
+  background:
+    rgba(255, 255, 255, 0.35);
+}
+
+
+html[data-theme="dark"] .hero-dot.is-active {
+  background:
+    #ffffff;
+}
+
+
+/* =========================================================
+   9. HOME SECTION HEADINGS
+   ========================================================= */
+
+html[data-theme="dark"] .home-serif-title {
+  color:
+    var(--tcem-dark-heading);
+}
+
+
+html[data-theme="dark"] .home-section-kicker {
+  color:
+    var(--tcem-dark-gold);
+}
+
+
+html[data-theme="dark"] .home-top-link {
+  color:
+    var(--tcem-dark-purple-soft);
+}
+
+
+html[data-theme="dark"] .home-top-link:hover {
+  color:
+    #c4b5fd;
+}
+
+
+/* =========================================================
+   10. SCRIPTURE / VERSE CARD
+   ========================================================= */
+
+/*
+ * Keep this as one of the stronger branded areas.
+
+ * Gradient is allowed here because it is part of the
+ * reference design, but there is deliberately NO glow.
+ */
+html[data-theme="dark"] .verse-showcase--mockup {
+  background:
+    transparent;
+}
+
+
+html[data-theme="dark"] .verse-mockup-card {
+  background:
+    linear-gradient(
+      135deg,
+      #241047 0%,
+      #402080 48%,
+      #5523a7 100%
+    );
+
+  border:
+    1px solid rgba(139, 92, 246, 0.26);
+
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.22);
+}
+
+
+/*
+ * Remove the brighter decorative light patches
+ * from the light design.
+ */
+html[data-theme="dark"]
+.verse-mockup-card::before {
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(139, 92, 246, 0.13),
+      transparent 38%
+    );
+}
+
+
+html[data-theme="dark"]
+.verse-mockup-quote-mark {
+  color:
+    var(--tcem-dark-gold);
+}
+
+
+html[data-theme="dark"]
+.verse-text--mockup {
+  color:
+    #ffffff;
+}
+
+
+html[data-theme="dark"]
+.verse-label {
+  color:
+    rgba(255, 255, 255, 0.72);
+}
+
+
+html[data-theme="dark"]
+.verse-reference--mockup {
+  color:
+    var(--tcem-dark-gold);
+}
+
+
+/* =========================================================
+   11. HOME EVENT CARDS
+   ========================================================= */
+
+html[data-theme="dark"] .home-event-card {
+  background:
+    var(--tcem-dark-card);
+
+  border:
+    1px solid var(--tcem-dark-border);
+
+  box-shadow:
+    0 12px 26px rgba(0, 0, 0, 0.18);
+}
+
+
+/*
+ * Hover provides only depth.
+ * No purple glow.
+ */
+html[data-theme="dark"]
+.home-event-card:hover {
+  transform:
+    translateY(-3px);
+
+  border-color:
+    rgba(139, 92, 246, 0.25);
+
+  box-shadow:
+    0 16px 30px rgba(0, 0, 0, 0.24);
+}
+
+
+html[data-theme="dark"]
+.home-event-title {
+  color:
+    var(--tcem-dark-heading);
+}
+
+
+html[data-theme="dark"]
+.home-event-text {
+  color:
+    var(--tcem-dark-muted);
+}
+
+
+html[data-theme="dark"]
+.home-event-date {
+  color:
+    var(--tcem-dark-gold);
+}
+
+
+html[data-theme="dark"]
+.home-event-link {
+  color:
+    var(--tcem-dark-purple-soft);
+}
+
+
+html[data-theme="dark"]
+.home-event-link:hover {
+  color:
+    #c4b5fd;
+}
+
+
+html[data-theme="dark"]
+.home-event-tag {
+  background:
+    rgba(139, 92, 246, 0.85);
+
+  color:
+    #ffffff;
+}
+
+
+/* =========================================================
+   12. HOME MINISTRY LEAD SECTION
+   ========================================================= */
+
+html[data-theme="dark"]
+.home-lead-image-card {
+  background:
+    var(--tcem-dark-card);
+
+  border:
+    1px solid var(--tcem-dark-border);
+
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.2);
+}
+
+
+html[data-theme="dark"]
+.home-lead-kicker {
+  color:
+    var(--tcem-dark-gold);
+}
+
+
+html[data-theme="dark"]
+.home-lead-role {
+  color:
+    var(--tcem-dark-purple-soft);
+}
+
+
+html[data-theme="dark"]
+.home-lead-text {
+  color:
+    var(--tcem-dark-muted);
+}
+
+
+/* =========================================================
+   13. HOME PRIMARY BUTTON
+   ========================================================= */
+
+html[data-theme="dark"]
+.home-primary-button {
+  background:
+    #7044d4;
+
+  color:
+    #ffffff;
+
+  /*
+   * No purple glow.
+   */
+  box-shadow: none;
+
+  border:
+    1px solid rgba(167, 139, 250, 0.24);
+}
+
+
+html[data-theme="dark"]
+.home-primary-button:hover {
+  background:
+    #7c4ce0;
+
+  color:
+    #ffffff;
+
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   14. MISSION / VISION INDICATORS
+   ========================================================= */
+
+html[data-theme="dark"]
+.mission-indicator {
+  background:
+    rgba(167, 139, 250, 0.18);
+}
+
+
+html[data-theme="dark"]
+.mission-indicator.is-active {
+  background:
+    var(--tcem-dark-purple);
+}
+
+
+/* =========================================================
+   15. HOUSE OF BREAD ACCENT
+   ========================================================= */
+
+html[data-theme="dark"]
+.house-of-bread {
+  color:
+    var(--tcem-dark-purple-soft);
+}
+
+
+/* =========================================================
+   16. GENERIC DARK CARDS
+   =========================================================
+
+   This catches many existing white cards throughout
+   the site without requiring immediate EJS rewrites.
+   ========================================================= */
+
+html[data-theme="dark"]
+article.bg-white,
+
+html[data-theme="dark"]
+div.bg-white {
+  background-color:
+    var(--tcem-dark-card) !important;
+}
+
+
+/* =========================================================
+   17. INPUTS / FORMS - GLOBAL FOUNDATION
+   ========================================================= */
+
+html[data-theme="dark"] input,
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] select {
+  background-color:
+    var(--tcem-dark-card);
+
+  color:
+    var(--tcem-dark-heading);
+
+  border-color:
+    var(--tcem-dark-border-strong);
+}
+
+
+html[data-theme="dark"] input::placeholder,
+html[data-theme="dark"] textarea::placeholder {
+  color:
+    #777482;
+}
+
+
+html[data-theme="dark"] input:focus,
+html[data-theme="dark"] textarea:focus,
+html[data-theme="dark"] select:focus {
+  border-color:
+    var(--tcem-dark-purple);
+}
+
+
+/* =========================================================
+   18. LINKS
+   ========================================================= */
+
+html[data-theme="dark"] a {
+  text-decoration-color:
+    rgba(167, 139, 250, 0.55);
+}
+
+
+/* =========================================================
+   19. DARK SELECTION COLOUR
+   ========================================================= */
+
+html[data-theme="dark"] ::selection {
+  background:
+    rgba(139, 92, 246, 0.38);
+
+  color:
+    #ffffff;
+}
