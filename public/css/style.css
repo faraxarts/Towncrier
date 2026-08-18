@@ -4142,3 +4142,803 @@ html[data-theme="dark"] ::selection {
   color:
     #ffffff;
 }
+
+/* Fix home mandate heading in dark mode */
+html[data-theme="dark"] #section-title {
+  color: #f8f7fb !important;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 700;
+}
+
+/* =========================================================
+   TCEM MINISTRY PAGES - DARK MODE
+   DBW + BOOTCAMP + ARROWS
+   =========================================================
+   Light mode is untouched.
+   No glow effects.
+   ========================================================= */
+
+
+/* =========================================================
+   1. SHARED MINISTRY PAGE BACKGROUND
+   ========================================================= */
+
+html[data-theme="dark"] body.dbw-page,
+html[data-theme="dark"] body.bootcamp-page,
+html[data-theme="dark"] body.arrows-page {
+  background: #0f0f18 !important;
+  color: #d7d4df;
+}
+
+
+/* =========================================================
+   2. MINISTRY SUB-NAVIGATION
+   ========================================================= */
+
+html[data-theme="dark"] body.dbw-page > section.border-b,
+html[data-theme="dark"] body.bootcamp-page > section.border-b,
+html[data-theme="dark"] body.arrows-page > section.border-b {
+  background: #11111b;
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+
+html[data-theme="dark"] .dbw-subnav-link,
+html[data-theme="dark"] .bootcamp-subnav-link,
+html[data-theme="dark"] .arrows-subnav-link {
+  color: #aaa6b4 !important;
+}
+
+
+html[data-theme="dark"] .dbw-subnav-link:hover,
+html[data-theme="dark"] .bootcamp-subnav-link:hover,
+html[data-theme="dark"] .arrows-subnav-link:hover {
+  color: #a78bfa !important;
+}
+
+
+/* Active DBW */
+html[data-theme="dark"]
+.dbw-subnav-link[href="/ministries/dbw"] {
+  color: #a78bfa !important;
+  border-bottom-color: #8b5cf6 !important;
+}
+
+
+/* Active Bootcamp */
+html[data-theme="dark"]
+.bootcamp-subnav-link[href="/ministries/bootcamp"] {
+  color: #a78bfa !important;
+  border-bottom-color: #8b5cf6 !important;
+}
+
+
+/* Active Arrows */
+html[data-theme="dark"]
+.arrows-subnav-link[href="/ministries/arrows"] {
+  color: #a78bfa !important;
+  border-bottom-color: #8b5cf6 !important;
+}
+
+
+/* =========================================================
+   3. DBW PAGE
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   DBW HERO + CTA GRADIENT
+   --------------------------------------------------------- */
+
+html[data-theme="dark"]
+.dbw-page .bg-gradient-to-r {
+  background-image:
+    linear-gradient(
+      120deg,
+      #312e81 0%,
+      #5b21b6 48%,
+      #86198f 100%
+    ) !important;
+
+  border: 1px solid rgba(139, 92, 246, 0.20);
+
+  box-shadow:
+    0 16px 32px rgba(0, 0, 0, 0.22) !important;
+}
+
+
+html[data-theme="dark"] .dbw-hero-title {
+  color: #ffffff;
+}
+
+
+html[data-theme="dark"] .dbw-hero-text {
+  color: rgba(255, 255, 255, 0.90);
+}
+
+
+/* ---------------------------------------------------------
+   DBW TITLES
+   --------------------------------------------------------- */
+
+html[data-theme="dark"] .dbw-section-title,
+html[data-theme="dark"] .dbw-card-title,
+html[data-theme="dark"] .dbw-track-title {
+  color: #f8f7fb;
+}
+
+
+html[data-theme="dark"]
+.dbw-section-title--light {
+  color: #ffffff !important;
+}
+
+
+/* ---------------------------------------------------------
+   DBW BODY TEXT
+   --------------------------------------------------------- */
+
+html[data-theme="dark"] .dbw-body-text {
+  color: #c9c6d1;
+}
+
+
+html[data-theme="dark"] .dbw-meta-text {
+  color: #aaa6b4;
+}
+
+
+/* ---------------------------------------------------------
+   DBW WHITE CARDS
+   --------------------------------------------------------- */
+
+html[data-theme="dark"]
+.dbw-page div.bg-white {
+  background: #191921 !important;
+
+  border-color:
+    rgba(255, 255, 255, 0.08) !important;
+
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.18) !important;
+}
+
+
+/* Mission / Approach icon boxes */
+
+html[data-theme="dark"]
+.dbw-page .bg-indigo-100,
+
+html[data-theme="dark"]
+.dbw-page .bg-purple-100 {
+  background:
+    rgba(139, 92, 246, 0.13) !important;
+
+  border:
+    1px solid rgba(139, 92, 246, 0.16);
+}
+
+
+/* ---------------------------------------------------------
+   DBW WEEKLY SCHEDULE CONTAINER
+   --------------------------------------------------------- */
+
+html[data-theme="dark"]
+.dbw-page [class~="bg-indigo-50/70"] {
+  background: #15151f !important;
+
+  border-color:
+    rgba(139, 92, 246, 0.16) !important;
+}
+
+
+/* ---------------------------------------------------------
+   DBW WHITE ACTION BUTTONS
+   ---------------------------------------------------------
+
+   Global dark mode turns .bg-white into charcoal.
+   These are intentional WHITE CTA buttons, so restore them.
+   --------------------------------------------------------- */
+
+html[data-theme="dark"]
+.dbw-page a.bg-white {
+  background: #ffffff !important;
+
+  color: #5b21b6 !important;
+
+  border-color:
+    transparent !important;
+
+  box-shadow: none !important;
+}
+
+
+html[data-theme="dark"]
+.dbw-page a.bg-white:hover {
+  background: #f4f1fa !important;
+
+  color: #4c1d95 !important;
+
+  box-shadow: none !important;
+}
+
+
+/* DBW secondary CTA */
+
+html[data-theme="dark"]
+.dbw-page a.bg-white\/10 {
+  background:
+    rgba(255, 255, 255, 0.07) !important;
+
+  color: #ffffff !important;
+
+  border-color:
+    rgba(255, 255, 255, 0.20) !important;
+}
+
+
+html[data-theme="dark"]
+.dbw-page a.bg-white\/10:hover {
+  background:
+    rgba(255, 255, 255, 0.12) !important;
+}
+
+
+
+/* =========================================================
+   4. DISCIPLESHIP BOOTCAMP
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   BOOTCAMP HERO + CTA
+   --------------------------------------------------------- */
+
+html[data-theme="dark"]
+.bootcamp-page .bg-gradient-to-r {
+  background-image:
+    linear-gradient(
+      120deg,
+      #7c2d12 0%,
+      #9f1239 52%,
+      #831843 100%
+    ) !important;
+
+  border:
+    1px solid rgba(251, 113, 133, 0.16);
+
+  box-shadow:
+    0 16px 32px rgba(0, 0, 0, 0.22) !important;
+}
+
+
+html[data-theme="dark"]
+.bootcamp-hero-title {
+  color: #ffffff;
+}
+
+
+html[data-theme="dark"]
+.bootcamp-hero-text {
+  color:
+    rgba(255, 255, 255, 0.90);
+}
+
+
+html[data-theme="dark"]
+.bootcamp-hero-label {
+  background:
+    rgba(255, 255, 255, 0.10) !important;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.14);
+
+  color: #ffffff;
+}
+
+
+/* ---------------------------------------------------------
+   BOOTCAMP TITLES
+   --------------------------------------------------------- */
+
+html[data-theme="dark"]
+.bootcamp-section-title,
+
+html[data-theme="dark"]
+.bootcamp-card-title,
+
+html[data-theme="dark"]
+.bootcamp-day-title {
+  color: #f8f7fb;
+}
+
+
+html[data-theme="dark"]
+.bootcamp-section-title--light {
+  color: #ffffff !important;
+}
+
+
+/* Italic Bootcamp word */
+
+html[data-theme="dark"]
+.bootcamp-word-slant {
+  color: #a78bfa;
+}
+
+
+/* ---------------------------------------------------------
+   BOOTCAMP BODY TEXT
+   --------------------------------------------------------- */
+
+html[data-theme="dark"]
+.bootcamp-body-text {
+  color: #c9c6d1;
+}
+
+
+html[data-theme="dark"]
+.bootcamp-meta-text {
+  color: #aaa6b4;
+}
+
+
+/* ---------------------------------------------------------
+   BOOTCAMP WHITE CARDS
+   --------------------------------------------------------- */
+
+html[data-theme="dark"]
+.bootcamp-page div.bg-white {
+  background: #191921 !important;
+
+  border-color:
+    rgba(255, 255, 255, 0.08) !important;
+
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.18) !important;
+}
+
+
+/* ---------------------------------------------------------
+   WHAT TO BRING
+   --------------------------------------------------------- */
+
+html[data-theme="dark"]
+.bootcamp-page [class~="bg-indigo-50/70"] {
+  background: #191921 !important;
+
+  border-color:
+    rgba(139, 92, 246, 0.18) !important;
+}
+
+
+/* ---------------------------------------------------------
+   REGISTRATION CARD
+   --------------------------------------------------------- */
+
+html[data-theme="dark"]
+.bootcamp-page [class~="bg-orange-50/40"] {
+  background: #1b191d !important;
+
+  border-color:
+    rgba(251, 146, 60, 0.15) !important;
+}
+
+
+/* ---------------------------------------------------------
+   GREEN CHECKMARKS
+   --------------------------------------------------------- */
+
+html[data-theme="dark"]
+.bootcamp-page .text-green-500 {
+  color: #4ade80 !important;
+}
+
+
+/* ---------------------------------------------------------
+   BOOTCAMP REGISTER BUTTON
+   --------------------------------------------------------- */
+
+html[data-theme="dark"]
+.bootcamp-page a.bg-white {
+  background: #ffffff !important;
+
+  color: #c2410c !important;
+
+  border-color:
+    transparent !important;
+
+  box-shadow: none !important;
+}
+
+
+html[data-theme="dark"]
+.bootcamp-page a.bg-white:hover {
+  background: #fff7ed !important;
+
+  color: #9a3412 !important;
+
+  box-shadow: none !important;
+}
+
+
+
+/* =========================================================
+   5. ARROWS IN THE QUIVER
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   ARROWS HERO
+   --------------------------------------------------------- */
+
+html[data-theme="dark"]
+.arrows-page .bg-gradient-to-r {
+  background-image:
+    linear-gradient(
+      120deg,
+      #065f46 0%,
+      #047857 48%,
+      #0f766e 100%
+    ) !important;
+
+  border:
+    1px solid rgba(52, 211, 153, 0.16);
+
+  box-shadow:
+    0 16px 32px rgba(0, 0, 0, 0.22) !important;
+}
+
+
+html[data-theme="dark"]
+.arrows-hero-title {
+  color: #ffffff;
+}
+
+
+html[data-theme="dark"]
+.arrows-hero-subtitle {
+  color:
+    rgba(255, 255, 255, 0.92);
+}
+
+
+html[data-theme="dark"]
+.arrows-hero-text {
+  color:
+    rgba(255, 255, 255, 0.90);
+}
+
+
+html[data-theme="dark"]
+.arrows-hero-quote {
+  color: #ffffff;
+}
+
+
+/* ---------------------------------------------------------
+   ARROWS TITLES + BODY
+   --------------------------------------------------------- */
+
+html[data-theme="dark"]
+.arrows-section-title,
+
+html[data-theme="dark"]
+.arrows-card-title {
+  color: #f8f7fb;
+}
+
+
+html[data-theme="dark"]
+.arrows-section-title--light {
+  color: #ffffff !important;
+}
+
+
+html[data-theme="dark"]
+.arrows-body-text {
+  color: #c9c6d1;
+}
+
+
+html[data-theme="dark"]
+.arrows-meta-text {
+  color: #aaa6b4;
+}
+
+
+html[data-theme="dark"]
+.arrows-list-text {
+  color: #d2cfda;
+}
+
+
+/* ---------------------------------------------------------
+   VISION + MISSION CARDS
+   --------------------------------------------------------- */
+
+html[data-theme="dark"]
+.arrows-page div.bg-white {
+  background: #191921 !important;
+
+  border-color:
+    rgba(255, 255, 255, 0.08) !important;
+
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.18) !important;
+}
+
+
+/* Icon boxes */
+
+html[data-theme="dark"]
+.arrows-page .bg-green-100,
+
+html[data-theme="dark"]
+.arrows-page .bg-emerald-100 {
+  background:
+    rgba(16, 185, 129, 0.12) !important;
+
+  border:
+    1px solid rgba(52, 211, 153, 0.15);
+}
+
+
+
+/* =========================================================
+   6. ARROWS IMAGE PROGRAM CARDS
+   =========================================================
+
+   Light mode:
+   white image overlay + dark text
+
+   Dark mode:
+   dark image overlay + light text
+
+   The photographs remain clearly visible.
+   ========================================================= */
+
+html[data-theme="dark"]
+.arrows-program-card {
+  border-color:
+    rgba(255, 255, 255, 0.10) !important;
+
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.22);
+
+  background-color: #191921;
+}
+
+
+html[data-theme="dark"]
+.arrows-program-card:hover {
+  transform: translateY(-4px);
+
+  border-color:
+    rgba(167, 139, 250, 0.22) !important;
+
+  box-shadow:
+    0 18px 34px rgba(0, 0, 0, 0.28);
+}
+
+
+/*
+ * Replace white overlay with a dark overlay.
+ */
+html[data-theme="dark"]
+.arrows-program-card::before {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(8, 8, 15, 0.50) 0%,
+      rgba(8, 8, 15, 0.62) 48%,
+      rgba(8, 8, 15, 0.76) 100%
+    );
+}
+
+
+html[data-theme="dark"]
+.arrows-program-card::after {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(50, 28, 95, 0.04) 0%,
+      rgba(50, 28, 95, 0.18) 100%
+    );
+}
+
+
+/* Program titles */
+
+html[data-theme="dark"]
+.arrows-program-card
+.arrows-card-title {
+  color: #ffffff;
+
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.65);
+}
+
+
+/* Age */
+
+html[data-theme="dark"]
+.arrows-program-card
+.arrows-meta-text {
+  color: #e7e4ed;
+
+  font-weight: 700;
+
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.65);
+}
+
+
+/* List */
+
+html[data-theme="dark"]
+.arrows-program-card
+.arrows-list-text {
+  color: #f1eff5;
+
+  font-weight: 600;
+
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.65);
+}
+
+
+/* Bullet dots */
+
+html[data-theme="dark"]
+.arrows-program-card
+.text-green-700 {
+  color: #86efac !important;
+}
+
+
+/* Emoji container */
+
+html[data-theme="dark"]
+.arrows-program-card__emoji {
+  background:
+    rgba(15, 15, 24, 0.76);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.14);
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.20);
+
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+
+
+/* =========================================================
+   7. ARROWS FINAL CTA
+   ========================================================= */
+
+html[data-theme="dark"]
+.arrows-page .bg-\[\#08C443\] {
+  background:
+    #047857 !important;
+
+  border:
+    1px solid rgba(52, 211, 153, 0.16);
+
+  box-shadow:
+    0 16px 32px rgba(0, 0, 0, 0.22) !important;
+}
+
+
+/* White primary CTA */
+
+html[data-theme="dark"]
+.arrows-page a.bg-white {
+  background: #ffffff !important;
+
+  color: #047857 !important;
+
+  border-color:
+    transparent !important;
+
+  box-shadow: none !important;
+}
+
+
+html[data-theme="dark"]
+.arrows-page a.bg-white:hover {
+  background: #ecfdf5 !important;
+
+  color: #065f46 !important;
+
+  box-shadow: none !important;
+}
+
+
+/* Secondary CTA */
+
+html[data-theme="dark"]
+.arrows-page a.bg-white\/10 {
+  background:
+    rgba(255, 255, 255, 0.07) !important;
+
+  color: #ffffff !important;
+
+  border-color:
+    rgba(255, 255, 255, 0.22) !important;
+}
+
+
+html[data-theme="dark"]
+.arrows-page a.bg-white\/10:hover {
+  background:
+    rgba(255, 255, 255, 0.12) !important;
+}
+
+
+
+/* =========================================================
+   8. REMOVE GLOW EFFECTS
+   ========================================================= */
+
+html[data-theme="dark"]
+.dbw-page .shadow-sm,
+
+html[data-theme="dark"]
+.dbw-page .shadow-md,
+
+html[data-theme="dark"]
+.bootcamp-page .shadow-sm,
+
+html[data-theme="dark"]
+.bootcamp-page .shadow-md,
+
+html[data-theme="dark"]
+.arrows-page .shadow-sm,
+
+html[data-theme="dark"]
+.arrows-page .shadow-md {
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.18) !important;
+}
+
+
+
+/* =========================================================
+   9. MOBILE DARK MODE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  html[data-theme="dark"]
+  .dbw-page div.bg-white,
+
+  html[data-theme="dark"]
+  .bootcamp-page div.bg-white,
+
+  html[data-theme="dark"]
+  .arrows-page div.bg-white {
+    box-shadow:
+      0 10px 22px rgba(0, 0, 0, 0.16) !important;
+  }
+
+
+  html[data-theme="dark"]
+  .arrows-program-card {
+    box-shadow:
+      0 10px 24px rgba(0, 0, 0, 0.20);
+  }
+
+
+  html[data-theme="dark"]
+  .arrows-program-card:hover {
+    transform: none;
+
+    box-shadow:
+      0 10px 24px rgba(0, 0, 0, 0.20);
+  }
+
+}
