@@ -165,7 +165,17 @@
     typeof ministryVideos !== "undefined" && Array.isArray(ministryVideos)
       ? ministryVideos
       : [];
+
+  /*
+   * YouTube recommends sending the website origin
+   * whenever enablejsapi=1 is being used.
+   */
+  const safeYouTubeOrigin =
+    typeof siteUrl !== "undefined" && siteUrl
+      ? encodeURIComponent(siteUrl)
+      : "";
 %>
+
 
 <section class="py-16 md:py-20 bg-white overflow-hidden">
   <div class="max-w-7xl mx-auto px-6 md:px-16">
@@ -209,12 +219,12 @@
 
                   <iframe
                     id="about-video-player-<%= index %>"
-                    src="<%= video.embedUrl %><%= video.embedUrl.includes('?') ? '&' : '?' %>enablejsapi=1&playsinline=1"
+                    src="<%= video.embedUrl %><%= video.embedUrl.includes('?') ? '&' : '?' %>enablejsapi=1&playsinline=1<%= safeYouTubeOrigin ? '&origin=' + safeYouTubeOrigin : '' %>"
                     title="<%= video.title %>"
                     class="about-video-iframe"
                     data-video-index="<%= index %>"
                     frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowfullscreen
                     loading="lazy"
                   ></iframe>
@@ -849,760 +859,1164 @@
   }
 
 }
+
+/* =========================================================
+   ABOUT PAGE - DARK MODE
+   ========================================================= */
+
+/* PAGE + HERO */
+html[data-theme="dark"] .about-page-hero {
+  background: #0f0f18;
+}
+
+html[data-theme="dark"] .about-page-hero__panel {
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.24);
+}
+
+html[data-theme="dark"] .about-page-hero__overlay {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(8, 8, 15, 0.18) 0%,
+      rgba(8, 8, 15, 0.34) 42%,
+      rgba(35, 18, 74, 0.82) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(65, 34, 128, 0.4) 0%,
+      rgba(65, 34, 128, 0.1) 22%,
+      rgba(65, 34, 128, 0) 38%
+    ),
+    linear-gradient(
+      270deg,
+      rgba(65, 34, 128, 0.28) 0%,
+      rgba(65, 34, 128, 0) 20%
+    );
+}
+
+html[data-theme="dark"] .about-page-hero__kicker {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+html[data-theme="dark"] .about-page-hero__title {
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .about-page-hero__text {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+
+/* WHO WE ARE */
+html[data-theme="dark"] .about-who-title {
+  color: #f8f7fb;
+}
+
+html[data-theme="dark"] .about-who-title__accent {
+  color: #a78bfa;
+}
+
+html[data-theme="dark"] .about-who-title__main {
+  color: #f8f7fb;
+}
+
+html[data-theme="dark"] .about-who-title + .space-y-8 {
+  color: #d2cfda !important;
+}
+
+
+/* MINISTRY LEAD */
+html[data-theme="dark"] .about-lead-shell {
+  background: #191921;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
+}
+
+html[data-theme="dark"] .about-lead-image-card {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.26);
+}
+
+html[data-theme="dark"] .about-lead-kicker {
+  color: #d6a84b;
+}
+
+html[data-theme="dark"] .about-lead-title {
+  color: #f8f7fb;
+}
+
+html[data-theme="dark"] .about-lead-role {
+  color: #a78bfa;
+}
+
+html[data-theme="dark"] .about-lead-text {
+  color: #c9c6d1;
+}
+
+
+/* VISION + MISSION */
+html[data-theme="dark"] .about-purpose-shell {
+  background: #191921;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
+}
+
+html[data-theme="dark"] .about-purpose-label {
+  color: #a78bfa;
+}
+
+html[data-theme="dark"] .about-purpose-accent {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(139, 92, 246, 0.08),
+      #8b5cf6,
+      rgba(139, 92, 246, 0.08)
+    );
+}
+
+html[data-theme="dark"] .about-purpose-quote-mark {
+  color: #8b5cf6;
+}
+
+html[data-theme="dark"] .about-purpose-vision-text {
+  color: #eeeaf7;
+}
+
+html[data-theme="dark"] .about-purpose-mission-body {
+  border-left-color: rgba(139, 92, 246, 0.72);
+}
+
+html[data-theme="dark"] .about-purpose-mission-body p {
+  color: #c9c6d1;
+}
+
+
+/* VIDEO SECTION */
+html[data-theme="dark"] .about-story-title {
+  color: #f8f7fb;
+}
+
+html[data-theme="dark"] .about-video-card {
+  background: #191921;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
+}
+
+html[data-theme="dark"]
+.about-video-slide.is-active
+.about-video-card {
+  border-color: rgba(139, 92, 246, 0.2);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.28);
+}
+
+html[data-theme="dark"] .about-video-slide.is-prev,
+html[data-theme="dark"] .about-video-slide.is-next {
+  opacity: 0.55;
+}
+
+html[data-theme="dark"] .about-video-caption {
+  background: #191921;
+}
+
+html[data-theme="dark"] .about-video-caption p {
+  color: #f8f7fb !important;
+}
+
+
+/* VIDEO DOTS */
+html[data-theme="dark"] .about-video-dot {
+  background: #4c4957;
+}
+
+html[data-theme="dark"] .about-video-dot.is-active {
+  background: #8b5cf6;
+}
+
+
+/* WHO WE ARE WHITE CARD */
+html[data-theme="dark"] .max-w-4xl.bg-white {
+  background: #191921 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18) !important;
+}
+
+
+/* ABOUT PAGE BODY TEXT */
+html[data-theme="dark"]
+.about-page-hero ~ section
+.text-slate-700 {
+  color: #c9c6d1 !important;
+}
+
+html[data-theme="dark"]
+.about-page-hero ~ section
+.text-slate-600 {
+  color: #aaa6b4 !important;
+}
+
+
+/* ABOUT BUTTON */
+html[data-theme="dark"]
+.about-lead-shell
+.home-primary-button {
+  background: #7044d4;
+  color: #ffffff;
+  border: 1px solid rgba(167, 139, 250, 0.26);
+  box-shadow: none;
+}
+
+html[data-theme="dark"]
+.about-lead-shell
+.home-primary-button:hover {
+  background: #7c4ce0;
+  color: #ffffff;
+  box-shadow: none;
+}
+
+
+/* MOBILE */
+@media (max-width: 767px) {
+  html[data-theme="dark"] .about-purpose-shell,
+  html[data-theme="dark"] .about-lead-shell,
+  html[data-theme="dark"] .max-w-4xl.bg-white {
+    border-color: rgba(255, 255, 255, 0.07) !important;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18) !important;
+  }
+
+  html[data-theme="dark"] .about-video-card {
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.2);
+  }
+}
+
+
 </style>
 
 <script>
-  document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+  document.addEventListener("DOMContentLoaded", function () {
 
-      const carousel =
-        document.getElementById(
-          "about-video-carousel"
-        );
+    const carousel =
+      document.getElementById("about-video-carousel");
+
+    if (!carousel) {
+      return;
+    }
 
 
-      if (!carousel) {
-        return;
+    const slides =
+      Array.from(
+        carousel.querySelectorAll(".about-video-slide")
+      );
+
+
+    const dots =
+      Array.from(
+        document.querySelectorAll(".about-video-dot")
+      );
+
+
+    const iframes =
+      Array.from(
+        carousel.querySelectorAll(".about-video-iframe")
+      );
+
+
+    const total = slides.length;
+
+    if (!total) {
+      return;
+    }
+
+
+    /* =========================================
+       STATE
+       ========================================= */
+
+    let activeIndex = 0;
+
+    let autoPlay = null;
+
+    let playbackMonitor = null;
+
+    let apiFailureTimer = null;
+
+
+    /*
+     * IMPORTANT:
+     *
+     * The carousel is NOT permitted to
+     * automatically move until the YouTube
+     * players have successfully connected.
+     */
+    let automaticRotationEnabled = false;
+
+
+    const youtubePlayers = [];
+
+    const readyPlayers = new Set();
+
+    const playingVideos = new Set();
+
+
+
+    /* =========================================
+       INDEX HELPERS
+       ========================================= */
+
+    function getWrappedIndex(index) {
+
+      if (index < 0) {
+        return total - 1;
       }
 
 
-      const slides =
-        Array.from(
-          carousel.querySelectorAll(
-            ".about-video-slide"
-          )
-        );
-
-
-      const dots =
-        Array.from(
-          document.querySelectorAll(
-            ".about-video-dot"
-          )
-        );
-
-
-      const iframes =
-        Array.from(
-          carousel.querySelectorAll(
-            ".about-video-iframe"
-          )
-        );
-
-
-      const total =
-        slides.length;
-
-
-      if (!total) {
-        return;
+      if (index >= total) {
+        return 0;
       }
 
 
-      /* =========================================
-         CAROUSEL STATE
-         ========================================= */
-
-      let activeIndex = 0;
-
-      let autoPlay = null;
-
-
-      /*
-       * YouTube Player objects will be
-       * stored here.
-       */
-      const youtubePlayers = [];
-
-
-      /*
-       * Keeps track of any video that
-       * is currently playing.
-       */
-      const playingVideos = new Set();
+      return index;
+    }
 
 
 
-      /* =========================================
-         WRAP CAROUSEL INDEX
-         ========================================= */
+    /* =========================================
+       STOP AUTO ROTATION
+       ========================================= */
 
-      function getWrappedIndex(index) {
+    function stopAutoPlay() {
 
-        if (index < 0) {
-          return total - 1;
-        }
+      if (autoPlay !== null) {
 
+        clearInterval(autoPlay);
 
-        if (index >= total) {
-          return 0;
-        }
-
-
-        return index;
-      }
-
-
-
-      /* =========================================
-         STOP CAROUSEL AUTOPLAY
-         ========================================= */
-
-      function stopAutoPlay() {
-
-        if (autoPlay) {
-
-          clearInterval(autoPlay);
-
-          autoPlay = null;
-
-        }
+        autoPlay = null;
 
       }
 
+    }
 
 
-      /* =========================================
-         START CAROUSEL AUTOPLAY
-         ========================================= */
 
-      function startAutoPlay() {
+    /* =========================================
+       READ THE REAL PLAYER STATES
+       ========================================= */
 
-        /*
-         * Never rotate while a video
-         * is currently playing.
-         */
-        if (playingVideos.size > 0) {
-          return;
-        }
+    function syncPlaybackState() {
 
+      if (
+        !window.YT ||
+        !window.YT.PlayerState
+      ) {
 
         stopAutoPlay();
 
-
-        autoPlay =
-          setInterval(
-            function () {
-
-              /*
-               * Extra protection in case a
-               * video began playing after
-               * the timer was created.
-               */
-              if (
-                playingVideos.size > 0
-              ) {
-
-                return;
-
-              }
-
-
-              updateCarousel(
-                activeIndex + 1,
-                true
-              );
-
-            },
-            5000
-          );
-
+        return;
       }
 
 
+      playingVideos.clear();
 
-      /* =========================================
-         PAUSE OTHER VIDEOS
-         ========================================= */
 
-      function pauseOtherVideos(
-        indexToKeep
-      ) {
+      youtubePlayers.forEach(
+        function (player, index) {
 
-        youtubePlayers.forEach(
-          function (
-            player,
-            index
+          if (
+            !player ||
+            typeof player.getPlayerState !== "function"
           ) {
 
+            return;
+
+          }
+
+
+          try {
+
+            const state =
+              player.getPlayerState();
+
+
             /*
-             * Do not pause the video belonging
-             * to the slide we are keeping.
+             * Treat PLAYING and BUFFERING
+             * as states where the carousel
+             * must remain completely still.
              */
             if (
-              !player ||
-              index === indexToKeep ||
-              typeof player.pauseVideo !==
-                "function"
+              state === window.YT.PlayerState.PLAYING ||
+              state === window.YT.PlayerState.BUFFERING
             ) {
+
+              playingVideos.add(index);
+
+            }
+
+          } catch (error) {
+
+            /*
+             * Player may not yet be fully ready.
+             * Do nothing until next check.
+             */
+
+          }
+
+        }
+      );
+
+
+      if (playingVideos.size > 0) {
+
+        stopAutoPlay();
+
+      } else if (
+        automaticRotationEnabled &&
+        autoPlay === null
+      ) {
+
+        startAutoPlay();
+
+      }
+
+    }
+
+
+
+    /* =========================================
+       START AUTO ROTATION
+       ========================================= */
+
+    function startAutoPlay() {
+
+      /*
+       * Fail-safe:
+       *
+       * Never auto-rotate unless YouTube API
+       * integration has been confirmed.
+       */
+      if (!automaticRotationEnabled) {
+        return;
+      }
+
+
+      /*
+       * Never rotate while any video is
+       * playing or buffering.
+       */
+      if (playingVideos.size > 0) {
+        return;
+      }
+
+
+      /*
+       * Don't create multiple timers.
+       */
+      if (autoPlay !== null) {
+        return;
+      }
+
+
+      autoPlay =
+        setInterval(
+          function () {
+
+            /*
+             * Check the real player states
+             * immediately before rotating.
+             */
+            syncPlaybackState();
+
+
+            /*
+             * A video may have started since
+             * the previous timer cycle.
+             */
+            if (playingVideos.size > 0) {
+
+              stopAutoPlay();
 
               return;
 
             }
 
 
-            try {
+            updateCarousel(
+              activeIndex + 1,
+              true
+            );
 
-              const state =
-                typeof player.getPlayerState ===
-                "function"
-                  ? player.getPlayerState()
-                  : null;
+          },
+          5000
+        );
+
+    }
 
 
-              /*
-               * YouTube PLAYING state = 1.
-               */
-              if (
-                window.YT &&
-                window.YT.PlayerState &&
-                state ===
-                  window.YT.PlayerState.PLAYING
-              ) {
 
-                player.pauseVideo();
+    /* =========================================
+       PLAYBACK MONITOR
+       ========================================= */
 
-              }
+    function startPlaybackMonitor() {
 
-            } catch (error) {
+      if (playbackMonitor !== null) {
+        return;
+      }
 
-              console.warn(
-                "Could not pause YouTube video:",
-                error
-              );
+
+      /*
+       * onStateChange should normally be
+       * sufficient, but this monitor provides
+       * a second layer of protection.
+       *
+       * Even if a PLAYING event is missed,
+       * we inspect the actual player states.
+       */
+      playbackMonitor =
+        setInterval(
+          function () {
+
+            syncPlaybackState();
+
+          },
+          700
+        );
+
+    }
+
+
+
+    /* =========================================
+       PAUSE VIDEOS ON OTHER SLIDES
+       ========================================= */
+
+    function pauseOtherVideos(indexToKeep) {
+
+      youtubePlayers.forEach(
+        function (player, index) {
+
+          if (
+            !player ||
+            index === indexToKeep ||
+            typeof player.pauseVideo !== "function"
+          ) {
+
+            return;
+
+          }
+
+
+          try {
+
+            const state =
+              player.getPlayerState();
+
+
+            if (
+              state === window.YT.PlayerState.PLAYING ||
+              state === window.YT.PlayerState.BUFFERING
+            ) {
+
+              player.pauseVideo();
 
             }
 
+          } catch (error) {
+
+            console.warn(
+              "Could not pause inactive YouTube player:",
+              error
+            );
+
           }
+
+        }
+      );
+
+    }
+
+
+
+    /* =========================================
+       UPDATE CAROUSEL
+       ========================================= */
+
+    function updateCarousel(
+      index,
+      pauseInactiveVideos = false
+    ) {
+
+      activeIndex =
+        getWrappedIndex(index);
+
+
+      if (pauseInactiveVideos) {
+
+        pauseOtherVideos(
+          activeIndex
         );
 
       }
 
 
-
-      /* =========================================
-         UPDATE CAROUSEL
-         ========================================= */
-
-      function updateCarousel(
-        index,
-        pauseInactiveVideos = false
-      ) {
-
-        activeIndex =
-          getWrappedIndex(index);
-
-
-        /*
-         * If we're intentionally changing
-         * slides, pause a video that may
-         * still be playing on another slide.
-         */
-        if (pauseInactiveVideos) {
-
-          pauseOtherVideos(
-            activeIndex
-          );
-
-        }
-
-
-        const prevIndex =
-          getWrappedIndex(
-            activeIndex - 1
-          );
-
-
-        const nextIndex =
-          getWrappedIndex(
-            activeIndex + 1
-          );
-
-
-        slides.forEach(
-          function (
-            slide,
-            i
-          ) {
-
-            slide.classList.remove(
-              "is-active",
-              "is-prev",
-              "is-next",
-              "is-hidden-left",
-              "is-hidden-right"
-            );
-
-
-            if (
-              i === activeIndex
-            ) {
-
-              slide.classList.add(
-                "is-active"
-              );
-
-            } else if (
-              window.innerWidth >= 768 &&
-              i === prevIndex
-            ) {
-
-              slide.classList.add(
-                "is-prev"
-              );
-
-            } else if (
-              window.innerWidth >= 768 &&
-              i === nextIndex
-            ) {
-
-              slide.classList.add(
-                "is-next"
-              );
-
-            } else if (
-              window.innerWidth >= 768
-            ) {
-
-              if (
-                i < activeIndex &&
-                !(
-                  activeIndex === 0 &&
-                  i === total - 1
-                )
-              ) {
-
-                slide.classList.add(
-                  "is-hidden-left"
-                );
-
-              } else {
-
-                slide.classList.add(
-                  "is-hidden-right"
-                );
-
-              }
-
-            }
-
-          }
+      const prevIndex =
+        getWrappedIndex(
+          activeIndex - 1
         );
 
 
-        /*
-         * Update the active navigation dot.
-         */
-        dots.forEach(
-          function (
-            dot,
-            i
+      const nextIndex =
+        getWrappedIndex(
+          activeIndex + 1
+        );
+
+
+      slides.forEach(
+        function (slide, i) {
+
+          slide.classList.remove(
+            "is-active",
+            "is-prev",
+            "is-next",
+            "is-hidden-left",
+            "is-hidden-right"
+          );
+
+
+          if (i === activeIndex) {
+
+            slide.classList.add(
+              "is-active"
+            );
+
+          } else if (
+            window.innerWidth >= 768 &&
+            i === prevIndex
+          ) {
+
+            slide.classList.add(
+              "is-prev"
+            );
+
+          } else if (
+            window.innerWidth >= 768 &&
+            i === nextIndex
+          ) {
+
+            slide.classList.add(
+              "is-next"
+            );
+
+          } else if (
+            window.innerWidth >= 768
           ) {
 
             if (
-              i === activeIndex
+              i < activeIndex &&
+              !(
+                activeIndex === 0 &&
+                i === total - 1
+              )
             ) {
 
-              dot.classList.add(
-                "is-active"
+              slide.classList.add(
+                "is-hidden-left"
               );
 
             } else {
 
-              dot.classList.remove(
-                "is-active"
+              slide.classList.add(
+                "is-hidden-right"
               );
 
             }
+
+          }
+
+        }
+      );
+
+
+      dots.forEach(
+        function (dot, i) {
+
+          dot.classList.toggle(
+            "is-active",
+            i === activeIndex
+          );
+
+        }
+      );
+
+    }
+
+
+
+    /* =========================================
+       DOT NAVIGATION
+       ========================================= */
+
+    dots.forEach(
+      function (dot) {
+
+        dot.addEventListener(
+          "click",
+          function () {
+
+            const index =
+              Number(
+                this.dataset.index
+              );
+
+
+            stopAutoPlay();
+
+
+            updateCarousel(
+              index,
+              true
+            );
+
+
+            /*
+             * Wait briefly for pauseVideo()
+             * to update the YouTube state.
+             */
+            setTimeout(
+              function () {
+
+                syncPlaybackState();
+
+              },
+              150
+            );
 
           }
         );
 
       }
+    );
 
 
 
-      /* =========================================
-         DOT NAVIGATION
-         ========================================= */
+    /* =========================================
+       RESIZE
+       ========================================= */
 
-      dots.forEach(
-        function (dot) {
+    window.addEventListener(
+      "resize",
+      function () {
 
-          dot.addEventListener(
-            "click",
-            function () {
+        /*
+         * Only recalculate positions.
+         * Do not alter video playback.
+         */
+        updateCarousel(
+          activeIndex,
+          false
+        );
 
-              const index =
-                Number(
-                  this.dataset.index
-                );
-
-
-              /*
-               * Stop existing timer first.
-               */
-              stopAutoPlay();
-
-
-              /*
-               * Change to requested video and
-               * pause videos on other slides.
-               */
-              updateCarousel(
-                index,
-                true
-              );
-
-
-              /*
-               * This will only actually restart
-               * if no video remains playing.
-               */
-              startAutoPlay();
-
-            }
-          );
-
-        }
-      );
+      }
+    );
 
 
 
-      /* =========================================
-         WINDOW RESIZE
-         ========================================= */
+    /* =========================================
+       YOUTUBE STATE CHANGE
+       ========================================= */
 
-      window.addEventListener(
-        "resize",
-        function () {
+    function handleYouTubeStateChange(
+      event,
+      videoIndex
+    ) {
 
-          /*
-           * Update positioning only.
-           *
-           * Do NOT restart autoplay here.
-           */
+      if (
+        !window.YT ||
+        !window.YT.PlayerState
+      ) {
+
+        stopAutoPlay();
+
+        return;
+
+      }
+
+
+      const state =
+        event.data;
+
+
+      /* -----------------------------------------
+         PLAYING
+         ----------------------------------------- */
+
+      if (
+        state ===
+        window.YT.PlayerState.PLAYING
+      ) {
+
+        playingVideos.add(
+          videoIndex
+        );
+
+
+        /*
+         * THIS IS THE IMPORTANT BEHAVIOUR:
+         *
+         * As soon as playback begins,
+         * completely kill the carousel timer.
+         */
+        stopAutoPlay();
+
+
+        /*
+         * If necessary, bring the playing
+         * video back into the active position.
+         */
+        if (
+          activeIndex !== videoIndex
+        ) {
+
           updateCarousel(
-            activeIndex,
+            videoIndex,
             false
           );
 
         }
-      );
+
+
+        return;
+      }
 
 
 
-      /* =========================================
-         YOUTUBE VIDEO STATE CHANGE
-         ========================================= */
+      /* -----------------------------------------
+         BUFFERING
+         ----------------------------------------- */
 
-      function handleYouTubeStateChange(
-        event,
-        videoIndex
+      if (
+        state ===
+        window.YT.PlayerState.BUFFERING
       ) {
 
-        if (
-          !window.YT ||
-          !window.YT.PlayerState
-        ) {
-
-          return;
-
-        }
+        playingVideos.add(
+          videoIndex
+        );
 
 
-        /* -----------------------------------------
-           VIDEO PLAYING
-           ----------------------------------------- */
-
-        if (
-          event.data ===
-          window.YT.PlayerState.PLAYING
-        ) {
-
-          /*
-           * Record that this video is playing.
-           */
-          playingVideos.add(
-            videoIndex
-          );
+        stopAutoPlay();
 
 
-          /*
-           * Ensure the playing video is treated
-           * as the currently active slide.
-           */
-          if (
-            videoIndex !== activeIndex
-          ) {
+        return;
+      }
 
-            updateCarousel(
-              videoIndex,
-              false
+
+
+      /* -----------------------------------------
+         PAUSED
+         ----------------------------------------- */
+
+      if (
+        state ===
+        window.YT.PlayerState.PAUSED
+      ) {
+
+        playingVideos.delete(
+          videoIndex
+        );
+
+
+        setTimeout(
+          function () {
+
+            syncPlaybackState();
+
+          },
+          150
+        );
+
+
+        return;
+      }
+
+
+
+      /* -----------------------------------------
+         ENDED
+         ----------------------------------------- */
+
+      if (
+        state ===
+        window.YT.PlayerState.ENDED
+      ) {
+
+        playingVideos.delete(
+          videoIndex
+        );
+
+
+        setTimeout(
+          function () {
+
+            syncPlaybackState();
+
+          },
+          150
+        );
+
+
+        return;
+      }
+
+
+
+      /* -----------------------------------------
+         CUED / UNSTARTED
+         ----------------------------------------- */
+
+      if (
+        state ===
+          window.YT.PlayerState.CUED ||
+        state ===
+          window.YT.PlayerState.UNSTARTED
+      ) {
+
+        playingVideos.delete(
+          videoIndex
+        );
+
+      }
+
+    }
+
+
+
+    /* =========================================
+       INITIALISE PLAYERS
+       ========================================= */
+
+    function initializeYouTubePlayers() {
+
+      if (
+        !window.YT ||
+        !window.YT.Player
+      ) {
+
+        automaticRotationEnabled = false;
+
+        stopAutoPlay();
+
+        return;
+      }
+
+
+      if (apiFailureTimer !== null) {
+
+        clearTimeout(
+          apiFailureTimer
+        );
+
+        apiFailureTimer = null;
+
+      }
+
+
+      iframes.forEach(
+        function (iframe, index) {
+
+          if (youtubePlayers[index]) {
+            return;
+          }
+
+
+          try {
+
+            youtubePlayers[index] =
+              new window.YT.Player(
+                iframe.id,
+                {
+
+                  events: {
+
+                    onReady:
+                      function () {
+
+                        readyPlayers.add(
+                          index
+                        );
+
+
+                        console.log(
+                          "About video ready:",
+                          index
+                        );
+
+
+                        /*
+                         * Only when ALL carousel
+                         * players are connected do
+                         * we permit automatic rotation.
+                         */
+                        if (
+                          readyPlayers.size === total
+                        ) {
+
+                          console.log(
+                            "All About-page YouTube players are ready."
+                          );
+
+
+                          automaticRotationEnabled =
+                            true;
+
+
+                          startPlaybackMonitor();
+
+
+                          syncPlaybackState();
+
+                        }
+
+                      },
+
+
+                    onStateChange:
+                      function (event) {
+
+                        console.log(
+                          "About video state:",
+                          index,
+                          event.data
+                        );
+
+
+                        handleYouTubeStateChange(
+                          event,
+                          index
+                        );
+
+                      },
+
+
+                    onError:
+                      function (event) {
+
+                        console.error(
+                          "YouTube player error:",
+                          index,
+                          event.data
+                        );
+
+
+                        /*
+                         * Safer to disable automatic
+                         * movement than rotate a video
+                         * unexpectedly.
+                         */
+                        automaticRotationEnabled =
+                          false;
+
+
+                        stopAutoPlay();
+
+                      }
+
+                  }
+
+                }
+              );
+
+          } catch (error) {
+
+            console.error(
+              "Unable to initialise YouTube player:",
+              error
             );
 
-          }
 
+            automaticRotationEnabled =
+              false;
 
-          /*
-           * MOST IMPORTANT PART:
-           *
-           * Stop the spinning / carousel
-           * immediately when playback begins.
-           */
-          stopAutoPlay();
-
-
-          return;
-        }
-
-
-
-        /* -----------------------------------------
-           VIDEO PAUSED
-           ----------------------------------------- */
-
-        if (
-          event.data ===
-          window.YT.PlayerState.PAUSED
-        ) {
-
-          playingVideos.delete(
-            videoIndex
-          );
-
-
-          /*
-           * Resume carousel rotation only
-           * when no video is playing.
-           */
-          if (
-            playingVideos.size === 0
-          ) {
-
-            startAutoPlay();
-
-          }
-
-
-          return;
-        }
-
-
-
-        /* -----------------------------------------
-           VIDEO FINISHED
-           ----------------------------------------- */
-
-        if (
-          event.data ===
-          window.YT.PlayerState.ENDED
-        ) {
-
-          playingVideos.delete(
-            videoIndex
-          );
-
-
-          /*
-           * Allow the carousel to continue
-           * after the video finishes.
-           */
-          if (
-            playingVideos.size === 0
-          ) {
-
-            startAutoPlay();
-
-          }
-
-
-          return;
-        }
-
-
-
-        /* -----------------------------------------
-           VIDEO BUFFERING
-           ----------------------------------------- */
-
-        if (
-          event.data ===
-          window.YT.PlayerState.BUFFERING
-        ) {
-
-          /*
-           * If YouTube temporarily buffers after
-           * playback has begun, we should not allow
-           * the carousel to rotate away.
-           */
-          if (
-            playingVideos.has(
-              videoIndex
-            )
-          ) {
 
             stopAutoPlay();
 
           }
 
         }
+      );
+
+    }
+
+
+
+    /* =========================================
+       LOAD YOUTUBE API
+       ========================================= */
+
+    function loadYouTubeAPI() {
+
+      /*
+       * API already loaded.
+       */
+      if (
+        window.YT &&
+        window.YT.Player
+      ) {
+
+        initializeYouTubePlayers();
+
+        return;
 
       }
 
 
-
-      /* =========================================
-         INITIALISE YOUTUBE PLAYERS
-         ========================================= */
-
-      function initializeYouTubePlayers() {
-
-        if (
-          !window.YT ||
-          !window.YT.Player
-        ) {
-
-          return;
-
-        }
+      /*
+       * Keep existing callback if another
+       * site component uses YouTube.
+       */
+      const previousCallback =
+        window.onYouTubeIframeAPIReady;
 
 
-        iframes.forEach(
-          function (
-            iframe,
-            index
+      window.onYouTubeIframeAPIReady =
+        function () {
+
+          console.log(
+            "YouTube IFrame API loaded successfully."
+          );
+
+
+          if (
+            typeof previousCallback ===
+            "function"
           ) {
-
-            /*
-             * Avoid creating the player twice.
-             */
-            if (
-              youtubePlayers[index]
-            ) {
-
-              return;
-
-            }
-
 
             try {
 
-              youtubePlayers[index] =
-                new window.YT.Player(
-                  iframe.id,
-                  {
-
-                    events: {
-
-                      onStateChange:
-                        function (
-                          event
-                        ) {
-
-                          handleYouTubeStateChange(
-                            event,
-                            index
-                          );
-
-                        }
-
-                    }
-
-                  }
-                );
+              previousCallback();
 
             } catch (error) {
 
-              console.error(
-                "Unable to initialise YouTube player:",
+              console.warn(
+                "Previous YouTube callback failed:",
                 error
               );
 
             }
 
           }
-        );
 
-      }
-
-
-
-      /* =========================================
-         LOAD YOUTUBE IFRAME API
-         ========================================= */
-
-      function loadYouTubeAPI() {
-
-        /*
-         * If YouTube's API has already been
-         * loaded somewhere else on the page,
-         * use it immediately.
-         */
-        if (
-          window.YT &&
-          window.YT.Player
-        ) {
 
           initializeYouTubePlayers();
 
-          return;
-
-        }
+        };
 
 
-        /*
-         * Keep any existing API callback so
-         * this does not interfere with other
-         * YouTube functionality on the site.
-         */
-        const previousCallback =
-          window.onYouTubeIframeAPIReady;
+      const existingScript =
+        document.querySelector(
+          'script[src="https://www.youtube.com/iframe_api"]'
+        );
 
 
-        window.onYouTubeIframeAPIReady =
-          function () {
-
-            if (
-              typeof previousCallback ===
-              "function"
-            ) {
-
-              try {
-
-                previousCallback();
-
-              } catch (error) {
-
-                console.warn(
-                  "Previous YouTube API callback failed:",
-                  error
-                );
-
-              }
-
-            }
-
-
-            initializeYouTubePlayers();
-
-          };
-
-
-        /*
-         * Do not load the script more than once.
-         */
-        const existingScript =
-          document.querySelector(
-            'script[src="https://www.youtube.com/iframe_api"]'
-          );
-
-
-        if (existingScript) {
-          return;
-        }
-
+      if (!existingScript) {
 
         const script =
           document.createElement(
@@ -1617,6 +2031,23 @@
         script.async = true;
 
 
+        script.onerror =
+          function () {
+
+            console.error(
+              "The YouTube IFrame API script could not be loaded. Check Content Security Policy."
+            );
+
+
+            automaticRotationEnabled =
+              false;
+
+
+            stopAutoPlay();
+
+          };
+
+
         document.head.appendChild(
           script
         );
@@ -1624,31 +2055,113 @@
       }
 
 
-
-      /* =========================================
-         INITIAL START
-         ========================================= */
-
-      updateCarousel(
-        0,
-        false
-      );
-
-
       /*
-       * Carousel begins normally.
+       * SAFETY TIMER
+       *
+       * If YouTube API has still not become
+       * available after 8 seconds, leave
+       * automatic carousel rotation DISABLED.
+       *
+       * This means a CSP failure can no longer
+       * make a playing video rotate away.
        */
-      startAutoPlay();
+      apiFailureTimer =
+        setTimeout(
+          function () {
+
+            if (
+              !window.YT ||
+              !window.YT.Player
+            ) {
+
+              console.error(
+                "YouTube IFrame API did not initialise. Automatic video rotation has been disabled."
+              );
 
 
-      /*
-       * Connect the YouTube videos to
-       * our play/pause detection.
-       */
-      loadYouTubeAPI();
+              automaticRotationEnabled =
+                false;
+
+
+              stopAutoPlay();
+
+            }
+
+          },
+          8000
+        );
 
     }
-  );
+
+
+
+    /* =========================================
+       INITIAL PAGE STATE
+       ========================================= */
+
+    updateCarousel(
+      0,
+      false
+    );
+
+
+    /*
+     * IMPORTANT:
+     *
+     * We deliberately DO NOT call
+     * startAutoPlay() here anymore.
+     *
+     * The old script did this immediately:
+     *
+     *     startAutoPlay();
+     *
+     * That allowed the carousel to begin
+     * spinning before YouTube integration
+     * had necessarily finished.
+     *
+     * The new code waits until all players
+     * confirm that they are ready.
+     */
+    loadYouTubeAPI();
+
+
+
+    /* =========================================
+       CLEANUP
+       ========================================= */
+
+    window.addEventListener(
+      "beforeunload",
+      function () {
+
+        stopAutoPlay();
+
+
+        if (
+          playbackMonitor !== null
+        ) {
+
+          clearInterval(
+            playbackMonitor
+          );
+
+        }
+
+
+        if (
+          apiFailureTimer !== null
+        ) {
+
+          clearTimeout(
+            apiFailureTimer
+          );
+
+        }
+
+      }
+    );
+
+  });
 </script>
   <%- include("partials/footer") %>
 
