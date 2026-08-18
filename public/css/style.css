@@ -4942,3 +4942,587 @@ html[data-theme="dark"]
   }
 
 }
+
+/* =========================================================
+   CONTACT PAGE - DARK MODE
+   =========================================================
+   Covers:
+   - Main Contact page
+   - Prayer request mode
+   - Registration mode
+   - Program registration variants
+
+   No glow effects.
+   ========================================================= */
+
+
+/* =========================================================
+   1. PAGE CANVAS
+   ========================================================= */
+
+html[data-theme="dark"] body.contact-page {
+  background: #0f0f18 !important;
+  color: #d7d4df;
+}
+
+
+/* =========================================================
+   2. CONNECT SUB-NAVIGATION
+   ========================================================= */
+
+html[data-theme="dark"]
+.contact-page > section:first-of-type {
+  background: #11111b !important;
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+
+html[data-theme="dark"]
+.contact-page > section:first-of-type a {
+  color: #aaa6b4 !important;
+}
+
+
+html[data-theme="dark"]
+.contact-page > section:first-of-type a:hover {
+  color: #a78bfa !important;
+}
+
+
+/* Active Contact link */
+
+html[data-theme="dark"]
+.contact-page > section:first-of-type
+a[href="/contact"] {
+  color: #a78bfa !important;
+  border-bottom-color: #8b5cf6 !important;
+}
+
+
+/* =========================================================
+   3. HERO
+   ========================================================= */
+
+html[data-theme="dark"]
+.contact-page #page-heading {
+  color: #f8f7fb !important;
+}
+
+
+html[data-theme="dark"]
+.contact-page #page-subtitle {
+  color: #c9c6d1 !important;
+}
+
+
+/* =========================================================
+   4. ALL CONTACT CARD HEADINGS
+   ========================================================= */
+
+html[data-theme="dark"]
+.contact-page .editorial-heading {
+  color: #f8f7fb !important;
+}
+
+
+/* Main section headings */
+
+html[data-theme="dark"]
+.contact-page .editorial-heading--hero {
+  color: #f8f7fb !important;
+}
+
+
+html[data-theme="dark"]
+.contact-page .editorial-heading--section {
+  color: #f8f7fb !important;
+}
+
+
+html[data-theme="dark"]
+.contact-page .editorial-heading--card {
+  color: #f8f7fb !important;
+}
+
+
+/* =========================================================
+   5. CONTACT INFORMATION CARDS
+   Visit Us / Call Us / Email
+   ========================================================= */
+
+html[data-theme="dark"]
+.contact-page .bg-white.border.border-gray-100 {
+  background: #191921 !important;
+
+  border-color:
+    rgba(255, 255, 255, 0.08) !important;
+
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.18) !important;
+}
+
+
+/* Contact card body text */
+
+html[data-theme="dark"]
+.contact-page .text-slate-700 {
+  color: #c9c6d1 !important;
+}
+
+
+html[data-theme="dark"]
+.contact-page .text-slate-600 {
+  color: #aaa6b4 !important;
+}
+
+
+/* Phone + email links */
+
+html[data-theme="dark"]
+.contact-page
+a[href^="tel:"],
+
+html[data-theme="dark"]
+.contact-page
+a[href^="mailto:"] {
+  color: #d7d4df;
+}
+
+
+html[data-theme="dark"]
+.contact-page
+a[href^="tel:"]:hover,
+
+html[data-theme="dark"]
+.contact-page
+a[href^="mailto:"]:hover {
+  color: #a78bfa !important;
+}
+
+
+/* =========================================================
+   6. CONTACT INFO ICON BOXES
+   ========================================================= */
+
+html[data-theme="dark"]
+.contact-page .bg-indigo-100 {
+  background:
+    rgba(99, 102, 241, 0.14) !important;
+
+  border:
+    1px solid rgba(129, 140, 248, 0.14);
+}
+
+
+html[data-theme="dark"]
+.contact-page .bg-purple-100 {
+  background:
+    rgba(139, 92, 246, 0.14) !important;
+
+  border:
+    1px solid rgba(167, 139, 250, 0.14);
+}
+
+
+html[data-theme="dark"]
+.contact-page .bg-pink-100 {
+  background:
+    rgba(236, 72, 153, 0.12) !important;
+
+  border:
+    1px solid rgba(244, 114, 182, 0.13);
+}
+
+
+/* =========================================================
+   7. SOCIAL MEDIA ICON BUTTONS
+   ========================================================= */
+
+html[data-theme="dark"]
+.contact-page
+a.rounded-full.bg-white {
+  background: #20202a !important;
+
+  color: #a78bfa !important;
+
+  border-color:
+    rgba(255, 255, 255, 0.10) !important;
+
+  box-shadow: none !important;
+}
+
+
+html[data-theme="dark"]
+.contact-page
+a.rounded-full.bg-white:hover {
+  background: #7044d4 !important;
+
+  color: #ffffff !important;
+
+  border-color:
+    #7044d4 !important;
+
+  box-shadow: none !important;
+}
+
+
+/* =========================================================
+   8. CONTACT FORM CARD
+   ========================================================= */
+
+html[data-theme="dark"]
+.contact-page #contact-form-section
+.xl\:col-span-3 {
+  background: #191921 !important;
+
+  border-color:
+    rgba(255, 255, 255, 0.08) !important;
+
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.20) !important;
+}
+
+
+html[data-theme="dark"]
+.contact-page #form-heading {
+  color: #f8f7fb !important;
+}
+
+
+html[data-theme="dark"]
+.contact-page #form-subtitle {
+  color: #aaa6b4 !important;
+}
+
+
+/* =========================================================
+   9. FORM LABELS
+   ========================================================= */
+
+html[data-theme="dark"]
+.contact-page #contact-form label {
+  color: #e3e0e9 !important;
+}
+
+
+/* =========================================================
+   10. INPUTS / SELECT / TEXTAREA
+   ========================================================= */
+
+html[data-theme="dark"]
+.contact-page #contact-form input,
+
+html[data-theme="dark"]
+.contact-page #contact-form select,
+
+html[data-theme="dark"]
+.contact-page #contact-form textarea {
+  background: #11111b !important;
+
+  color: #f8f7fb !important;
+
+  border-color:
+    rgba(255, 255, 255, 0.11) !important;
+
+  box-shadow: none !important;
+}
+
+
+html[data-theme="dark"]
+.contact-page #contact-form input::placeholder,
+
+html[data-theme="dark"]
+.contact-page #contact-form textarea::placeholder {
+  color: #777482 !important;
+}
+
+
+/*
+ * Select menu options
+ */
+
+html[data-theme="dark"]
+.contact-page #contact-form select option {
+  background: #191921;
+
+  color: #f8f7fb;
+}
+
+
+/* Focus state */
+
+html[data-theme="dark"]
+.contact-page #contact-form input:focus,
+
+html[data-theme="dark"]
+.contact-page #contact-form select:focus,
+
+html[data-theme="dark"]
+.contact-page #contact-form textarea:focus {
+  border-color: #8b5cf6 !important;
+
+  outline: none !important;
+
+  box-shadow:
+    0 0 0 2px rgba(139, 92, 246, 0.12) !important;
+}
+
+
+/* =========================================================
+   11. BROWSER AUTOFILL
+   ========================================================= */
+
+html[data-theme="dark"]
+.contact-page
+input:-webkit-autofill,
+
+html[data-theme="dark"]
+.contact-page
+input:-webkit-autofill:hover,
+
+html[data-theme="dark"]
+.contact-page
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color:
+    #f8f7fb !important;
+
+  -webkit-box-shadow:
+    0 0 0 1000px #11111b inset !important;
+
+  caret-color:
+    #ffffff;
+}
+
+
+/* =========================================================
+   12. FORM SUCCESS MESSAGE
+   ========================================================= */
+
+html[data-theme="dark"]
+.contact-page .bg-green-50 {
+  background:
+    rgba(34, 197, 94, 0.10) !important;
+
+  color:
+    #86efac !important;
+
+  border-color:
+    rgba(74, 222, 128, 0.20) !important;
+}
+
+
+/* =========================================================
+   13. SEND MESSAGE BUTTON
+   ========================================================= */
+
+html[data-theme="dark"]
+.contact-page #submit-button {
+  background: #7044d4 !important;
+
+  color: #ffffff !important;
+
+  border:
+    1px solid rgba(167, 139, 250, 0.24);
+
+  box-shadow: none !important;
+}
+
+
+html[data-theme="dark"]
+.contact-page #submit-button:hover {
+  background: #7c4ce0 !important;
+
+  color: #ffffff !important;
+
+  box-shadow: none !important;
+}
+
+
+/* =========================================================
+   14. JOIN OUR COMMUNITY CARD
+   ========================================================= */
+
+html[data-theme="dark"]
+.contact-page
+#contact-form-section
+.xl\:col-span-2
+.bg-white {
+  background: #191921 !important;
+
+  border-color:
+    rgba(255, 255, 255, 0.08) !important;
+
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.18) !important;
+}
+
+
+html[data-theme="dark"]
+.contact-page
+#contact-form-section
+.xl\:col-span-2
+.bg-white p {
+  color: #c9c6d1 !important;
+}
+
+
+/* =========================================================
+   15. WHATSAPP BUTTON
+   ========================================================= */
+
+html[data-theme="dark"]
+.contact-page
+a.bg-\[\#08C443\] {
+  background: #087d3b !important;
+
+  color: #ffffff !important;
+
+  box-shadow: none !important;
+}
+
+
+html[data-theme="dark"]
+.contact-page
+a.bg-\[\#08C443\]:hover {
+  background: #0a8d45 !important;
+
+  opacity: 1 !important;
+}
+
+
+/* =========================================================
+   16. TELEGRAM BUTTON
+   ========================================================= */
+
+html[data-theme="dark"]
+.contact-page
+a.bg-\[\#3B82F6\] {
+  background: #2563a8 !important;
+
+  color: #ffffff !important;
+
+  box-shadow: none !important;
+}
+
+
+html[data-theme="dark"]
+.contact-page
+a.bg-\[\#3B82F6\]:hover {
+  background: #2d70bb !important;
+
+  opacity: 1 !important;
+}
+
+
+/* =========================================================
+   17. FELLOWSHIP CARD
+   ========================================================= */
+
+html[data-theme="dark"]
+.contact-page
+#contact-form-section
+.bg-gradient-to-r {
+  background-image:
+    linear-gradient(
+      120deg,
+      #312e81 0%,
+      #5b21b6 50%,
+      #831843 100%
+    ) !important;
+
+  border:
+    1px solid rgba(139, 92, 246, 0.20);
+
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.22) !important;
+}
+
+
+html[data-theme="dark"]
+.contact-page
+#contact-form-section
+.bg-gradient-to-r
+.editorial-heading {
+  color: #ffffff !important;
+}
+
+
+html[data-theme="dark"]
+.contact-page
+#contact-form-section
+.bg-gradient-to-r p {
+  color:
+    rgba(255, 255, 255, 0.90) !important;
+}
+
+
+/* =========================================================
+   18. REGISTRATION MODE
+   =========================================================
+
+   These same elements are modified by your JS when:
+   ?type=registration
+
+   No additional page is required.
+   ========================================================= */
+
+html[data-theme="dark"]
+.contact-page #program-field-wrapper:not(.hidden) {
+  color: #d7d4df;
+}
+
+
+/* =========================================================
+   19. NO PURPLE GLOW
+   ========================================================= */
+
+html[data-theme="dark"]
+.contact-page .shadow-sm,
+
+html[data-theme="dark"]
+.contact-page .shadow-md {
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.18) !important;
+}
+
+
+/*
+ * Do not let the generic shadow rule turn
+ * buttons into floating/glowing objects.
+ */
+
+html[data-theme="dark"]
+.contact-page button.shadow-md,
+
+html[data-theme="dark"]
+.contact-page a.shadow-sm,
+
+html[data-theme="dark"]
+.contact-page a.shadow-md {
+  box-shadow: none !important;
+}
+
+
+/* =========================================================
+   20. MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  html[data-theme="dark"]
+  .contact-page
+  .bg-white.border.border-gray-100 {
+    box-shadow:
+      0 10px 22px rgba(0, 0, 0, 0.16) !important;
+  }
+
+
+  html[data-theme="dark"]
+  .contact-page
+  #contact-form-section
+  .xl\:col-span-3 {
+    box-shadow:
+      0 10px 22px rgba(0, 0, 0, 0.18) !important;
+  }
+
+}
