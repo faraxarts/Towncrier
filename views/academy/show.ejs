@@ -162,6 +162,504 @@
         scroll-margin-top: 6.5rem;
       }
     }
+    /* =========================================================
+   ACADEMY DETAIL / DBW HUB - DARK MODE
+   =========================================================
+   Covers:
+   - DBW Hub landing page
+   - Academy overview
+   - Learning tracks
+   - Featured courses
+   - Status messages
+   - Bottom CTA
+
+   Light mode remains unchanged.
+   No glow effects.
+   ========================================================= */
+
+
+/* =========================================================
+   PAGE CANVAS
+   ========================================================= */
+
+html[data-theme="dark"]
+body.academy-detail-page {
+  background: #0f0f18 !important;
+
+  color: #d7d4df;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-detail-page > section.bg-gradient-to-r {
+  background-image:
+    linear-gradient(
+      120deg,
+      #27205e 0%,
+      #4c1d95 50%,
+      #701a75 100%
+    ) !important;
+
+  border-bottom:
+    1px solid rgba(139, 92, 246, 0.18);
+
+  box-shadow: none;
+}
+
+
+html[data-theme="dark"]
+.academy-hero-title {
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   HERO STAT CARDS
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-detail-page
+.bg-white\/10 {
+  background:
+    rgba(15, 15, 24, 0.28) !important;
+
+  border-color:
+    rgba(255, 255, 255, 0.13) !important;
+
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   HERO WHITE PRIMARY BUTTONS
+   =========================================================
+
+   Global dark mode changes .bg-white,
+   so restore intentional white CTA buttons.
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-detail-page
+button.bg-white,
+
+html[data-theme="dark"]
+.academy-detail-page
+a.bg-white {
+  background: #ffffff !important;
+
+  color: #4f46e5 !important;
+
+  border-color:
+    transparent !important;
+
+  box-shadow: none !important;
+}
+
+
+html[data-theme="dark"]
+.academy-detail-page
+button.bg-white:hover,
+
+html[data-theme="dark"]
+.academy-detail-page
+a.bg-white:hover {
+  background: #f3f1f8 !important;
+
+  color: #4338ca !important;
+
+  box-shadow: none !important;
+}
+
+
+/* =========================================================
+   STATUS MESSAGES
+   ========================================================= */
+
+/* Authentication required */
+
+html[data-theme="dark"]
+.academy-detail-page .bg-red-50 {
+  background:
+    rgba(239, 68, 68, 0.10) !important;
+
+  border-color:
+    rgba(248, 113, 113, 0.20) !important;
+
+  color:
+    #fca5a5 !important;
+}
+
+
+/* Join required */
+
+html[data-theme="dark"]
+.academy-detail-page .bg-blue-50 {
+  background:
+    rgba(59, 130, 246, 0.10) !important;
+
+  border-color:
+    rgba(96, 165, 250, 0.20) !important;
+
+  color:
+    #93c5fd !important;
+}
+
+
+/* Joined successfully */
+
+html[data-theme="dark"]
+.academy-detail-page .bg-green-50 {
+  background:
+    rgba(34, 197, 94, 0.10) !important;
+
+  border-color:
+    rgba(74, 222, 128, 0.20) !important;
+
+  color:
+    #86efac !important;
+}
+
+
+/* =========================================================
+   SECTION TITLES
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-detail-page
+.academy-section-title {
+  color: #f8f7fb;
+}
+
+
+html[data-theme="dark"]
+.academy-detail-page
+.academy-section-title--light {
+  color: #ffffff !important;
+}
+
+
+html[data-theme="dark"]
+.academy-detail-page
+.academy-card-title {
+  color: #f8f7fb;
+}
+
+
+/* =========================================================
+   STANDARD BODY TEXT
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-detail-page
+.text-slate-700 {
+  color: #c9c6d1 !important;
+}
+
+
+html[data-theme="dark"]
+.academy-detail-page
+.text-slate-600 {
+  color: #aaa6b4 !important;
+}
+
+
+/* =========================================================
+   OVERVIEW CARD
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-detail-page
+section
+div.bg-white.border.border-gray-100 {
+  background: #191921 !important;
+
+  border-color:
+    rgba(255, 255, 255, 0.08) !important;
+
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.18) !important;
+}
+
+
+/* =========================================================
+   LEARNING TRACK CARDS
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-detail-page
+article.bg-white.border.border-gray-100 {
+  background: #191921 !important;
+
+  border-color:
+    rgba(255, 255, 255, 0.08) !important;
+
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.18) !important;
+}
+
+
+/* Price badge */
+
+html[data-theme="dark"]
+.academy-detail-page
+.bg-purple-100 {
+  background:
+    rgba(139, 92, 246, 0.13) !important;
+
+  color:
+    #c4b5fd !important;
+
+  border:
+    1px solid rgba(139, 92, 246, 0.18);
+}
+
+
+/* =========================================================
+   EMPTY TRACK / COURSE CARDS
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-detail-page
+.bg-white.border.border-gray-100.rounded-\[28px\] {
+  background: #191921 !important;
+
+  border-color:
+    rgba(255, 255, 255, 0.08) !important;
+
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.18) !important;
+}
+
+
+/* =========================================================
+   FEATURED COURSE CARDS
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-detail-page
+article.bg-white.border.border-indigo-100 {
+  background: #191921 !important;
+
+  border-color:
+    rgba(139, 92, 246, 0.16) !important;
+
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.20) !important;
+}
+
+
+html[data-theme="dark"]
+.academy-detail-page
+article.bg-white.border.border-indigo-100:hover {
+  border-color:
+    rgba(167, 139, 250, 0.26) !important;
+
+  box-shadow:
+    0 17px 34px rgba(0, 0, 0, 0.24) !important;
+}
+
+
+/* =========================================================
+   COURSE IMAGES
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-detail-page
+article img {
+  background: #11111b;
+}
+
+
+/* =========================================================
+   LOCKED COURSE BADGE
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-detail-page
+.bg-white\/95 {
+  background:
+    rgba(25, 25, 33, 0.94) !important;
+
+  color:
+    #f8f7fb !important;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.10);
+
+  box-shadow: none !important;
+}
+
+
+/* =========================================================
+   ACADEMY ACTION BUTTONS
+   ========================================================= */
+
+/* Indigo buttons */
+
+html[data-theme="dark"]
+.academy-detail-page
+.bg-\[\#4F46E5\] {
+  background: #5b4bd6 !important;
+
+  color: #ffffff !important;
+
+  box-shadow: none !important;
+}
+
+
+html[data-theme="dark"]
+.academy-detail-page
+.bg-\[\#4F46E5\]:hover {
+  background: #6757e0 !important;
+}
+
+
+/* TCEM purple buttons */
+
+html[data-theme="dark"]
+.academy-detail-page
+.bg-\[\#6B46C1\] {
+  background: #7044d4 !important;
+
+  color: #ffffff !important;
+
+  box-shadow: none !important;
+}
+
+
+html[data-theme="dark"]
+.academy-detail-page
+.bg-\[\#6B46C1\]:hover {
+  background: #7c4ce0 !important;
+}
+
+
+/* Pending verification */
+
+html[data-theme="dark"]
+.academy-detail-page
+.bg-yellow-500 {
+  background: #a16207 !important;
+
+  color: #ffffff !important;
+
+  box-shadow: none !important;
+}
+
+
+/* =========================================================
+   BOTTOM CTA
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-detail-page
+section:last-of-type
+.bg-gradient-to-r {
+  background-image:
+    linear-gradient(
+      120deg,
+      #27205e 0%,
+      #4c1d95 50%,
+      #701a75 100%
+    ) !important;
+
+  border:
+    1px solid rgba(139, 92, 246, 0.20);
+
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.22) !important;
+}
+
+
+/* Bottom secondary transparent button */
+
+html[data-theme="dark"]
+.academy-detail-page
+.border-white\/30 {
+  border-color:
+    rgba(255, 255, 255, 0.28) !important;
+
+  color: #ffffff !important;
+}
+
+
+html[data-theme="dark"]
+.academy-detail-page
+.border-white\/30:hover {
+  background:
+    rgba(255, 255, 255, 0.08) !important;
+}
+
+
+/* =========================================================
+   REMOVE GLOW EFFECTS
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-detail-page
+.shadow-sm,
+
+html[data-theme="dark"]
+.academy-detail-page
+.shadow-md {
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.18) !important;
+}
+
+
+/*
+ * Buttons should remain flat.
+ */
+
+html[data-theme="dark"]
+.academy-detail-page
+button.shadow-sm,
+
+html[data-theme="dark"]
+.academy-detail-page
+button.shadow-md,
+
+html[data-theme="dark"]
+.academy-detail-page
+a.shadow-sm,
+
+html[data-theme="dark"]
+.academy-detail-page
+a.shadow-md {
+  box-shadow: none !important;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  html[data-theme="dark"]
+  .academy-detail-page
+  article.bg-white,
+
+  html[data-theme="dark"]
+  .academy-detail-page
+  div.bg-white.border {
+    box-shadow:
+      0 10px 22px rgba(0, 0, 0, 0.18) !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-detail-page
+  article.bg-white.border.border-indigo-100:hover {
+    box-shadow:
+      0 10px 22px rgba(0, 0, 0, 0.18) !important;
+  }
+
+}
   </style>
 </head>
 

@@ -377,6 +377,316 @@
   background: #5b35b5;
   transform: translateY(-1px);
 }
+
+/* =========================================================
+   ACADEMY INDEX - DARK MODE
+   =========================================================
+   Covers:
+   - Academy landing page
+   - DBW Hub card
+   - Davidic Harp Coming Soon card
+   - Coming Soon modal
+
+   Light mode remains unchanged.
+   No glow effects.
+   ========================================================= */
+
+
+/* =========================================================
+   PAGE CANVAS
+   ========================================================= */
+
+html[data-theme="dark"] body.academy-page {
+  background: #0f0f18 !important;
+  color: #d7d4df;
+}
+
+
+/* =========================================================
+   PAGE INTRO
+   ========================================================= */
+
+html[data-theme="dark"] .academy-kicker {
+  color: #d6a84b;
+}
+
+html[data-theme="dark"] .academy-title {
+  color: #f8f7fb;
+}
+
+html[data-theme="dark"] .academy-title-accent {
+  color: #8b5cf6;
+}
+
+html[data-theme="dark"] .academy-subtitle {
+  color: #aaa6b4;
+}
+
+
+/* =========================================================
+   ACADEMY CARDS
+   ========================================================= */
+
+html[data-theme="dark"] .academy-card {
+  background: #191921;
+
+  border-color:
+    rgba(139, 92, 246, 0.28);
+
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.20);
+}
+
+
+/*
+ * Remove the light radial decoration.
+ * This prevents the purple-glow appearance.
+ */
+html[data-theme="dark"] .academy-card::before {
+  background: none;
+}
+
+html[data-theme="dark"] .academy-card:hover {
+  transform: translateY(-4px);
+
+  border-color:
+    rgba(167, 139, 250, 0.38);
+
+  box-shadow:
+    0 18px 34px rgba(0, 0, 0, 0.26);
+}
+
+
+/* =========================================================
+   CARD TYPOGRAPHY
+   ========================================================= */
+
+html[data-theme="dark"] .academy-card__title {
+  color: #f8f7fb;
+}
+
+html[data-theme="dark"] .academy-card__subtitle {
+  color: #a78bfa;
+}
+
+html[data-theme="dark"] .academy-card__description {
+  color: #c9c6d1;
+}
+
+html[data-theme="dark"] .academy-card__rule {
+  background:
+    rgba(255, 255, 255, 0.12);
+}
+
+
+/* =========================================================
+   CARD BUTTON
+   ========================================================= */
+
+html[data-theme="dark"] .academy-card__cta {
+  background: #7044d4;
+
+  color: #ffffff;
+
+  border:
+    1px solid rgba(167, 139, 250, 0.22);
+
+  box-shadow: none;
+}
+
+html[data-theme="dark"] .academy-card__cta:hover {
+  background: #7c4ce0;
+
+  color: #ffffff;
+
+  transform: translateY(-1px);
+
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   DAVIDIC HARP COMING SOON CARD
+   ========================================================= */
+
+html[data-theme="dark"] .academy-card--coming-soon {
+  border-color:
+    rgba(139, 92, 246, 0.20);
+}
+
+html[data-theme="dark"] .academy-card--coming-soon:hover {
+  border-color:
+    rgba(167, 139, 250, 0.30);
+
+  transform: translateY(-3px);
+}
+
+html[data-theme="dark"] .academy-card__cta--coming-soon {
+  background: #7044d4;
+
+  color: #ffffff;
+
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   FOOTNOTE
+   ========================================================= */
+
+html[data-theme="dark"] .academy-footnote {
+  color: #aaa6b4;
+}
+
+html[data-theme="dark"] .academy-footnote a {
+  color: #d7d4df;
+}
+
+html[data-theme="dark"] .academy-footnote a:hover {
+  color: #a78bfa;
+}
+
+
+/* =========================================================
+   EMPTY ACADEMY STATE
+   ========================================================= */
+
+html[data-theme="dark"] .academy-empty {
+  background: #191921;
+
+  border-color:
+    rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.18);
+}
+
+html[data-theme="dark"] .academy-empty__title {
+  color: #f8f7fb;
+}
+
+html[data-theme="dark"] .academy-empty__text {
+  color: #aaa6b4;
+}
+
+
+/* =========================================================
+   DAVIDIC HARP MODAL BACKDROP
+   ========================================================= */
+
+html[data-theme="dark"]
+.davidic-coming-soon-modal__backdrop {
+  background:
+    rgba(3, 3, 10, 0.82);
+}
+
+
+/* =========================================================
+   DAVIDIC HARP MODAL
+   ========================================================= */
+
+html[data-theme="dark"]
+.davidic-coming-soon-modal__dialog {
+  background: #191921;
+
+  border-color:
+    rgba(139, 92, 246, 0.20);
+
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.42);
+}
+
+
+/* Close button */
+
+html[data-theme="dark"]
+.davidic-coming-soon-modal__close {
+  background: #25252f;
+
+  color: #e7e4ed;
+}
+
+html[data-theme="dark"]
+.davidic-coming-soon-modal__close:hover {
+  background: #30303b;
+
+  color: #ffffff;
+}
+
+
+/* Modal icon */
+
+html[data-theme="dark"]
+.davidic-coming-soon-modal__icon {
+  background:
+    rgba(139, 92, 246, 0.13);
+
+  border:
+    1px solid rgba(139, 92, 246, 0.18);
+}
+
+
+/* Modal title */
+
+html[data-theme="dark"]
+.davidic-coming-soon-modal__title {
+  color: #f8f7fb;
+}
+
+
+/* Modal description */
+
+html[data-theme="dark"]
+.davidic-coming-soon-modal__text {
+  color: #c9c6d1;
+}
+
+
+/* Modal button */
+
+html[data-theme="dark"]
+.davidic-coming-soon-modal__button {
+  background: #7044d4;
+
+  color: #ffffff;
+
+  box-shadow: none;
+}
+
+html[data-theme="dark"]
+.davidic-coming-soon-modal__button:hover {
+  background: #7c4ce0;
+
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  html[data-theme="dark"] .academy-card,
+  html[data-theme="dark"] .academy-empty {
+    box-shadow:
+      0 10px 22px rgba(0, 0, 0, 0.18);
+  }
+
+  html[data-theme="dark"] .academy-card:hover {
+    transform: none;
+
+    box-shadow:
+      0 10px 22px rgba(0, 0, 0, 0.18);
+  }
+
+  html[data-theme="dark"]
+  .davidic-coming-soon-modal__dialog {
+    box-shadow:
+      0 20px 45px rgba(0, 0, 0, 0.38);
+  }
+
+}
   </style>
 
   <section class="academy-shell">
