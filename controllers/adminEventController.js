@@ -779,13 +779,14 @@ exports.togglePublishEvent = async (
     await event.save();
 
 
-    
+
     if (event.isPublished) {
       await createEventNotificationIfNeeded(
         event._id
       );
     }
 
+    
 
     return res.redirect(
       "/admin/events"
