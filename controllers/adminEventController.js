@@ -785,8 +785,9 @@ exports.togglePublishEvent = async (
         event._id
       );
     }
-
     
+
+
 
     return res.redirect(
       "/admin/events"
