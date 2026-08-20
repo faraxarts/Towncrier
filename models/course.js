@@ -1,5 +1,10 @@
 const mongoose = require("mongoose");
 
+
+/* =========================================================
+   STORED FILE
+   ========================================================= */
+
 const fileItemSchema = new mongoose.Schema(
   {
     originalName: {
@@ -7,14 +12,46 @@ const fileItemSchema = new mongoose.Schema(
       trim: true,
       default: "",
     },
+
     fileUrl: {
       type: String,
       trim: true,
       required: true,
     },
+
+    /*
+     * Cloudinary public ID.
+     *
+     * Empty for legacy /uploads/... records.
+     */
+    publicId: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+
+    /*
+     * Usually:
+     * image
+     * video
+     * raw
+     */
+    resourceType: {
+      type: String,
+      trim: true,
+      default: "",
+    },
   },
-  { _id: false }
+
+  {
+    _id: false,
+  }
 );
+
+
+/* =========================================================
+   MODULE
+   ========================================================= */
 
 const moduleSchema = new mongoose.Schema(
   {
@@ -23,13 +60,22 @@ const moduleSchema = new mongoose.Schema(
       trim: true,
       required: true,
     },
+
     lessons: {
       type: Number,
       default: 0,
     },
   },
-  { _id: false }
+
+  {
+    _id: false,
+  }
 );
+
+
+/* =========================================================
+   COURSE
+   ========================================================= */
 
 const courseSchema = new mongoose.Schema(
   {
@@ -64,11 +110,29 @@ const courseSchema = new mongoose.Schema(
       default: 1,
     },
 
+
+    /* =====================================================
+       FEATURED IMAGE
+       ===================================================== */
+
     featuredImage: {
       type: String,
       trim: true,
       default: "",
     },
+
+    featuredImagePublicId: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+
+    featuredImageResourceType: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+
 
     description: {
       type: String,
@@ -115,18 +179,34 @@ const courseSchema = new mongoose.Schema(
     buttonClass: {
       type: String,
       trim: true,
-      default: "bg-[#4F46E5] hover:bg-indigo-700",
+      default:
+        "bg-[#4F46E5] hover:bg-indigo-700",
     },
+
+
+    /* =====================================================
+       DOCUMENTS
+       ===================================================== */
 
     courseDocuments: {
       type: [fileItemSchema],
       default: [],
     },
 
+
+    /* =====================================================
+       AUDIOS
+       ===================================================== */
+
     courseAudios: {
       type: [fileItemSchema],
       default: [],
     },
+
+
+    /* =====================================================
+       ASSIGNMENT DOCUMENT
+       ===================================================== */
 
     assignmentDocument: {
       originalName: {
@@ -134,12 +214,26 @@ const courseSchema = new mongoose.Schema(
         trim: true,
         default: "",
       },
+
       fileUrl: {
         type: String,
         trim: true,
         default: "",
       },
+
+      publicId: {
+        type: String,
+        trim: true,
+        default: "",
+      },
+
+      resourceType: {
+        type: String,
+        trim: true,
+        default: "",
+      },
     },
+
 
     whatYouWillLearn: {
       type: [String],
@@ -176,7 +270,15 @@ const courseSchema = new mongoose.Schema(
       default: true,
     },
   },
-  { timestamps: true }
+
+  {
+    timestamps: true,
+  }
 );
 
-module.exports = mongoose.model("Course", courseSchema);
+
+module.exports =
+  mongoose.model(
+    "Course",
+    courseSchema
+  );

@@ -140,6 +140,8 @@ app.use((req, res, next) => {
 
       "font-src 'self' https://fonts.gstatic.com data:",
 
+      "media-src 'self' https:",
+
       /*
        * YouTube IFrame API must be allowed here.
        *
