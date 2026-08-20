@@ -60,6 +60,211 @@
         line-height: 1.75;
       }
     }
+    /* =========================================================
+   404 + 500 ERROR PAGES - DARK MODE
+   =========================================================
+   Light mode remains unchanged.
+   No glow effects.
+   ========================================================= */
+
+
+/* =========================================================
+   1. PAGE CANVAS
+   ========================================================= */
+
+html[data-theme="dark"] body.error-page {
+  background: #0f0f18 !important;
+  color: #d7d4df;
+}
+
+
+/* =========================================================
+   2. ERROR CARD
+   ========================================================= */
+
+html[data-theme="dark"]
+.error-page
+.bg-white.border.border-gray-100 {
+  background: #191921 !important;
+
+  border-color:
+    rgba(255, 255, 255, 0.08) !important;
+
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.20) !important;
+}
+
+
+/* =========================================================
+   3. ERROR KICKER
+   ========================================================= */
+
+html[data-theme="dark"]
+.error-page
+.error-kicker {
+  color: #a78bfa;
+}
+
+
+/* =========================================================
+   4. ERROR TITLE
+   ========================================================= */
+
+html[data-theme="dark"]
+.error-page
+.error-title {
+  color: #f8f7fb;
+}
+
+
+/* =========================================================
+   5. ERROR DESCRIPTION
+   ========================================================= */
+
+html[data-theme="dark"]
+.error-page
+.error-text {
+  color: #aaa6b4;
+}
+
+
+/* =========================================================
+   6. PRIMARY PURPLE BUTTON
+   Go Home / Return Home
+   ========================================================= */
+
+html[data-theme="dark"]
+.error-page
+a.bg-\[\#6B46C1\] {
+  background: #7044d4 !important;
+
+  color: #ffffff !important;
+
+  border:
+    1px solid rgba(167, 139, 250, 0.22);
+
+  box-shadow: none !important;
+}
+
+
+html[data-theme="dark"]
+.error-page
+a.bg-\[\#6B46C1\]:hover {
+  background: #7c4ce0 !important;
+
+  color: #ffffff !important;
+
+  box-shadow: none !important;
+}
+
+
+/* =========================================================
+   7. SECONDARY BUTTON
+   Contact Us / Try Again
+   ========================================================= */
+
+html[data-theme="dark"]
+.error-page
+a.bg-white.border-gray-200,
+
+html[data-theme="dark"]
+.error-page
+button.bg-white.border-gray-200 {
+  background: #20202a !important;
+
+  color: #d7d4df !important;
+
+  border-color:
+    rgba(255, 255, 255, 0.10) !important;
+
+  box-shadow: none !important;
+}
+
+
+html[data-theme="dark"]
+.error-page
+a.bg-white.border-gray-200:hover,
+
+html[data-theme="dark"]
+.error-page
+button.bg-white.border-gray-200:hover {
+  background:
+    rgba(139, 92, 246, 0.10) !important;
+
+  color: #c4b5fd !important;
+
+  border-color:
+    #8b5cf6 !important;
+
+  box-shadow: none !important;
+}
+
+
+/* =========================================================
+   8. ACCESSIBLE FOCUS STATES
+   ========================================================= */
+
+html[data-theme="dark"]
+.error-page
+a:focus-visible,
+
+html[data-theme="dark"]
+.error-page
+button:focus-visible {
+  outline:
+    2px solid #a78bfa;
+
+  outline-offset: 3px;
+}
+
+
+/* =========================================================
+   9. REMOVE LIGHT SHADOW / GLOW
+   ========================================================= */
+
+html[data-theme="dark"]
+.error-page
+.shadow,
+
+html[data-theme="dark"]
+.error-page
+.shadow-sm,
+
+html[data-theme="dark"]
+.error-page
+.shadow-md {
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.20) !important;
+}
+
+
+/* Buttons stay flat */
+
+html[data-theme="dark"]
+.error-page
+a.shadow-sm,
+
+html[data-theme="dark"]
+.error-page
+button.shadow-sm {
+  box-shadow: none !important;
+}
+
+
+/* =========================================================
+   10. MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  html[data-theme="dark"]
+  .error-page
+  .bg-white.border.border-gray-100 {
+    box-shadow:
+      0 10px 22px rgba(0, 0, 0, 0.18) !important;
+  }
+
+}
   </style>
 </head>
 <body class="error-page">

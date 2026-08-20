@@ -1,3 +1,357 @@
+<style>
+  /* =========================================================
+     TCEM AUTH MODAL - DARK MODE
+     =========================================================
+     Covers:
+     - Sign In view
+     - Register view
+     - Inputs
+     - Feedback messages
+     - Close button
+     - Switching between login/register
+
+     Light mode remains unchanged.
+     No glow effects.
+     ========================================================= */
+
+
+  /* =========================================================
+     1. MODAL BACKDROP
+     ========================================================= */
+
+  html[data-theme="dark"] #auth-modal {
+    background:
+      rgba(3, 3, 10, 0.78) !important;
+
+    backdrop-filter:
+      blur(4px);
+
+    -webkit-backdrop-filter:
+      blur(4px);
+  }
+
+
+  /* =========================================================
+     2. MODAL PANEL
+     ========================================================= */
+
+  html[data-theme="dark"] #auth-modal-panel {
+    background: #191921 !important;
+
+    border-color:
+      rgba(255, 255, 255, 0.08) !important;
+
+    color: #d7d4df;
+
+    box-shadow:
+      0 28px 65px rgba(0, 0, 0, 0.46) !important;
+  }
+
+
+  /* =========================================================
+     3. HEADINGS
+     ========================================================= */
+
+  html[data-theme="dark"]
+  #auth-modal
+  .text-gray-950 {
+    color: #f8f7fb !important;
+  }
+
+
+  /* =========================================================
+     4. DESCRIPTION / SECONDARY TEXT
+     ========================================================= */
+
+  html[data-theme="dark"]
+  #auth-modal
+  .text-slate-600 {
+    color: #aaa6b4 !important;
+  }
+
+
+  /* =========================================================
+     5. CLOSE BUTTON
+     ========================================================= */
+
+  html[data-theme="dark"] #auth-modal-close {
+    background: #24242e !important;
+
+    color: #d7d4df !important;
+
+    border-color:
+      rgba(255, 255, 255, 0.10) !important;
+
+    box-shadow: none !important;
+  }
+
+
+  html[data-theme="dark"] #auth-modal-close:hover {
+    background: #30303b !important;
+
+    color: #ffffff !important;
+
+    border-color:
+      rgba(255, 255, 255, 0.14) !important;
+
+    box-shadow: none !important;
+  }
+
+
+  /* =========================================================
+     6. FORM LABELS
+     ========================================================= */
+
+  html[data-theme="dark"]
+  #auth-modal
+  label {
+    color: #e7e4ed !important;
+  }
+
+
+  /* =========================================================
+     7. LOGIN + REGISTER INPUTS
+     ========================================================= */
+
+  html[data-theme="dark"]
+  #auth-modal
+  input:not([type="hidden"]) {
+    background: #11111b !important;
+
+    color: #f8f7fb !important;
+
+    border-color:
+      rgba(255, 255, 255, 0.11) !important;
+
+    outline: none !important;
+
+    box-shadow: none !important;
+  }
+
+
+  html[data-theme="dark"]
+  #auth-modal
+  input:not([type="hidden"])::placeholder {
+    color: #777482 !important;
+  }
+
+
+  /* =========================================================
+     8. INPUT FOCUS
+     ========================================================= */
+
+  html[data-theme="dark"]
+  #auth-modal
+  input:not([type="hidden"]):focus {
+    border-color:
+      #8b5cf6 !important;
+
+    outline: none !important;
+
+    box-shadow:
+      0 0 0 2px rgba(139, 92, 246, 0.10) !important;
+  }
+
+
+  /* =========================================================
+     9. SIGN IN / REGISTER PRIMARY BUTTONS
+     ========================================================= */
+
+  html[data-theme="dark"] #login-submit-btn,
+  html[data-theme="dark"] #register-submit-btn {
+    background: #7044d4 !important;
+
+    color: #ffffff !important;
+
+    border:
+      1px solid rgba(167, 139, 250, 0.22);
+
+    box-shadow: none !important;
+  }
+
+
+  html[data-theme="dark"] #login-submit-btn:hover,
+  html[data-theme="dark"] #register-submit-btn:hover {
+    background: #7c4ce0 !important;
+
+    color: #ffffff !important;
+
+    box-shadow: none !important;
+  }
+
+
+  /* =========================================================
+     10. SWITCH LOGIN / REGISTER LINKS
+     ========================================================= */
+
+  html[data-theme="dark"] #switch-to-register,
+  html[data-theme="dark"] #switch-to-login {
+    color: #a78bfa !important;
+
+    background: transparent;
+
+    box-shadow: none !important;
+  }
+
+
+  html[data-theme="dark"] #switch-to-register:hover,
+  html[data-theme="dark"] #switch-to-login:hover {
+    color: #c4b5fd !important;
+  }
+
+
+  /* =========================================================
+     11. AUTH FEEDBACK BOX
+     ========================================================= */
+
+  html[data-theme="dark"] #auth-feedback {
+    background: #20202a;
+
+    color: #d7d4df;
+
+    border-color:
+      rgba(255, 255, 255, 0.10);
+  }
+
+
+  /*
+   * If auth-modal.js applies common Tailwind
+   * success/error classes, these keep them dark.
+   */
+
+  html[data-theme="dark"]
+  #auth-feedback.bg-red-50 {
+    background:
+      rgba(239, 68, 68, 0.10) !important;
+
+    color:
+      #fca5a5 !important;
+
+    border-color:
+      rgba(248, 113, 113, 0.22) !important;
+  }
+
+
+  html[data-theme="dark"]
+  #auth-feedback.bg-green-50 {
+    background:
+      rgba(34, 197, 94, 0.10) !important;
+
+    color:
+      #86efac !important;
+
+    border-color:
+      rgba(74, 222, 128, 0.22) !important;
+  }
+
+
+  html[data-theme="dark"]
+  #auth-feedback.bg-blue-50 {
+    background:
+      rgba(59, 130, 246, 0.10) !important;
+
+    color:
+      #93c5fd !important;
+
+    border-color:
+      rgba(96, 165, 250, 0.22) !important;
+  }
+
+
+  html[data-theme="dark"]
+  #auth-feedback.bg-yellow-50 {
+    background:
+      rgba(234, 179, 8, 0.10) !important;
+
+    color:
+      #fde68a !important;
+
+    border-color:
+      rgba(250, 204, 21, 0.20) !important;
+  }
+
+
+  /* =========================================================
+     12. BROWSER AUTOFILL
+     ========================================================= */
+
+  html[data-theme="dark"]
+  #auth-modal
+  input:-webkit-autofill,
+
+  html[data-theme="dark"]
+  #auth-modal
+  input:-webkit-autofill:hover,
+
+  html[data-theme="dark"]
+  #auth-modal
+  input:-webkit-autofill:focus {
+    -webkit-text-fill-color:
+      #f8f7fb !important;
+
+    -webkit-box-shadow:
+      0 0 0 1000px #11111b inset !important;
+
+    caret-color: #ffffff;
+
+    transition:
+      background-color 9999s ease-in-out 0s;
+  }
+
+
+  /* =========================================================
+     13. ACCESSIBLE KEYBOARD FOCUS
+     ========================================================= */
+
+  html[data-theme="dark"]
+  #auth-modal-close:focus-visible,
+
+  html[data-theme="dark"]
+  #switch-to-register:focus-visible,
+
+  html[data-theme="dark"]
+  #switch-to-login:focus-visible,
+
+  html[data-theme="dark"]
+  #login-submit-btn:focus-visible,
+
+  html[data-theme="dark"]
+  #register-submit-btn:focus-visible {
+    outline:
+      2px solid #a78bfa;
+
+    outline-offset: 3px;
+  }
+
+
+  /* =========================================================
+     14. MOBILE
+     ========================================================= */
+
+  @media (max-width: 767px) {
+
+    html[data-theme="dark"] #auth-modal {
+      padding:
+        1rem !important;
+    }
+
+
+    html[data-theme="dark"] #auth-modal-panel {
+      max-height:
+        calc(100vh - 2rem);
+
+      overflow-y:
+        auto;
+
+      border-radius:
+        1.5rem;
+
+      box-shadow:
+        0 20px 45px rgba(0, 0, 0, 0.42) !important;
+    }
+
+  }
+</style>
 <div id="auth-modal" class="fixed inset-0 z-[90] hidden items-center justify-center bg-black/50 px-4 py-8">
   <div
     id="auth-modal-panel"

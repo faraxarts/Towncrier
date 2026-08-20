@@ -5,6 +5,373 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Manual Payment | <%= academy.name %></title>
   <link rel="stylesheet" href="/css/style.css" />
+  <style>
+  /* =========================================================
+     ACADEMY MANUAL PAYMENT PAGE - DARK MODE
+     =========================================================
+     Covers:
+     - Page canvas
+     - Back link
+     - Bank details card
+     - Payment reference
+     - Verification form
+     - Text fields
+     - File upload
+     - Submit button
+
+     Light mode remains unchanged.
+     No glow effects.
+     ========================================================= */
+
+
+  /* =========================================================
+     1. PAGE CANVAS
+     ========================================================= */
+
+  html[data-theme="dark"]
+  body.academy-manual-payment-page {
+    background: #0f0f18 !important;
+    color: #d7d4df;
+  }
+
+
+  /* =========================================================
+     2. BACK TO COURSES LINK
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  a[href*="/courses"] {
+    color: #a78bfa !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  a[href*="/courses"]:hover {
+    color: #c4b5fd !important;
+  }
+
+
+  /* =========================================================
+     3. MAIN CARDS
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  .xl\:col-span-2.bg-white,
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  .xl\:col-span-3.bg-white {
+    background: #191921 !important;
+
+    border-color:
+      rgba(255, 255, 255, 0.08) !important;
+
+    box-shadow:
+      0 14px 30px rgba(0, 0, 0, 0.20) !important;
+  }
+
+
+  /* =========================================================
+     4. HEADINGS
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  .text-gray-950 {
+    color: #f8f7fb !important;
+  }
+
+
+  /* =========================================================
+     5. BODY TEXT
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  .text-slate-700 {
+    color: #c9c6d1 !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  .text-slate-600 {
+    color: #aaa6b4 !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  .text-slate-500 {
+    color: #8f8b99 !important;
+  }
+
+
+  /* Bank detail labels */
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  strong {
+    color: #f1eef6;
+  }
+
+
+  /* =========================================================
+     6. PAYMENT REFERENCE BOX
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  .bg-purple-50 {
+    background:
+      rgba(139, 92, 246, 0.10) !important;
+
+    border-color:
+      rgba(139, 92, 246, 0.20) !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  .bg-purple-50
+  .text-slate-600 {
+    color: #aaa6b4 !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  .bg-purple-50
+  .text-\[\#6B46C1\] {
+    color: #a78bfa !important;
+  }
+
+
+  /* =========================================================
+     7. FORM LABELS
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  form label {
+    color: #e7e4ed !important;
+  }
+
+
+  /* =========================================================
+     8. FORM INPUTS / TEXTAREA
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  form input,
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  form textarea {
+    background: #11111b !important;
+
+    color: #f8f7fb !important;
+
+    border-color:
+      rgba(255, 255, 255, 0.11) !important;
+
+    outline: none;
+
+    box-shadow: none !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  form input::placeholder,
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  form textarea::placeholder {
+    color: #777482 !important;
+  }
+
+
+  /* =========================================================
+     9. FORM FOCUS
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  form input:focus,
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  form textarea:focus {
+    border-color:
+      #8b5cf6 !important;
+
+    outline: none !important;
+
+    box-shadow:
+      0 0 0 2px rgba(139, 92, 246, 0.10) !important;
+  }
+
+
+  /* =========================================================
+     10. FILE UPLOAD FIELD
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  input[type="file"] {
+    background: #11111b !important;
+
+    color: #c9c6d1 !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  input[type="file"]::file-selector-button {
+    border: none;
+
+    border-radius: 0.75rem;
+
+    background: #7044d4;
+
+    color: #ffffff;
+
+    padding:
+      0.65rem 1rem;
+
+    margin-right:
+      1rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  input[type="file"]::file-selector-button:hover {
+    background: #7c4ce0;
+  }
+
+
+  /* =========================================================
+     11. SUBMIT PAYMENT BUTTON
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  form button[type="submit"] {
+    background: #7044d4 !important;
+
+    color: #ffffff !important;
+
+    border:
+      1px solid rgba(167, 139, 250, 0.22);
+
+    box-shadow: none !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  form button[type="submit"]:hover {
+    background: #7c4ce0 !important;
+
+    color: #ffffff !important;
+
+    box-shadow: none !important;
+  }
+
+
+  /* =========================================================
+     12. BROWSER AUTOFILL
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  input:-webkit-autofill,
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  input:-webkit-autofill:hover,
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  input:-webkit-autofill:focus {
+    -webkit-text-fill-color:
+      #f8f7fb !important;
+
+    -webkit-box-shadow:
+      0 0 0 1000px #11111b inset !important;
+
+    caret-color: #ffffff;
+  }
+
+
+  /* =========================================================
+     13. REMOVE GLOW / LIGHT SHADOWS
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  .shadow,
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  .shadow-sm,
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  .shadow-md {
+    box-shadow:
+      0 12px 28px rgba(0, 0, 0, 0.18) !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  button.shadow-sm,
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  button.shadow-md,
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  a.shadow-sm,
+
+  html[data-theme="dark"]
+  .academy-manual-payment-page
+  a.shadow-md {
+    box-shadow: none !important;
+  }
+
+
+  /* =========================================================
+     14. MOBILE
+     ========================================================= */
+
+  @media (max-width: 767px) {
+
+    html[data-theme="dark"]
+    .academy-manual-payment-page
+    .xl\:col-span-2.bg-white,
+
+    html[data-theme="dark"]
+    .academy-manual-payment-page
+    .xl\:col-span-3.bg-white {
+      box-shadow:
+        0 10px 22px rgba(0, 0, 0, 0.18) !important;
+    }
+
+  }
+</style>
 </head>
 <body class="bg-[#f7f7f8] text-gray-900">
 

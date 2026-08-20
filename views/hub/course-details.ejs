@@ -175,10 +175,535 @@
         height: 420px;
       }
     }
+    /* =========================================================
+   ACADEMY COURSE DETAILS PAGE - DARK MODE
+   =========================================================
+   Covers:
+   - Course hero
+   - Featured image
+   - Course overview
+   - What You Will Learn
+   - Course details
+   - Documents
+   - Audios
+   - Assignment
+
+   Light mode remains unchanged.
+   No glow effects.
+   ========================================================= */
+
+
+/* =========================================================
+   1. PAGE CANVAS
+   ========================================================= */
+
+html[data-theme="dark"]
+body.academy-course-detail-page {
+  background: #0f0f18 !important;
+  color: #d7d4df;
+}
+
+
+/* =========================================================
+   2. COURSE HERO
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+> section:first-of-type {
+  background-image:
+    linear-gradient(
+      120deg,
+      #27205e 0%,
+      #4c1d95 50%,
+      #701a75 100%
+    ) !important;
+
+  border-bottom:
+    1px solid rgba(139, 92, 246, 0.18);
+
+  box-shadow: none;
+}
+
+
+/* Hero title */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+> section:first-of-type
+h1 {
+  color: #ffffff !important;
+}
+
+
+/* Hero breadcrumb */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+> section:first-of-type
+.text-white\/80 {
+  color:
+    rgba(255, 255, 255, 0.78) !important;
+}
+
+
+/* Hero description */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+> section:first-of-type
+.text-white\/90 {
+  color:
+    rgba(255, 255, 255, 0.90) !important;
+}
+
+
+/* Breadcrumb links */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+> section:first-of-type
+a {
+  color:
+    rgba(255, 255, 255, 0.80);
+}
+
+html[data-theme="dark"]
+.academy-course-detail-page
+> section:first-of-type
+a:hover {
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   3. HERO WHITE BUTTON
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+> section:first-of-type
+a.bg-white {
+  background: #ffffff !important;
+
+  color: #4f46e5 !important;
+
+  border-color: transparent !important;
+
+  box-shadow: none !important;
+}
+
+html[data-theme="dark"]
+.academy-course-detail-page
+> section:first-of-type
+a.bg-white:hover {
+  background: #f3f1f8 !important;
+
+  color: #4338ca !important;
+
+  box-shadow: none !important;
+}
+
+
+/* =========================================================
+   4. COURSE / DOCUMENTS SUB-NAV
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+> section:first-of-type
+.border-t {
+  border-top-color:
+    rgba(255, 255, 255, 0.12) !important;
+}
+
+
+/* Active Courses tab */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+a[href$="/courses"].border-white {
+  color: #ffffff !important;
+
+  border-bottom-color:
+    #ffffff !important;
+}
+
+
+/* Documents tab */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+a[href$="/documents"] {
+  color:
+    rgba(255, 255, 255, 0.72);
+}
+
+html[data-theme="dark"]
+.academy-course-detail-page
+a[href$="/documents"]:hover {
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   5. FEATURED IMAGE CARD
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.course-featured-image {
+  background: #11111b;
+}
+
+
+html[data-theme="dark"]
+.academy-course-detail-page
+div.bg-white.border.border-gray-100:has(.course-featured-image) {
+  background: #191921 !important;
+
+  border-color:
+    rgba(255, 255, 255, 0.08) !important;
+
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.20) !important;
+}
+
+
+/* =========================================================
+   6. ALL MAIN WHITE CONTENT CARDS
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.bg-white.border.border-gray-100 {
+  background: #191921 !important;
+
+  border-color:
+    rgba(255, 255, 255, 0.08) !important;
+
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.18) !important;
+}
+
+
+/* =========================================================
+   7. CARD HEADINGS
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.text-gray-950 {
+  color: #f8f7fb !important;
+}
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.text-gray-900 {
+  color: #e7e4ed !important;
+}
+
+
+/* =========================================================
+   8. BODY TEXT
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.text-slate-700 {
+  color: #c9c6d1 !important;
+}
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.text-slate-600 {
+  color: #aaa6b4 !important;
+}
+
+
+/* =========================================================
+   9. WHAT YOU WILL LEARN CARDS
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.bg-indigo-50\/70 {
+  background: #20202a !important;
+
+  border:
+    1px solid rgba(139, 92, 246, 0.13);
+}
+
+
+/* Check icon */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.text-\[\#4F46E5\] {
+  color: #a78bfa !important;
+}
+
+
+/* =========================================================
+   10. COURSE DETAILS SIDEBAR
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+aside
+.bg-white {
+  background: #191921 !important;
+
+  border-color:
+    rgba(255, 255, 255, 0.08) !important;
+}
+
+
+/* Labels such as Duration, Lessons, Instructor */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+aside
+.font-semibold {
+  color: #e7e4ed;
+}
+
+
+/* =========================================================
+   11. DOCUMENT ROWS
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.course-file-row {
+  background: #20202a !important;
+
+  border-color:
+    rgba(255, 255, 255, 0.08) !important;
+
+  color: #d7d4df;
+}
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.course-file-row:hover {
+  background: #252530 !important;
+
+  border-color:
+    rgba(139, 92, 246, 0.42) !important;
+}
+
+
+/* Document title */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.course-file-row
+.text-gray-900 {
+  color: #f8f7fb !important;
+}
+
+
+/* Document filename */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.course-file-row
+.text-slate-600 {
+  color: #aaa6b4 !important;
+}
+
+
+/* Open link */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.course-file-row
+.text-\[\#6B46C1\] {
+  color: #a78bfa !important;
+}
+
+
+/* =========================================================
+   12. AUDIO CARDS
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.course-audio-card {
+  background: #20202a !important;
+
+  border-color:
+    rgba(255, 255, 255, 0.08) !important;
+}
+
+
+/* Audio title */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.course-audio-card
+.text-gray-900 {
+  color: #f8f7fb !important;
+}
+
+
+/* Audio filename */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.course-audio-card
+.text-slate-600 {
+  color: #aaa6b4 !important;
+}
+
+
+/* =========================================================
+   13. AUDIO PLAYER
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.course-audio-player {
+  color-scheme: dark;
+
+  border-radius: 999px;
+}
+
+
+/*
+ * Browsers control most <audio> styling,
+ * but this keeps its surrounding area dark.
+ */
+html[data-theme="dark"]
+.academy-course-detail-page
+audio {
+  background: #11111b;
+}
+
+
+/* =========================================================
+   14. ASSIGNMENT CARD
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+aside
+.course-file-row {
+  background: #20202a !important;
+}
+
+
+/* =========================================================
+   15. PURPLE LINKS / OPEN ACTIONS
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.text-\[\#6B46C1\] {
+  color: #a78bfa !important;
+}
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.text-\[\#6B46C1\]:hover {
+  color: #c4b5fd !important;
+}
+
+
+/* =========================================================
+   16. GENERIC GRAY INNER CARDS
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.bg-gray-50\/80 {
+  background: #20202a !important;
+
+  border-color:
+    rgba(255, 255, 255, 0.08) !important;
+}
+
+
+/* =========================================================
+   17. REMOVE LIGHT SHADOWS / GLOW
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.shadow,
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.shadow-sm,
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.shadow-md {
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.18) !important;
+}
+
+
+/*
+ * Buttons and links should remain flat.
+ */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+a.shadow-sm,
+
+html[data-theme="dark"]
+.academy-course-detail-page
+a.shadow-md {
+  box-shadow: none !important;
+}
+
+
+/* =========================================================
+   18. FOCUS STATES
+   ========================================================= */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.course-file-row:focus-visible {
+  outline:
+    2px solid #a78bfa;
+
+  outline-offset: 3px;
+}
+
+
+/* =========================================================
+   19. MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  html[data-theme="dark"]
+  .academy-course-detail-page
+  .bg-white.border.border-gray-100 {
+    box-shadow:
+      0 10px 22px rgba(0, 0, 0, 0.18) !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-course-detail-page
+  .course-file-row,
+
+  html[data-theme="dark"]
+  .academy-course-detail-page
+  .course-audio-card {
+    background: #1d1d27 !important;
+  }
+
+}
+
   </style>
 </head>
 
-<body class="bg-[#f7f7f8] text-gray-900">
+<body class="academy-course-detail-page bg-[#f7f7f8] text-gray-900">
 
   <%- include("../partials/header") %>
 
