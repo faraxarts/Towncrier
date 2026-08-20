@@ -142,6 +142,8 @@ app.use((req, res, next) => {
 
       "media-src 'self' https:",
 
+      
+
       /*
        * YouTube IFrame API must be allowed here.
        *
