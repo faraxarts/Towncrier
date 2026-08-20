@@ -16,7 +16,29 @@ const eventSchema = new mongoose.Schema(
       lowercase: true,
     },
 
+    /*
+     * Permanent delivery URL.
+     *
+     * Old records may still contain:
+     * /uploads/events/images/...
+     *
+     * New records will contain:
+     * https://res.cloudinary.com/...
+     */
     featuredImage: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+
+    /*
+     * Cloudinary identifier used when replacing or
+     * deleting the image.
+     *
+     * Optional so existing Event records continue
+     * working without a migration.
+     */
+    featuredImagePublicId: {
       type: String,
       trim: true,
       default: "",
@@ -69,7 +91,13 @@ const eventSchema = new mongoose.Schema(
       default: true,
     },
   },
-  { timestamps: true }
+
+  {
+    timestamps: true,
+  }
 );
 
-module.exports = mongoose.model("Event", eventSchema);
+module.exports = mongoose.model(
+  "Event",
+  eventSchema
+);
