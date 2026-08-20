@@ -412,37 +412,40 @@
     outline-offset: 4px;
   }
 
+/* =========================================
+   THEME ICON DISPLAY
+   ========================================= */
 
-  .site-theme-toggle svg {
-    width: 20px;
-    height: 20px;
-
-    display: block;
-  }
-
-
-  /*
-   * Light mode shows the sun.
-   */
-  .site-theme-toggle__moon {
-    display: none;
-  }
+.site-theme-toggle svg {
+  width: 20px;
+  height: 20px;
+}
 
 
-  /*
-   * Dark mode shows the moon.
-   */
-  html[data-theme="dark"]
-  .site-theme-toggle__sun {
-    display: none;
-  }
+/* LIGHT MODE
+   Show ONLY the sun
+*/
+.site-theme-toggle__sun {
+  display: block;
+}
+
+.site-theme-toggle__moon {
+  display: none;
+}
 
 
-  html[data-theme="dark"]
-  .site-theme-toggle__moon {
-    display: block;
-  }
+/* DARK MODE
+   Show ONLY the moon
+*/
+html[data-theme="dark"]
+.site-theme-toggle__sun {
+  display: none;
+}
 
+html[data-theme="dark"]
+.site-theme-toggle__moon {
+  display: block;
+}
 
 
   /* =========================================
