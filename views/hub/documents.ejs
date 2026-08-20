@@ -11,8 +11,703 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="/css/style.css" />
+  <style>
+  /* =========================================================
+     ACADEMY DOCUMENTS / ASSIGNMENTS PAGE - DARK MODE
+     =========================================================
+     Covers:
+     - Documents hero
+     - Courses/Documents navigation
+     - Assignment submission form
+     - File upload field
+     - Success message
+     - Submission guide
+     - Information panel
+     - Submission history
+     - Status badges
+
+     Light mode remains unchanged.
+     No glow effects.
+     ========================================================= */
+
+
+  /* =========================================================
+     1. PAGE CANVAS
+     ========================================================= */
+
+  html[data-theme="dark"]
+  body.academy-documents-page {
+    background: #0f0f18 !important;
+    color: #d7d4df;
+  }
+
+
+  /* =========================================================
+     2. HERO
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  > section:first-of-type {
+    background-image:
+      linear-gradient(
+        120deg,
+        #27205e 0%,
+        #4c1d95 50%,
+        #701a75 100%
+      ) !important;
+
+    border-bottom:
+      1px solid rgba(139, 92, 246, 0.18);
+
+    box-shadow: none;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  > section:first-of-type
+  h1 {
+    color: #ffffff !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  > section:first-of-type
+  .text-white\/90 {
+    color:
+      rgba(255, 255, 255, 0.90) !important;
+  }
+
+
+  /* =========================================================
+     3. HERO WHITE BUTTON
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  > section:first-of-type
+  a.bg-white {
+    background: #ffffff !important;
+
+    color: #4f46e5 !important;
+
+    border-color: transparent !important;
+
+    box-shadow: none !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  > section:first-of-type
+  a.bg-white:hover {
+    background: #f3f1f8 !important;
+
+    color: #4338ca !important;
+
+    box-shadow: none !important;
+  }
+
+
+  /* =========================================================
+     4. COURSES / DOCUMENTS NAVIGATION
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  > section:first-of-type
+  .border-t {
+    border-top-color:
+      rgba(255, 255, 255, 0.12) !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  > section:first-of-type
+  a {
+    color:
+      rgba(255, 255, 255, 0.72);
+  }
+
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  > section:first-of-type
+  a:hover {
+    color: #ffffff;
+  }
+
+
+  /* Active Documents tab */
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  a[href$="/documents"].border-white {
+    color: #ffffff !important;
+
+    border-bottom-color:
+      #ffffff !important;
+  }
+
+
+  /* =========================================================
+     5. PAGE HEADINGS
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  .text-gray-950 {
+    color: #f8f7fb !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  .text-gray-900 {
+    color: #e7e4ed !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  .text-gray-800 {
+    color: #e1dee7 !important;
+  }
+
+
+  /* =========================================================
+     6. BODY TEXT
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  .text-slate-700 {
+    color: #c9c6d1 !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  .text-slate-600 {
+    color: #aaa6b4 !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  .text-slate-500 {
+    color: #8e8a98 !important;
+  }
+
+
+  /* =========================================================
+     7. MAIN FORM CARD
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  .xl\:col-span-3.bg-white {
+    background: #191921 !important;
+
+    border-color:
+      rgba(255, 255, 255, 0.08) !important;
+
+    box-shadow:
+      0 14px 30px rgba(0, 0, 0, 0.20) !important;
+  }
+
+
+  /* =========================================================
+     8. SUCCESS MESSAGE
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  .bg-green-50 {
+    background:
+      rgba(34, 197, 94, 0.10) !important;
+
+    color:
+      #86efac !important;
+
+    border-color:
+      rgba(74, 222, 128, 0.22) !important;
+  }
+
+
+  /* =========================================================
+     9. FORM LABELS
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  form label {
+    color: #e7e4ed !important;
+  }
+
+
+  /* =========================================================
+     10. INPUTS / SELECT / TEXTAREA
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  form input,
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  form select,
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  form textarea {
+    background: #11111b !important;
+
+    color: #f8f7fb !important;
+
+    border-color:
+      rgba(255, 255, 255, 0.11) !important;
+
+    box-shadow: none !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  form input::placeholder,
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  form textarea::placeholder {
+    color: #777482 !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  form select option {
+    background: #191921;
+
+    color: #f8f7fb;
+  }
+
+
+  /* =========================================================
+     11. FORM FOCUS STATES
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  form input:focus,
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  form select:focus,
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  form textarea:focus {
+    border-color:
+      #8b5cf6 !important;
+
+    outline: none !important;
+
+    box-shadow:
+      0 0 0 2px rgba(139, 92, 246, 0.10) !important;
+  }
+
+
+  /* =========================================================
+     12. FILE INPUT
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  input[type="file"] {
+    background: #11111b !important;
+
+    color: #c9c6d1 !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  input[type="file"]::file-selector-button {
+    border: none;
+
+    border-radius: 0.75rem;
+
+    background: #7044d4;
+
+    color: #ffffff;
+
+    padding:
+      0.65rem 1rem;
+
+    margin-right:
+      1rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  input[type="file"]::file-selector-button:hover {
+    background: #7c4ce0;
+  }
+
+
+  /* =========================================================
+     13. UPLOAD ASSIGNMENT BUTTON
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  form button[type="submit"] {
+    background: #7044d4 !important;
+
+    color: #ffffff !important;
+
+    border:
+      1px solid rgba(167, 139, 250, 0.22);
+
+    box-shadow: none !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  form button[type="submit"]:hover {
+    background: #7c4ce0 !important;
+
+    box-shadow: none !important;
+  }
+
+
+  /* =========================================================
+     14. SUBMISSION GUIDE CARD
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  .xl\:col-span-2
+  .bg-white {
+    background: #191921 !important;
+
+    border-color:
+      rgba(255, 255, 255, 0.08) !important;
+
+    box-shadow:
+      0 12px 28px rgba(0, 0, 0, 0.18) !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  .xl\:col-span-2
+  .bg-white h3 {
+    color: #f8f7fb !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  .xl\:col-span-2
+  .bg-white p {
+    color: #c9c6d1 !important;
+  }
+
+
+  /* =========================================================
+     15. KEEP YOUR WORK ORGANIZED PANEL
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  .xl\:col-span-2
+  .bg-gradient-to-r {
+    background-image:
+      linear-gradient(
+        120deg,
+        #27205e 0%,
+        #4c1d95 50%,
+        #701a75 100%
+      ) !important;
+
+    border:
+      1px solid rgba(139, 92, 246, 0.18);
+
+    box-shadow:
+      0 14px 30px rgba(0, 0, 0, 0.22) !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  .xl\:col-span-2
+  .bg-gradient-to-r
+  h3 {
+    color: #ffffff !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  .xl\:col-span-2
+  .bg-gradient-to-r
+  p {
+    color:
+      rgba(255, 255, 255, 0.90) !important;
+  }
+
+
+  /* =========================================================
+     16. SUBMISSION HISTORY EMPTY STATE
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  section:last-of-type
+  .bg-white {
+    background: #191921 !important;
+
+    border-color:
+      rgba(255, 255, 255, 0.08) !important;
+
+    box-shadow:
+      0 12px 28px rgba(0, 0, 0, 0.18) !important;
+  }
+
+
+  /* =========================================================
+     17. SUBMISSION HISTORY CARDS
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  article.bg-white {
+    background: #191921 !important;
+
+    border-color:
+      rgba(255, 255, 255, 0.08) !important;
+
+    box-shadow:
+      0 12px 28px rgba(0, 0, 0, 0.18) !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  article h4 {
+    color: #f8f7fb !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  article strong {
+    color: #e7e4ed;
+  }
+
+
+  /* =========================================================
+     18. SUBMISSION STATUS - SUBMITTED
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  .bg-blue-100 {
+    background:
+      rgba(59, 130, 246, 0.12) !important;
+
+    color:
+      #93c5fd !important;
+
+    border:
+      1px solid rgba(96, 165, 250, 0.18);
+  }
+
+
+  /* =========================================================
+     19. SUBMISSION STATUS - REVIEWED
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  .bg-yellow-100 {
+    background:
+      rgba(234, 179, 8, 0.12) !important;
+
+    color:
+      #fde68a !important;
+
+    border:
+      1px solid rgba(250, 204, 21, 0.18);
+  }
+
+
+  /* =========================================================
+     20. SUBMISSION STATUS - ACCEPTED
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  .bg-green-100 {
+    background:
+      rgba(34, 197, 94, 0.12) !important;
+
+    color:
+      #86efac !important;
+
+    border:
+      1px solid rgba(74, 222, 128, 0.18);
+  }
+
+
+  /* =========================================================
+     21. SUBMISSION STATUS - NEEDS REVISION
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  .bg-red-100 {
+    background:
+      rgba(239, 68, 68, 0.12) !important;
+
+    color:
+      #fca5a5 !important;
+
+    border:
+      1px solid rgba(248, 113, 113, 0.18);
+  }
+
+
+  /* =========================================================
+     22. OPEN FILE BUTTON
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  article
+  a.bg-\[\#6B46C1\] {
+    background: #7044d4 !important;
+
+    color: #ffffff !important;
+
+    border:
+      1px solid rgba(167, 139, 250, 0.22);
+
+    box-shadow: none !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  article
+  a.bg-\[\#6B46C1\]:hover {
+    background: #7c4ce0 !important;
+
+    box-shadow: none !important;
+  }
+
+
+  /* =========================================================
+     23. BROWSER AUTOFILL
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  input:-webkit-autofill,
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  input:-webkit-autofill:hover,
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  input:-webkit-autofill:focus {
+    -webkit-text-fill-color:
+      #f8f7fb !important;
+
+    -webkit-box-shadow:
+      0 0 0 1000px #11111b inset !important;
+
+    caret-color: #ffffff;
+  }
+
+
+  /* =========================================================
+     24. REMOVE GLOW EFFECTS
+     ========================================================= */
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  .shadow,
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  .shadow-sm,
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  .shadow-md {
+    box-shadow:
+      0 12px 28px rgba(0, 0, 0, 0.18) !important;
+  }
+
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  a.shadow-sm,
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  a.shadow-md,
+
+  html[data-theme="dark"]
+  .academy-documents-page
+  button.shadow-md {
+    box-shadow: none !important;
+  }
+
+
+  /* =========================================================
+     25. MOBILE
+     ========================================================= */
+
+  @media (max-width: 767px) {
+
+    html[data-theme="dark"]
+    .academy-documents-page
+    .xl\:col-span-3.bg-white,
+
+    html[data-theme="dark"]
+    .academy-documents-page
+    .xl\:col-span-2
+    .bg-white,
+
+    html[data-theme="dark"]
+    .academy-documents-page
+    article.bg-white,
+
+    html[data-theme="dark"]
+    .academy-documents-page
+    section:last-of-type
+    .bg-white {
+      box-shadow:
+        0 10px 22px rgba(0, 0, 0, 0.18) !important;
+    }
+
+  }
+</style>
 </head>
-<body class="bg-[#f7f7f8] text-gray-900">
+<body class="academy-documents-page bg-[#f7f7f8] text-gray-900">
 
   <%- include("../partials/header") %>
 
