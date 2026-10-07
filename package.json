@@ -29,5 +29,9 @@
     "nodemon": "^3.1.11",
     "postcss": "^8.5.8",
     "tailwindcss": "^3.4.10"
+
+  },
+  "allowScripts": {
+    "bcrypt@6.0.0": true
   }
 }
