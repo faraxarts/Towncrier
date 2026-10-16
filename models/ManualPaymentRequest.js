@@ -57,6 +57,36 @@ const manualPaymentRequestSchema = new mongoose.Schema(
       default: "",
     },
 
+    proofPublicId: {
+  type: String,
+  trim: true,
+  default: "",
+},
+
+proofResourceType: {
+  type: String,
+  trim: true,
+  default: "",
+},
+
+proofOriginalName: {
+  type: String,
+  trim: true,
+  default: "",
+},
+
+proofMimeType: {
+  type: String,
+  trim: true,
+  default: "",
+},
+
+proofBytes: {
+  type: Number,
+  min: 0,
+  default: 0,
+},
+
     status: {
       type: String,
       enum: ["initiated", "pending", "approved", "rejected"],

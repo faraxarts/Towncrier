@@ -1,7 +1,6 @@
 const express = require("express");
 const multer = require("multer");
 const path = require("path");
-const fs = require("fs");
 
 const {
   getManualPaymentPage,
@@ -13,45 +12,122 @@ const {
   requireAcademyEnrollmentPage,
 } = require("../middleware/academyEnrollmentMiddleware");
 
-const router = express.Router({ mergeParams: true });
 
-const uploadDir = path.join(__dirname, "..", "public", "uploads", "payment-proofs");
+const router = express.Router({
+  mergeParams: true,
+});
 
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, uploadDir);
-  },
-  filename: function (req, file, cb) {
-    const ext = path.extname(file.originalname);
-    cb(null, `payment-proof-${Date.now()}${ext}`);
+/* =========================================================
+   PAYMENT PROOF UPLOAD
+
+   No permanent Render filesystem storage.
+   ========================================================= */
+
+const storage = multer.memoryStorage();
+
+
+const allowedExtensions = new Set([
+  ".jpg",
+  ".jpeg",
+  ".png",
+  ".pdf",
+]);
+
+
+const allowedMimeTypes = new Set([
+  "image/jpeg",
+  "image/png",
+  "application/pdf",
+]);
+
+
+const fileFilter = (
+  req,
+  file,
+  cb
+) => {
+  const extension = path
+    .extname(
+      file.originalname || ""
+    )
+    .toLowerCase();
+
+
+  const extensionAllowed =
+    allowedExtensions.has(
+      extension
+    );
+
+
+  const mimeAllowed =
+    allowedMimeTypes.has(
+      file.mimetype
+    );
+
+
+  if (
+    extensionAllowed &&
+    mimeAllowed
+  ) {
+    return cb(
+      null,
+      true
+    );
+  }
+
+
+  return cb(
+    new Error(
+      "Only JPG, JPEG, PNG, and PDF files are allowed."
+    )
+  );
+};
+
+
+const upload = multer({
+  storage,
+
+  fileFilter,
+
+  limits: {
+    fileSize:
+      10 * 1024 * 1024,
+
+    files: 1,
   },
 });
 
-const fileFilter = (req, file, cb) => {
-  const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
-  const isValid = allowedExtensions.test(file.originalname);
 
-  if (isValid) {
-    return cb(null, true);
-  }
+/* =========================================================
+   ACADEMY
+   ========================================================= */
 
-  cb(new Error("Only JPG, JPEG, PNG, and PDF files are allowed."));
-};
+router.use(
+  loadAcademyBySlug
+);
 
-const upload = multer({ storage, fileFilter });
 
-router.use(loadAcademyBySlug);
+router.get(
+  "/levels/:levelId",
 
-router.get("/levels/:levelId", requireAcademyEnrollmentPage, getManualPaymentPage);
+  requireAcademyEnrollmentPage,
+
+  getManualPaymentPage
+);
+
+
 router.post(
   "/levels/:levelId/submit",
+
   requireAcademyEnrollmentPage,
-  upload.single("proofFile"),
+
+  upload.single(
+    "proofFile"
+  ),
+
   submitManualPaymentRequest
 );
+
 
 module.exports = router;

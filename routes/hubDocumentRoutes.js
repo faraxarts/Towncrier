@@ -1,7 +1,6 @@
 const express = require("express");
 const multer = require("multer");
 const path = require("path");
-const fs = require("fs");
 
 const {
   getDocumentsPage,
@@ -13,45 +12,121 @@ const {
   requireAcademyEnrollmentPage,
 } = require("../middleware/academyEnrollmentMiddleware");
 
-const router = express.Router({ mergeParams: true });
+const router = express.Router({
+  mergeParams: true,
+});
 
-const uploadDir = path.join(__dirname, "..", "public", "uploads", "submissions");
 
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
+/* =========================================================
+   ASSIGNMENT UPLOAD
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, uploadDir);
-  },
-  filename: function (req, file, cb) {
-    const ext = path.extname(file.originalname);
-    cb(null, `submission-${Date.now()}${ext}`);
+   Files stay temporarily in memory and are uploaded
+   permanently to Cloudinary by the controller.
+   ========================================================= */
+
+const storage = multer.memoryStorage();
+
+
+const allowedExtensions = new Set([
+  ".pdf",
+  ".doc",
+  ".docx",
+]);
+
+
+const allowedMimeTypes = new Set([
+  "application/pdf",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+]);
+
+
+const fileFilter = (
+  req,
+  file,
+  cb
+) => {
+  const extension = path
+    .extname(
+      file.originalname || ""
+    )
+    .toLowerCase();
+
+
+  const extensionAllowed =
+    allowedExtensions.has(
+      extension
+    );
+
+
+  const mimeAllowed =
+    allowedMimeTypes.has(
+      file.mimetype
+    );
+
+
+  if (
+    extensionAllowed &&
+    mimeAllowed
+  ) {
+    return cb(
+      null,
+      true
+    );
+  }
+
+
+  return cb(
+    new Error(
+      "Only PDF, DOC, and DOCX files are allowed."
+    )
+  );
+};
+
+
+const upload = multer({
+  storage,
+
+  fileFilter,
+
+  limits: {
+    fileSize:
+      15 * 1024 * 1024,
+
+    files: 1,
   },
 });
 
-const fileFilter = (req, file, cb) => {
-  const allowedExtensions = /(\.pdf|\.doc|\.docx)$/i;
-  const isValid = allowedExtensions.test(file.originalname);
 
-  if (isValid) {
-    return cb(null, true);
-  }
+/* =========================================================
+   ACADEMY
+   ========================================================= */
 
-  cb(new Error("Only PDF, DOC, and DOCX files are allowed."));
-};
+router.use(
+  loadAcademyBySlug
+);
 
-const upload = multer({ storage, fileFilter });
 
-router.use(loadAcademyBySlug);
+router.get(
+  "/",
 
-router.get("/", requireAcademyEnrollmentPage, getDocumentsPage);
+  requireAcademyEnrollmentPage,
+
+  getDocumentsPage
+);
+
+
 router.post(
   "/submit-assignment",
+
   requireAcademyEnrollmentPage,
-  upload.single("assignmentFile"),
+
+  upload.single(
+    "assignmentFile"
+  ),
+
   submitAssignment
 );
+
 
 module.exports = router;
