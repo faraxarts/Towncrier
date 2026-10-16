@@ -1,5 +1,6 @@
 const express = require("express");
-
+const academyResourceRoutes =
+  require("./academyResourceRoutes");
 const {
   getAcademyIndex,
   getAcademyHome,
@@ -32,6 +33,20 @@ router.param(
  * Public Academy listing page.
  */
 router.get("/", getAcademyIndex);
+
+/* =========================================================
+   DBW V2 COURSE RESOURCE ROUTES
+   ========================================================= */
+
+router.use(
+  "/:academySlug/courses/:courseSlug/resources",
+
+  loadAcademyBySlug,
+
+  requireAcademyEnrollmentPage,
+
+  academyResourceRoutes
+);
 
 /*
  * Individual course details.

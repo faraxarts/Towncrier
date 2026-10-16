@@ -2,6 +2,9 @@ const express = require("express");
 const multer = require("multer");
 const path = require("path");
 
+const adminCourseResourceRoutes =
+  require("./adminCourseResourceRoutes");
+
 const {
   getAllCourses,
   getNewCourseForm,
@@ -11,6 +14,19 @@ const {
   deleteCourse,
   togglePublishCourse,
 } = require("../controllers/adminCourseController");
+
+const {
+  getBuilderStartForm,
+  startBuilder,
+  getBuilder,
+  updateBuilderDetails,
+  updateBuilderRules,
+  saveBuilderDraft,
+  publishBuilderCourse,
+} = require(
+  "../controllers/adminCourseBuilderController"
+);
+
 
 const {
   isAuthenticated,
@@ -148,6 +164,14 @@ router.use(
   isAdmin
 );
 
+/* =========================================================
+   DBW V2 LEARNING MATERIAL ROUTES
+   ========================================================= */
+
+router.use(
+  "/:courseId/resources",
+  adminCourseResourceRoutes
+);
 
 /* =========================================================
    ROUTES
@@ -160,7 +184,56 @@ router.get(
 
 router.get(
   "/new",
-  getNewCourseForm
+  getBuilderStartForm
+);
+
+/* =========================================================
+   DBW V2 COURSE BUILDER
+   ========================================================= */
+
+router.post(
+  "/builder/start",
+
+  upload.single(
+    "featuredImage"
+  ),
+
+  startBuilder
+);
+
+
+router.get(
+  "/:id/builder/:step",
+  getBuilder
+);
+
+
+router.post(
+  "/:id/builder/details",
+
+  upload.single(
+    "featuredImage"
+  ),
+
+  updateBuilderDetails
+);
+
+
+router.post(
+  "/:id/builder/rules",
+  updateBuilderRules
+);
+
+
+router.post(
+  "/:id/builder/save-draft",
+  saveBuilderDraft
+);
+
+
+router.post(
+  "/:id/builder/publish",
+  publishBuilderCourse
 );
 
 

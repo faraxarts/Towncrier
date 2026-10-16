@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>
+    Create Course | Admin
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="/css/style.css"
+  />
+</head>
+
+
+<body
+  class="bg-[#f7f7f8] text-gray-900"
+>
+
+  <div
+    class="min-h-screen lg:grid lg:grid-cols-[280px_1fr]"
+  >
+
+    <%- include("../partials/admin-sidebar") %>
+
+
+    <main
+      class="px-6 py-8 md:px-10 lg:px-12"
+    >
+
+      <div
+        class="max-w-5xl mx-auto"
+      >
+
+        <div
+          class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8"
+        >
+
+          <div>
+
+            <p
+              class="text-sm font-bold uppercase tracking-widest text-[#6B46C1] mb-2"
+            >
+              DBW Course Builder
+            </p>
+
+            <h1
+              class="text-4xl font-extrabold text-gray-950 mb-2"
+            >
+              Create New Course
+            </h1>
+
+            <p
+              class="text-lg text-slate-600"
+            >
+              Start the Course as a private draft.
+              You can leave and continue editing later.
+            </p>
+
+          </div>
+
+
+          <a
+            href="/admin/courses"
+            class="rounded-2xl bg-white border border-gray-200 px-5 py-3 font-semibold text-gray-800"
+          >
+            Back
+          </a>
+
+        </div>
+
+
+        <div
+          class="mb-8 grid grid-cols-4 gap-2"
+        >
+
+          <div
+            class="rounded-2xl bg-[#6B46C1] text-white p-4 text-center font-bold"
+          >
+            1
+            <span
+              class="hidden md:inline"
+            >
+              · Details
+            </span>
+          </div>
+
+          <div
+            class="rounded-2xl bg-white border border-gray-200 p-4 text-center font-semibold text-gray-400"
+          >
+            2
+            <span class="hidden md:inline">
+              · Materials
+            </span>
+          </div>
+
+          <div
+            class="rounded-2xl bg-white border border-gray-200 p-4 text-center font-semibold text-gray-400"
+          >
+            3
+            <span class="hidden md:inline">
+              · Rules
+            </span>
+          </div>
+
+          <div
+            class="rounded-2xl bg-white border border-gray-200 p-4 text-center font-semibold text-gray-400"
+          >
+            4
+            <span class="hidden md:inline">
+              · Publish
+            </span>
+          </div>
+
+        </div>
+
+
+        <form
+          action="/admin/courses/builder/start"
+          method="POST"
+          enctype="multipart/form-data"
+          class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8 md:p-10 space-y-7"
+        >
+
+          <div>
+
+            <label
+              class="block text-sm font-semibold mb-2"
+            >
+              Start With
+            </label>
+
+            <select
+              name="template"
+              class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+            >
+              <option value="blank">
+                Blank Course
+              </option>
+
+              <option value="audio-document">
+                Audio + E-book
+              </option>
+
+              <option
+                value="audio-document-assignment"
+                selected
+              >
+                Audio + E-book + Assignment
+              </option>
+
+              <option value="audio-only">
+                Audio Only
+              </option>
+
+              <option value="document-only">
+                E-book Only
+              </option>
+            </select>
+
+            <p
+              class="text-sm text-slate-500 mt-2"
+            >
+              Templates only create empty Learning Material
+              slots. You can change or remove them later.
+            </p>
+
+          </div>
+
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
+
+            <div>
+
+              <label
+                class="block text-sm font-semibold mb-2"
+              >
+                Academy
+              </label>
+
+              <select
+                id="academy-select"
+                name="academy"
+                required
+                class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+              >
+
+                <option value="">
+                  Select Academy
+                </option>
+
+                <% academies.forEach((academy) => { %>
+
+                  <option
+                    value="<%= academy._id %>"
+                  >
+                    <%= academy.name %>
+                  </option>
+
+                <% }) %>
+
+              </select>
+
+            </div>
+
+
+            <div>
+
+              <label
+                class="block text-sm font-semibold mb-2"
+              >
+                Level
+              </label>
+
+              <select
+                id="level-select"
+                name="level"
+                required
+                class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+              >
+
+                <option value="">
+                  Select Level
+                </option>
+
+                <% levels.forEach((level) => { %>
+
+                  <option
+                    value="<%= level._id %>"
+                    data-academy-id="<%= level.academy ? level.academy._id : '' %>"
+                  >
+                    <%= level.title %>
+                    —
+                    <%= level.academy ? level.academy.name : "" %>
+                  </option>
+
+                <% }) %>
+
+              </select>
+
+            </div>
+
+          </div>
+
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-3 gap-6"
+          >
+
+            <div
+              class="md:col-span-2"
+            >
+
+              <label
+                class="block text-sm font-semibold mb-2"
+              >
+                Course Title
+              </label>
+
+              <input
+                id="course-title"
+                name="title"
+                required
+                type="text"
+                class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+                placeholder="The Faith"
+              />
+
+            </div>
+
+
+            <div>
+
+              <label
+                class="block text-sm font-semibold mb-2"
+              >
+                Position in Level
+              </label>
+
+              <input
+                name="levelPosition"
+                type="number"
+                min="1"
+                value="1"
+                class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+              />
+
+            </div>
+
+          </div>
+
+
+          <div>
+
+            <label
+              class="block text-sm font-semibold mb-2"
+            >
+              Slug
+            </label>
+
+            <input
+              name="slug"
+              type="text"
+              class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+              placeholder="Leave blank to generate automatically"
+            />
+
+          </div>
+
+
+          <div>
+
+            <label
+              class="block text-sm font-semibold mb-2"
+            >
+              Short Description
+            </label>
+
+            <textarea
+              name="description"
+              required
+              rows="4"
+              class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+            ></textarea>
+
+          </div>
+
+
+          <div>
+
+            <label
+              class="block text-sm font-semibold mb-2"
+            >
+              Course Overview
+            </label>
+
+            <textarea
+              name="overview"
+              rows="5"
+              class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+            ></textarea>
+
+          </div>
+
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
+
+            <div>
+
+              <label
+                class="block text-sm font-semibold mb-2"
+              >
+                Instructor
+              </label>
+
+              <input
+                name="instructor"
+                type="text"
+                class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+              />
+
+            </div>
+
+
+            <div>
+
+              <label
+                class="block text-sm font-semibold mb-2"
+              >
+                Estimated Duration
+              </label>
+
+              <input
+                name="duration"
+                type="text"
+                class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+                placeholder="Example: 2 weeks"
+              />
+
+            </div>
+
+          </div>
+
+
+          <div>
+
+            <label
+              class="block text-sm font-semibold mb-2"
+            >
+              Featured Image
+            </label>
+
+            <input
+              name="featuredImage"
+              type="file"
+              accept=".jpg,.jpeg,.png,.webp"
+              class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+            />
+
+          </div>
+
+
+          <div>
+
+            <label
+              class="block text-sm font-semibold mb-2"
+            >
+              What You Will Learn
+            </label>
+
+            <textarea
+              name="whatYouWillLearn"
+              rows="5"
+              class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+              placeholder="One point per line"
+            ></textarea>
+
+          </div>
+
+
+          <div
+            class="rounded-2xl bg-purple-50 border border-purple-100 p-5"
+          >
+
+            <p
+              class="font-bold text-[#6B46C1]"
+            >
+              This Course will be created as a Draft.
+            </p>
+
+            <p
+              class="text-sm text-slate-600 mt-1"
+            >
+              Learners will not see it until you complete
+              the builder and publish it.
+            </p>
+
+          </div>
+
+
+          <button
+            type="submit"
+            class="rounded-2xl bg-[#6B46C1] text-white px-8 py-4 font-semibold hover:bg-purple-700 transition"
+          >
+            Create Draft & Continue
+          </button>
+
+        </form>
+
+      </div>
+
+    </main>
+
+  </div>
+
+
+  <script src="/js/admin-shell.js"></script>
+
+
+  <script>
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+
+        const academySelect =
+          document.getElementById(
+            "academy-select"
+          );
+
+        const levelSelect =
+          document.getElementById(
+            "level-select"
+          );
+
+
+        function filterLevels() {
+
+          const academyId =
+            academySelect.value;
+
+
+          Array.from(
+            levelSelect.options
+          ).forEach(
+            function (
+              option,
+              index
+            ) {
+
+              if (index === 0) {
+                option.hidden =
+                  false;
+
+                option.disabled =
+                  false;
+
+                return;
+              }
+
+
+              const matches =
+                academyId &&
+                option.dataset
+                  .academyId ===
+                  academyId;
+
+
+              option.hidden =
+                !matches;
+
+              option.disabled =
+                !matches;
+
+            }
+          );
+
+
+          const selected =
+            levelSelect.options[
+              levelSelect.selectedIndex
+            ];
+
+
+          if (
+            selected &&
+            selected.disabled
+          ) {
+            levelSelect.value =
+              "";
+          }
+
+        }
+
+
+        academySelect.addEventListener(
+          "change",
+          filterLevels
+        );
+
+
+        filterLevels();
+
+      }
+    );
+  </script>
+
+</body>
+</html>

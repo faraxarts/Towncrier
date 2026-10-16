@@ -85,12 +85,16 @@
                     </div>
 
                     <div class="flex flex-wrap gap-3">
-                      <a
-                        href="/admin/courses/<%= course._id %>/edit<%= selectedAcademy ? `?academy=${selectedAcademy}` : '' %>"
-                        class="rounded-2xl bg-[#6B46C1] text-white px-5 py-3 font-semibold hover:bg-purple-700 transition"
-                      >
-                        Edit
-                      </a>
+                     <a
+  href="<%= course.contentMode === 'resources'
+    ? `/admin/courses/${course._id}/builder/1`
+    : `/admin/courses/${course._id}/edit${selectedAcademy ? `?academy=${selectedAcademy}` : ''}` %>"
+  class="rounded-2xl bg-[#6B46C1] text-white px-5 py-3 font-semibold hover:bg-purple-700 transition"
+>
+  <%= course.contentMode === "resources"
+    ? "Open Builder"
+    : "Edit" %>
+</a>
 
                       <form action="/admin/courses/<%= course._id %>/toggle-publish" method="POST">
                         <input type="hidden" name="redirectAcademy" value="<%= selectedAcademy || '' %>">

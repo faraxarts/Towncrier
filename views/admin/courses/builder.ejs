@@ -1,0 +1,2037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>
+    <%= course.title %> | Course Builder
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="/css/style.css"
+  />
+</head>
+
+
+<body class="bg-[#f7f7f8] text-gray-900">
+
+<div class="min-h-screen lg:grid lg:grid-cols-[280px_1fr]">
+
+  <%- include("../partials/admin-sidebar") %>
+
+
+  <main class="px-6 py-8 md:px-10 lg:px-12">
+
+    <div class="max-w-6xl mx-auto">
+
+      <div
+        class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8"
+      >
+
+        <div>
+
+          <p
+            class="text-sm font-bold uppercase tracking-widest text-[#6B46C1] mb-2"
+          >
+            DBW Course Builder
+          </p>
+
+          <h1
+            class="text-4xl font-extrabold text-gray-950"
+          >
+            <%= course.title %>
+          </h1>
+
+          <p
+            class="text-slate-500 mt-2"
+          >
+            <%= course.status === "published"
+              ? "Published Course"
+              : "Draft saved automatically as you build" %>
+          </p>
+
+        </div>
+
+
+        <a
+          href="/admin/courses"
+          class="rounded-2xl bg-white border border-gray-200 px-5 py-3 font-semibold"
+        >
+          Exit Builder
+        </a>
+
+      </div>
+
+
+      <% if (error) { %>
+
+        <div
+          class="mb-6 rounded-2xl border border-red-200 bg-red-50 p-5 text-red-700 font-semibold"
+        >
+          <%= error %>
+        </div>
+
+      <% } %>
+
+
+      <% if (success) { %>
+
+        <div
+          class="mb-6 rounded-2xl border border-green-200 bg-green-50 p-5 text-green-700 font-semibold"
+        >
+          Changes saved successfully.
+        </div>
+
+      <% } %>
+
+
+      <!-- STEPS -->
+
+      <div
+        class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8"
+      >
+
+        <% const stepNames = [
+          "Course Details",
+          "Learning Materials",
+          "Course Rules",
+          "Review & Publish"
+        ]; %>
+
+
+        <% stepNames.forEach((name, index) => {
+          const number = index + 1;
+        %>
+
+          <a
+            href="/admin/courses/<%= course._id %>/builder/<%= number %>"
+            class="rounded-2xl border p-4 text-center font-semibold transition
+              <%= step === number
+                ? 'bg-[#6B46C1] border-[#6B46C1] text-white'
+                : 'bg-white border-gray-200 text-gray-600' %>"
+          >
+            <span class="block text-sm">
+              Step <%= number %>
+            </span>
+
+            <span
+              class="hidden md:block mt-1"
+            >
+              <%= name %>
+            </span>
+          </a>
+
+        <% }) %>
+
+      </div>
+
+
+      <!-- =================================================
+           STEP 1
+           ================================================= -->
+
+      <% if (step === 1) { %>
+
+        <form
+          action="/admin/courses/<%= course._id %>/builder/details"
+          method="POST"
+          enctype="multipart/form-data"
+          class="bg-white rounded-[28px] border border-gray-100 shadow-sm p-8 space-y-6"
+        >
+
+          <h2
+            class="text-2xl font-extrabold"
+          >
+            Course Details
+          </h2>
+
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
+
+            <div>
+
+              <label class="block text-sm font-semibold mb-2">
+                Academy
+              </label>
+
+              <select
+                id="academy-select"
+                name="academy"
+                required
+                class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+              >
+
+                <% academies.forEach((academy) => { %>
+
+                  <option
+                    value="<%= academy._id %>"
+                    <%= String(course.academy?._id) === String(academy._id) ? "selected" : "" %>
+                  >
+                    <%= academy.name %>
+                  </option>
+
+                <% }) %>
+
+              </select>
+
+            </div>
+
+
+            <div>
+
+              <label class="block text-sm font-semibold mb-2">
+                Level
+              </label>
+
+              <select
+                id="level-select"
+                name="level"
+                required
+                class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+              >
+
+                <% levels.forEach((level) => { %>
+
+                  <option
+                    value="<%= level._id %>"
+                    data-academy-id="<%= level.academy ? level.academy._id : '' %>"
+                    <%= String(course.level?._id) === String(level._id) ? "selected" : "" %>
+                  >
+                    <%= level.title %>
+                  </option>
+
+                <% }) %>
+
+              </select>
+
+            </div>
+
+          </div>
+
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-3 gap-6"
+          >
+
+            <div class="md:col-span-2">
+
+              <label class="block text-sm font-semibold mb-2">
+                Course Title
+              </label>
+
+              <input
+                name="title"
+                required
+                value="<%= course.title %>"
+                class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+              />
+
+            </div>
+
+
+            <div>
+
+              <label class="block text-sm font-semibold mb-2">
+                Position
+              </label>
+
+              <input
+                name="levelPosition"
+                type="number"
+                min="1"
+                value="<%= course.levelPosition || 1 %>"
+                class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+              />
+
+            </div>
+
+          </div>
+
+
+          <div>
+
+            <label class="block text-sm font-semibold mb-2">
+              Slug
+            </label>
+
+            <input
+              name="slug"
+              value="<%= course.slug %>"
+              class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+            />
+
+          </div>
+
+
+          <div>
+
+            <label class="block text-sm font-semibold mb-2">
+              Short Description
+            </label>
+
+            <textarea
+              name="description"
+              required
+              rows="4"
+              class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+            ><%= course.description %></textarea>
+
+          </div>
+
+
+          <div>
+
+            <label class="block text-sm font-semibold mb-2">
+              Overview
+            </label>
+
+            <textarea
+              name="overview"
+              rows="5"
+              class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+            ><%= course.overview || "" %></textarea>
+
+          </div>
+
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
+
+            <div>
+
+              <label class="block text-sm font-semibold mb-2">
+                Instructor
+              </label>
+
+              <input
+                name="instructor"
+                value="<%= course.instructor || '' %>"
+                class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+              />
+
+            </div>
+
+
+            <div>
+
+              <label class="block text-sm font-semibold mb-2">
+                Estimated Duration
+              </label>
+
+              <input
+                name="duration"
+                value="<%= course.duration || '' %>"
+                class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+              />
+
+            </div>
+
+          </div>
+
+
+          <% if (course.featuredImage) { %>
+
+            <div>
+
+              <p class="text-sm font-semibold mb-2">
+                Current Featured Image
+              </p>
+
+              <img
+                src="<%= course.featuredImage %>"
+                alt=""
+                class="w-40 h-28 object-cover rounded-2xl border"
+              />
+
+            </div>
+
+          <% } %>
+
+
+          <div>
+
+            <label class="block text-sm font-semibold mb-2">
+              Replace Featured Image
+            </label>
+
+            <input
+              name="featuredImage"
+              type="file"
+              accept=".jpg,.jpeg,.png,.webp"
+              class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+            />
+
+          </div>
+
+
+          <div>
+
+            <label class="block text-sm font-semibold mb-2">
+              What You Will Learn
+            </label>
+
+            <textarea
+              name="whatYouWillLearn"
+              rows="5"
+              class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+            ><%= (course.whatYouWillLearn || []).join("\n") %></textarea>
+
+          </div>
+
+
+          <button
+            type="submit"
+            class="rounded-2xl bg-[#6B46C1] text-white px-7 py-4 font-semibold"
+          >
+            Save & Continue to Materials
+          </button>
+
+        </form>
+
+      <% } %>
+
+
+      <!-- =================================================
+           STEP 2
+           ================================================= -->
+
+      <% if (step === 2) { %>
+
+        <div class="space-y-6">
+
+          <div
+            class="bg-white rounded-[28px] border border-gray-100 shadow-sm p-8"
+          >
+
+            <div
+              class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-7"
+            >
+
+              <div>
+
+                <h2 class="text-2xl font-extrabold">
+                  Learning Materials
+                </h2>
+
+                <p class="text-slate-500 mt-1">
+                  Add and arrange everything the learner will use.
+                </p>
+
+              </div>
+
+              <span
+                class="rounded-full bg-purple-50 text-[#6B46C1] px-4 py-2 font-semibold"
+              >
+                <%= resources.length %>
+                material<%= resources.length === 1 ? "" : "s" %>
+              </span>
+
+            </div>
+
+
+            <% if (!resources.length) { %>
+
+              <div
+                class="rounded-2xl border border-dashed border-gray-300 p-10 text-center"
+              >
+                <p class="font-bold text-xl">
+                  No Learning Materials yet
+                </p>
+
+                <p class="text-slate-500 mt-2">
+                  Use the form below to add the first one.
+                </p>
+              </div>
+
+            <% } %>
+
+
+            <div class="space-y-4">
+
+              <% resources.forEach((resource, index) => { %>
+
+                <div
+                  class="rounded-2xl border border-gray-200 p-6"
+                >
+
+                  <div
+                    class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-5"
+                  >
+
+                    <div>
+
+                      <div
+                        class="flex flex-wrap items-center gap-2 mb-2"
+                      >
+
+                        <span
+                          class="rounded-full bg-gray-100 px-3 py-1 text-sm font-bold uppercase"
+                        >
+                          <%= resource.type %>
+                        </span>
+
+                        <% if (resource.required) { %>
+
+                          <span
+                            class="rounded-full bg-purple-50 text-[#6B46C1] px-3 py-1 text-sm font-semibold"
+                          >
+                            Required
+                          </span>
+
+                        <% } else { %>
+
+                          <span
+                            class="rounded-full bg-gray-50 text-gray-500 px-3 py-1 text-sm font-semibold"
+                          >
+                            Optional
+                          </span>
+
+                        <% } %>
+
+                      </div>
+
+
+                      <h3
+                        class="text-xl font-extrabold"
+                      >
+                        <%= index + 1 %>.
+                        <%= resource.title %>
+                      </h3>
+
+
+                      <% if (
+                        ["audio", "document", "assignment"]
+                          .includes(resource.type)
+                      ) { %>
+
+                        <p
+                          class="text-sm mt-2 <%= resource.file?.fileUrl ? 'text-green-700' : 'text-orange-600' %>"
+                        >
+                          <%= resource.file?.fileUrl
+                            ? `✓ ${resource.file.originalName || "File uploaded"}`
+                            : "⚠ No file uploaded yet" %>
+                        </p>
+
+                      <% } %>
+
+
+                      <p
+                        class="text-sm text-slate-500 mt-2"
+                      >
+                        Completion:
+                        <strong>
+                          <%= resource.completion?.method || "none" %>
+                        </strong>
+                      </p>
+
+                    </div>
+
+
+                    <div class="flex flex-wrap gap-2">
+
+                      <button
+                        type="button"
+                        data-resource-action
+                        data-url="/admin/courses/<%= course._id %>/resources/<%= resource._id %>/move-up"
+                        class="rounded-xl border border-gray-200 px-3 py-2 font-semibold"
+                      >
+                        ↑
+                      </button>
+
+                      <button
+                        type="button"
+                        data-resource-action
+                        data-url="/admin/courses/<%= course._id %>/resources/<%= resource._id %>/move-down"
+                        class="rounded-xl border border-gray-200 px-3 py-2 font-semibold"
+                      >
+                        ↓
+                      </button>
+
+                      <button
+                        type="button"
+                        data-resource-delete
+                        data-url="/admin/courses/<%= course._id %>/resources/<%= resource._id %>/delete"
+                        class="rounded-xl border border-red-200 text-red-600 px-4 py-2 font-semibold"
+                      >
+                        Delete
+                      </button>
+
+                    </div>
+
+                  </div>
+
+
+                  <details class="mt-5">
+
+                    <summary
+                      class="cursor-pointer font-bold text-[#6B46C1]"
+                    >
+                      Edit Material
+                    </summary>
+
+
+                    <form
+                      data-resource-form
+                      data-action="/admin/courses/<%= course._id %>/resources/<%= resource._id %>/update"
+                      data-type="<%= resource.type %>"
+                      class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-5"
+                      enctype="multipart/form-data"
+                    >
+
+                      <div class="md:col-span-2">
+
+                        <label class="block text-sm font-semibold mb-2">
+                          Title
+                        </label>
+
+                        <input
+                          name="title"
+                          value="<%= resource.title %>"
+                          required
+                          class="w-full rounded-xl border border-gray-200 px-4 py-3"
+                        />
+
+                      </div>
+
+
+                      <div class="md:col-span-2">
+
+                        <label class="block text-sm font-semibold mb-2">
+                          Description / Instructions
+                        </label>
+
+                        <textarea
+                          name="description"
+                          rows="4"
+                          class="w-full rounded-xl border border-gray-200 px-4 py-3"
+                        ><%= resource.description || "" %></textarea>
+
+                      </div>
+
+
+                      <% if (
+                        ["audio", "document", "assignment"]
+                          .includes(resource.type)
+                      ) { %>
+
+                        <div class="md:col-span-2">
+
+                          <label class="block text-sm font-semibold mb-2">
+                            Replace File
+                          </label>
+
+                          <input
+                            name="resourceFile"
+                            type="file"
+                            class="w-full rounded-xl border border-gray-200 px-4 py-3"
+                          />
+
+                        </div>
+
+                      <% } %>
+
+
+                      <% if (resource.type === "written") { %>
+
+                        <div class="md:col-span-2">
+
+                          <label class="block text-sm font-semibold mb-2">
+                            Written Content
+                          </label>
+
+                          <textarea
+                            name="content"
+                            rows="8"
+                            class="w-full rounded-xl border border-gray-200 px-4 py-3"
+                          ><%= resource.content || "" %></textarea>
+
+                        </div>
+
+                      <% } %>
+
+
+                      <% if (resource.type === "external") { %>
+
+                        <div class="md:col-span-2">
+
+                          <label class="block text-sm font-semibold mb-2">
+                            External URL
+                          </label>
+
+                          <input
+                            name="externalUrl"
+                            value="<%= resource.externalUrl || '' %>"
+                            class="w-full rounded-xl border border-gray-200 px-4 py-3"
+                          />
+
+                        </div>
+
+                      <% } %>
+
+
+                      <label class="flex items-center gap-3">
+                        <input
+                          data-required-checkbox
+                          type="checkbox"
+                          <%= resource.required ? "checked" : "" %>
+                        />
+
+                        Required
+                      </label>
+
+
+                      <label class="flex items-center gap-3">
+                        <input
+                          data-online-checkbox
+                          type="checkbox"
+                          <%= resource.access?.allowOnline ? "checked" : "" %>
+                        />
+
+                        Allow Online Use
+                      </label>
+
+
+                      <label class="flex items-center gap-3">
+                        <input
+                          data-download-checkbox
+                          type="checkbox"
+                          <%= resource.access?.allowDownload ? "checked" : "" %>
+                        />
+
+                        Allow Download
+                      </label>
+
+
+                      <% if (resource.type === "assignment") { %>
+
+                        <label class="flex items-center gap-3">
+
+                          <input
+                            data-submission-checkbox
+                            type="checkbox"
+                            <%= resource.assignmentSettings?.submissionRequired !== false ? "checked" : "" %>
+                          />
+
+                          Submission Required
+                        </label>
+
+                      <% } %>
+
+
+                      <div>
+
+                        <label class="block text-sm font-semibold mb-2">
+                          Completion Method
+                        </label>
+
+                        <select
+                          name="completionMethod"
+                          class="w-full rounded-xl border border-gray-200 px-4 py-3"
+                        >
+
+                          <% const method = resource.completion?.method || "none"; %>
+
+                          <% if (resource.type === "audio") { %>
+                            <option value="audio_percentage" <%= method === "audio_percentage" ? "selected" : "" %>>
+                              Listen to Percentage
+                            </option>
+
+                            <option value="manual_confirmation" <%= method === "manual_confirmation" ? "selected" : "" %>>
+                              Learner Confirms
+                            </option>
+                          <% } %>
+
+
+                          <% if (["document", "written"].includes(resource.type)) { %>
+                            <option value="manual_confirmation" <%= method === "manual_confirmation" ? "selected" : "" %>>
+                              Learner Confirms
+                            </option>
+
+                            <option value="resource_opened" <%= method === "resource_opened" ? "selected" : "" %>>
+                              Opening Counts as Complete
+                            </option>
+                          <% } %>
+
+
+                          <% if (resource.type === "assignment") { %>
+                            <option value="assignment_accepted" <%= method === "assignment_accepted" ? "selected" : "" %>>
+                              Admin Accepts Submission
+                            </option>
+
+                            <option value="assignment_submitted" <%= method === "assignment_submitted" ? "selected" : "" %>>
+                              Submission Counts as Complete
+                            </option>
+                          <% } %>
+
+
+                          <% if (resource.type === "external") { %>
+                            <option value="external_visit" <%= method === "external_visit" ? "selected" : "" %>>
+                              Visit Link
+                            </option>
+                          <% } %>
+
+
+                          <option value="none" <%= method === "none" ? "selected" : "" %>>
+                            No Completion Requirement
+                          </option>
+
+                        </select>
+
+                      </div>
+
+
+                      <% if (resource.type === "audio") { %>
+
+                        <div>
+
+                          <label class="block text-sm font-semibold mb-2">
+                            Listening Threshold %
+                          </label>
+
+                          <input
+                            name="completionThreshold"
+                            type="number"
+                            min="1"
+                            max="100"
+                            value="<%= resource.completion?.threshold || 80 %>"
+                            class="w-full rounded-xl border border-gray-200 px-4 py-3"
+                          />
+
+                        </div>
+
+                      <% } %>
+
+
+                      <div class="md:col-span-2">
+
+                        <button
+                          type="submit"
+                          class="rounded-xl bg-[#6B46C1] text-white px-5 py-3 font-semibold"
+                        >
+                          Save Material
+                        </button>
+
+                      </div>
+
+                    </form>
+
+                  </details>
+
+                </div>
+
+              <% }) %>
+
+            </div>
+
+          </div>
+
+
+          <!-- ADD MATERIAL -->
+
+          <div
+            class="bg-white rounded-[28px] border border-gray-100 shadow-sm p-8"
+          >
+
+            <h2 class="text-2xl font-extrabold mb-2">
+              + Add Learning Material
+            </h2>
+
+            <p class="text-slate-500 mb-6">
+              Audio, e-book, assignment, written material or external resource.
+            </p>
+
+
+            <form
+              id="add-resource-form"
+              data-resource-form
+              data-action="/admin/courses/<%= course._id %>/resources"
+              class="grid grid-cols-1 md:grid-cols-2 gap-5"
+              enctype="multipart/form-data"
+            >
+
+              <div>
+
+                <label class="block text-sm font-semibold mb-2">
+                  Material Type
+                </label>
+
+                <select
+                  id="new-resource-type"
+                  name="type"
+                  class="w-full rounded-xl border border-gray-200 px-4 py-3"
+                >
+                  <option value="audio">
+                    Audio Teaching
+                  </option>
+
+                  <option value="document">
+                    E-book / Document
+                  </option>
+
+                  <option value="assignment">
+                    Assignment
+                  </option>
+
+                  <option value="written">
+                    Written Material
+                  </option>
+
+                  <option value="external">
+                    External Resource
+                  </option>
+                </select>
+
+              </div>
+
+
+              <div>
+
+                <label class="block text-sm font-semibold mb-2">
+                  Title
+                </label>
+
+                <input
+                  name="title"
+                  required
+                  class="w-full rounded-xl border border-gray-200 px-4 py-3"
+                />
+
+              </div>
+
+
+              <div class="md:col-span-2">
+
+                <label class="block text-sm font-semibold mb-2">
+                  Description / Instructions
+                </label>
+
+                <textarea
+                  name="description"
+                  rows="4"
+                  class="w-full rounded-xl border border-gray-200 px-4 py-3"
+                ></textarea>
+
+              </div>
+
+
+              <div
+                id="new-file-field"
+                class="md:col-span-2"
+              >
+
+                <label class="block text-sm font-semibold mb-2">
+                  File
+                </label>
+
+                <input
+                  id="new-resource-file"
+                  name="resourceFile"
+                  type="file"
+                  class="w-full rounded-xl border border-gray-200 px-4 py-3"
+                />
+
+              </div>
+
+
+              <div
+                id="new-written-field"
+                class="hidden md:col-span-2"
+              >
+
+                <label class="block text-sm font-semibold mb-2">
+                  Written Content
+                </label>
+
+                <textarea
+                  name="content"
+                  rows="8"
+                  class="w-full rounded-xl border border-gray-200 px-4 py-3"
+                ></textarea>
+
+              </div>
+
+
+              <div
+                id="new-external-field"
+                class="hidden md:col-span-2"
+              >
+
+                <label class="block text-sm font-semibold mb-2">
+                  External URL
+                </label>
+
+                <input
+                  name="externalUrl"
+                  class="w-full rounded-xl border border-gray-200 px-4 py-3"
+                />
+
+              </div>
+
+
+              <label class="flex items-center gap-3">
+                <input
+                  data-required-checkbox
+                  type="checkbox"
+                  checked
+                />
+
+                Required
+              </label>
+
+
+              <label class="flex items-center gap-3">
+                <input
+                  data-online-checkbox
+                  type="checkbox"
+                  checked
+                />
+
+                Allow Online Use
+              </label>
+
+
+              <label class="flex items-center gap-3">
+                <input
+                  data-download-checkbox
+                  type="checkbox"
+                  checked
+                />
+
+                Allow Download
+              </label>
+
+
+              <label
+                id="new-submission-field"
+                class="hidden items-center gap-3"
+              >
+                <input
+                  data-submission-checkbox
+                  type="checkbox"
+                  checked
+                />
+
+                Submission Required
+              </label>
+
+
+              <div>
+
+                <label class="block text-sm font-semibold mb-2">
+                  Completion Method
+                </label>
+
+                <select
+                  id="new-completion-method"
+                  name="completionMethod"
+                  class="w-full rounded-xl border border-gray-200 px-4 py-3"
+                ></select>
+
+              </div>
+
+
+              <div
+                id="new-threshold-field"
+              >
+
+                <label class="block text-sm font-semibold mb-2">
+                  Listening Threshold %
+                </label>
+
+                <input
+                  name="completionThreshold"
+                  type="number"
+                  min="1"
+                  max="100"
+                  value="80"
+                  class="w-full rounded-xl border border-gray-200 px-4 py-3"
+                />
+
+              </div>
+
+
+              <div class="md:col-span-2">
+
+                <button
+                  type="submit"
+                  class="rounded-xl bg-[#6B46C1] text-white px-6 py-3 font-semibold"
+                >
+                  Add Learning Material
+                </button>
+
+              </div>
+
+            </form>
+
+          </div>
+
+
+          <div class="flex justify-end">
+
+            <a
+              href="/admin/courses/<%= course._id %>/builder/3"
+              class="rounded-2xl bg-[#6B46C1] text-white px-7 py-4 font-semibold"
+            >
+              Continue to Course Rules →
+            </a>
+
+          </div>
+
+        </div>
+
+      <% } %>
+
+
+      <!-- =================================================
+           STEP 3
+           ================================================= -->
+
+      <% if (step === 3) { %>
+
+        <form
+          action="/admin/courses/<%= course._id %>/builder/rules"
+          method="POST"
+          class="bg-white rounded-[28px] border border-gray-100 shadow-sm p-8 space-y-7"
+        >
+
+          <div>
+
+            <h2 class="text-2xl font-extrabold">
+              Course Rules
+            </h2>
+
+            <p class="text-slate-500 mt-1">
+              Control completion and progression without changing Level access/payment.
+            </p>
+
+          </div>
+
+
+          <div>
+
+            <label class="block text-sm font-semibold mb-2">
+              Course Completion
+            </label>
+
+            <select
+              name="completionRule"
+              class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+            >
+
+              <option
+                value="all_required_resources"
+                <%= course.completionRule === "all_required_resources" ? "selected" : "" %>
+              >
+                Complete all required Learning Materials
+              </option>
+
+              <option
+                value="admin_approval"
+                <%= course.completionRule === "admin_approval" ? "selected" : "" %>
+              >
+                Administrator manually approves Course
+              </option>
+
+              <option
+                value="none"
+                <%= course.completionRule === "none" ? "selected" : "" %>
+              >
+                No tracked completion
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div>
+
+            <label class="block text-sm font-semibold mb-2">
+              Course Access
+            </label>
+
+            <select
+              name="accessRule"
+              class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+            >
+
+              <option
+                value="level_access"
+                <%= course.accessRule === "level_access" ? "selected" : "" %>
+              >
+                Available to anyone who has unlocked this Level
+              </option>
+
+              <option
+                value="previous_course_complete"
+                <%= course.accessRule === "previous_course_complete" ? "selected" : "" %>
+              >
+                Require previous Course completion
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div>
+
+            <label class="block text-sm font-semibold mb-2">
+              After Completion
+            </label>
+
+            <select
+              id="next-course-mode"
+              name="nextCourseMode"
+              class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+            >
+
+              <option
+                value="auto"
+                <%= course.nextCourseMode === "auto" ? "selected" : "" %>
+              >
+                Automatically recommend the next Course in this Level
+              </option>
+
+              <option
+                value="manual"
+                <%= course.nextCourseMode === "manual" ? "selected" : "" %>
+              >
+                Choose the next Course manually
+              </option>
+
+              <option
+                value="none"
+                <%= course.nextCourseMode === "none" ? "selected" : "" %>
+              >
+                Do not recommend another Course
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div
+            id="manual-next-course"
+          >
+
+            <label class="block text-sm font-semibold mb-2">
+              Next Course
+            </label>
+
+            <select
+              name="nextCourse"
+              class="w-full rounded-2xl border border-gray-200 px-4 py-3.5"
+            >
+
+              <option value="">
+                Select Course
+              </option>
+
+              <% nextCourseOptions.forEach((item) => { %>
+
+                <option
+                  value="<%= item._id %>"
+                  <%= String(course.nextCourse?._id || course.nextCourse || "") === String(item._id) ? "selected" : "" %>
+                >
+                  <%= item.title %>
+                </option>
+
+              <% }) %>
+
+            </select>
+
+          </div>
+
+
+          <button
+            type="submit"
+            class="rounded-2xl bg-[#6B46C1] text-white px-7 py-4 font-semibold"
+          >
+            Save Rules & Review
+          </button>
+
+        </form>
+
+      <% } %>
+
+
+      <!-- =================================================
+           STEP 4
+           ================================================= -->
+
+      <% if (step === 4) { %>
+
+        <div class="space-y-6">
+
+          <div
+            class="bg-white rounded-[28px] border border-gray-100 shadow-sm p-8"
+          >
+
+            <h2 class="text-2xl font-extrabold mb-6">
+              Review Course
+            </h2>
+
+
+            <div class="space-y-3">
+
+              <p>
+                <strong>Academy:</strong>
+                <%= course.academy?.name || "Not assigned" %>
+              </p>
+
+              <p>
+                <strong>Level:</strong>
+                <%= course.level?.title || "Not assigned" %>
+              </p>
+
+              <p>
+                <strong>Position:</strong>
+                <%= course.levelPosition %>
+              </p>
+
+              <p>
+                <strong>Completion:</strong>
+                <%= course.completionRule %>
+              </p>
+
+              <p>
+                <strong>Course Access:</strong>
+                <%= course.accessRule %>
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div
+            class="bg-white rounded-[28px] border border-gray-100 shadow-sm p-8"
+          >
+
+            <h2 class="text-2xl font-extrabold mb-6">
+              Learning Materials
+            </h2>
+
+
+            <% if (!resources.length) { %>
+
+              <p class="text-red-600 font-semibold">
+                No Learning Materials have been added.
+              </p>
+
+            <% } else { %>
+
+              <div class="space-y-3">
+
+                <% resources.forEach((resource, index) => { %>
+
+                  <div
+                    class="rounded-2xl border border-gray-200 p-5 flex items-center justify-between gap-5"
+                  >
+
+                    <div>
+
+                      <p class="font-bold">
+                        <%= index + 1 %>.
+                        <%= resource.title %>
+                      </p>
+
+                      <p class="text-sm text-slate-500 mt-1">
+                        <%= resource.type %>
+                        ·
+                        <%= resource.required ? "Required" : "Optional" %>
+                      </p>
+
+                    </div>
+
+
+                    <span
+                      class="text-sm font-semibold <%= resource.status === 'published' ? 'text-green-700' : 'text-orange-600' %>"
+                    >
+                      <%= resource.status %>
+                    </span>
+
+                  </div>
+
+                <% }) %>
+
+              </div>
+
+            <% } %>
+
+          </div>
+
+
+          <div
+            class="bg-white rounded-[28px] border border-gray-100 shadow-sm p-8"
+          >
+
+            <h2 class="text-2xl font-extrabold mb-2">
+              Ready?
+            </h2>
+
+            <p class="text-slate-500 mb-6">
+              Publishing makes the Course available to learners
+              who have access to this Level.
+            </p>
+
+
+            <div class="flex flex-wrap gap-4">
+
+              <form
+                action="/admin/courses/<%= course._id %>/builder/publish"
+                method="POST"
+              >
+
+                <button
+                  type="submit"
+                  class="rounded-2xl bg-[#6B46C1] text-white px-8 py-4 font-bold"
+                >
+                  Publish Course
+                </button>
+
+              </form>
+
+
+              <form
+                action="/admin/courses/<%= course._id %>/builder/save-draft"
+                method="POST"
+              >
+
+                <button
+                  type="submit"
+                  class="rounded-2xl bg-white border border-gray-200 px-8 py-4 font-bold text-gray-700"
+                >
+                  Save as Draft
+                </button>
+
+              </form>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      <% } %>
+
+    </div>
+
+  </main>
+
+</div>
+
+
+<script src="/js/admin-shell.js"></script>
+
+
+<script>
+  document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+      /* =========================================
+         STEP 1 ACADEMY / LEVEL
+         ========================================= */
+
+      const academySelect =
+        document.getElementById(
+          "academy-select"
+        );
+
+      const levelSelect =
+        document.getElementById(
+          "level-select"
+        );
+
+
+      if (
+        academySelect &&
+        levelSelect
+      ) {
+
+        function filterLevels() {
+
+          const academyId =
+            academySelect.value;
+
+
+          Array.from(
+            levelSelect.options
+          ).forEach(
+            function (option) {
+
+              const optionAcademy =
+                option.dataset
+                  .academyId;
+
+
+              if (
+                !optionAcademy
+              ) {
+                return;
+              }
+
+
+              const show =
+                optionAcademy ===
+                academyId;
+
+
+              option.hidden =
+                !show;
+
+              option.disabled =
+                !show;
+
+            }
+          );
+
+        }
+
+
+        academySelect.addEventListener(
+          "change",
+          filterLevels
+        );
+
+
+        filterLevels();
+
+      }
+
+
+      /* =========================================
+         STEP 3 NEXT COURSE
+         ========================================= */
+
+      const nextMode =
+        document.getElementById(
+          "next-course-mode"
+        );
+
+      const manualNext =
+        document.getElementById(
+          "manual-next-course"
+        );
+
+
+      if (
+        nextMode &&
+        manualNext
+      ) {
+
+        function updateNextMode() {
+
+          manualNext.style.display =
+            nextMode.value ===
+            "manual"
+              ? "block"
+              : "none";
+
+        }
+
+
+        nextMode.addEventListener(
+          "change",
+          updateNextMode
+        );
+
+
+        updateNextMode();
+
+      }
+
+
+      /* =========================================
+         NEW MATERIAL TYPE
+         ========================================= */
+
+      const typeSelect =
+        document.getElementById(
+          "new-resource-type"
+        );
+
+      const fileField =
+        document.getElementById(
+          "new-file-field"
+        );
+
+      const fileInput =
+        document.getElementById(
+          "new-resource-file"
+        );
+
+      const writtenField =
+        document.getElementById(
+          "new-written-field"
+        );
+
+      const externalField =
+        document.getElementById(
+          "new-external-field"
+        );
+
+      const submissionField =
+        document.getElementById(
+          "new-submission-field"
+        );
+
+      const thresholdField =
+        document.getElementById(
+          "new-threshold-field"
+        );
+
+      const completionSelect =
+        document.getElementById(
+          "new-completion-method"
+        );
+
+
+      function updateNewMaterialFields() {
+
+        if (!typeSelect) {
+          return;
+        }
+
+
+        const type =
+          typeSelect.value;
+
+
+        const fileBased =
+          [
+            "audio",
+            "document",
+            "assignment"
+          ].includes(type);
+
+
+        if (fileField) {
+          fileField.classList.toggle(
+            "hidden",
+            !fileBased
+          );
+        }
+
+
+        if (writtenField) {
+          writtenField.classList.toggle(
+            "hidden",
+            type !== "written"
+          );
+        }
+
+
+        if (externalField) {
+          externalField.classList.toggle(
+            "hidden",
+            type !== "external"
+          );
+        }
+
+
+        if (submissionField) {
+
+          submissionField.classList.toggle(
+            "hidden",
+            type !== "assignment"
+          );
+
+
+          submissionField.classList.toggle(
+            "flex",
+            type === "assignment"
+          );
+
+        }
+
+
+        if (thresholdField) {
+          thresholdField.classList.toggle(
+            "hidden",
+            type !== "audio"
+          );
+        }
+
+
+        if (fileInput) {
+
+          if (type === "audio") {
+            fileInput.accept =
+              ".mp3,.wav,.mpeg,.ogg";
+          }
+
+          else if (
+            type === "document" ||
+            type === "assignment"
+          ) {
+            fileInput.accept =
+              ".pdf,.doc,.docx";
+          }
+
+          else {
+            fileInput.accept =
+              "";
+          }
+
+        }
+
+
+        if (completionSelect) {
+
+          const methods = {
+            audio: [
+              ["audio_percentage", "Listen to Percentage"],
+              ["manual_confirmation", "Learner Confirms"],
+              ["none", "No Completion Requirement"]
+            ],
+
+            document: [
+              ["manual_confirmation", "Learner Confirms"],
+              ["resource_opened", "Opening Counts as Complete"],
+              ["none", "No Completion Requirement"]
+            ],
+
+            assignment: [
+              ["assignment_accepted", "Admin Accepts Submission"],
+              ["assignment_submitted", "Submission Counts as Complete"],
+              ["none", "No Completion Requirement"]
+            ],
+
+            written: [
+              ["manual_confirmation", "Learner Confirms"],
+              ["resource_opened", "Opening Counts as Complete"],
+              ["none", "No Completion Requirement"]
+            ],
+
+            external: [
+              ["external_visit", "Visit Link"],
+              ["none", "No Completion Requirement"]
+            ]
+          };
+
+
+          completionSelect.innerHTML =
+            "";
+
+
+          methods[type].forEach(
+            function (item) {
+
+              const option =
+                document.createElement(
+                  "option"
+                );
+
+
+              option.value =
+                item[0];
+
+
+              option.textContent =
+                item[1];
+
+
+              completionSelect.appendChild(
+                option
+              );
+
+            }
+          );
+
+        }
+
+      }
+
+
+      if (typeSelect) {
+
+        typeSelect.addEventListener(
+          "change",
+          updateNewMaterialFields
+        );
+
+
+        updateNewMaterialFields();
+
+      }
+
+
+      /* =========================================
+         RESOURCE FORMS
+         ========================================= */
+
+      document
+        .querySelectorAll(
+          "[data-resource-form]"
+        )
+        .forEach(
+          function (form) {
+
+            form.addEventListener(
+              "submit",
+              async function (
+                event
+              ) {
+
+                event.preventDefault();
+
+
+                const button =
+                  form.querySelector(
+                    'button[type="submit"]'
+                  );
+
+
+                if (button) {
+                  button.disabled =
+                    true;
+
+                  button.textContent =
+                    "Saving...";
+                }
+
+
+                try {
+
+                  const data =
+                    new FormData(
+                      form
+                    );
+
+
+                  const required =
+                    form.querySelector(
+                      "[data-required-checkbox]"
+                    );
+
+
+                  const online =
+                    form.querySelector(
+                      "[data-online-checkbox]"
+                    );
+
+
+                  const download =
+                    form.querySelector(
+                      "[data-download-checkbox]"
+                    );
+
+
+                  const submission =
+                    form.querySelector(
+                      "[data-submission-checkbox]"
+                    );
+
+
+                  if (required) {
+                    data.set(
+                      "required",
+                      required.checked
+                        ? "true"
+                        : "false"
+                    );
+                  }
+
+
+                  if (online) {
+                    data.set(
+                      "allowOnline",
+                      online.checked
+                        ? "true"
+                        : "false"
+                    );
+                  }
+
+
+                  if (download) {
+                    data.set(
+                      "allowDownload",
+                      download.checked
+                        ? "true"
+                        : "false"
+                    );
+                  }
+
+
+                  if (submission) {
+                    data.set(
+                      "submissionRequired",
+                      submission.checked
+                        ? "true"
+                        : "false"
+                    );
+                  }
+
+
+                  const response =
+                    await fetch(
+                      form.dataset.action,
+                      {
+                        method:
+                          "POST",
+
+                        body:
+                          data,
+
+                        credentials:
+                          "same-origin"
+                      }
+                    );
+
+
+                  const result =
+                    await response.json();
+
+
+                  if (!response.ok) {
+                    throw new Error(
+                      result.message ||
+                      "Unable to save material."
+                    );
+                  }
+
+
+                  window.location.reload();
+
+                } catch (error) {
+
+                  alert(
+                    error.message
+                  );
+
+
+                  if (button) {
+                    button.disabled =
+                      false;
+
+                    button.textContent =
+                      "Save";
+                  }
+
+                }
+
+              }
+            );
+
+          }
+        );
+
+
+      /* =========================================
+         MOVE
+         ========================================= */
+
+      document
+        .querySelectorAll(
+          "[data-resource-action]"
+        )
+        .forEach(
+          function (button) {
+
+            button.addEventListener(
+              "click",
+              async function () {
+
+                const response =
+                  await fetch(
+                    button.dataset.url,
+                    {
+                      method:
+                        "POST",
+
+                      credentials:
+                        "same-origin"
+                    }
+                  );
+
+
+                if (response.ok) {
+                  window.location.reload();
+                }
+
+              }
+            );
+
+          }
+        );
+
+
+      /* =========================================
+         DELETE
+         ========================================= */
+
+      document
+        .querySelectorAll(
+          "[data-resource-delete]"
+        )
+        .forEach(
+          function (button) {
+
+            button.addEventListener(
+              "click",
+              async function () {
+
+                if (
+                  !confirm(
+                    "Permanently delete this Learning Material and its associated file?"
+                  )
+                ) {
+                  return;
+                }
+
+
+                const response =
+                  await fetch(
+                    button.dataset.url,
+                    {
+                      method:
+                        "POST",
+
+                      credentials:
+                        "same-origin"
+                    }
+                  );
+
+
+                const result =
+                  await response.json();
+
+
+                if (!response.ok) {
+
+                  alert(
+                    result.message ||
+                    "Unable to delete material."
+                  );
+
+                  return;
+                }
+
+
+                window.location.reload();
+
+              }
+            );
+
+          }
+        );
+
+    }
+  );
+</script>
+
+</body>
+</html>

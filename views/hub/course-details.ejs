@@ -700,6 +700,560 @@ html[data-theme="dark"]
 
 }
 
+/* =========================================================
+   DBW V2 LEARNING MATERIALS
+   ========================================================= */
+
+.dbw-resource-list {
+  display: grid;
+  gap: 1.25rem;
+}
+
+
+.dbw-resource-card {
+  scroll-margin-top: 8rem;
+
+  padding: 1.5rem;
+
+  border:
+    1px solid #e5e7eb;
+
+  border-radius:
+    1.25rem;
+
+  background:
+    #f8fafc;
+}
+
+
+.dbw-resource-header {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 1rem;
+
+  margin-bottom:
+    1.25rem;
+}
+
+
+.dbw-resource-number {
+  width: 2.75rem;
+  height: 2.75rem;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius:
+    9999px;
+
+  background:
+    #6b46c1;
+
+  color:
+    #ffffff;
+
+  font-size:
+    0.85rem;
+
+  font-weight:
+    800;
+}
+
+
+.dbw-resource-heading {
+  flex: 1;
+  min-width: 0;
+}
+
+
+.dbw-resource-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 0.6rem;
+
+  margin-bottom:
+    0.45rem;
+
+  color:
+    #64748b;
+
+  font-size:
+    0.8rem;
+
+  font-weight:
+    700;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    0.04em;
+}
+
+
+.dbw-required,
+.dbw-optional {
+  padding:
+    0.25rem 0.6rem;
+
+  border-radius:
+    9999px;
+
+  font-size:
+    0.72rem;
+}
+
+
+.dbw-required {
+  background:
+    #ede9fe;
+
+  color:
+    #6b46c1;
+}
+
+
+.dbw-optional {
+  background:
+    #f1f5f9;
+
+  color:
+    #64748b;
+}
+
+
+.dbw-resource-title {
+  color:
+    #111827;
+
+  font-size:
+    1.25rem;
+
+  font-weight:
+    800;
+}
+
+
+.dbw-resource-description {
+  margin-top:
+    0.5rem;
+
+  color:
+    #64748b;
+
+  line-height:
+    1.7;
+
+  white-space:
+    pre-line;
+}
+
+
+.dbw-resource-actions {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 0.75rem;
+
+  margin-top:
+    1rem;
+}
+
+
+.dbw-resource-primary-action,
+.dbw-resource-secondary-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height:
+    2.85rem;
+
+  padding:
+    0.65rem 1rem;
+
+  border-radius:
+    0.85rem;
+
+  font-weight:
+    700;
+
+  text-decoration:
+    none;
+}
+
+
+.dbw-resource-primary-action {
+  border:
+    1px solid #6b46c1;
+
+  background:
+    #6b46c1;
+
+  color:
+    #ffffff;
+}
+
+
+.dbw-resource-primary-action:hover {
+  background:
+    #553c9a;
+}
+
+
+.dbw-resource-secondary-action {
+  border:
+    1px solid #ddd6fe;
+
+  background:
+    #ffffff;
+
+  color:
+    #6b46c1;
+}
+
+
+.dbw-resource-file-name,
+.dbw-resource-note {
+  margin-top:
+    0.8rem;
+
+  color:
+    #64748b;
+
+  font-size:
+    0.9rem;
+
+  overflow-wrap:
+    anywhere;
+}
+
+
+.dbw-written-content {
+  margin-top:
+    1rem;
+
+  color:
+    #334155;
+
+  line-height:
+    1.8;
+
+  white-space:
+    pre-line;
+}
+
+
+.dbw-assignment-status {
+  margin-top:
+    1.25rem;
+
+  padding:
+    1rem;
+
+  border:
+    1px solid #e2e8f0;
+
+  border-radius:
+    1rem;
+
+  background:
+    #ffffff;
+
+  color:
+    #475569;
+}
+
+
+.dbw-assignment-status-label {
+  margin-bottom:
+    0.5rem;
+
+  color:
+    #111827;
+
+  font-weight:
+    800;
+}
+
+
+.dbw-review-feedback {
+  margin-top:
+    1rem;
+
+  padding:
+    0.9rem;
+
+  border-radius:
+    0.85rem;
+
+  background:
+    #f8fafc;
+}
+
+
+.dbw-review-feedback p {
+  margin-top:
+    0.35rem;
+
+  white-space:
+    pre-line;
+}
+
+
+.dbw-assignment-form {
+  display: grid;
+
+  gap:
+    1rem;
+
+  margin-top:
+    1.25rem;
+
+  padding-top:
+    1.25rem;
+
+  border-top:
+    1px solid #e5e7eb;
+}
+
+
+.dbw-assignment-form label {
+  display: block;
+
+  margin-bottom:
+    0.45rem;
+
+  color:
+    #334155;
+
+  font-weight:
+    700;
+}
+
+
+.dbw-assignment-form label span {
+  color:
+    #94a3b8;
+
+  font-weight:
+    500;
+}
+
+
+.dbw-assignment-form input,
+.dbw-assignment-form textarea {
+  width: 100%;
+
+  padding:
+    0.8rem;
+
+  border:
+    1px solid #cbd5e1;
+
+  border-radius:
+    0.85rem;
+
+  background:
+    #ffffff;
+}
+
+
+.dbw-resource-success {
+  margin-top:
+    1rem;
+
+  color:
+    #15803d;
+
+  font-weight:
+    800;
+}
+
+
+.dbw-resource-empty {
+  color:
+    #b45309;
+
+  font-weight:
+    600;
+}
+
+
+/* DARK MODE */
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.dbw-resource-card {
+  background:
+    #20202a;
+
+  border-color:
+    rgba(255, 255, 255, 0.08);
+}
+
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.dbw-resource-title {
+  color:
+    #f8f7fb;
+}
+
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.dbw-resource-meta,
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.dbw-resource-description,
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.dbw-resource-file-name,
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.dbw-resource-note,
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.dbw-written-content {
+  color:
+    #aaa6b4;
+}
+
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.dbw-required {
+  background:
+    rgba(139, 92, 246, 0.15);
+
+  color:
+    #c4b5fd;
+}
+
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.dbw-optional {
+  background:
+    rgba(255, 255, 255, 0.06);
+
+  color:
+    #aaa6b4;
+}
+
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.dbw-resource-secondary-action {
+  background:
+    #191921;
+
+  border-color:
+    rgba(139, 92, 246, 0.4);
+
+  color:
+    #c4b5fd;
+}
+
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.dbw-assignment-status,
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.dbw-review-feedback {
+  background:
+    #191921;
+
+  border-color:
+    rgba(255, 255, 255, 0.08);
+
+  color:
+    #c9c6d1;
+}
+
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.dbw-assignment-status-label,
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.dbw-assignment-form label {
+  color:
+    #f8f7fb;
+}
+
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.dbw-assignment-form {
+  border-top-color:
+    rgba(255, 255, 255, 0.08);
+}
+
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.dbw-assignment-form input,
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.dbw-assignment-form textarea {
+  background:
+    #11111b;
+
+  border-color:
+    rgba(255, 255, 255, 0.12);
+
+  color:
+    #f8f7fb;
+}
+
+
+@media (max-width: 640px) {
+
+  .dbw-resource-header {
+    gap:
+      0.75rem;
+  }
+
+
+  .dbw-resource-card {
+    padding:
+      1.1rem;
+  }
+
+
+  .dbw-resource-actions {
+    display:
+      grid;
+
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .dbw-resource-primary-action,
+  .dbw-resource-secondary-action {
+    width:
+      100%;
+  }
+
+}
+
   </style>
 </head>
 
@@ -880,7 +1434,23 @@ html[data-theme="dark"]
               </p>
             <% } %>
           </div>
+          
+          <!-- DBW V2 LEARNING MATERIALS -->
 
+<% if (isResourceMode) { %>
+
+  <%- include(
+    "./partials/course-resources",
+    {
+      academy,
+      course,
+      resources,
+      submissionByResource,
+      assignmentStatus
+    }
+  ) %>
+
+<% } %>
         </div>
 
         <!-- SIDEBAR -->
@@ -936,7 +1506,7 @@ html[data-theme="dark"]
 
             </div>
           </div>
-
+          <% if (!isResourceMode) { %>
           <!-- COURSE DOCUMENTS -->
           <div
             class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8"
@@ -1117,6 +1687,7 @@ html[data-theme="dark"]
               </p>
             <% } %>
           </div>
+          <% } %>
 
         </aside>
       </div>

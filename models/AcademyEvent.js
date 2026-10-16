@@ -89,6 +89,7 @@ const academyEventSchema =
           "DOCUMENT_COMPLETED",
 
           "ASSIGNMENT_OPENED",
+          "ASSIGNMENT_DOWNLOADED",
           "ASSIGNMENT_SUBMITTED",
           "ASSIGNMENT_REVISION_REQUIRED",
           "ASSIGNMENT_ACCEPTED",

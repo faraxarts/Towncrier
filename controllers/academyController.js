@@ -4,6 +4,11 @@ const Level = require("../models/Level");
 const Course = require("../models/course");
 const UserLevelAccess = require("../models/UserLevelAccess");
 const ManualPaymentRequest = require("../models/ManualPaymentRequest");
+const CourseResource =
+  require("../models/CourseResource");
+
+const AssignmentSubmission =
+  require("../models/AssignmentSubmission");
 
 function formatCourseForView(course) {
   return {
@@ -230,51 +235,227 @@ exports.getAcademyCourses = async (req, res) => {
   }
 };
 
-exports.getAcademyCourseDetails = async (req, res) => {
-  try {
-    const academy = req.academy;
+exports.getAcademyCourseDetails =
+  async (
+    req,
+    res
+  ) => {
+    try {
+      const academy =
+        req.academy;
 
-    const dbCourse = await Course.findOne({
-      academy: academy._id,
-      slug: req.params.courseSlug,
-      isPublished: true,
-    }).populate("level");
 
-    if (!dbCourse) {
-      return res.status(404).render("404", { message: "Course not found" });
+      const dbCourse =
+        await Course.findOne({
+          academy:
+            academy._id,
+
+          slug:
+            req.params.courseSlug,
+
+          isPublished:
+            true,
+        }).populate(
+          "level"
+        );
+
+
+      if (!dbCourse) {
+        return res
+          .status(404)
+          .render(
+            "404",
+            {
+              message:
+                "Course not found",
+            }
+          );
+      }
+
+
+      /* ===================================================
+         LEVEL ACCESS
+         =================================================== */
+
+      let hasAccess =
+        false;
+
+
+      if (!dbCourse.level) {
+        hasAccess =
+          true;
+      }
+
+      else if (
+        res.locals.isAdmin
+      ) {
+        hasAccess =
+          true;
+      }
+
+      else if (
+        req.session.userId
+      ) {
+        const access =
+          await UserLevelAccess.findOne({
+            user:
+              req.session.userId,
+
+            level:
+              dbCourse
+                .level
+                ._id,
+
+            status:
+              "active",
+          });
+
+
+        hasAccess =
+          !!access;
+      }
+
+
+      if (!hasAccess) {
+        return res.redirect(
+          `/academy/${academy.slug}/courses`
+        );
+      }
+
+
+      const course =
+        formatCourseForView(
+          dbCourse
+        );
+
+
+      /* ===================================================
+         DBW V2 RESOURCE MODE
+         =================================================== */
+
+      const isResourceMode =
+        dbCourse.contentMode ===
+        "resources";
+
+
+      let resources =
+        [];
+
+
+      let submissionByResource =
+        {};
+
+
+      if (isResourceMode) {
+
+        resources =
+          await CourseResource.find({
+            course:
+              dbCourse._id,
+
+            status:
+              "published",
+          }).sort({
+            order: 1,
+            createdAt: 1,
+          });
+
+
+        if (
+          req.session.userId
+        ) {
+          const assignmentIds =
+            resources
+              .filter(
+                (resource) =>
+                  resource.type ===
+                  "assignment"
+              )
+              .map(
+                (resource) =>
+                  resource._id
+              );
+
+
+          if (
+            assignmentIds.length
+          ) {
+            const submissions =
+              await AssignmentSubmission.find({
+                user:
+                  req.session.userId,
+
+                course:
+                  dbCourse._id,
+
+                resource: {
+                  $in:
+                    assignmentIds,
+                },
+              }).lean();
+
+
+            submissionByResource =
+              submissions.reduce(
+                (
+                  result,
+                  submission
+                ) => {
+
+                  result[
+                    String(
+                      submission.resource
+                    )
+                  ] =
+                    submission;
+
+
+                  return result;
+                },
+
+                {}
+              );
+          }
+        }
+      }
+
+
+      return res.render(
+        "hub/course-details",
+        {
+          academy,
+          course,
+
+          isResourceMode,
+
+          resources,
+
+          submissionByResource,
+
+          assignmentStatus:
+            req.query
+              .assignment ||
+            "",
+        }
+      );
+    } catch (error) {
+      console.error(
+        "Get academy course details error:",
+        error
+      );
+
+
+      return res
+        .status(500)
+        .render(
+          "500",
+          {
+            pageTitle:
+              "Server Error",
+
+            message:
+              "Something unexpected happened while processing that request. Please try again shortly.",
+          }
+        );
     }
-
-    let hasAccess = false;
-
-    if (!dbCourse.level) {
-      hasAccess = true;
-    } else if (res.locals.isAdmin) {
-      hasAccess = true;
-    } else if (req.session.userId) {
-      const access = await UserLevelAccess.findOne({
-        user: req.session.userId,
-        level: dbCourse.level._id,
-        status: "active",
-      });
-
-      hasAccess = !!access;
-    }
-
-    if (!hasAccess) {
-      return res.redirect(`/academy/${academy.slug}/courses`);
-    }
-
-    const course = formatCourseForView(dbCourse);
-
-    res.render("hub/course-details", {
-      academy,
-      course,
-    });
-  } catch (error) {
-    console.error("Get academy course details error:", error);
-    res.status(500).render("500", {
-      pageTitle: "Server Error",
-      message: "Something unexpected happened while processing that request. Please try again shortly.",
-    });
-  }
-};
+  };
