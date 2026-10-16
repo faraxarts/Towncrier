@@ -64,11 +64,16 @@ const storage =
 
 const allowedExtensions =
   new Set([
+    /* Audio */
     ".mp3",
     ".wav",
     ".mpeg",
     ".ogg",
+    ".m4a",
+    ".aac",
+    ".mp4",
 
+    /* Documents */
     ".pdf",
     ".doc",
     ".docx",
@@ -101,11 +106,11 @@ const fileFilter = (
   }
 
 
-  return cb(
-    new Error(
-      "Only supported audio or document files are allowed."
-    )
-  );
+ return cb(
+  new Error(
+    "Unsupported file type. Audio can be MP3, WAV, MPEG, OGG, M4A, AAC, or MP4. Documents can be PDF, DOC, or DOCX."
+  )
+);
 };
 
 
@@ -172,6 +177,77 @@ router.post(
   deleteResource
 );
 
+/* =========================================================
+   RESOURCE UPLOAD ERROR HANDLER
 
+   Keeps AJAX responses consistently JSON instead of
+   returning Express HTML error pages.
+   ========================================================= */
+
+router.use(
+  (
+    error,
+    req,
+    res,
+    next
+  ) => {
+
+    if (
+      error instanceof
+      multer.MulterError
+    ) {
+
+      let message =
+        error.message;
+
+
+      if (
+        error.code ===
+        "LIMIT_FILE_SIZE"
+      ) {
+        message =
+          "The selected file is too large. Maximum upload size is 50 MB.";
+      }
+
+
+      return res
+        .status(400)
+        .json({
+          success:
+            false,
+
+          message,
+        });
+    }
+
+
+    if (error) {
+
+      console.error(
+        "Course resource upload error:",
+        error
+      );
+
+
+      return res
+        .status(400)
+        .json({
+          success:
+            false,
+
+          message:
+            error.message ||
+            "Unable to process this upload.",
+        });
+    }
+
+
+    return next();
+  }
+);
+
+
+module.exports =
+  router;
 module.exports =
   router;

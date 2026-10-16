@@ -39,6 +39,9 @@ const audioExtensions = new Set([
   ".wav",
   ".mpeg",
   ".ogg",
+  ".m4a",
+  ".aac",
+  ".mp4",
 ]);
 
 
@@ -304,8 +307,8 @@ function validateResourceFile(
       )
     ) {
       throw new Error(
-        "Audio resources must be MP3, WAV, MPEG, or OGG files."
-      );
+  "Audio resources must be MP3, WAV, MPEG, OGG, M4A, AAC, or MP4 audio files."
+);
     }
 
     return;
