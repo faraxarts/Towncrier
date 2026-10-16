@@ -109,7 +109,111 @@ const courseSchema = new mongoose.Schema(
       type: Number,
       default: 1,
     },
+    
+    /* =====================================================
+   DBW V2 CONTENT SYSTEM
+   ===================================================== */
 
+/*
+ * legacy:
+ * Current courseAudios / courseDocuments /
+ * assignmentDocument system.
+ *
+ * resources:
+ * New CourseResource architecture.
+ */
+contentMode: {
+  type: String,
+
+  enum: [
+    "legacy",
+    "resources",
+  ],
+
+  default: "legacy",
+},
+
+
+/*
+ * New publishing lifecycle.
+ *
+ * Existing isPublished is intentionally retained
+ * during migration.
+ */
+status: {
+  type: String,
+
+  enum: [
+    "draft",
+    "published",
+    "archived",
+  ],
+
+  default: "published",
+},
+
+
+/*
+ * Determines when the Course itself is completed.
+ */
+completionRule: {
+  type: String,
+
+  enum: [
+    "all_required_resources",
+    "admin_approval",
+    "none",
+  ],
+
+  default:
+    "all_required_resources",
+},
+
+
+/*
+ * level_access:
+ * Any learner who has unlocked this Level can
+ * access the Course.
+ *
+ * previous_course_complete:
+ * Reserved for optional sequential learning.
+ */
+accessRule: {
+  type: String,
+
+  enum: [
+    "level_access",
+    "previous_course_complete",
+  ],
+
+  default: "level_access",
+},
+
+
+/*
+ * Determines what we recommend after completion.
+ */
+nextCourseMode: {
+  type: String,
+
+  enum: [
+    "auto",
+    "manual",
+    "none",
+  ],
+
+  default: "auto",
+},
+
+
+nextCourse: {
+  type:
+    mongoose.Schema.Types.ObjectId,
+
+  ref: "Course",
+
+  default: null,
+},
 
     /* =====================================================
        FEATURED IMAGE
