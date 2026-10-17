@@ -702,50 +702,94 @@ html[data-theme="dark"]
 
 /* =========================================================
    DBW V2 LEARNING MATERIALS
+   FLAT LEARNER EXPERIENCE
    ========================================================= */
 
+.dbw-learning-materials {
+  width: 100%;
+}
+
+
+.dbw-learning-heading {
+  margin-bottom: 1.5rem;
+}
+
+
+.dbw-learning-heading h2 {
+  color: #111827;
+
+  font-size: 2rem;
+  line-height: 1.15;
+
+  font-weight: 800;
+}
+
+
+.dbw-learning-heading p {
+  max-width: 46rem;
+
+  margin-top: 0.65rem;
+
+  color: #64748b;
+
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+
+.dbw-learning-empty {
+  padding: 1.5rem 0;
+
+  color: #64748b;
+}
+
+
 .dbw-resource-list {
-  display: grid;
-  gap: 1.25rem;
+  border-top:
+    1px solid #e5e7eb;
 }
 
 
 .dbw-resource-card {
   scroll-margin-top: 8rem;
 
-  padding: 1.5rem;
+  padding:
+    2rem 0;
 
-  border:
+  border-bottom:
     1px solid #e5e7eb;
 
-  border-radius:
-    1.25rem;
-
   background:
-    #f8fafc;
+    transparent;
 }
 
 
-.dbw-resource-header {
-  display: flex;
-  align-items: flex-start;
+.dbw-resource-layout {
+  display: grid;
 
-  gap: 1rem;
+  grid-template-columns:
+    3rem minmax(0, 1fr);
 
-  margin-bottom:
-    1.25rem;
+  gap:
+    1.1rem;
 }
 
 
 .dbw-resource-number {
-  width: 2.75rem;
-  height: 2.75rem;
+  width:
+    3rem;
 
-  flex-shrink: 0;
+  height:
+    3rem;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
 
   border-radius:
     9999px;
@@ -764,27 +808,33 @@ html[data-theme="dark"]
 }
 
 
-.dbw-resource-heading {
-  flex: 1;
-  min-width: 0;
+.dbw-resource-body {
+  min-width:
+    0;
 }
 
 
 .dbw-resource-meta {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  display:
+    flex;
 
-  gap: 0.6rem;
+  align-items:
+    center;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    0.55rem;
 
   margin-bottom:
-    0.45rem;
+    0.55rem;
 
   color:
     #64748b;
 
   font-size:
-    0.8rem;
+    0.78rem;
 
   font-weight:
     700;
@@ -799,14 +849,20 @@ html[data-theme="dark"]
 
 .dbw-required,
 .dbw-optional {
+  display:
+    inline-flex;
+
   padding:
-    0.25rem 0.6rem;
+    0.23rem 0.55rem;
 
   border-radius:
     9999px;
 
   font-size:
-    0.72rem;
+    0.68rem;
+
+  font-weight:
+    700;
 }
 
 
@@ -833,7 +889,10 @@ html[data-theme="dark"]
     #111827;
 
   font-size:
-    1.25rem;
+    1.35rem;
+
+  line-height:
+    1.3;
 
   font-weight:
     800;
@@ -842,24 +901,43 @@ html[data-theme="dark"]
 
 .dbw-resource-description {
   margin-top:
-    0.5rem;
+    0.65rem;
 
   color:
     #64748b;
 
   line-height:
-    1.7;
+    1.75;
 
   white-space:
     pre-line;
 }
 
 
-.dbw-resource-actions {
-  display: flex;
-  flex-wrap: wrap;
+.dbw-v2-audio {
+  width:
+    100%;
 
-  gap: 0.75rem;
+  max-width:
+    34rem;
+
+  margin-top:
+    1.1rem;
+}
+
+
+.dbw-resource-actions {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    0.75rem;
 
   margin-top:
     1rem;
@@ -868,24 +946,32 @@ html[data-theme="dark"]
 
 .dbw-resource-primary-action,
 .dbw-resource-secondary-action {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
 
   min-height:
-    2.85rem;
+    2.8rem;
 
   padding:
     0.65rem 1rem;
 
   border-radius:
-    0.85rem;
+    0.8rem;
 
   font-weight:
     700;
 
   text-decoration:
     none;
+
+  transition:
+    0.2s ease;
 }
 
 
@@ -904,6 +990,9 @@ html[data-theme="dark"]
 .dbw-resource-primary-action:hover {
   background:
     #553c9a;
+
+  border-color:
+    #553c9a;
 }
 
 
@@ -912,23 +1001,28 @@ html[data-theme="dark"]
     1px solid #ddd6fe;
 
   background:
-    #ffffff;
+    transparent;
 
   color:
     #6b46c1;
 }
 
 
-.dbw-resource-file-name,
-.dbw-resource-note {
+.dbw-resource-secondary-action:hover {
+  background:
+    #f5f3ff;
+}
+
+
+.dbw-resource-file-name {
   margin-top:
-    0.8rem;
+    0.75rem;
 
   color:
     #64748b;
 
   font-size:
-    0.9rem;
+    0.88rem;
 
   overflow-wrap:
     anywhere;
@@ -943,141 +1037,118 @@ html[data-theme="dark"]
     #334155;
 
   line-height:
-    1.8;
+    1.85;
 
   white-space:
     pre-line;
 }
 
 
-.dbw-assignment-status {
+/* ASSIGNMENT STATUS */
+
+.dbw-assignment-summary {
   margin-top:
-    1.25rem;
+    1.2rem;
 
   padding:
-    1rem;
+    1rem 1.1rem;
 
-  border:
-    1px solid #e2e8f0;
-
-  border-radius:
-    1rem;
-
-  background:
-    #ffffff;
-
-  color:
-    #475569;
-}
-
-
-.dbw-assignment-status-label {
-  margin-bottom:
-    0.5rem;
-
-  color:
-    #111827;
-
-  font-weight:
-    800;
-}
-
-
-.dbw-review-feedback {
-  margin-top:
-    1rem;
-
-  padding:
-    0.9rem;
-
-  border-radius:
-    0.85rem;
+  border-left:
+    3px solid #cbd5e1;
 
   background:
     #f8fafc;
 }
 
 
-.dbw-review-feedback p {
+.dbw-assignment-summary.is-accepted {
+  border-left-color:
+    #16a34a;
+
+  background:
+    #f0fdf4;
+}
+
+
+.dbw-assignment-summary.needs-revision {
+  border-left-color:
+    #dc2626;
+
+  background:
+    #fef2f2;
+}
+
+
+.dbw-assignment-label {
+  display:
+    block;
+
+  margin-bottom:
+    0.2rem;
+
+  color:
+    #64748b;
+
+  font-size:
+    0.78rem;
+
+  font-weight:
+    700;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    0.04em;
+}
+
+
+.dbw-assignment-value {
+  color:
+    #111827;
+}
+
+
+.dbw-assignment-feedback {
   margin-top:
-    0.35rem;
+    0.9rem;
+
+  color:
+    #475569;
+
+  line-height:
+    1.6;
+}
+
+
+.dbw-assignment-feedback p {
+  margin-top:
+    0.3rem;
 
   white-space:
     pre-line;
 }
 
 
-.dbw-assignment-form {
-  display: grid;
-
-  gap:
-    1rem;
+.dbw-submitted-file {
+  display:
+    inline-block;
 
   margin-top:
-    1.25rem;
-
-  padding-top:
-    1.25rem;
-
-  border-top:
-    1px solid #e5e7eb;
-}
-
-
-.dbw-assignment-form label {
-  display: block;
-
-  margin-bottom:
-    0.45rem;
+    0.85rem;
 
   color:
-    #334155;
+    #6b46c1;
 
   font-weight:
     700;
 }
 
 
-.dbw-assignment-form label span {
-  color:
-    #94a3b8;
-
-  font-weight:
-    500;
-}
-
-
-.dbw-assignment-form input,
-.dbw-assignment-form textarea {
-  width: 100%;
-
-  padding:
+.dbw-resource-empty {
+  margin-top:
     0.8rem;
 
-  border:
-    1px solid #cbd5e1;
-
-  border-radius:
-    0.85rem;
-
-  background:
-    #ffffff;
-}
-
-
-.dbw-resource-success {
-  margin-top:
-    1rem;
-
-  color:
-    #15803d;
-
-  font-weight:
-    800;
-}
-
-
-.dbw-resource-empty {
   color:
     #b45309;
 
@@ -1086,26 +1157,29 @@ html[data-theme="dark"]
 }
 
 
-/* DARK MODE */
+/* =========================================================
+   DARK MODE
+   ========================================================= */
 
 html[data-theme="dark"]
 .academy-course-detail-page
-.dbw-resource-card {
-  background:
-    #20202a;
-
-  border-color:
-    rgba(255, 255, 255, 0.08);
-}
-
+.dbw-learning-heading h2,
 
 html[data-theme="dark"]
 .academy-course-detail-page
-.dbw-resource-title {
+.dbw-resource-title,
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.dbw-assignment-value {
   color:
     #f8f7fb;
 }
 
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.dbw-learning-heading p,
 
 html[data-theme="dark"]
 .academy-course-detail-page
@@ -1121,13 +1195,25 @@ html[data-theme="dark"]
 
 html[data-theme="dark"]
 .academy-course-detail-page
-.dbw-resource-note,
+.dbw-written-content,
 
 html[data-theme="dark"]
 .academy-course-detail-page
-.dbw-written-content {
+.dbw-assignment-feedback {
   color:
     #aaa6b4;
+}
+
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.dbw-resource-list,
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.dbw-resource-card {
+  border-color:
+    rgba(255, 255, 255, 0.09);
 }
 
 
@@ -1156,11 +1242,8 @@ html[data-theme="dark"]
 html[data-theme="dark"]
 .academy-course-detail-page
 .dbw-resource-secondary-action {
-  background:
-    #191921;
-
   border-color:
-    rgba(139, 92, 246, 0.4);
+    rgba(139, 92, 246, 0.35);
 
   color:
     #c4b5fd;
@@ -1169,71 +1252,86 @@ html[data-theme="dark"]
 
 html[data-theme="dark"]
 .academy-course-detail-page
-.dbw-assignment-status,
-
-html[data-theme="dark"]
-.academy-course-detail-page
-.dbw-review-feedback {
+.dbw-resource-secondary-action:hover {
   background:
-    #191921;
-
-  border-color:
-    rgba(255, 255, 255, 0.08);
-
-  color:
-    #c9c6d1;
+    rgba(139, 92, 246, 0.08);
 }
 
 
 html[data-theme="dark"]
 .academy-course-detail-page
-.dbw-assignment-status-label,
-
-html[data-theme="dark"]
-.academy-course-detail-page
-.dbw-assignment-form label {
-  color:
-    #f8f7fb;
-}
-
-
-html[data-theme="dark"]
-.academy-course-detail-page
-.dbw-assignment-form {
-  border-top-color:
-    rgba(255, 255, 255, 0.08);
-}
-
-
-html[data-theme="dark"]
-.academy-course-detail-page
-.dbw-assignment-form input,
-
-html[data-theme="dark"]
-.academy-course-detail-page
-.dbw-assignment-form textarea {
+.dbw-assignment-summary {
   background:
-    #11111b;
+    rgba(255, 255, 255, 0.035);
 
-  border-color:
-    rgba(255, 255, 255, 0.12);
-
-  color:
-    #f8f7fb;
+  border-left-color:
+    #64748b;
 }
 
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.dbw-assignment-summary.is-accepted {
+  background:
+    rgba(34, 197, 94, 0.07);
+
+  border-left-color:
+    #22c55e;
+}
+
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.dbw-assignment-summary.needs-revision {
+  background:
+    rgba(239, 68, 68, 0.07);
+
+  border-left-color:
+    #ef4444;
+}
+
+
+html[data-theme="dark"]
+.academy-course-detail-page
+.dbw-submitted-file {
+  color:
+    #c4b5fd;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
 @media (max-width: 640px) {
 
-  .dbw-resource-header {
-    gap:
-      0.75rem;
+  .dbw-learning-heading h2 {
+    font-size:
+      1.7rem;
   }
 
 
   .dbw-resource-card {
     padding:
-      1.1rem;
+      1.5rem 0;
+  }
+
+
+  .dbw-resource-layout {
+    grid-template-columns:
+      2.6rem minmax(0, 1fr);
+
+    gap:
+      0.85rem;
+  }
+
+
+  .dbw-resource-number {
+    width:
+      2.6rem;
+
+    height:
+      2.6rem;
   }
 
 
@@ -1396,62 +1494,7 @@ html[data-theme="dark"]
             </p>
           </div>
 
-          <!-- WHAT YOU WILL LEARN -->
-          <div
-            class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8 md:p-10"
-          >
-            <h2
-              class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-6"
-            >
-              What You Will Learn
-            </h2>
-
-            <% if (
-              course.whatYouWillLearn &&
-              course.whatYouWillLearn.length
-            ) { %>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <% course.whatYouWillLearn.forEach((item) => { %>
-                  <div
-                    class="flex items-start gap-3 rounded-2xl bg-indigo-50/70 px-5 py-4"
-                  >
-                    <span
-                      class="text-[#4F46E5] text-xl mt-0.5"
-                      aria-hidden="true"
-                    >
-                      ✓
-                    </span>
-
-                    <p class="text-base md:text-lg text-slate-700">
-                      <%= item %>
-                    </p>
-                  </div>
-                <% }) %>
-              </div>
-            <% } else { %>
-              <p class="text-lg text-slate-600">
-                No learning outcomes added yet.
-              </p>
-            <% } %>
-          </div>
           
-          <!-- DBW V2 LEARNING MATERIALS -->
-
-<% if (isResourceMode) { %>
-
-  <%- include(
-  "./course-resources",
-  {
-    academy,
-    course,
-    resources,
-    submissionByResource,
-    assignmentStatus
-  }
-) %>
-
-<% } %>
-        </div>
 
         <!-- SIDEBAR -->
         <aside class="space-y-8">
@@ -1475,37 +1518,123 @@ html[data-theme="dark"]
                 </span>
               </div>
 
-              <div class="flex items-start justify-between gap-4">
-                <span class="font-semibold shrink-0">Lessons</span>
-                <span class="text-right break-words min-w-0">
-                  <%= course.lessons || "Not specified" %>
-                </span>
-              </div>
+              <% if (isResourceMode) { %>
 
-              <div class="flex items-start justify-between gap-4">
-                <span class="font-semibold shrink-0">Instructor</span>
-                <span class="text-right break-words min-w-0">
-                  <%= course.instructor || "Not assigned" %>
-                </span>
-              </div>
+  <!-- DBW V2 COURSE DETAILS -->
+
+  <div class="flex items-start justify-between gap-4">
+
+    <span class="font-semibold shrink-0">
+      Materials
+    </span>
+
+    <span class="text-right">
+      <%= resources ? resources.length : 0 %>
+    </span>
+
+  </div>
+
+<% } else { %>
+
+  <!-- LEGACY COURSE DETAILS -->
+
+  <div class="flex items-start justify-between gap-4">
+
+    <span class="font-semibold shrink-0">
+      Lessons
+    </span>
+
+    <span class="text-right break-words min-w-0">
+      <%= course.lessons || "Not specified" %>
+    </span>
+
+  </div>
 
 
-              <div class="flex items-start justify-between gap-4">
-                <span class="font-semibold shrink-0">Students</span>
-                <span class="text-right">
-                  <%= course.students || 0 %>
-                </span>
-              </div>
+  <div class="flex items-start justify-between gap-4">
 
-              <div class="flex items-start justify-between gap-4">
-                <span class="font-semibold shrink-0">Rating</span>
-                <span class="text-right">
-                  <%= course.rating || 0 %>
-                </span>
-              </div>
+    <span class="font-semibold shrink-0">
+      Students
+    </span>
+
+    <span class="text-right">
+      <%= course.students || 0 %>
+    </span>
+
+  </div>
+
+
+  <div class="flex items-start justify-between gap-4">
+
+    <span class="font-semibold shrink-0">
+      Rating
+    </span>
+
+    <span class="text-right">
+      <%= course.rating || 0 %>
+    </span>
+
+  </div>
+
+<% } %>
 
             </div>
           </div>
+          <!-- WHAT YOU WILL LEARN — DESKTOP SIDEBAR -->
+
+<div
+  class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8"
+>
+
+  <h2
+    class="text-2xl md:text-3xl font-extrabold text-gray-950 mb-6"
+  >
+    What You Will Learn
+  </h2>
+
+
+  <% if (
+    course.whatYouWillLearn &&
+    course.whatYouWillLearn.length
+  ) { %>
+
+    <div class="space-y-4">
+
+      <% course.whatYouWillLearn.forEach((item) => { %>
+
+        <div
+          class="flex items-start gap-3"
+        >
+
+          <span
+            class="text-[#6B46C1] font-bold mt-0.5"
+            aria-hidden="true"
+          >
+            ✓
+          </span>
+
+
+          <p
+            class="text-base text-slate-700 leading-relaxed"
+          >
+            <%= item %>
+          </p>
+
+        </div>
+
+      <% }) %>
+
+    </div>
+
+  <% } else { %>
+
+    <p class="text-base text-slate-600">
+      No learning outcomes added yet.
+    </p>
+
+  <% } %>
+
+</div>
           <% if (!isResourceMode) { %>
           <!-- COURSE DOCUMENTS -->
           <div

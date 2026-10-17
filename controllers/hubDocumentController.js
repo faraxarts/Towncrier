@@ -1,6 +1,9 @@
 const Course =
   require("../models/course");
 
+const CourseResource =
+  require("../models/CourseResource");
+  
 const AssignmentSubmission =
   require("../models/AssignmentSubmission");
 
@@ -26,6 +29,10 @@ exports.getDocumentsPage = async (
       req.academy;
 
 
+    /* =====================================================
+       ACCESSIBLE LEVELS
+       ===================================================== */
+
     const accesses =
       await UserLevelAccess.find({
         user:
@@ -45,6 +52,10 @@ exports.getDocumentsPage = async (
       );
 
 
+    /* =====================================================
+       ACCESSIBLE COURSES
+       ===================================================== */
+
     const courses =
       await Course.find({
         academy:
@@ -59,13 +70,110 @@ exports.getDocumentsPage = async (
         },
       })
         .select(
-          "title slug"
+          "title slug contentMode level"
         )
         .sort({
-          levelPosition: 1,
-          createdAt: 1,
+          levelPosition:
+            1,
+
+          createdAt:
+            1,
         });
 
+
+    const accessibleCourseIds =
+      courses.map(
+        (course) =>
+          course._id
+      );
+
+
+    /* =====================================================
+       DBW V2 ASSIGNMENTS
+       ===================================================== */
+
+    const v2Assignments =
+      await CourseResource.find({
+        course: {
+          $in:
+            accessibleCourseIds,
+        },
+
+        type:
+          "assignment",
+
+        status:
+          "published",
+      })
+        .populate(
+          "course",
+          "title slug academy level"
+        )
+        .sort({
+          order:
+            1,
+
+          createdAt:
+            1,
+        });
+
+
+    /* =====================================================
+       SELECTED ASSIGNMENT
+
+       Coming from:
+       ?assignment=COURSE_RESOURCE_ID
+       ===================================================== */
+
+    const requestedAssignmentId =
+      req.query
+        .assignment ||
+      "";
+
+
+    const selectedAssignment =
+      requestedAssignmentId
+        ? (
+            v2Assignments.find(
+              (assignment) =>
+                String(
+                  assignment._id
+                ) ===
+                String(
+                  requestedAssignmentId
+                )
+            ) ||
+            null
+          )
+        : null;
+
+
+    /* =====================================================
+       CURRENT SUBMISSION FOR SELECTED ASSIGNMENT
+       ===================================================== */
+
+    let selectedSubmission =
+      null;
+
+
+    if (
+      selectedAssignment
+    ) {
+      selectedSubmission =
+        await AssignmentSubmission.findOne({
+          user:
+            req.session.userId,
+
+          resource:
+            selectedAssignment
+              ._id,
+        }).lean();
+    }
+
+
+    /* =====================================================
+       SUBMISSION HISTORY
+       ===================================================== */
 
     const dbSubmissions =
       await AssignmentSubmission.find({
@@ -76,8 +184,13 @@ exports.getDocumentsPage = async (
           "course",
           "title slug academy"
         )
+        .populate(
+          "resource",
+          "title type"
+        )
         .sort({
-          createdAt: -1,
+          updatedAt:
+            -1,
         });
 
 
@@ -87,7 +200,8 @@ exports.getDocumentsPage = async (
           (item) =>
             item.course &&
             String(
-              item.course.academy
+              item.course
+                .academy
             ) ===
               String(
                 academy._id
@@ -96,12 +210,14 @@ exports.getDocumentsPage = async (
         .map(
           (item) => ({
             assignmentTitle:
+              item.resource
+                ?.title ||
               item.assignmentTitle,
 
             courseTitle:
               item.course
-                ? item.course.title
-                : "Unknown Course",
+                ?.title ||
+              "Unknown Course",
 
             status:
               item.status ||
@@ -109,15 +225,37 @@ exports.getDocumentsPage = async (
 
             submittedAt:
               new Date(
+                item.updatedAt ||
                 item.createdAt
-              ).toLocaleString(),
+              )
+                .toLocaleString(),
 
             submissionNote:
-              item.submissionNote,
+              item.submissionNote ||
+              "",
+
+            reviewFeedback:
+              item.reviewFeedback ||
+              "",
+
+            revisionCount:
+              item.revisionCount ||
+              0,
 
             fileUrl:
-              item.file?.fileUrl ||
+              item.file
+                ?.fileUrl ||
               "",
+
+            originalName:
+              item.file
+                ?.originalName ||
+              "",
+
+            resourceId:
+              item.resource
+                ?._id ||
+              null,
           })
         );
 
@@ -126,11 +264,20 @@ exports.getDocumentsPage = async (
       "hub/documents",
       {
         academy,
+
         courses,
+
+        v2Assignments,
+
+        selectedAssignment,
+
+        selectedSubmission,
+
         submissions,
 
         submitted:
-          req.query.submitted ||
+          req.query
+            .submitted ||
           "",
       }
     );

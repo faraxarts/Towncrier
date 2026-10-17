@@ -17,21 +17,15 @@
 %>
 
 
-<div
-  class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8 md:p-10"
->
+<section class="dbw-learning-materials">
 
-  <div class="mb-8">
+  <div class="dbw-learning-heading">
 
-    <h2
-      class="text-3xl md:text-4xl font-extrabold text-gray-950"
-    >
+    <h2>
       Your Learning Materials
     </h2>
 
-    <p
-      class="text-lg text-slate-600 mt-3"
-    >
+    <p>
       Work through the materials below in the order provided.
       Required materials contribute to Course completion.
     </p>
@@ -41,9 +35,9 @@
 
   <% if (!resources || !resources.length) { %>
 
-    <p class="text-lg text-slate-600">
+    <div class="dbw-learning-empty">
       No Learning Materials have been published yet.
-    </p>
+    </div>
 
   <% } %>
 
@@ -64,6 +58,35 @@
 
       const resourceBase =
         `/academy/${academy.slug}/courses/${course.slug}/resources/${resource._id}`;
+
+      let assignmentStatusLabel =
+        "Not Submitted";
+
+      if (submission) {
+
+        if (
+          submission.status === "Submitted" ||
+          submission.status === "Reviewed"
+        ) {
+          assignmentStatusLabel =
+            "Awaiting Review";
+        }
+
+        else if (
+          submission.status === "Needs Revision"
+        ) {
+          assignmentStatusLabel =
+            "Needs Revision";
+        }
+
+        else if (
+          submission.status === "Accepted"
+        ) {
+          assignmentStatusLabel =
+            "Accepted";
+        }
+
+      }
     %>
 
 
@@ -72,9 +95,7 @@
         class="dbw-resource-card"
       >
 
-        <!-- HEADER -->
-
-        <div class="dbw-resource-header">
+        <div class="dbw-resource-layout">
 
           <div
             class="dbw-resource-number"
@@ -84,7 +105,7 @@
           </div>
 
 
-          <div class="dbw-resource-heading">
+          <div class="dbw-resource-body">
 
             <div class="dbw-resource-meta">
 
@@ -116,166 +137,143 @@
 
             <% } %>
 
-          </div>
 
-        </div>
+            <!-- =========================================
+                 AUDIO
+                 ========================================= -->
+
+            <% if (resource.type === "audio") { %>
+
+              <% if (
+                resource.file &&
+                resource.file.fileUrl
+              ) { %>
+
+                <audio
+                  controls
+                  preload="metadata"
+                  class="course-audio-player dbw-v2-audio"
+                  data-resource-id="<%= resource._id %>"
+                >
+
+                  <source
+                    src="<%= resource.file.fileUrl %>"
+                  />
+
+                  Your browser does not support audio playback.
+
+                </audio>
 
 
-        <!-- AUDIO -->
+                <% if (
+                  resource.access &&
+                  resource.access.allowDownload
+                ) { %>
 
-        <% if (resource.type === "audio") { %>
+                  <div class="dbw-resource-actions">
 
-          <% if (resource.file && resource.file.fileUrl) { %>
+                    <a
+                      href="<%= resourceBase %>/download"
+                      class="dbw-resource-primary-action"
+                    >
+                      Download Audio
+                    </a>
 
-            <audio
-              controls
-              preload="metadata"
-              class="course-audio-player dbw-v2-audio"
-              data-resource-id="<%= resource._id %>"
-            >
+                  </div>
 
-              <source
-                src="<%= resource.file.fileUrl %>"
-              />
+                <% } %>
 
-              Your browser does not support audio playback.
+              <% } else { %>
 
-            </audio>
+                <p class="dbw-resource-empty">
+                  Audio file unavailable.
+                </p>
+
+              <% } %>
+
+            <% } %>
 
 
-            <% if (
-              resource.access &&
-              resource.access.allowDownload
-            ) { %>
+            <!-- =========================================
+                 DOCUMENT
+                 ========================================= -->
+
+            <% if (resource.type === "document") { %>
 
               <div class="dbw-resource-actions">
 
-                <a
-                  href="<%= resourceBase %>/download"
-                  class="dbw-resource-primary-action"
-                >
-                  Download Audio
-                </a>
+                <% if (
+                  resource.access &&
+                  resource.access.allowOnline &&
+                  resource.file &&
+                  resource.file.fileUrl
+                ) { %>
 
+                  <a
+                    href="<%= resourceBase %>/open"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="dbw-resource-primary-action"
+                  >
+                    Read Online
+                  </a>
+
+                <% } %>
+
+
+                <% if (
+                  resource.access &&
+                  resource.access.allowDownload &&
+                  resource.file &&
+                  resource.file.fileUrl
+                ) { %>
+
+                  <a
+                    href="<%= resourceBase %>/download"
+                    class="dbw-resource-secondary-action"
+                  >
+                    Download
+                  </a>
+
+                <% } %>
+
+              </div>
+
+
+              <% if (
+                resource.file &&
+                resource.file.originalName
+              ) { %>
+
+                <p class="dbw-resource-file-name">
+                  <%= resource.file.originalName %>
+                </p>
+
+              <% } %>
+
+            <% } %>
+
+
+            <!-- =========================================
+                 WRITTEN MATERIAL
+                 ========================================= -->
+
+            <% if (resource.type === "written") { %>
+
+              <div class="dbw-written-content">
+                <%= resource.content || "" %>
               </div>
 
             <% } %>
 
-          <% } else { %>
 
-            <p class="dbw-resource-empty">
-              Audio file unavailable.
-            </p>
+            <!-- =========================================
+                 EXTERNAL
+                 ========================================= -->
 
-          <% } %>
+            <% if (resource.type === "external") { %>
 
-        <% } %>
-
-
-        <!-- DOCUMENT -->
-
-        <% if (resource.type === "document") { %>
-
-          <div class="dbw-resource-actions">
-
-            <% if (
-              resource.access &&
-              resource.access.allowOnline &&
-              resource.file &&
-              resource.file.fileUrl
-            ) { %>
-
-              <a
-                href="<%= resourceBase %>/open"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="dbw-resource-primary-action"
-              >
-                Read Online
-              </a>
-
-            <% } %>
-
-
-            <% if (
-              resource.access &&
-              resource.access.allowDownload &&
-              resource.file &&
-              resource.file.fileUrl
-            ) { %>
-
-              <a
-                href="<%= resourceBase %>/download"
-                class="dbw-resource-secondary-action"
-              >
-                Download
-              </a>
-
-            <% } %>
-
-          </div>
-
-
-          <% if (
-            resource.file &&
-            resource.file.originalName
-          ) { %>
-
-            <p class="dbw-resource-file-name">
-              <%= resource.file.originalName %>
-            </p>
-
-          <% } %>
-
-        <% } %>
-
-
-        <!-- WRITTEN -->
-
-        <% if (resource.type === "written") { %>
-
-          <div class="dbw-written-content">
-            <%= resource.content || "" %>
-          </div>
-
-        <% } %>
-
-
-        <!-- EXTERNAL -->
-
-        <% if (resource.type === "external") { %>
-
-          <div class="dbw-resource-actions">
-
-            <a
-              href="<%= resourceBase %>/open"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="dbw-resource-primary-action"
-            >
-              Open Resource ↗
-            </a>
-
-          </div>
-
-        <% } %>
-
-
-        <!-- ASSIGNMENT -->
-
-        <% if (resource.type === "assignment") { %>
-
-          <% if (
-            resource.file &&
-            resource.file.fileUrl
-          ) { %>
-
-            <div class="dbw-resource-actions">
-
-              <% if (
-                resource.access &&
-                resource.access.allowOnline
-              ) { %>
+              <div class="dbw-resource-actions">
 
                 <a
                   href="<%= resourceBase %>/open"
@@ -283,207 +281,182 @@
                   rel="noopener noreferrer"
                   class="dbw-resource-primary-action"
                 >
-                  View Assignment
+                  Open Resource ↗
                 </a>
 
-              <% } %>
+              </div>
+
+            <% } %>
 
 
-              <% if (
-                resource.access &&
-                resource.access.allowDownload
-              ) { %>
+            <!-- =========================================
+                 ASSIGNMENT
 
-                <a
-                  href="<%= resourceBase %>/download"
-                  class="dbw-resource-secondary-action"
-                >
-                  Download Assignment
-                </a>
+                 IMPORTANT:
+                 The Course page displays the Assignment,
+                 its file and its status.
 
-              <% } %>
+                 Actual submission happens on the dedicated
+                 Documents / Assignments page.
+                 ========================================= -->
 
-            </div>
+            <% if (resource.type === "assignment") { %>
 
-          <% } %>
+              <div class="dbw-resource-actions">
+
+                <% if (
+                  resource.access &&
+                  resource.access.allowOnline &&
+                  resource.file &&
+                  resource.file.fileUrl
+                ) { %>
+
+                  <a
+                    href="<%= resourceBase %>/open"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="dbw-resource-secondary-action"
+                  >
+                    View Assignment
+                  </a>
+
+                <% } %>
 
 
-          <% if (submission) { %>
+                <% if (
+                  resource.access &&
+                  resource.access.allowDownload &&
+                  resource.file &&
+                  resource.file.fileUrl
+                ) { %>
 
-            <div class="dbw-assignment-status">
+                  <a
+                    href="<%= resourceBase %>/download"
+                    class="dbw-resource-secondary-action"
+                  >
+                    Download Assignment
+                  </a>
 
-              <p class="dbw-assignment-status-label">
-                Your Submission
-              </p>
+                <% } %>
 
-              <p>
-                Status:
-                <strong>
-                  <%= submission.status %>
-                </strong>
-              </p>
+              </div>
 
 
-              <% if (
-                submission.file &&
-                submission.file.originalName
-              ) { %>
+              <div
+                class="
+                  dbw-assignment-summary
 
-                <p>
-                  File:
+                  <%= submission &&
+                      submission.status === 'Accepted'
+                    ? 'is-accepted'
+                    : '' %>
+
+                  <%= submission &&
+                      submission.status === 'Needs Revision'
+                    ? 'needs-revision'
+                    : '' %>
+                "
+              >
+
+                <div>
+
+                  <span class="dbw-assignment-label">
+                    Submission Status
+                  </span>
+
+                  <strong class="dbw-assignment-value">
+                    <%= assignmentStatusLabel %>
+                  </strong>
+
+                </div>
+
+
+                <% if (
+                  submission &&
+                  submission.reviewFeedback
+                ) { %>
+
+                  <div class="dbw-assignment-feedback">
+
+                    <strong>
+                      Reviewer Feedback
+                    </strong>
+
+                    <p>
+                      <%= submission.reviewFeedback %>
+                    </p>
+
+                  </div>
+
+                <% } %>
+
+
+                <% if (
+                  submission &&
+                  submission.file &&
+                  submission.file.originalName
+                ) { %>
 
                   <a
                     href="<%= submission.file.fileUrl %>"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="text-[#6B46C1] font-semibold"
+                    class="dbw-submitted-file"
                   >
-                    <%= submission.file.originalName %>
+                    View Submitted File
                   </a>
-                </p>
 
-              <% } %>
-
-
-              <% if (
-                submission.status === "Needs Revision" &&
-                submission.reviewFeedback
-              ) { %>
-
-                <div class="dbw-review-feedback">
-
-                  <strong>
-                    Reviewer Feedback
-                  </strong>
-
-                  <p>
-                    <%= submission.reviewFeedback %>
-                  </p>
-
-                </div>
-
-              <% } %>
-
-
-              <% if (
-                submission.status === "Accepted" &&
-                submission.reviewFeedback
-              ) { %>
-
-                <div class="dbw-review-feedback">
-
-                  <strong>
-                    Reviewer Comment
-                  </strong>
-
-                  <p>
-                    <%= submission.reviewFeedback %>
-                  </p>
-
-                </div>
-
-              <% } %>
-
-            </div>
-
-          <% } %>
-
-
-          <% if (
-            (
-              !resource.assignmentSettings ||
-              resource.assignmentSettings.submissionRequired !== false
-            ) &&
-            (
-              !submission ||
-              submission.status === "Needs Revision"
-            )
-          ) { %>
-
-            <form
-              action="<%= resourceBase %>/assignment-submit"
-              method="POST"
-              enctype="multipart/form-data"
-              class="dbw-assignment-form"
-            >
-
-              <div>
-
-                <label>
-                  <%= submission &&
-                      submission.status === "Needs Revision"
-                    ? "Upload Revised Assignment"
-                    : "Upload Your Assignment" %>
-                </label>
-
-                <input
-                  type="file"
-                  name="assignmentFile"
-                  accept=".pdf,.doc,.docx"
-                  required
-                />
+                <% } %>
 
               </div>
 
 
-              <div>
+              <div class="dbw-resource-actions">
 
-                <label>
-                  Submission Note
-                  <span>(optional)</span>
-                </label>
+                <a
+                  href="/academy/<%= academy.slug %>/documents?assignment=<%= resource._id %>#assignment-upload"
+                  class="dbw-resource-primary-action"
+                >
 
-                <textarea
-                  name="submissionNote"
-                  rows="3"
-                  placeholder="Add a short note for the reviewer..."
-                ></textarea>
-
-              </div>
-
-
-              <button
-                type="submit"
-                class="dbw-resource-primary-action"
-              >
-                <%= submission &&
+                  <% if (
+                    submission &&
                     submission.status === "Needs Revision"
-                  ? "Submit Revision"
-                  : "Submit Assignment" %>
-              </button>
+                  ) { %>
 
-            </form>
+                    Revise Assignment
 
-          <% } %>
+                  <% } else if (
+                    submission &&
+                    (
+                      submission.status === "Submitted" ||
+                      submission.status === "Reviewed"
+                    )
+                  ) { %>
 
+                    View Submission Status
 
-          <% if (
-            submission &&
-            (
-              submission.status === "Submitted" ||
-              submission.status === "Reviewed"
-            )
-          ) { %>
+                  <% } else if (
+                    submission &&
+                    submission.status === "Accepted"
+                  ) { %>
 
-            <p class="dbw-resource-note">
-              Your assignment has been received and is awaiting review.
-            </p>
+                    View Assignment Submission
 
-          <% } %>
+                  <% } else { %>
 
+                    Go to Assignment Submission
 
-          <% if (
-            submission &&
-            submission.status === "Accepted"
-          ) { %>
+                  <% } %>
 
-            <p class="dbw-resource-success">
-              ✓ Assignment accepted.
-            </p>
+                </a>
 
-          <% } %>
+              </div>
 
-        <% } %>
+            <% } %>
+
+          </div>
+
+        </div>
 
       </article>
 
@@ -491,4 +464,4 @@
 
   </div>
 
-</div>
+</section>
