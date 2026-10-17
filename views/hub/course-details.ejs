@@ -1493,6 +1493,24 @@ html[data-theme="dark"]
               <%= course.overview || course.description %>
             </p>
           </div>
+          <!-- =====================================================
+     DBW V2 LEARNING MATERIALS
+     ===================================================== -->
+
+<% if (isResourceMode) { %>
+
+  <%- include(
+    "./course-resources",
+    {
+      academy,
+      course,
+      resources,
+      submissionByResource,
+      assignmentStatus
+    }
+  ) %>
+
+<% } %>
 
           
 
