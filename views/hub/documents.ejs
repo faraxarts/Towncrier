@@ -705,26 +705,553 @@
     }
 
   }
+
+  /* =========================================================
+   DBW V2 ASSIGNMENT SUBMISSION
+   FLAT LAYOUT
+   ========================================================= */
+
+.dbw-assignment-upload {
+  min-width: 0;
+}
+
+
+.dbw-assignment-upload-header {
+  margin-bottom: 2rem;
+}
+
+
+.dbw-assignment-upload-header h2 {
+  color: #111827;
+
+  font-size: 2rem;
+  line-height: 1.15;
+
+  font-weight: 800;
+}
+
+
+.dbw-assignment-upload-header p {
+  max-width: 42rem;
+
+  margin-top: 0.65rem;
+
+  color: #64748b;
+
+  line-height: 1.7;
+}
+
+
+.dbw-assignment-success-message {
+  margin-bottom: 1.5rem;
+
+  padding: 1rem 1.1rem;
+
+  border-left: 3px solid #16a34a;
+
+  background: #f0fdf4;
+
+  color: #15803d;
+
+  font-weight: 700;
+}
+
+
+.dbw-assignment-section {
+  padding: 1.7rem 0;
+
+  border-top: 1px solid #e5e7eb;
+}
+
+
+.dbw-assignment-section:last-of-type {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+
+.dbw-assignment-section h4 {
+  margin-bottom: 0.75rem;
+
+  color: #111827;
+
+  font-size: 1.1rem;
+
+  font-weight: 800;
+}
+
+
+.dbw-assignment-eyebrow {
+  margin-bottom: 0.4rem;
+
+  color: #6b46c1;
+
+  font-size: 0.75rem;
+
+  font-weight: 800;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.06em;
+}
+
+
+.dbw-selected-assignment-title {
+  color: #111827;
+
+  font-size: 1.5rem;
+
+  font-weight: 800;
+}
+
+
+.dbw-selected-assignment-course {
+  margin-top: 0.4rem;
+
+  color: #64748b;
+}
+
+
+.dbw-assignment-instructions {
+  color: #475569;
+
+  line-height: 1.8;
+
+  white-space: pre-line;
+}
+
+
+.dbw-assignment-field-label {
+  display: block;
+
+  margin-bottom: 0.55rem;
+
+  color: #334155;
+
+  font-size: 0.9rem;
+
+  font-weight: 700;
+}
+
+
+.dbw-assignment-field-label span {
+  color: #94a3b8;
+
+  font-weight: 500;
+}
+
+
+.dbw-assignment-control {
+  width: 100%;
+
+  padding: 0.85rem 1rem;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 0.9rem;
+
+  background: #ffffff;
+
+  color: #111827;
+
+  outline: none;
+}
+
+
+.dbw-assignment-control:focus {
+  border-color: #6b46c1;
+
+  box-shadow:
+    0 0 0 3px rgba(107, 70, 193, 0.1);
+}
+
+
+.dbw-assignment-help {
+  margin-top: 0.55rem;
+
+  color: #64748b;
+
+  font-size: 0.82rem;
+}
+
+
+.dbw-assignment-actions {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 0.75rem;
+}
+
+
+.dbw-assignment-secondary-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-height: 2.8rem;
+
+  padding: 0.65rem 1rem;
+
+  border: 1px solid #ddd6fe;
+
+  border-radius: 0.8rem;
+
+  color: #6b46c1;
+
+  font-weight: 700;
+
+  text-decoration: none;
+}
+
+
+.dbw-assignment-secondary-button:hover {
+  background: #f5f3ff;
+}
+
+
+.dbw-assignment-status-block {
+  margin-top: 1.6rem;
+
+  padding: 1.1rem 1.2rem;
+
+  border-left: 3px solid #64748b;
+
+  background: #f8fafc;
+}
+
+
+.dbw-assignment-status-block h4 {
+  margin-top: 0.25rem;
+
+  color: #111827;
+
+  font-size: 1.15rem;
+
+  font-weight: 800;
+}
+
+
+.dbw-assignment-status-block p {
+  margin-top: 0.4rem;
+
+  color: #475569;
+
+  line-height: 1.65;
+
+  white-space: pre-line;
+}
+
+
+.dbw-assignment-status-block.is-pending {
+  border-left-color: #2563eb;
+
+  background: #eff6ff;
+}
+
+
+.dbw-assignment-status-block.is-accepted {
+  border-left-color: #16a34a;
+
+  background: #f0fdf4;
+}
+
+
+.dbw-assignment-status-block.needs-revision {
+  border-left-color: #dc2626;
+
+  background: #fef2f2;
+}
+
+
+.dbw-assignment-status-label {
+  color: #64748b;
+
+  font-size: 0.72rem;
+
+  font-weight: 800;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.05em;
+}
+
+
+.dbw-assignment-feedback {
+  margin-top: 1rem;
+}
+
+
+.dbw-submission-file-link {
+  display: inline-block;
+
+  margin-top: 0.9rem;
+
+  color: #6b46c1;
+
+  font-weight: 700;
+}
+
+
+.dbw-assignment-form-flat {
+  display: grid;
+
+  gap: 1.4rem;
+
+  margin-top: 1.8rem;
+
+  padding-top: 1.8rem;
+
+  border-top: 1px solid #e5e7eb;
+}
+
+
+.dbw-assignment-submit-button {
+  width: fit-content;
+
+  min-height: 3rem;
+
+  padding: 0.7rem 1.4rem;
+
+  border: 0;
+
+  border-radius: 9999px;
+
+  background: #6b46c1;
+
+  color: #ffffff;
+
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+
+.dbw-assignment-submit-button:hover {
+  background: #553c9a;
+}
+
+
+.dbw-assignment-empty {
+  padding: 1.6rem 0;
+
+  border-top: 1px solid #e5e7eb;
+
+  color: #64748b;
+}
+
+
+.dbw-assignment-empty strong {
+  display: block;
+
+  margin-bottom: 0.35rem;
+
+  color: #111827;
+}
+
+
+.dbw-assignment-change {
+  margin-top: 1.5rem;
+}
+
+
+.dbw-assignment-change a {
+  color: #6b46c1;
+
+  font-weight: 700;
+
+  text-decoration: none;
+}
+
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+html[data-theme="dark"]
+.dbw-assignment-upload-header h2,
+
+html[data-theme="dark"]
+.dbw-selected-assignment-title,
+
+html[data-theme="dark"]
+.dbw-assignment-section h4,
+
+html[data-theme="dark"]
+.dbw-assignment-status-block h4,
+
+html[data-theme="dark"]
+.dbw-assignment-empty strong {
+  color: #f8f7fb;
+}
+
+
+html[data-theme="dark"]
+.dbw-assignment-upload-header p,
+
+html[data-theme="dark"]
+.dbw-selected-assignment-course,
+
+html[data-theme="dark"]
+.dbw-assignment-instructions,
+
+html[data-theme="dark"]
+.dbw-assignment-help,
+
+html[data-theme="dark"]
+.dbw-assignment-status-block p,
+
+html[data-theme="dark"]
+.dbw-assignment-empty {
+  color: #aaa6b4;
+}
+
+
+html[data-theme="dark"]
+.dbw-assignment-section,
+
+html[data-theme="dark"]
+.dbw-assignment-form-flat,
+
+html[data-theme="dark"]
+.dbw-assignment-empty {
+  border-color:
+    rgba(255, 255, 255, 0.09);
+}
+
+
+html[data-theme="dark"]
+.dbw-assignment-field-label {
+  color: #e5e3eb;
+}
+
+
+html[data-theme="dark"]
+.dbw-assignment-control {
+  background: #11111b;
+
+  border-color:
+    rgba(255, 255, 255, 0.12);
+
+  color: #f8f7fb;
+}
+
+
+html[data-theme="dark"]
+.dbw-assignment-secondary-button {
+  border-color:
+    rgba(139, 92, 246, 0.35);
+
+  color: #c4b5fd;
+}
+
+
+html[data-theme="dark"]
+.dbw-assignment-secondary-button:hover {
+  background:
+    rgba(139, 92, 246, 0.08);
+}
+
+
+html[data-theme="dark"]
+.dbw-assignment-status-block {
+  background:
+    rgba(255, 255, 255, 0.035);
+}
+
+
+html[data-theme="dark"]
+.dbw-assignment-status-block.is-pending {
+  background:
+    rgba(37, 99, 235, 0.08);
+}
+
+
+html[data-theme="dark"]
+.dbw-assignment-status-block.is-accepted {
+  background:
+    rgba(34, 197, 94, 0.07);
+}
+
+
+html[data-theme="dark"]
+.dbw-assignment-status-block.needs-revision {
+  background:
+    rgba(239, 68, 68, 0.07);
+}
+
+
+/* MOBILE */
+
+@media (max-width: 640px) {
+
+  .dbw-assignment-upload-header h2 {
+    font-size: 1.7rem;
+  }
+
+
+  .dbw-assignment-actions {
+    display: grid;
+
+    grid-template-columns: 1fr;
+  }
+
+
+  .dbw-assignment-secondary-button,
+  .dbw-assignment-submit-button {
+    width: 100%;
+  }
+
+}
 </style>
 </head>
 <body class="academy-documents-page bg-[#f7f7f8] text-gray-900">
 
   <%- include("../partials/header") %>
 
+
   <%
     const assignmentSubmissions =
-      typeof submissions !== "undefined" && Array.isArray(submissions)
+      typeof submissions !== "undefined" &&
+      Array.isArray(submissions)
         ? submissions
         : [];
   %>
 
-  <section class="bg-gradient-to-r from-[#4F46E5] via-[#7C3AED] to-[#C026D3] text-white">
-    <div class="max-w-7xl mx-auto px-6 md:px-16 py-10 md:py-12">
-      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+
+  <!-- =====================================================
+       ACADEMY HERO
+       ===================================================== -->
+
+  <section
+    class="bg-gradient-to-r from-[#4F46E5] via-[#7C3AED] to-[#C026D3] text-white"
+  >
+
+    <div
+      class="max-w-7xl mx-auto px-6 md:px-16 py-10 md:py-12"
+    >
+
+      <div
+        class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6"
+      >
+
         <div>
-          <h1 class="text-3xl md:text-5xl font-extrabold mb-3"><%= academy.name %></h1>
-          <p class="text-lg md:text-2xl text-white/90">Assignment Submission Center</p>
+
+          <h1
+            class="text-3xl md:text-5xl font-extrabold mb-3"
+          >
+            <%= academy.name %>
+          </h1>
+
+          <p
+            class="text-lg md:text-2xl text-white/90"
+          >
+            Assignment Submission Center
+          </p>
+
         </div>
+
 
         <a
           href="/academy/<%= academy.slug %>/courses"
@@ -732,738 +1259,953 @@
         >
           My Courses
         </a>
+
       </div>
+
     </div>
 
-    <div class="border-t border-white/15">
-      <div class="max-w-7xl mx-auto px-6 md:px-16">
-        <div class="flex items-center gap-8 overflow-x-auto">
-          <a href="/academy/<%= academy.slug %>/courses" class="inline-flex h-14 items-center border-b-2 border-transparent text-white/70 font-medium whitespace-nowrap hover:text-white transition">
-            <span class="mr-2">📖</span>
+
+    <!-- ACADEMY NAV -->
+
+    <div
+      class="border-t border-white/15"
+    >
+
+      <div
+        class="max-w-7xl mx-auto px-6 md:px-16"
+      >
+
+        <div
+          class="flex items-center gap-8 overflow-x-auto"
+        >
+
+          <a
+            href="/academy/<%= academy.slug %>/courses"
+            class="inline-flex h-14 items-center border-b-2 border-transparent text-white/70 font-medium whitespace-nowrap hover:text-white transition"
+          >
+            <span class="mr-2">
+              📖
+            </span>
+
             Courses
           </a>
-          <a href="/academy/<%= academy.slug %>/documents" class="inline-flex h-14 items-center border-b-2 border-white text-white font-semibold whitespace-nowrap">
-            <span class="mr-2">📄</span>
+
+
+          <a
+            href="/academy/<%= academy.slug %>/documents"
+            class="inline-flex h-14 items-center border-b-2 border-white text-white font-semibold whitespace-nowrap"
+          >
+            <span class="mr-2">
+              📄
+            </span>
+
             Documents
           </a>
+
         </div>
+
       </div>
+
     </div>
+
   </section>
 
-  <section class="pt-12 md:pt-14 pb-10">
-    <div class="max-w-7xl mx-auto px-6 md:px-16">
-      <h2 class="text-4xl md:text-5xl font-extrabold text-gray-950 mb-4">
+
+  <!-- =====================================================
+       PAGE INTRODUCTION
+       ===================================================== -->
+
+  <section
+    class="pt-12 md:pt-14 pb-10"
+  >
+
+    <div
+      class="max-w-7xl mx-auto px-6 md:px-16"
+    >
+
+      <h2
+        class="text-4xl md:text-5xl font-extrabold text-gray-950 mb-4"
+      >
         Upload Assignment
       </h2>
-      <p class="text-lg md:text-2xl text-slate-600 max-w-5xl">
-        Submit your completed assignment documents for <%= academy.name %> and keep track of all your previous submissions.
+
+      <p
+        class="text-lg md:text-2xl text-slate-600 max-w-5xl"
+      >
+        Submit your completed assignment documents for
+        <%= academy.name %>
+        and keep track of your previous submissions.
       </p>
+
     </div>
+
   </section>
 
-  <section class="pb-16 md:pb-20">
-    <div class="max-w-7xl mx-auto px-6 md:px-16">
-      <div class="grid grid-cols-1 xl:grid-cols-5 gap-8">
 
-        <div class="xl:col-span-3 bg-white border border-gray-100 rounded-[28px] shadow-sm p-8 md:p-10">
-          <% if (typeof submitted !== "undefined" && submitted === "success") { %>
-            <div class="mb-6 rounded-2xl border border-green-200 bg-green-50 px-5 py-4 text-green-700 font-medium">
-              Assignment uploaded successfully.
+  <!-- =====================================================
+       ASSIGNMENT WORKSPACE
+       ===================================================== -->
+
+  <section
+    class="pb-16 md:pb-20"
+  >
+
+    <div
+      class="max-w-7xl mx-auto px-6 md:px-16"
+    >
+
+      <div
+        class="grid grid-cols-1 xl:grid-cols-5 gap-8"
+      >
+
+
+        <!-- =================================================
+             LEFT — FLAT DBW V2 ASSIGNMENT SUBMISSION
+             ================================================= -->
+
+        <section
+          id="assignment-upload"
+          class="xl:col-span-3 dbw-assignment-upload"
+        >
+
+
+          <!-- SUCCESS -->
+
+          <% if (
+            typeof submitted !== "undefined" &&
+            submitted === "success"
+          ) { %>
+
+            <div
+              class="dbw-assignment-success-message"
+            >
+              ✓ Assignment uploaded successfully.
             </div>
+
           <% } %>
 
-          <!-- ======================================================
-     DBW V2 ASSIGNMENT SUBMISSION
-     ====================================================== -->
 
-<div
-  id="assignment-upload"
-  class="xl:col-span-3 bg-white border border-gray-100 rounded-[28px] shadow-sm p-8 md:p-10"
->
+          <!-- HEADER -->
 
-  <!-- SUCCESS MESSAGE -->
-
-  <% if (
-    typeof submitted !== "undefined" &&
-    submitted === "success"
-  ) { %>
-
-    <div
-      class="mb-6 rounded-2xl border border-green-200 bg-green-50 px-5 py-4 text-green-700 font-medium"
-    >
-      Assignment uploaded successfully.
-    </div>
-
-  <% } %>
-
-
-  <div class="mb-8">
-
-    <h3
-      class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-3"
-    >
-      Assignment Submission
-    </h3>
-
-    <p
-      class="text-lg text-slate-600 leading-relaxed"
-    >
-      Select an assignment below or continue directly
-      from a Course page.
-    </p>
-
-  </div>
-
-
-  <!-- ====================================================
-       NO ASSIGNMENT CURRENTLY SELECTED
-       ==================================================== -->
-
-  <% if (!selectedAssignment) { %>
-
-    <% if (
-      v2Assignments &&
-      v2Assignments.length
-    ) { %>
-
-      <div>
-
-        <label
-          for="v2AssignmentSelect"
-          class="block text-sm font-semibold text-gray-800 mb-2"
-        >
-          Select Assignment
-        </label>
-
-
-        <select
-          id="v2AssignmentSelect"
-          class="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3.5 text-gray-900 outline-none focus:border-[#6B46C1] focus:ring-2 focus:ring-purple-100 transition"
-        >
-
-          <option value="">
-            Choose an assignment
-          </option>
-
-
-          <% v2Assignments.forEach((assignment) => { %>
-
-            <option
-              value="<%= assignment._id %>"
-            >
-              <%= assignment.course?.title || "Course" %>
-              —
-              <%= assignment.title %>
-            </option>
-
-          <% }) %>
-
-        </select>
-
-
-        <p
-          class="mt-3 text-sm text-slate-500"
-        >
-          Assignments from Courses available to you will appear here.
-        </p>
-
-      </div>
-
-
-      <script>
-        document
-          .getElementById(
-            "v2AssignmentSelect"
-          )
-          ?.addEventListener(
-            "change",
-            function () {
-
-              if (!this.value) {
-                return;
-              }
-
-
-              window.location.href =
-                `/academy/<%= academy.slug %>/documents?assignment=${encodeURIComponent(
-                  this.value
-                )}#assignment-upload`;
-
-            }
-          );
-      </script>
-
-    <% } else { %>
-
-      <div
-        class="rounded-2xl border border-gray-200 bg-gray-50 p-6"
-      >
-
-        <p
-          class="font-semibold text-gray-900"
-        >
-          No assignments are currently available.
-        </p>
-
-        <p
-          class="text-slate-600 mt-2"
-        >
-          Published assignments from Courses you have access to
-          will appear here.
-        </p>
-
-      </div>
-
-    <% } %>
-
-  <% } %>
-
-
-  <!-- ====================================================
-       ASSIGNMENT SELECTED
-       ==================================================== -->
-
-  <% if (selectedAssignment) { %>
-
-    <div
-      class="rounded-2xl bg-purple-50 border border-purple-100 p-5 mb-7"
-    >
-
-      <p
-        class="text-sm uppercase tracking-wide font-bold text-[#6B46C1] mb-1"
-      >
-        Selected Assignment
-      </p>
-
-
-      <h4
-        class="text-xl font-extrabold text-gray-950"
-      >
-        <%= selectedAssignment.title %>
-      </h4>
-
-
-      <p
-        class="text-slate-600 mt-1"
-      >
-        Course:
-
-        <strong>
-          <%= selectedAssignment.course?.title || "Course" %>
-        </strong>
-      </p>
-
-    </div>
-
-
-    <!-- INSTRUCTIONS -->
-
-    <% if (
-      selectedAssignment.description
-    ) { %>
-
-      <div class="mb-6">
-
-        <h4
-          class="font-bold text-gray-900 mb-2"
-        >
-          Instructions
-        </h4>
-
-        <p
-          class="text-slate-700 leading-relaxed whitespace-pre-line"
-        >
-          <%= selectedAssignment.description %>
-        </p>
-
-      </div>
-
-    <% } %>
-
-
-    <!-- ASSIGNMENT SOURCE FILE -->
-
-    <% if (
-      selectedAssignment.file &&
-      selectedAssignment.file.fileUrl
-    ) { %>
-
-      <div
-        class="flex flex-wrap gap-3 mb-7"
-      >
-
-        <% if (
-          selectedAssignment.access &&
-          selectedAssignment.access.allowOnline
-        ) { %>
-
-          <a
-            href="/academy/<%= academy.slug %>/courses/<%= selectedAssignment.course.slug %>/resources/<%= selectedAssignment._id %>/open"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center justify-center rounded-2xl border border-purple-200 text-[#6B46C1] px-5 py-3 font-semibold"
+          <div
+            class="dbw-assignment-upload-header"
           >
-            View Assignment
-          </a>
 
-        <% } %>
+            <h2>
+              Assignment Submission
+            </h2>
 
-
-        <% if (
-          selectedAssignment.access &&
-          selectedAssignment.access.allowDownload
-        ) { %>
-
-          <a
-            href="/academy/<%= academy.slug %>/courses/<%= selectedAssignment.course.slug %>/resources/<%= selectedAssignment._id %>/download"
-            class="inline-flex items-center justify-center rounded-2xl border border-purple-200 text-[#6B46C1] px-5 py-3 font-semibold"
-          >
-            Download Assignment
-          </a>
-
-        <% } %>
-
-      </div>
-
-    <% } %>
-
-
-    <!-- ==================================================
-         ACCEPTED
-         ================================================== -->
-
-    <% if (
-      selectedSubmission &&
-      selectedSubmission.status === "Accepted"
-    ) { %>
-
-      <div
-        class="rounded-2xl border border-green-200 bg-green-50 p-6"
-      >
-
-        <h4
-          class="font-extrabold text-green-800 text-xl"
-        >
-          ✓ Assignment Accepted
-        </h4>
-
-        <p
-          class="text-green-700 mt-2"
-        >
-          This assignment has been reviewed and accepted.
-        </p>
-
-
-        <% if (
-          selectedSubmission.reviewFeedback
-        ) { %>
-
-          <div class="mt-4">
-
-            <strong class="text-green-900">
-              Reviewer Comment
-            </strong>
-
-            <p
-              class="text-green-800 mt-1 whitespace-pre-line"
-            >
-              <%= selectedSubmission.reviewFeedback %>
+            <p>
+              Select an assignment below or continue directly
+              from a Course page.
             </p>
 
           </div>
 
-        <% } %>
+
+          <!-- ===============================================
+               NO ASSIGNMENT SELECTED
+               =============================================== -->
+
+          <% if (!selectedAssignment) { %>
 
 
-        <% if (
-          selectedSubmission.file &&
-          selectedSubmission.file.fileUrl
-        ) { %>
+            <% if (
+              v2Assignments &&
+              v2Assignments.length
+            ) { %>
 
-          <a
-            href="<%= selectedSubmission.file.fileUrl %>"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-block mt-4 text-green-800 font-bold"
-          >
-            View Submitted File
-          </a>
+              <div
+                class="dbw-assignment-section"
+              >
 
-        <% } %>
-
-      </div>
-
-    <% } %>
+                <label
+                  for="v2AssignmentSelect"
+                  class="dbw-assignment-field-label"
+                >
+                  Select Assignment
+                </label>
 
 
-    <!-- ==================================================
-         AWAITING REVIEW
-         ================================================== -->
+                <select
+                  id="v2AssignmentSelect"
+                  class="dbw-assignment-control"
+                >
 
-    <% if (
-      selectedSubmission &&
-      (
-        selectedSubmission.status === "Submitted" ||
-        selectedSubmission.status === "Reviewed"
-      )
-    ) { %>
-
-      <div
-        class="rounded-2xl border border-blue-200 bg-blue-50 p-6"
-      >
-
-        <h4
-          class="font-extrabold text-blue-800 text-xl"
-        >
-          Awaiting Review
-        </h4>
-
-        <p
-          class="text-blue-700 mt-2"
-        >
-          Your assignment has been received and is waiting
-          for administrator review.
-        </p>
+                  <option value="">
+                    Choose an assignment
+                  </option>
 
 
-        <% if (
-          selectedSubmission.file &&
-          selectedSubmission.file.fileUrl
-        ) { %>
+                  <% v2Assignments.forEach((assignment) => { %>
 
-          <a
-            href="<%= selectedSubmission.file.fileUrl %>"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-block mt-4 text-blue-800 font-bold"
-          >
-            View Submitted File
-          </a>
+                    <option
+                      value="<%= assignment._id %>"
+                    >
+                      <%= assignment.course?.title || "Course" %>
+                      —
+                      <%= assignment.title %>
+                    </option>
 
-        <% } %>
+                  <% }) %>
 
-      </div>
-
-    <% } %>
+                </select>
 
 
-    <!-- ==================================================
-         NEW SUBMISSION / REVISION
-         ================================================== -->
+                <p
+                  class="dbw-assignment-help"
+                >
+                  Assignments from Courses available to you
+                  will appear here.
+                </p>
 
-    <% if (
-      !selectedSubmission ||
-      selectedSubmission.status === "Needs Revision"
-    ) { %>
-
-
-      <!-- REVISION FEEDBACK -->
-
-      <% if (
-        selectedSubmission &&
-        selectedSubmission.status === "Needs Revision"
-      ) { %>
-
-        <div
-          class="mb-6 rounded-2xl border border-red-200 bg-red-50 p-5"
-        >
-
-          <h4
-            class="font-bold text-red-800"
-          >
-            Revision Required
-          </h4>
+              </div>
 
 
-          <% if (
-            selectedSubmission.reviewFeedback
-          ) { %>
+              <script>
+                document
+                  .getElementById(
+                    "v2AssignmentSelect"
+                  )
+                  ?.addEventListener(
+                    "change",
+                    function () {
 
-            <p
-              class="text-red-700 mt-2 whitespace-pre-line"
-            >
-              <%= selectedSubmission.reviewFeedback %>
-            </p>
+                      if (!this.value) {
+                        return;
+                      }
 
-          <% } else { %>
 
-            <p
-              class="text-red-700 mt-2"
-            >
-              An administrator has requested that you revise
-              and resubmit this assignment.
-            </p>
+                      window.location.href =
+                        `/academy/<%= academy.slug %>/documents?assignment=${encodeURIComponent(
+                          this.value
+                        )}#assignment-upload`;
+
+                    }
+                  );
+              </script>
+
+            <% } else { %>
+
+              <div
+                class="dbw-assignment-empty"
+              >
+
+                <strong>
+                  No assignments are currently available.
+                </strong>
+
+                <p>
+                  Published assignments from Courses you have
+                  access to will appear here.
+                </p>
+
+              </div>
+
+            <% } %>
 
           <% } %>
 
-        </div>
 
-      <% } %>
+          <!-- ===============================================
+               ASSIGNMENT SELECTED
+               =============================================== -->
+
+          <% if (selectedAssignment) { %>
 
 
-      <!-- ACTUAL SUBMISSION FORM -->
+            <!-- ASSIGNMENT IDENTITY -->
 
-      <form
-        action="/academy/<%= academy.slug %>/courses/<%= selectedAssignment.course.slug %>/resources/<%= selectedAssignment._id %>/assignment-submit"
-        method="POST"
-        enctype="multipart/form-data"
-        class="space-y-6"
-      >
-
-        <div>
-
-          <label
-            for="submissionNote"
-            class="block text-sm font-semibold text-gray-800 mb-2"
-          >
-            Submission Note
-
-            <span
-              class="font-normal text-slate-500"
+            <div
+              class="dbw-assignment-section"
             >
-              (optional)
-            </span>
 
-          </label>
-
-
-          <textarea
-            id="submissionNote"
-            name="submissionNote"
-            rows="4"
-            class="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3.5 text-gray-900 outline-none focus:border-[#6B46C1] focus:ring-2 focus:ring-purple-100 transition resize-none"
-            placeholder="Add a short note for the reviewer..."
-          ></textarea>
-
-        </div>
-
-
-        <div>
-
-          <label
-            for="assignmentFile"
-            class="block text-sm font-semibold text-gray-800 mb-2"
-          >
-            <%= selectedSubmission
-              ? "Upload Revised Document"
-              : "Upload Assignment Document" %>
-          </label>
-
-
-          <input
-            type="file"
-            id="assignmentFile"
-            name="assignmentFile"
-            accept=".pdf,.doc,.docx"
-            class="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3.5 text-gray-900 outline-none focus:border-[#6B46C1] focus:ring-2 focus:ring-purple-100 transition"
-            required
-          />
-
-
-          <p
-            class="mt-2 text-sm text-slate-500"
-          >
-            Accepted formats: PDF, DOC, DOCX
-          </p>
-
-        </div>
-
-
-        <button
-          type="submit"
-          class="inline-flex items-center justify-center rounded-full bg-[#6B46C1] text-white px-8 py-4 font-bold text-lg hover:bg-purple-700 transition"
-        >
-          <%= selectedSubmission
-            ? "Submit Revision"
-            : "Submit Assignment" %>
-        </button>
-
-      </form>
-
-    <% } %>
-
-
-    <div class="mt-7">
-
-      <a
-        href="/academy/<%= academy.slug %>/documents"
-        class="text-[#6B46C1] font-semibold"
-      >
-        ← Choose Another Assignment
-      </a>
-
-    </div>
-
-  <% } %>
-
-</div>
-
-          <form action="/academy/<%= academy.slug %>/documents/submit-assignment" method="POST" enctype="multipart/form-data" class="space-y-6">
-            <div>
-              <label for="courseId" class="block text-sm font-semibold text-gray-800 mb-2">Select Course</label>
-              <select
-                id="courseId"
-                name="courseId"
-                class="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3.5 text-gray-900 outline-none focus:border-[#6B46C1] focus:ring-2 focus:ring-purple-100 transition"
-                required
+              <div
+                class="dbw-assignment-eyebrow"
               >
-                <option value="">Choose a course</option>
-                <% if (courses && courses.length) { %>
-                  <% courses.forEach((course) => { %>
-                    <option value="<%= course._id || course.slug %>"><%= course.title %></option>
-                  <% }) %>
-                <% } %>
-              </select>
-            </div>
+                Selected Assignment
+              </div>
 
-            <div>
-              <label for="assignmentTitle" class="block text-sm font-semibold text-gray-800 mb-2">Assignment Title</label>
-              <input
-                type="text"
-                id="assignmentTitle"
-                name="assignmentTitle"
-                class="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3.5 text-gray-900 outline-none focus:border-[#6B46C1] focus:ring-2 focus:ring-purple-100 transition"
-                placeholder="Example: Week 1 Assignment Answers"
-                required
-              />
-            </div>
 
-            <div>
-              <label for="submissionNote" class="block text-sm font-semibold text-gray-800 mb-2">Short Note</label>
-              <textarea
-                id="submissionNote"
-                name="submissionNote"
-                rows="4"
-                class="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3.5 text-gray-900 outline-none focus:border-[#6B46C1] focus:ring-2 focus:ring-purple-100 transition resize-none"
-                placeholder="Add any short note for your submission..."
-              ></textarea>
-            </div>
+              <h3
+                class="dbw-selected-assignment-title"
+              >
+                <%= selectedAssignment.title %>
+              </h3>
 
-            <div>
-              <label for="assignmentFile" class="block text-sm font-semibold text-gray-800 mb-2">Upload Document</label>
-              <input
-                type="file"
-                id="assignmentFile"
-                name="assignmentFile"
-                accept=".pdf,.doc,.docx"
-                class="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3.5 text-gray-900 outline-none focus:border-[#6B46C1] focus:ring-2 focus:ring-purple-100 transition"
-                required
-              />
-              <p class="mt-2 text-sm text-slate-500">
-                Accepted formats: PDF, DOC, DOCX
+
+              <p
+                class="dbw-selected-assignment-course"
+              >
+                Course:
+
+                <strong>
+                  <%= selectedAssignment.course?.title || "Course" %>
+                </strong>
               </p>
+
             </div>
 
-            <button
-              type="submit"
-              class="inline-flex items-center justify-center rounded-full bg-[#6B46C1] text-white px-8 py-4 font-bold text-lg shadow-md hover:bg-purple-700 transition"
-            >
-              Upload Assignment
-            </button>
-          </form>
-        </div>
 
-        <div class="xl:col-span-2 space-y-8">
-          <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8">
-            <h3 class="text-2xl md:text-3xl font-extrabold text-gray-950 mb-4">
+            <!-- INSTRUCTIONS -->
+
+            <% if (
+              selectedAssignment.description
+            ) { %>
+
+              <div
+                class="dbw-assignment-section"
+              >
+
+                <h4>
+                  Instructions
+                </h4>
+
+                <p
+                  class="dbw-assignment-instructions"
+                >
+                  <%= selectedAssignment.description %>
+                </p>
+
+              </div>
+
+            <% } %>
+
+
+            <!-- ASSIGNMENT MATERIAL -->
+
+            <% if (
+              selectedAssignment.file &&
+              selectedAssignment.file.fileUrl
+            ) { %>
+
+              <div
+                class="dbw-assignment-section"
+              >
+
+                <h4>
+                  Assignment Material
+                </h4>
+
+
+                <div
+                  class="dbw-assignment-actions"
+                >
+
+                  <% if (
+                    selectedAssignment.access &&
+                    selectedAssignment.access.allowOnline
+                  ) { %>
+
+                    <a
+                      href="/academy/<%= academy.slug %>/courses/<%= selectedAssignment.course.slug %>/resources/<%= selectedAssignment._id %>/open"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="dbw-assignment-secondary-button"
+                    >
+                      View Assignment
+                    </a>
+
+                  <% } %>
+
+
+                  <% if (
+                    selectedAssignment.access &&
+                    selectedAssignment.access.allowDownload
+                  ) { %>
+
+                    <a
+                      href="/academy/<%= academy.slug %>/courses/<%= selectedAssignment.course.slug %>/resources/<%= selectedAssignment._id %>/download"
+                      class="dbw-assignment-secondary-button"
+                    >
+                      Download Assignment
+                    </a>
+
+                  <% } %>
+
+                </div>
+
+              </div>
+
+            <% } %>
+
+
+            <!-- =============================================
+                 ACCEPTED
+                 ============================================= -->
+
+            <% if (
+              selectedSubmission &&
+              selectedSubmission.status === "Accepted"
+            ) { %>
+
+              <div
+                class="dbw-assignment-status-block is-accepted"
+              >
+
+                <span
+                  class="dbw-assignment-status-label"
+                >
+                  Submission Status
+                </span>
+
+                <h4>
+                  ✓ Assignment Accepted
+                </h4>
+
+                <p>
+                  This assignment has been reviewed and accepted.
+                </p>
+
+
+                <% if (
+                  selectedSubmission.reviewFeedback
+                ) { %>
+
+                  <div
+                    class="dbw-assignment-feedback"
+                  >
+
+                    <strong>
+                      Reviewer Comment
+                    </strong>
+
+                    <p>
+                      <%= selectedSubmission.reviewFeedback %>
+                    </p>
+
+                  </div>
+
+                <% } %>
+
+
+                <% if (
+                  selectedSubmission.file &&
+                  selectedSubmission.file.fileUrl
+                ) { %>
+
+                  <a
+                    href="<%= selectedSubmission.file.fileUrl %>"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="dbw-submission-file-link"
+                  >
+                    View Submitted File
+                  </a>
+
+                <% } %>
+
+              </div>
+
+            <% } %>
+
+
+            <!-- =============================================
+                 AWAITING REVIEW
+                 ============================================= -->
+
+            <% if (
+              selectedSubmission &&
+              (
+                selectedSubmission.status === "Submitted" ||
+                selectedSubmission.status === "Reviewed"
+              )
+            ) { %>
+
+              <div
+                class="dbw-assignment-status-block is-pending"
+              >
+
+                <span
+                  class="dbw-assignment-status-label"
+                >
+                  Submission Status
+                </span>
+
+                <h4>
+                  Awaiting Review
+                </h4>
+
+                <p>
+                  Your assignment has been received and is waiting
+                  for administrator review.
+                </p>
+
+
+                <% if (
+                  selectedSubmission.file &&
+                  selectedSubmission.file.fileUrl
+                ) { %>
+
+                  <a
+                    href="<%= selectedSubmission.file.fileUrl %>"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="dbw-submission-file-link"
+                  >
+                    View Submitted File
+                  </a>
+
+                <% } %>
+
+              </div>
+
+            <% } %>
+
+
+            <!-- =============================================
+                 NEW SUBMISSION / REVISION
+                 ============================================= -->
+
+            <% if (
+              !selectedSubmission ||
+              selectedSubmission.status === "Needs Revision"
+            ) { %>
+
+
+              <!-- REVISION NOTICE -->
+
+              <% if (
+                selectedSubmission &&
+                selectedSubmission.status === "Needs Revision"
+              ) { %>
+
+                <div
+                  class="dbw-assignment-status-block needs-revision"
+                >
+
+                  <span
+                    class="dbw-assignment-status-label"
+                  >
+                    Submission Status
+                  </span>
+
+                  <h4>
+                    Revision Required
+                  </h4>
+
+
+                  <% if (
+                    selectedSubmission.reviewFeedback
+                  ) { %>
+
+                    <p>
+                      <%= selectedSubmission.reviewFeedback %>
+                    </p>
+
+                  <% } else { %>
+
+                    <p>
+                      An administrator has requested that you
+                      revise and resubmit this assignment.
+                    </p>
+
+                  <% } %>
+
+                </div>
+
+              <% } %>
+
+
+              <!-- SUBMISSION FORM -->
+
+              <form
+                action="/academy/<%= academy.slug %>/courses/<%= selectedAssignment.course.slug %>/resources/<%= selectedAssignment._id %>/assignment-submit"
+                method="POST"
+                enctype="multipart/form-data"
+                class="dbw-assignment-form-flat"
+              >
+
+                <div>
+
+                  <label
+                    for="submissionNote"
+                    class="dbw-assignment-field-label"
+                  >
+                    Submission Note
+
+                    <span>
+                      (optional)
+                    </span>
+                  </label>
+
+
+                  <textarea
+                    id="submissionNote"
+                    name="submissionNote"
+                    rows="4"
+                    class="dbw-assignment-control"
+                    placeholder="Add a short note for the reviewer..."
+                  ></textarea>
+
+                </div>
+
+
+                <div>
+
+                  <label
+                    for="assignmentFile"
+                    class="dbw-assignment-field-label"
+                  >
+                    <%= selectedSubmission
+                      ? "Upload Revised Document"
+                      : "Upload Assignment Document" %>
+                  </label>
+
+
+                  <input
+                    type="file"
+                    id="assignmentFile"
+                    name="assignmentFile"
+                    accept=".pdf,.doc,.docx"
+                    class="dbw-assignment-control"
+                    required
+                  />
+
+
+                  <p
+                    class="dbw-assignment-help"
+                  >
+                    Accepted formats: PDF, DOC, DOCX
+                  </p>
+
+                </div>
+
+
+                <button
+                  type="submit"
+                  class="dbw-assignment-submit-button"
+                >
+                  <%= selectedSubmission
+                    ? "Submit Revision"
+                    : "Submit Assignment" %>
+                </button>
+
+              </form>
+
+            <% } %>
+
+
+            <!-- CHANGE ASSIGNMENT -->
+
+            <div
+              class="dbw-assignment-change"
+            >
+
+              <a
+                href="/academy/<%= academy.slug %>/documents"
+              >
+                ← Choose Another Assignment
+              </a>
+
+            </div>
+
+          <% } %>
+
+        </section>
+
+
+        <!-- =================================================
+             RIGHT SIDEBAR
+             ================================================= -->
+
+        <aside
+          class="xl:col-span-2 space-y-8"
+        >
+
+
+          <!-- SUBMISSION GUIDE -->
+
+          <div
+            class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8"
+          >
+
+            <h3
+              class="text-2xl md:text-3xl font-extrabold text-gray-950 mb-4"
+            >
               Submission Guide
             </h3>
 
-            <div class="space-y-4 text-lg text-slate-700 leading-relaxed">
-              <p>1. Select the course the assignment belongs to.</p>
-              <p>2. Upload your completed answer document.</p>
-              <p>3. Check your submission history below after upload.</p>
+
+            <div
+              class="space-y-4 text-lg text-slate-700 leading-relaxed"
+            >
+
+              <p>
+                1. Select the assignment you want to complete.
+              </p>
+
+              <p>
+                2. Review or download the assignment instructions.
+              </p>
+
+              <p>
+                3. Upload your completed answer document.
+              </p>
+
+              <p>
+                4. Check your submission status after uploading.
+              </p>
+
             </div>
+
           </div>
 
-          <div class="bg-gradient-to-r from-[#4F46E5] via-[#A855F7] to-[#EC4899] rounded-[28px] p-8 text-white shadow-sm">
-            <h3 class="text-2xl md:text-3xl font-extrabold mb-4">
+
+          <!-- ORGANIZATION CARD -->
+
+          <div
+            class="bg-gradient-to-r from-[#4F46E5] via-[#A855F7] to-[#EC4899] rounded-[28px] p-8 text-white shadow-sm"
+          >
+
+            <h3
+              class="text-2xl md:text-3xl font-extrabold mb-4"
+            >
               Keep Your Work Organized
             </h3>
-            <p class="text-lg leading-relaxed text-white/95">
-              Every submitted assignment in <%= academy.name %> will appear in your history, making it easy to track what you have already turned in.
+
+            <p
+              class="text-lg leading-relaxed text-white/95"
+            >
+              Every submitted assignment in
+              <%= academy.name %>
+              will appear in your history, making it easy to
+              track what you have already turned in.
             </p>
+
           </div>
-        </div>
+
+        </aside>
 
       </div>
+
     </div>
+
   </section>
 
-  <section class="pb-20 md:pb-24">
-    <div class="max-w-7xl mx-auto px-6 md:px-16">
-      <div class="mb-8">
-        <h3 class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-3">
+
+  <!-- =====================================================
+       SUBMISSION HISTORY
+       ===================================================== -->
+
+  <section
+    class="pb-20 md:pb-24"
+  >
+
+    <div
+      class="max-w-7xl mx-auto px-6 md:px-16"
+    >
+
+      <div
+        class="mb-8"
+      >
+
+        <h3
+          class="text-3xl md:text-4xl font-extrabold text-gray-950 mb-3"
+        >
           Submission History
         </h3>
-        <p class="text-lg text-slate-600">
+
+        <p
+          class="text-lg text-slate-600"
+        >
           View your previously uploaded assignment documents here.
         </p>
+
       </div>
 
+
+      <!-- NO SUBMISSIONS -->
+
       <% if (!assignmentSubmissions.length) { %>
-        <div class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-10 text-center">
-          <h4 class="text-2xl font-extrabold text-gray-950 mb-3">
+
+        <div
+          class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-10 text-center"
+        >
+
+          <h4
+            class="text-2xl font-extrabold text-gray-950 mb-3"
+          >
             No submissions yet
           </h4>
-          <p class="text-lg text-slate-600">
-            Your uploaded assignment documents will appear here after submission.
+
+          <p
+            class="text-lg text-slate-600"
+          >
+            Your uploaded assignment documents will appear
+            here after submission.
           </p>
+
         </div>
+
       <% } else { %>
-        <div class="space-y-6">
+
+
+        <!-- SUBMISSIONS -->
+
+        <div
+          class="space-y-6"
+        >
+
           <% assignmentSubmissions.forEach((item) => { %>
-            <article class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8">
-              <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
+
+            <article
+              class="bg-white border border-gray-100 rounded-[28px] shadow-sm p-8"
+            >
+
+              <div
+                class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6"
+              >
+
                 <div>
-                  <h4 class="text-2xl font-extrabold text-gray-950 mb-2">
+
+                  <h4
+                    class="text-2xl font-extrabold text-gray-950 mb-2"
+                  >
                     <%= item.assignmentTitle %>
                   </h4>
-                  <p class="text-lg text-slate-700 mb-2">
-                    <strong>Course:</strong> <%= item.courseTitle %>
+
+
+                  <p
+                    class="text-lg text-slate-700 mb-2"
+                  >
+                    <strong>
+                      Course:
+                    </strong>
+
+                    <%= item.courseTitle %>
                   </p>
 
-                  <div class="mb-2">
-                    <span class="font-semibold text-slate-700">Status:</span>
-                    <span class="inline-flex rounded-full px-3 py-1 text-sm font-semibold
-                      <%= item.status === 'Submitted' ? 'bg-blue-100 text-blue-700' : '' %>
-                      <%= item.status === 'Reviewed' ? 'bg-yellow-100 text-yellow-700' : '' %>
-                      <%= item.status === 'Accepted' ? 'bg-green-100 text-green-700' : '' %>
-                      <%= item.status === 'Needs Revision' ? 'bg-red-100 text-red-700' : '' %>
-                    ">
+
+                  <!-- STATUS -->
+
+                  <div
+                    class="mb-2"
+                  >
+
+                    <span
+                      class="font-semibold text-slate-700"
+                    >
+                      Status:
+                    </span>
+
+
+                    <span
+                      class="
+                        inline-flex rounded-full px-3 py-1 text-sm font-semibold
+
+                        <%= item.status === 'Submitted'
+                          ? 'bg-blue-100 text-blue-700'
+                          : '' %>
+
+                        <%= item.status === 'Reviewed'
+                          ? 'bg-yellow-100 text-yellow-700'
+                          : '' %>
+
+                        <%= item.status === 'Accepted'
+                          ? 'bg-green-100 text-green-700'
+                          : '' %>
+
+                        <%= item.status === 'Needs Revision'
+                          ? 'bg-red-100 text-red-700'
+                          : '' %>
+                      "
+                    >
                       <%= item.status || "Submitted" %>
                     </span>
+
                   </div>
 
-                  <p class="text-lg text-slate-700 mb-2">
-                    <strong>Submitted:</strong> <%= item.submittedAt %>
+
+                  <p
+                    class="text-lg text-slate-700 mb-2"
+                  >
+                    <strong>
+                      Submitted:
+                    </strong>
+
+                    <%= item.submittedAt %>
                   </p>
 
+
                   <% if (item.submissionNote) { %>
-                    <p class="text-base text-slate-600 mt-4">
-                      <strong>Note:</strong> <%= item.submissionNote %>
+
+                    <p
+                      class="text-base text-slate-600 mt-4"
+                    >
+                      <strong>
+                        Note:
+                      </strong>
+
+                      <%= item.submissionNote %>
                     </p>
+
                   <% } %>
+
+
+                  <!-- REVIEW FEEDBACK -->
+
+                  <% if (item.reviewFeedback) { %>
+
+                    <div
+                      class="mt-4"
+                    >
+
+                      <p
+                        class="font-semibold text-slate-700"
+                      >
+                        Reviewer Feedback:
+                      </p>
+
+                      <p
+                        class="text-base text-slate-600 mt-1 whitespace-pre-line"
+                      >
+                        <%= item.reviewFeedback %>
+                      </p>
+
+                    </div>
+
+                  <% } %>
+
                 </div>
 
-                <div class="flex flex-wrap gap-3">
-                  <a
-                    href="<%= item.fileUrl %>"
-                    target="_blank"
-                    class="inline-flex items-center justify-center rounded-2xl bg-[#6B46C1] text-white px-6 py-3 font-semibold hover:bg-purple-700 transition"
+
+                <!-- FILE -->
+
+                <% if (item.fileUrl) { %>
+
+                  <div
+                    class="flex flex-wrap gap-3"
                   >
-                    Open File
-                  </a>
-                </div>
+
+                    <a
+                      href="<%= item.fileUrl %>"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center justify-center rounded-2xl bg-[#6B46C1] text-white px-6 py-3 font-semibold hover:bg-purple-700 transition"
+                    >
+                      Open File
+                    </a>
+
+                  </div>
+
+                <% } %>
+
               </div>
+
             </article>
+
           <% }) %>
+
         </div>
+
       <% } %>
+
     </div>
+
   </section>
 
+
   <%- include("../partials/footer") %>
+
 </body>
-</html>
