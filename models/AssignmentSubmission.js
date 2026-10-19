@@ -1,113 +1,183 @@
-const mongoose = require("mongoose");
+const mongoose =
+  require("mongoose");
 
 
 const assignmentSubmissionSchema =
   new mongoose.Schema(
     {
+      /* =====================================================
+         LEARNER
+         ===================================================== */
+
       user: {
         type:
           mongoose.Schema.Types.ObjectId,
 
-        ref: "User",
+        ref:
+          "User",
 
-        required: true,
+        required:
+          true,
 
-        index: true,
+        index:
+          true,
       },
 
+
+      /* =====================================================
+         COURSE
+         ===================================================== */
 
       course: {
         type:
           mongoose.Schema.Types.ObjectId,
 
-        ref: "Course",
+        ref:
+          "Course",
 
-        required: true,
+        required:
+          true,
 
-        index: true,
-      },
-
-
-      /*
-       * New DBW V2 assignment resource.
-       *
-       * Nullable temporarily so legacy/test submissions
-       * remain compatible during migration.
-       */
-      resource: {
-        type:
-          mongoose.Schema.Types.ObjectId,
-
-        ref: "CourseResource",
-
-        default: null,
-
-        index: true,
-      },
-
-
-      assignmentTitle: {
-        type: String,
-        required: true,
-        trim: true,
-      },
-
-
-      submissionNote: {
-        type: String,
-        trim: true,
-        default: "",
+        index:
+          true,
       },
 
 
       /* =====================================================
-         CURRENT SUBMISSION FILE ONLY
+         DBW V2 ASSIGNMENT RESOURCE
 
-         We intentionally do NOT retain previous uploaded
-         revision files.
+         null remains valid for old legacy submissions.
+         ===================================================== */
+
+      resource: {
+        type:
+          mongoose.Schema.Types.ObjectId,
+
+        ref:
+          "CourseResource",
+
+        default:
+          null,
+
+        index:
+          true,
+      },
+
+
+      assignmentTitle: {
+        type:
+          String,
+
+        required:
+          true,
+
+        trim:
+          true,
+      },
+
+
+      submissionNote: {
+        type:
+          String,
+
+        trim:
+          true,
+
+        default:
+          "",
+      },
+
+
+      /* =====================================================
+         CURRENT SUBMISSION FILE
+
+         We keep only the current revision file.
+
+         When the learner uploads a replacement revision,
+         the previous Cloudinary asset is permanently deleted.
          ===================================================== */
 
       file: {
         originalName: {
-          type: String,
-          required: true,
-          trim: true,
+          type:
+            String,
+
+          required:
+            true,
+
+          trim:
+            true,
         },
+
 
         fileUrl: {
-          type: String,
-          required: true,
-          trim: true,
+          type:
+            String,
+
+          required:
+            true,
+
+          trim:
+            true,
         },
+
 
         publicId: {
-          type: String,
-          trim: true,
-          default: "",
+          type:
+            String,
+
+          trim:
+            true,
+
+          default:
+            "",
         },
+
 
         resourceType: {
-          type: String,
-          trim: true,
-          default: "",
+          type:
+            String,
+
+          trim:
+            true,
+
+          default:
+            "",
         },
+
 
         mimeType: {
-          type: String,
-          trim: true,
-          default: "",
+          type:
+            String,
+
+          trim:
+            true,
+
+          default:
+            "",
         },
 
+
         bytes: {
-          type: Number,
-          min: 0,
-          default: 0,
+          type:
+            Number,
+
+          default:
+            0,
+
+          min:
+            0,
         },
       },
 
 
+      /* =====================================================
+         REVIEW STATUS
+         ===================================================== */
+
       status: {
-        type: String,
+        type:
+          String,
 
         enum: [
           "Submitted",
@@ -116,22 +186,11 @@ const assignmentSubmissionSchema =
           "Needs Revision",
         ],
 
-        default: "Submitted",
+        default:
+          "Submitted",
 
-        index: true,
-      },
-
-
-      /*
-       * How many times a learner has replaced the
-       * submission after revision was requested.
-       *
-       * This preserves tiny metadata, not old files.
-       */
-      revisionCount: {
-        type: Number,
-        min: 0,
-        default: 0,
+        index:
+          true,
       },
 
 
@@ -140,9 +199,14 @@ const assignmentSubmissionSchema =
          ===================================================== */
 
       reviewFeedback: {
-        type: String,
-        trim: true,
-        default: "",
+        type:
+          String,
+
+        trim:
+          true,
+
+        default:
+          "",
       },
 
 
@@ -150,60 +214,68 @@ const assignmentSubmissionSchema =
         type:
           mongoose.Schema.Types.ObjectId,
 
-        ref: "User",
+        ref:
+          "User",
 
-        default: null,
+        default:
+          null,
       },
 
 
       reviewedAt: {
-        type: Date,
-        default: null,
+        type:
+          Date,
+
+        default:
+          null,
       },
 
 
       acceptedAt: {
-        type: Date,
-        default: null,
+        type:
+          Date,
+
+        default:
+          null,
+      },
+
+
+      /* =====================================================
+         REVISION COUNT
+
+         We don't preserve every historical Cloudinary file.
+         We simply record how many revision uploads occurred.
+         ===================================================== */
+
+      revisionCount: {
+        type:
+          Number,
+
+        default:
+          0,
+
+        min:
+          0,
       },
     },
 
     {
-      timestamps: true,
+      timestamps:
+        true,
     }
   );
 
 
 /* =========================================================
-   NEW SYSTEM:
-
-   One current AssignmentSubmission per
-   learner + assignment resource.
-
-   Legacy records where resource is null are excluded
-   from this uniqueness rule.
+   USEFUL QUERY INDEX
    ========================================================= */
 
-assignmentSubmissionSchema.index(
-  {
-    user: 1,
-    resource: 1,
-  },
-  {
-    unique: true,
-
-    partialFilterExpression: {
-      resource: {
-        $type: "objectId",
-      },
-    },
-  }
-);
-
-
 assignmentSubmissionSchema.index({
-  course: 1,
-  status: 1,
+  user:
+    1,
+
+  resource:
+    1,
 });
 
 
