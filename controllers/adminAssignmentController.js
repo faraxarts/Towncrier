@@ -11,11 +11,19 @@ const AcademyEvent =
   require("../models/AcademyEvent");
 
 
+const {
+  syncAcceptedAssignmentProgress,
+} =
+  require(
+    "../services/academyProgressService"
+  );
+
+
 /* =========================================================
    ANALYTICS
 
-   Review actions should never fail simply because an
-   analytics event could not be written.
+   Review analytics must never prevent the actual review
+   action from being saved.
    ========================================================= */
 
 async function logReviewEvent({
@@ -96,12 +104,13 @@ async function logReviewEvent({
         new Date(),
 
       /*
-       * Review events are meaningful permanent history,
-       * not temporary engagement telemetry.
+       * Assignment review events are meaningful history,
+       * so they are not temporary telemetry.
        */
       expiresAt:
         null,
     });
+
   } catch (error) {
     console.error(
       "Assignment review analytics error:",
@@ -120,7 +129,9 @@ exports.getAllAssignmentSubmissions =
     req,
     res
   ) => {
+
     try {
+
       const selectedAcademy =
         req.query
           .academy
@@ -145,34 +156,44 @@ exports.getAllAssignmentSubmissions =
 
 
       /* =====================================================
-         ACADEMIES + COURSE FILTER
+         ACADEMIES
          ===================================================== */
 
-      const [
-        academies,
-        courseIds,
-      ] =
-        await Promise.all([
-          Academy.find({
-            isPublished:
-              true,
-          }).sort({
-            createdAt:
-              1,
-          }),
+      const academies =
+        await Academy.find({
+          isPublished:
+            true,
+        }).sort({
+          createdAt:
+            1,
+        });
 
-          selectedAcademy
-            ? Course.find({
-                academy:
-                  selectedAcademy,
-              }).distinct(
-                "_id"
-              )
-            : Promise.resolve(
-                null
-              ),
-        ]);
 
+      /* =====================================================
+         COURSE IDS FOR ACADEMY FILTER
+         ===================================================== */
+
+      let courseIds =
+        null;
+
+
+      if (
+        selectedAcademy
+      ) {
+
+        courseIds =
+          await Course.find({
+            academy:
+              selectedAcademy,
+          }).distinct(
+            "_id"
+          );
+      }
+
+
+      /* =====================================================
+         SUBMISSION FILTER
+         ===================================================== */
 
       const filter =
         {};
@@ -181,6 +202,7 @@ exports.getAllAssignmentSubmissions =
       if (
         selectedAcademy
       ) {
+
         filter.course = {
           $in:
             courseIds ||
@@ -189,19 +211,40 @@ exports.getAllAssignmentSubmissions =
       }
 
 
+      /*
+       * In the Admin UI, "Submitted" represents everything
+       * currently awaiting review.
+       *
+       * This includes both Submitted and Reviewed records.
+       */
+
       if (
+        selectedStatus ===
+        "Submitted"
+      ) {
+
+        filter.status = {
+          $in: [
+            "Submitted",
+            "Reviewed",
+          ],
+        };
+      }
+
+      else if (
         selectedStatus &&
         allowedStatuses.has(
           selectedStatus
         )
       ) {
+
         filter.status =
           selectedStatus;
       }
 
 
       /* =====================================================
-         SUBMISSIONS
+         LOAD SUBMISSIONS
          ===================================================== */
 
       const submissions =
@@ -254,8 +297,8 @@ exports.getAllAssignmentSubmissions =
       /* =====================================================
          COUNTS
 
-         Counts respect the selected Academy, but not the
-         selected status tab.
+         Counts respect the Academy filter but do not depend
+         on the selected Status filter.
          ===================================================== */
 
       const countFilter =
@@ -265,6 +308,7 @@ exports.getAllAssignmentSubmissions =
       if (
         selectedAcademy
       ) {
+
         countFilter.course = {
           $in:
             courseIds ||
@@ -275,41 +319,53 @@ exports.getAllAssignmentSubmissions =
 
       const [
         allCount,
-        submittedCount,
+        awaitingCount,
         revisionCount,
         acceptedCount,
       ] =
         await Promise.all([
-          AssignmentSubmission.countDocuments(
-            countFilter
-          ),
 
-          AssignmentSubmission.countDocuments({
-            ...countFilter,
+          AssignmentSubmission
+            .countDocuments(
+              countFilter
+            ),
 
-            status: {
-              $in: [
-                "Submitted",
-                "Reviewed",
-              ],
-            },
-          }),
 
-          AssignmentSubmission.countDocuments({
-            ...countFilter,
+          AssignmentSubmission
+            .countDocuments({
+              ...countFilter,
 
-            status:
-              "Needs Revision",
-          }),
+              status: {
+                $in: [
+                  "Submitted",
+                  "Reviewed",
+                ],
+              },
+            }),
 
-          AssignmentSubmission.countDocuments({
-            ...countFilter,
 
-            status:
-              "Accepted",
-          }),
+          AssignmentSubmission
+            .countDocuments({
+              ...countFilter,
+
+              status:
+                "Needs Revision",
+            }),
+
+
+          AssignmentSubmission
+            .countDocuments({
+              ...countFilter,
+
+              status:
+                "Accepted",
+            }),
         ]);
 
+
+      /* =====================================================
+         RENDER
+         ===================================================== */
 
       return res.render(
         "admin/assignments/index",
@@ -327,7 +383,7 @@ exports.getAllAssignmentSubmissions =
               allCount,
 
             awaiting:
-              submittedCount,
+              awaitingCount,
 
             revision:
               revisionCount,
@@ -345,7 +401,9 @@ exports.getAllAssignmentSubmissions =
             "",
         }
       );
+
     } catch (error) {
+
       console.error(
         "Get assignment submissions error:",
         error
@@ -369,7 +427,7 @@ exports.getAllAssignmentSubmissions =
 
 
 /* =========================================================
-   REVIEW ASSIGNMENT
+   REVIEW ASSIGNMENT SUBMISSION
    ========================================================= */
 
 exports.reviewAssignmentSubmission =
@@ -377,11 +435,18 @@ exports.reviewAssignmentSubmission =
     req,
     res
   ) => {
+
     try {
+
+      /* =====================================================
+         LOAD SUBMISSION
+         ===================================================== */
+
       const submission =
-        await AssignmentSubmission.findById(
-          req.params.id
-        )
+        await AssignmentSubmission
+          .findById(
+            req.params.id
+          )
           .populate(
             "user",
             "name email"
@@ -418,6 +483,7 @@ exports.reviewAssignmentSubmission =
 
 
       if (!submission) {
+
         return res.redirect(
           "/admin/assignments?error=" +
           encodeURIComponent(
@@ -426,6 +492,10 @@ exports.reviewAssignmentSubmission =
         );
       }
 
+
+      /* =====================================================
+         INPUT
+         ===================================================== */
 
       const action =
         req.body
@@ -446,6 +516,7 @@ exports.reviewAssignmentSubmission =
         action !==
           "revision"
       ) {
+
         return res.redirect(
           "/admin/assignments?error=" +
           encodeURIComponent(
@@ -456,6 +527,68 @@ exports.reviewAssignmentSubmission =
 
 
       /* =====================================================
+         RETURN FILTERS
+         ===================================================== */
+
+      const buildReturnUrl =
+        (
+          successCode
+        ) => {
+
+          const query =
+            new URLSearchParams();
+
+
+          if (
+            req.body
+              .returnAcademy
+          ) {
+
+            query.set(
+              "academy",
+
+              req.body
+                .returnAcademy
+            );
+          }
+
+
+          if (
+            req.body
+              .returnStatus
+          ) {
+
+            query.set(
+              "status",
+
+              req.body
+                .returnStatus
+            );
+          }
+
+
+          if (
+            successCode
+          ) {
+
+            query.set(
+              "success",
+              successCode
+            );
+          }
+
+
+          const queryString =
+            query.toString();
+
+
+          return queryString
+            ? `/admin/assignments?${queryString}`
+            : "/admin/assignments";
+        };
+
+
+      /* =====================================================
          REQUEST REVISION
          ===================================================== */
 
@@ -463,7 +596,14 @@ exports.reviewAssignmentSubmission =
         action ===
         "revision"
       ) {
+
+        /*
+         * Revision feedback is mandatory because the learner
+         * needs to know what must be corrected.
+         */
+
         if (!feedback) {
+
           return res.redirect(
             "/admin/assignments?error=" +
             encodeURIComponent(
@@ -507,44 +647,10 @@ exports.reviewAssignmentSubmission =
         });
 
 
-        const query =
-          new URLSearchParams();
-
-
-        if (
-          req.body
-            .returnAcademy
-        ) {
-          query.set(
-            "academy",
-
-            req.body
-              .returnAcademy
-          );
-        }
-
-
-        if (
-          req.body
-            .returnStatus
-        ) {
-          query.set(
-            "status",
-
-            req.body
-              .returnStatus
-          );
-        }
-
-
-        query.set(
-          "success",
-          "revision-requested"
-        );
-
-
         return res.redirect(
-          `/admin/assignments?${query.toString()}`
+          buildReturnUrl(
+            "revision-requested"
+          )
         );
       }
 
@@ -552,6 +658,32 @@ exports.reviewAssignmentSubmission =
       /* =====================================================
          ACCEPT ASSIGNMENT
          ===================================================== */
+
+      /*
+       * Save the previous values so that, in the unlikely
+       * event that progress synchronization fails, we can
+       * restore the review state rather than leaving the
+       * submission Accepted while Course progress remains
+       * incomplete.
+       */
+
+      const previousReviewState = {
+        status:
+          submission.status,
+
+        reviewFeedback:
+          submission.reviewFeedback,
+
+        reviewedBy:
+          submission.reviewedBy,
+
+        reviewedAt:
+          submission.reviewedAt,
+
+        acceptedAt:
+          submission.acceptedAt,
+      };
+
 
       submission.status =
         "Accepted";
@@ -576,6 +708,86 @@ exports.reviewAssignmentSubmission =
       await submission.save();
 
 
+      /* =====================================================
+         DBW V2 PROGRESS
+
+         Assignment acceptance is what completes an
+         assignment CourseResource under the default V2 rule.
+
+         Legacy submissions have no resource reference and
+         therefore skip this step.
+         ===================================================== */
+
+      if (
+        submission.resource
+      ) {
+
+        try {
+
+          await syncAcceptedAssignmentProgress(
+            submission
+          );
+
+        } catch (
+          progressError
+        ) {
+
+          console.error(
+            "Assignment progress synchronization error:",
+            progressError
+          );
+
+
+          /*
+           * Restore the original review state so Admin can
+           * safely retry after the underlying issue is fixed.
+           */
+
+          submission.status =
+            previousReviewState.status;
+
+
+          submission.reviewFeedback =
+            previousReviewState
+              .reviewFeedback ||
+            "";
+
+
+          submission.reviewedBy =
+            previousReviewState
+              .reviewedBy ||
+            null;
+
+
+          submission.reviewedAt =
+            previousReviewState
+              .reviewedAt ||
+            null;
+
+
+          submission.acceptedAt =
+            previousReviewState
+              .acceptedAt ||
+            null;
+
+
+          await submission.save();
+
+
+          return res.redirect(
+            "/admin/assignments?error=" +
+            encodeURIComponent(
+              "The assignment could not be accepted because learner progress could not be updated. Please try again."
+            )
+          );
+        }
+      }
+
+
+      /* =====================================================
+         ACCEPTANCE EVENT
+         ===================================================== */
+
       await logReviewEvent({
         submission,
 
@@ -587,46 +799,14 @@ exports.reviewAssignmentSubmission =
       });
 
 
-      const query =
-        new URLSearchParams();
-
-
-      if (
-        req.body
-          .returnAcademy
-      ) {
-        query.set(
-          "academy",
-
-          req.body
-            .returnAcademy
-        );
-      }
-
-
-      if (
-        req.body
-          .returnStatus
-      ) {
-        query.set(
-          "status",
-
-          req.body
-            .returnStatus
-        );
-      }
-
-
-      query.set(
-        "success",
-        "accepted"
-      );
-
-
       return res.redirect(
-        `/admin/assignments?${query.toString()}`
+        buildReturnUrl(
+          "accepted"
+        )
       );
+
     } catch (error) {
+
       console.error(
         "Review assignment submission error:",
         error

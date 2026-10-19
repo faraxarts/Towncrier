@@ -1,119 +1,317 @@
 <%
+
   const typeIcons = {
+
     audio: "🎧",
+
     document: "📖",
+
     assignment: "📝",
+
     written: "📄",
+
     external: "🔗"
+
   };
 
   const typeLabels = {
+
     audio: "Audio Teaching",
+
     document: "E-book / Study Material",
+
     assignment: "Assignment",
+
     written: "Written Material",
+
     external: "External Resource"
+
   };
+
 %>
 
-
 <section class="dbw-learning-materials">
+
+  <%
+
+  const currentCourseProgress =
+    courseProgress || {
+      status: "not_started",
+      progressPercentage: 0,
+      completedRequiredResources: 0,
+      requiredResources: 0
+    };
+
+  const courseProgressPercent =
+    Math.max(
+      0,
+      Math.min(
+        100,
+        Number(currentCourseProgress.progressPercentage) || 0
+      )
+    );
+
+%>
+
+<div class="dbw-course-progress">
+
+  <div class="dbw-course-progress-top">
+
+    <div>
+
+      <span class="dbw-course-progress-label">
+
+        Course Progress
+
+      </span>
+
+      <strong>
+
+        <%= currentCourseProgress.progressPercentage || 0 %>%
+
+      </strong>
+
+    </div>
+
+    <span>
+
+      <%= currentCourseProgress.completedRequiredResources || 0 %>
+
+      of
+
+      <%= currentCourseProgress.requiredResources || 0 %>
+
+      required materials completed
+
+    </span>
+
+  </div>
+
+  <div
+
+    class="dbw-course-progress-track"
+
+    aria-label="Course progress"
+
+  >
+
+    <div
+      class="dbw-course-progress-fill"
+      data-course-progress-fill
+      data-progress-width="<%= courseProgressPercent %>"
+    ></div>
+
+  </div>
+
+  <% if (
+
+    currentCourseProgress.status ===
+
+    "completed"
+
+  ) { %>
+
+    <p class="dbw-course-complete-message">
+
+      ✓ Course completed
+
+    </p>
+
+  <% } %>
+
+</div>
 
   <div class="dbw-learning-heading">
 
     <h2>
+
       Your Learning Materials
+
     </h2>
 
     <p>
+
       Work through the materials below in the order provided.
+
       Required materials contribute to Course completion.
+
     </p>
 
   </div>
 
-
   <% if (!resources || !resources.length) { %>
 
     <div class="dbw-learning-empty">
+
       No Learning Materials have been published yet.
+
     </div>
 
   <% } %>
-
 
   <div class="dbw-resource-list">
 
     <% (resources || []).forEach((resource, index) => {
 
       const submission =
+
         submissionByResource &&
+
         submissionByResource[
+
           String(resource._id)
+
         ]
+
           ? submissionByResource[
+
               String(resource._id)
+
             ]
+
           : null;
 
       const resourceBase =
+
         `/academy/${academy.slug}/courses/${course.slug}/resources/${resource._id}`;
 
       let assignmentStatusLabel =
+
         "Not Submitted";
 
       if (submission) {
 
         if (
+
           submission.status === "Submitted" ||
+
           submission.status === "Reviewed"
+
         ) {
+
           assignmentStatusLabel =
+
             "Awaiting Review";
+
         }
 
         else if (
+
           submission.status === "Needs Revision"
+
         ) {
+
           assignmentStatusLabel =
+
             "Needs Revision";
+
         }
 
         else if (
+
           submission.status === "Accepted"
+
         ) {
+
           assignmentStatusLabel =
+
             "Accepted";
+
         }
 
       }
+
+      const progress =
+
+  resourceProgressById &&
+
+  resourceProgressById[
+
+    String(resource._id)
+
+  ]
+
+    ? resourceProgressById[
+
+        String(resource._id)
+
+      ]
+
+    : null;
+
+const progressStatus =
+
+  progress?.status ||
+
+  "not_started";
+
+let progressLabel =
+
+  "Not Started";
+
+if (
+
+  progressStatus ===
+
+  "in_progress"
+
+) {
+
+  progressLabel =
+
+    "In Progress";
+
+}
+
+if (
+
+  progressStatus ===
+
+  "completed"
+
+) {
+
+  progressLabel =
+
+    "Completed";
+
+}
+
     %>
 
-
       <article
+
         id="resource-<%= resource._id %>"
+
         class="dbw-resource-card"
+
       >
 
         <div class="dbw-resource-layout">
 
           <div
-            class="dbw-resource-number"
-            aria-hidden="true"
-          >
-            <%= String(index + 1).padStart(2, "0") %>
-          </div>
 
+            class="dbw-resource-number"
+
+            aria-hidden="true"
+
+          >
+
+            <%= String(index + 1).padStart(2, "0") %>
+
+          </div>
 
           <div class="dbw-resource-body">
 
             <div class="dbw-resource-meta">
 
               <span>
-                <%= typeIcons[resource.type] || "📚" %>
-                <%= typeLabels[resource.type] || resource.type %>
-              </span>
 
+                <%= typeIcons[resource.type] || "📚" %>
+
+                <%= typeLabels[resource.type] || resource.type %>
+
+              </span>
 
               <span
                 class="<%= resource.required ? 'dbw-required' : 'dbw-optional' %>"
@@ -121,32 +319,44 @@
                 <%= resource.required ? "Required" : "Optional" %>
               </span>
 
+              <span
+                class="dbw-progress-badge <%= progressStatus === 'completed' ? 'is-completed' : '' %> <%= progressStatus === 'in_progress' ? 'is-progress' : '' %>"
+              >
+                <%= progressLabel %>
+              </span>
+
             </div>
 
-
             <h3 class="dbw-resource-title">
-              <%= resource.title %>
-            </h3>
 
+              <%= resource.title %>
+
+            </h3>
 
             <% if (resource.description) { %>
 
               <p class="dbw-resource-description">
+
                 <%= resource.description %>
+
               </p>
 
             <% } %>
 
-
             <!-- =========================================
+
                  AUDIO
+
                  ========================================= -->
 
             <% if (resource.type === "audio") { %>
 
               <% if (
+
                 resource.file &&
+
                 resource.file.fileUrl
+
               ) { %>
 
                 <audio
@@ -154,29 +364,62 @@
                   preload="metadata"
                   class="course-audio-player dbw-v2-audio"
                   data-resource-id="<%= resource._id %>"
+                  data-progress-url="<%= resourceBase %>/audio-progress"
+                  data-resume-position="<%= progress?.lastPositionSeconds || 0 %>"
+                  data-progress-percentage="<%= progress?.progressPercentage || 0 %>"
                 >
 
                   <source
+
                     src="<%= resource.file.fileUrl %>"
+
                   />
 
                   Your browser does not support audio playback.
 
                 </audio>
 
+                <div
+                  class="dbw-audio-progress-text"
+                  data-audio-progress-text="<%= resource._id %>"
+                >
+                  <% if (
+                    progress &&
+                    progress.progressPercentage > 0 &&
+                    progress.status !== "completed"
+                  ) { %>
+                    Listening progress:
+                    <strong><%= progress.progressPercentage %>%</strong>
+                  <% } %>
+
+                  <% if (
+                    progress &&
+                    progress.status === "completed"
+                  ) { %>
+                    <strong>✓ Listening requirement completed</strong>
+                  <% } %>
+                </div>
 
                 <% if (
+
                   resource.access &&
+
                   resource.access.allowDownload
+
                 ) { %>
 
                   <div class="dbw-resource-actions">
 
                     <a
+
                       href="<%= resourceBase %>/download"
+
                       class="dbw-resource-primary-action"
+
                     >
+
                       Download Audio
+
                     </a>
 
                   </div>
@@ -186,16 +429,19 @@
               <% } else { %>
 
                 <p class="dbw-resource-empty">
+
                   Audio file unavailable.
+
                 </p>
 
               <% } %>
 
             <% } %>
 
-
             <!-- =========================================
+
                  DOCUMENT
+
                  ========================================= -->
 
             <% if (resource.type === "document") { %>
@@ -203,59 +449,92 @@
               <div class="dbw-resource-actions">
 
                 <% if (
+
                   resource.access &&
+
                   resource.access.allowOnline &&
+
                   resource.file &&
+
                   resource.file.fileUrl
+
                 ) { %>
 
                   <a
+
                     href="<%= resourceBase %>/open"
+
                     target="_blank"
+
                     rel="noopener noreferrer"
+
                     class="dbw-resource-primary-action"
+
                   >
+
                     Read Online
+
                   </a>
 
                 <% } %>
 
-
                 <% if (
+
                   resource.access &&
+
                   resource.access.allowDownload &&
+
                   resource.file &&
+
                   resource.file.fileUrl
+
                 ) { %>
 
                   <a
+
                     href="<%= resourceBase %>/download"
+
                     class="dbw-resource-secondary-action"
+
                   >
+
                     Download
+
                   </a>
 
                 <% } %>
 
               </div>
 
-
               <% if (
                 resource.file &&
                 resource.file.originalName
               ) { %>
-
                 <p class="dbw-resource-file-name">
                   <%= resource.file.originalName %>
                 </p>
+              <% } %>
 
+              <% if (
+                resource.completion?.method === "manual_confirmation" &&
+                progressStatus !== "completed"
+              ) { %>
+                <button
+                  type="button"
+                  class="dbw-manual-complete-button"
+                  data-complete-resource
+                  data-url="<%= resourceBase %>/complete"
+                >
+                  Mark Material Completed
+                </button>
               <% } %>
 
             <% } %>
 
-
             <!-- =========================================
+
                  WRITTEN MATERIAL
+
                  ========================================= -->
 
             <% if (resource.type === "written") { %>
@@ -264,11 +543,26 @@
                 <%= resource.content || "" %>
               </div>
 
+              <% if (
+                resource.completion?.method === "manual_confirmation" &&
+                progressStatus !== "completed"
+              ) { %>
+                <button
+                  type="button"
+                  class="dbw-manual-complete-button"
+                  data-complete-resource
+                  data-url="<%= resourceBase %>/complete"
+                >
+                  Mark Material Completed
+                </button>
+              <% } %>
+
             <% } %>
 
-
             <!-- =========================================
+
                  EXTERNAL
+
                  ========================================= -->
 
             <% if (resource.type === "external") { %>
@@ -276,28 +570,39 @@
               <div class="dbw-resource-actions">
 
                 <a
+
                   href="<%= resourceBase %>/open"
+
                   target="_blank"
+
                   rel="noopener noreferrer"
+
                   class="dbw-resource-primary-action"
+
                 >
+
                   Open Resource ↗
+
                 </a>
 
               </div>
 
             <% } %>
 
-
             <!-- =========================================
+
                  ASSIGNMENT
 
                  IMPORTANT:
+
                  The Course page displays the Assignment,
+
                  its file and its status.
 
                  Actual submission happens on the dedicated
+
                  Documents / Assignments page.
+
                  ========================================= -->
 
             <% if (resource.type === "assignment") { %>
@@ -305,139 +610,203 @@
               <div class="dbw-resource-actions">
 
                 <% if (
+
                   resource.access &&
+
                   resource.access.allowOnline &&
+
                   resource.file &&
+
                   resource.file.fileUrl
+
                 ) { %>
 
                   <a
+
                     href="<%= resourceBase %>/open"
+
                     target="_blank"
+
                     rel="noopener noreferrer"
+
                     class="dbw-resource-secondary-action"
+
                   >
+
                     View Assignment
+
                   </a>
 
                 <% } %>
 
-
                 <% if (
+
                   resource.access &&
+
                   resource.access.allowDownload &&
+
                   resource.file &&
+
                   resource.file.fileUrl
+
                 ) { %>
 
                   <a
+
                     href="<%= resourceBase %>/download"
+
                     class="dbw-resource-secondary-action"
+
                   >
+
                     Download Assignment
+
                   </a>
 
                 <% } %>
 
               </div>
 
-
               <div
+
                 class="
+
                   dbw-assignment-summary
 
                   <%= submission &&
+
                       submission.status === 'Accepted'
+
                     ? 'is-accepted'
+
                     : '' %>
 
                   <%= submission &&
+
                       submission.status === 'Needs Revision'
+
                     ? 'needs-revision'
+
                     : '' %>
+
                 "
+
               >
 
                 <div>
 
                   <span class="dbw-assignment-label">
+
                     Submission Status
+
                   </span>
 
                   <strong class="dbw-assignment-value">
+
                     <%= assignmentStatusLabel %>
+
                   </strong>
 
                 </div>
 
-
                 <% if (
+
                   submission &&
+
                   submission.reviewFeedback
+
                 ) { %>
 
                   <div class="dbw-assignment-feedback">
 
                     <strong>
+
                       Reviewer Feedback
+
                     </strong>
 
                     <p>
+
                       <%= submission.reviewFeedback %>
+
                     </p>
 
                   </div>
 
                 <% } %>
 
-
                 <% if (
+
                   submission &&
+
                   submission.file &&
+
                   submission.file.originalName
+
                 ) { %>
 
                   <a
+
                     href="<%= submission.file.fileUrl %>"
+
                     target="_blank"
+
                     rel="noopener noreferrer"
+
                     class="dbw-submitted-file"
+
                   >
+
                     View Submitted File
+
                   </a>
 
                 <% } %>
 
               </div>
 
-
               <div class="dbw-resource-actions">
 
                 <a
+
                   href="/academy/<%= academy.slug %>/documents?assignment=<%= resource._id %>#assignment-upload"
+
                   class="dbw-resource-primary-action"
+
                 >
 
                   <% if (
+
                     submission &&
+
                     submission.status === "Needs Revision"
+
                   ) { %>
 
                     Revise Assignment
 
                   <% } else if (
+
                     submission &&
+
                     (
+
                       submission.status === "Submitted" ||
+
                       submission.status === "Reviewed"
+
                     )
+
                   ) { %>
 
                     View Submission Status
 
                   <% } else if (
+
                     submission &&
+
                     submission.status === "Accepted"
+
                   ) { %>
 
                     View Assignment Submission
@@ -465,3 +834,666 @@
   </div>
 
 </section>
+
+<script>
+
+document.addEventListener(
+
+  "DOMContentLoaded",
+
+  function () {
+
+    /* =====================================================
+       COURSE PROGRESS BAR
+       ===================================================== */
+
+    const courseProgressFill =
+      document.querySelector(
+        "[data-course-progress-fill]"
+      );
+
+    if (courseProgressFill) {
+      const width =
+        Math.max(
+          0,
+          Math.min(
+            100,
+            Number(
+              courseProgressFill.dataset.progressWidth
+            ) || 0
+          )
+        );
+
+      courseProgressFill.style.width =
+        `${width}%`;
+    }
+
+    /* =====================================================
+
+       MANUAL COMPLETION
+
+       ===================================================== */
+
+    document
+
+      .querySelectorAll(
+
+        "[data-complete-resource]"
+
+      )
+
+      .forEach(
+
+        function (button) {
+
+          button.addEventListener(
+
+            "click",
+
+            async function () {
+
+              if (button.disabled) {
+
+                return;
+
+              }
+
+              const originalText =
+
+                button.textContent.trim();
+
+              button.disabled =
+
+                true;
+
+              button.textContent =
+
+                "Saving...";
+
+              try {
+
+                const response =
+
+                  await fetch(
+
+                    button.dataset.url,
+
+                    {
+
+                      method:
+
+                        "POST",
+
+                      credentials:
+
+                        "same-origin",
+
+                      headers: {
+
+                        Accept:
+
+                          "application/json",
+
+                      },
+
+                    }
+
+                  );
+
+                const result =
+
+                  await response.json();
+
+                if (!response.ok) {
+
+                  throw new Error(
+
+                    result.message ||
+
+                    "Unable to complete this material."
+
+                  );
+
+                }
+
+                window.location.reload();
+
+              } catch (error) {
+
+                alert(
+
+                  error.message
+
+                );
+
+                button.disabled =
+
+                  false;
+
+                button.textContent =
+
+                  originalText;
+
+              }
+
+            }
+
+          );
+
+        }
+
+      );
+
+    /* =====================================================
+
+       AUDIO PROGRESS
+
+       ===================================================== */
+
+    document
+
+      .querySelectorAll(
+
+        ".dbw-v2-audio[data-progress-url]"
+
+      )
+
+      .forEach(
+
+        function (audio) {
+
+          let lastSaveAt =
+
+            Date.now();
+
+          let accumulatedEngagedSeconds =
+
+            0;
+
+          let playingSince =
+
+            null;
+
+          let saveInFlight =
+
+            false;
+
+          let pendingSave =
+
+            false;
+
+          const resumePosition =
+
+            Number(
+
+              audio.dataset
+
+                .resumePosition ||
+
+              0
+
+            );
+
+          /* -----------------------------------------------
+
+             RESUME
+
+             ----------------------------------------------- */
+
+          audio.addEventListener(
+
+            "loadedmetadata",
+
+            function () {
+
+              if (
+
+                resumePosition > 1 &&
+
+                Number.isFinite(
+
+                  audio.duration
+
+                ) &&
+
+                resumePosition <
+
+                  audio.duration - 3
+
+              ) {
+
+                audio.currentTime =
+
+                  resumePosition;
+
+              }
+
+            },
+
+            {
+
+              once:
+
+                true,
+
+            }
+
+          );
+
+          /* -----------------------------------------------
+
+             ENGAGEMENT CLOCK
+
+             ----------------------------------------------- */
+
+          audio.addEventListener(
+
+            "play",
+
+            function () {
+
+              playingSince =
+
+                Date.now();
+
+            }
+
+          );
+
+          function collectEngagement() {
+
+            if (
+
+              playingSince ===
+
+              null
+
+            ) {
+
+              return;
+
+            }
+
+            const now =
+
+              Date.now();
+
+            const delta =
+
+              (
+
+                now -
+
+                playingSince
+
+              ) /
+
+              1000;
+
+            if (
+
+              delta > 0 &&
+
+              delta < 60
+
+            ) {
+
+              accumulatedEngagedSeconds +=
+
+                delta;
+
+            }
+
+            playingSince =
+
+              audio.paused
+
+                ? null
+
+                : now;
+
+          }
+
+          /* -----------------------------------------------
+
+             SAVE
+
+             ----------------------------------------------- */
+
+          async function saveProgress(
+
+            force = false
+
+          ) {
+
+            collectEngagement();
+
+            const now =
+
+              Date.now();
+
+            if (
+
+              !force &&
+
+              now -
+
+                lastSaveAt <
+
+                20000
+
+            ) {
+
+              return;
+
+            }
+
+            if (saveInFlight) {
+
+              pendingSave =
+
+                true;
+
+              return;
+
+            }
+
+            if (
+
+              !Number.isFinite(
+
+                audio.duration
+
+              ) ||
+
+              audio.duration <= 0
+
+            ) {
+
+              return;
+
+            }
+
+            saveInFlight =
+
+              true;
+
+            const engaged =
+
+              accumulatedEngagedSeconds;
+
+            accumulatedEngagedSeconds =
+
+              0;
+
+            try {
+
+              const response =
+
+                await fetch(
+
+                  audio.dataset
+
+                    .progressUrl,
+
+                  {
+
+                    method:
+
+                      "POST",
+
+                    credentials:
+
+                      "same-origin",
+
+                    headers: {
+
+                      "Content-Type":
+
+                        "application/json",
+
+                      Accept:
+
+                        "application/json",
+
+                    },
+
+                    body:
+
+                      JSON.stringify({
+
+                        positionSeconds:
+
+                          audio.currentTime,
+
+                        durationSeconds:
+
+                          audio.duration,
+
+                        engagedDeltaSeconds:
+
+                          engaged,
+
+                      }),
+
+                  }
+
+                );
+
+              if (
+
+                response.ok
+
+              ) {
+
+                const result =
+
+                  await response.json();
+
+                const percentage =
+
+                  result
+
+                    .resourceProgress
+
+                    ?.progressPercentage;
+
+                const status =
+
+                  result
+
+                    .resourceProgress
+
+                    ?.status;
+
+                const text =
+
+                  document.querySelector(
+
+                    `[data-audio-progress-text="${audio.dataset.resourceId}"]`
+
+                  );
+
+                if (text) {
+
+                  if (
+
+                    status ===
+
+                    "completed"
+
+                  ) {
+
+                    text.innerHTML =
+
+                      "<strong>✓ Listening requirement completed</strong>";
+
+                  }
+
+                  else if (
+
+                    percentage > 0
+
+                  ) {
+
+                    text.innerHTML =
+
+                      `Listening progress: <strong>${percentage}%</strong>`;
+
+                  }
+
+                }
+
+              }
+
+            } catch (error) {
+
+              console.error(
+
+                "Audio progress save failed:",
+
+                error
+
+              );
+
+              /*
+
+               * Restore unsaved listening time so it can
+
+               * be included in the next attempt.
+
+               */
+
+              accumulatedEngagedSeconds +=
+
+                engaged;
+
+            } finally {
+
+              lastSaveAt =
+
+                Date.now();
+
+              saveInFlight =
+
+                false;
+
+              if (pendingSave) {
+
+                pendingSave =
+
+                  false;
+
+                saveProgress(
+
+                  true
+
+                );
+
+              }
+
+            }
+
+          }
+
+          /* -----------------------------------------------
+
+             PERIODIC SAVE
+
+             ----------------------------------------------- */
+
+          audio.addEventListener(
+
+            "timeupdate",
+
+            function () {
+
+              if (
+
+                !audio.paused
+
+              ) {
+
+                saveProgress(
+
+                  false
+
+                );
+
+              }
+
+            }
+
+          );
+
+          audio.addEventListener(
+
+            "pause",
+
+            function () {
+
+              saveProgress(
+
+                true
+
+              );
+
+            }
+
+          );
+
+          audio.addEventListener(
+
+            "ended",
+
+            function () {
+
+              saveProgress(
+
+                true
+
+              );
+
+            }
+
+          );
+
+          /*
+
+           * sendBeacon is intentionally not used here
+
+           * because our JSON progress endpoint and normal
+
+           * saves already cover the meaningful cases.
+
+           */
+
+          window\.addEventListener(
+
+            "pagehide",
+
+            function () {
+
+              if (
+
+                !audio.paused
+
+              ) {
+
+                collectEngagement();
+
+              }
+
+            }
+
+          );
+
+        }
+
+      );
+
+  }
+
+);
+
+</script>

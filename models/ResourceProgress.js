@@ -1,76 +1,101 @@
-const mongoose = require("mongoose");
+const mongoose =
+  require("mongoose");
 
 
 const resourceProgressSchema =
   new mongoose.Schema(
     {
+      /* =====================================================
+         LEARNER
+         ===================================================== */
+
       user: {
         type:
           mongoose.Schema.Types.ObjectId,
 
-        ref: "User",
+        ref:
+          "User",
 
-        required: true,
+        required:
+          true,
 
-        index: true,
+        index:
+          true,
       },
 
+
+      /* =====================================================
+         COURSE
+         ===================================================== */
 
       course: {
         type:
           mongoose.Schema.Types.ObjectId,
 
-        ref: "Course",
+        ref:
+          "Course",
 
-        required: true,
+        required:
+          true,
 
-        index: true,
+        index:
+          true,
       },
 
+
+      /* =====================================================
+         LEARNING MATERIAL
+         ===================================================== */
 
       resource: {
         type:
           mongoose.Schema.Types.ObjectId,
 
-        ref: "CourseResource",
+        ref:
+          "CourseResource",
 
-        required: true,
+        required:
+          true,
 
-        index: true,
+        index:
+          true,
       },
 
 
       /* =====================================================
          STATUS
-
-         No database record is required for "Not Started".
-         If this document exists, the learner has interacted
-         with the resource.
          ===================================================== */
 
       status: {
-        type: String,
+        type:
+          String,
 
         enum: [
+          "not_started",
           "in_progress",
           "completed",
         ],
 
-        default: "in_progress",
+        default:
+          "not_started",
 
-        index: true,
+        index:
+          true,
       },
 
 
-      /* =====================================================
-         GENERAL PROGRESS
-         ===================================================== */
-
       progressPercentage: {
-        type: Number,
-        min: 0,
-        max: 100,
-        default: 0,
+        type:
+          Number,
+
+        default:
+          0,
+
+        min:
+          0,
+
+        max:
+          100,
       },
 
 
@@ -78,100 +103,161 @@ const resourceProgressSchema =
          AUDIO POSITION
 
          lastPositionSeconds:
-         Where playback should resume.
+         where playback should resume.
 
          furthestPositionSeconds:
-         Furthest meaningful position reached.
+         highest point physically reached.
+
+         engagedSeconds:
+         approximate meaningful playback time.
          ===================================================== */
 
       lastPositionSeconds: {
-        type: Number,
-        min: 0,
-        default: 0,
+        type:
+          Number,
+
+        default:
+          0,
+
+        min:
+          0,
       },
 
 
       furthestPositionSeconds: {
-        type: Number,
-        min: 0,
-        default: 0,
+        type:
+          Number,
+
+        default:
+          0,
+
+        min:
+          0,
       },
 
 
-      /*
-       * Approximate real active engagement.
-       *
-       * Useful later for audio analytics without
-       * storing a database event every 20 seconds.
-       */
       engagedSeconds: {
-        type: Number,
-        min: 0,
-        default: 0,
+        type:
+          Number,
+
+        default:
+          0,
+
+        min:
+          0,
       },
 
+
+      durationSeconds: {
+        type:
+          Number,
+
+        default:
+          0,
+
+        min:
+          0,
+      },
+
+
+      /* =====================================================
+         ACTIVITY DATES
+         ===================================================== */
 
       startedAt: {
-        type: Date,
-        default: Date.now,
+        type:
+          Date,
+
+        default:
+          null,
       },
 
 
       lastActivityAt: {
-        type: Date,
-        default: Date.now,
-        index: true,
+        type:
+          Date,
+
+        default:
+          null,
+
+        index:
+          true,
       },
 
 
       completedAt: {
-        type: Date,
-        default: null,
+        type:
+          Date,
+
+        default:
+          null,
       },
 
 
+      /* =====================================================
+         COMPLETION SOURCE
+         ===================================================== */
+
       completionSource: {
-        type: String,
+        type:
+          String,
 
         enum: [
-          "audio_threshold",
+          "audio_percentage",
           "manual_confirmation",
           "resource_opened",
           "assignment_submitted",
           "assignment_accepted",
           "external_visit",
           "admin",
-          "system",
+          "none",
         ],
 
-        default: null,
+        default:
+          "none",
       },
     },
 
     {
-      timestamps: true,
+      timestamps:
+        true,
     }
   );
 
 
 /* =========================================================
-   ONE PROGRESS RECORD PER USER + RESOURCE
+   ONE PROGRESS RECORD PER LEARNER + RESOURCE
    ========================================================= */
 
 resourceProgressSchema.index(
   {
-    user: 1,
-    resource: 1,
+    user:
+      1,
+
+    resource:
+      1,
   },
+
   {
-    unique: true,
+    unique:
+      true,
   }
 );
 
 
+/* =========================================================
+   COURSE PROGRESS LOOKUPS
+   ========================================================= */
+
 resourceProgressSchema.index({
-  user: 1,
-  course: 1,
+  user:
+    1,
+
+  course:
+    1,
+
+  status:
+    1,
 });
 
 

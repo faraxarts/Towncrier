@@ -1,116 +1,166 @@
-const mongoose = require("mongoose");
+const mongoose =
+  require("mongoose");
 
 
 const courseProgressSchema =
   new mongoose.Schema(
     {
+      /* =====================================================
+         LEARNER
+         ===================================================== */
+
       user: {
         type:
           mongoose.Schema.Types.ObjectId,
 
-        ref: "User",
+        ref:
+          "User",
 
-        required: true,
+        required:
+          true,
 
-        index: true,
+        index:
+          true,
       },
 
+
+      /* =====================================================
+         COURSE
+         ===================================================== */
 
       course: {
         type:
           mongoose.Schema.Types.ObjectId,
 
-        ref: "Course",
+        ref:
+          "Course",
 
-        required: true,
+        required:
+          true,
 
-        index: true,
+        index:
+          true,
       },
 
 
+      /* =====================================================
+         STATUS
+         ===================================================== */
+
       status: {
-        type: String,
+        type:
+          String,
 
         enum: [
+          "not_started",
           "in_progress",
           "completed",
         ],
 
-        default: "in_progress",
+        default:
+          "not_started",
 
-        index: true,
+        index:
+          true,
       },
 
 
+      /* =====================================================
+         REQUIRED MATERIAL SUMMARY
+         ===================================================== */
+
       requiredResources: {
-        type: Number,
-        min: 0,
-        default: 0,
+        type:
+          Number,
+
+        default:
+          0,
+
+        min:
+          0,
       },
 
 
       completedRequiredResources: {
-        type: Number,
-        min: 0,
-        default: 0,
+        type:
+          Number,
+
+        default:
+          0,
+
+        min:
+          0,
       },
 
 
       progressPercentage: {
-        type: Number,
-        min: 0,
-        max: 100,
-        default: 0,
+        type:
+          Number,
+
+        default:
+          0,
+
+        min:
+          0,
+
+        max:
+          100,
       },
 
 
-      /*
-       * Powers "Resume Learning".
-       */
+      /* =====================================================
+         RESUME LEARNING
+         ===================================================== */
+
       lastResource: {
         type:
           mongoose.Schema.Types.ObjectId,
 
-        ref: "CourseResource",
+        ref:
+          "CourseResource",
 
-        default: null,
+        default:
+          null,
       },
 
 
+      /* =====================================================
+         DATES
+         ===================================================== */
+
       startedAt: {
-        type: Date,
-        default: Date.now,
+        type:
+          Date,
+
+        default:
+          null,
       },
 
 
       lastActivityAt: {
-        type: Date,
-        default: Date.now,
-        index: true,
+        type:
+          Date,
+
+        default:
+          null,
+
+        index:
+          true,
       },
 
 
       completedAt: {
-        type: Date,
-        default: null,
-      },
+        type:
+          Date,
 
-
-      completionSource: {
-        type: String,
-
-        enum: [
-          "resources",
-          "admin",
-          "system",
-        ],
-
-        default: null,
+        default:
+          null,
       },
     },
 
     {
-      timestamps: true,
+      timestamps:
+        true,
     }
   );
 
@@ -121,13 +171,31 @@ const courseProgressSchema =
 
 courseProgressSchema.index(
   {
-    user: 1,
-    course: 1,
+    user:
+      1,
+
+    course:
+      1,
   },
+
   {
-    unique: true,
+    unique:
+      true,
   }
 );
+
+
+/* =========================================================
+   RESUME LEARNING LOOKUPS
+   ========================================================= */
+
+courseProgressSchema.index({
+  user:
+    1,
+
+  lastActivityAt:
+    -1,
+});
 
 
 module.exports =

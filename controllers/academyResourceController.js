@@ -13,15 +13,29 @@ const AssignmentSubmission =
 const AcademyEvent =
   require("../models/AcademyEvent");
 
+
+const {
+  touchResource,
+  manuallyCompleteResource,
+  updateAudioProgress,
+  completeResource,
+} =
+  require(
+    "../services/academyProgressService"
+  );
+
+
 const {
   uploadBuffer,
   deleteAsset,
 } =
-  require("../services/cloudinaryService");
+  require(
+    "../services/cloudinaryService"
+  );
 
 
 /* =========================================================
-   ANALYTICS
+   HELPERS
    ========================================================= */
 
 function getTemporaryExpiry(
@@ -30,28 +44,80 @@ function getTemporaryExpiry(
   const date =
     new Date();
 
+
   date.setDate(
-    date.getDate() + days
+    date.getDate() +
+    days
   );
+
 
   return date;
 }
 
 
+function shouldTrackLearnerProgress(
+  req,
+  res
+) {
+  return Boolean(
+    req.session.userId &&
+    !res.locals.isAdmin
+  );
+}
+
+
+function sendResourceError(
+  res,
+  statusCode,
+  message,
+  wantsJson = false
+) {
+  if (wantsJson) {
+    return res
+      .status(statusCode)
+      .json({
+        success:
+          false,
+
+        message,
+      });
+  }
+
+
+  return res
+    .status(statusCode)
+    .send(
+      message
+    );
+}
+
+
+/* =========================================================
+   ANALYTICS
+   ========================================================= */
+
 async function logAcademyEvent({
   req,
+  res,
   course,
-  resource,
+  resource = null,
   eventType,
   metadata = {},
   temporary = true,
 }) {
   try {
+
+    /*
+     * Admin previews must not pollute learner analytics.
+     */
+
     if (
-      !req.session.userId
+      !req.session.userId ||
+      res.locals.isAdmin
     ) {
       return;
     }
+
 
     await AcademyEvent.create({
       user:
@@ -81,13 +147,18 @@ async function logAcademyEvent({
 
       expiresAt:
         temporary
-          ? getTemporaryExpiry(180)
+          ? getTemporaryExpiry(
+              180
+            )
           : null,
     });
+
   } catch (error) {
+
     /*
      * Analytics must never stop learning.
      */
+
     console.error(
       "Academy analytics event error:",
       error
@@ -102,8 +173,29 @@ async function logAcademyEvent({
 
 async function getAccessibleResource(
   req,
-  res
+  res,
+  {
+    json = false,
+  } = {}
 ) {
+
+  if (
+    !req.session.userId &&
+    !res.locals.isAdmin
+  ) {
+
+    sendResourceError(
+      res,
+      401,
+      "Please sign in to access this Learning Material.",
+      json
+    );
+
+
+    return null;
+  }
+
+
   const course =
     await Course.findOne({
       academy:
@@ -117,26 +209,35 @@ async function getAccessibleResource(
 
       contentMode:
         "resources",
-    }).populate(
-      "level"
-    );
+    })
+      .populate(
+        "level"
+      );
 
 
   if (!course) {
-    res
-      .status(404)
-      .send(
-        "Course not found."
-      );
+
+    sendResourceError(
+      res,
+      404,
+      "Course not found.",
+      json
+    );
+
 
     return null;
   }
 
 
+  /* =======================================================
+     LEVEL ACCESS
+     ======================================================= */
+
   if (
     course.level &&
     !res.locals.isAdmin
   ) {
+
     const access =
       await UserLevelAccess.findOne({
         user:
@@ -151,16 +252,23 @@ async function getAccessibleResource(
 
 
     if (!access) {
-      res
-        .status(403)
-        .send(
-          "You do not have access to this Course."
-        );
+
+      sendResourceError(
+        res,
+        403,
+        "You do not have access to this Course.",
+        json
+      );
+
 
       return null;
     }
   }
 
+
+  /* =======================================================
+     RESOURCE
+     ======================================================= */
 
   const resource =
     await CourseResource.findOne({
@@ -176,11 +284,14 @@ async function getAccessibleResource(
 
 
   if (!resource) {
-    res
-      .status(404)
-      .send(
-        "Learning Material not found."
-      );
+
+    sendResourceError(
+      res,
+      404,
+      "Learning Material not found.",
+      json
+    );
+
 
     return null;
   }
@@ -197,150 +308,14 @@ async function getAccessibleResource(
    OPEN RESOURCE
    ========================================================= */
 
-exports.openResource = async (
-  req,
-  res
-) => {
-  try {
-    const context =
-      await getAccessibleResource(
-        req,
-        res
-      );
-
-
-    if (!context) {
-      return;
-    }
-
-
-    const {
-      course,
-      resource,
-    } = context;
-
-
-    /* External resource */
-
-    if (
-      resource.type ===
-      "external"
-    ) {
-      if (
-        !/^https?:\/\//i.test(
-          resource.externalUrl ||
-          ""
-        )
-      ) {
-        return res
-          .status(400)
-          .send(
-            "Invalid external resource URL."
-          );
-      }
-
-
-      await logAcademyEvent({
-        req,
-        course,
-        resource,
-
-        eventType:
-          "EXTERNAL_RESOURCE_VISITED",
-      });
-
-
-      return res.redirect(
-        resource.externalUrl
-      );
-    }
-
-
-    /* Uploaded resources */
-
-    if (
-      !resource.access
-        ?.allowOnline
-    ) {
-      return res
-        .status(403)
-        .send(
-          "Online viewing is not enabled for this material."
-        );
-    }
-
-
-    if (
-      !resource.file
-        ?.fileUrl
-    ) {
-      return res
-        .status(404)
-        .send(
-          "Resource file not found."
-        );
-    }
-
-
-    let eventType =
-      "RESOURCE_OPENED";
-
-
-    if (
-      resource.type ===
-      "document"
-    ) {
-      eventType =
-        "DOCUMENT_OPENED";
-    }
-
-
-    if (
-      resource.type ===
-      "assignment"
-    ) {
-      eventType =
-        "ASSIGNMENT_OPENED";
-    }
-
-
-    await logAcademyEvent({
-      req,
-      course,
-      resource,
-      eventType,
-    });
-
-
-    return res.redirect(
-      resource.file.fileUrl
-    );
-  } catch (error) {
-    console.error(
-      "Open Academy resource error:",
-      error
-    );
-
-
-    return res
-      .status(500)
-      .send(
-        "Unable to open this Learning Material."
-      );
-  }
-};
-
-
-/* =========================================================
-   DOWNLOAD RESOURCE
-   ========================================================= */
-
-exports.downloadResource =
+exports.openResource =
   async (
     req,
     res
   ) => {
+
     try {
+
       const context =
         await getAccessibleResource(
           req,
@@ -356,13 +331,276 @@ exports.downloadResource =
       const {
         course,
         resource,
-      } = context;
+      } =
+        context;
+
+
+      const trackProgress =
+        shouldTrackLearnerProgress(
+          req,
+          res
+        );
+
+
+      /* =====================================================
+         EXTERNAL RESOURCE
+         ===================================================== */
+
+      if (
+        resource.type ===
+        "external"
+      ) {
+
+        if (
+          !/^https?:\/\//i.test(
+            resource.externalUrl ||
+            ""
+          )
+        ) {
+
+          return res
+            .status(400)
+            .send(
+              "Invalid external resource URL."
+            );
+        }
+
+
+        await logAcademyEvent({
+          req,
+          res,
+          course,
+          resource,
+
+          eventType:
+            "EXTERNAL_RESOURCE_VISITED",
+        });
+
+
+        if (
+          trackProgress
+        ) {
+
+          if (
+            resource
+              .completion
+              ?.method ===
+            "external_visit"
+          ) {
+
+            await completeResource({
+              userId:
+                req.session.userId,
+
+              courseId:
+                course._id,
+
+              resourceId:
+                resource._id,
+
+              source:
+                "external_visit",
+            });
+
+          } else {
+
+            await touchResource({
+              userId:
+                req.session.userId,
+
+              courseId:
+                course._id,
+
+              resourceId:
+                resource._id,
+            });
+          }
+        }
+
+
+        return res.redirect(
+          resource.externalUrl
+        );
+      }
+
+
+      /* =====================================================
+         UPLOADED RESOURCE
+         ===================================================== */
+
+      if (
+        !resource
+          .access
+          ?.allowOnline
+      ) {
+
+        return res
+          .status(403)
+          .send(
+            "Online viewing is not enabled for this material."
+          );
+      }
 
 
       if (
-        !resource.access
+        !resource
+          .file
+          ?.fileUrl
+      ) {
+
+        return res
+          .status(404)
+          .send(
+            "Resource file not found."
+          );
+      }
+
+
+      /* =====================================================
+         ANALYTICS EVENT TYPE
+         ===================================================== */
+
+      let eventType =
+        "RESOURCE_OPENED";
+
+
+      if (
+        resource.type ===
+        "document"
+      ) {
+
+        eventType =
+          "DOCUMENT_OPENED";
+      }
+
+
+      if (
+        resource.type ===
+        "assignment"
+      ) {
+
+        eventType =
+          "ASSIGNMENT_OPENED";
+      }
+
+
+      await logAcademyEvent({
+        req,
+        res,
+        course,
+        resource,
+        eventType,
+      });
+
+
+      /* =====================================================
+         PROGRESS
+
+         Opening a material starts it.
+
+         It completes automatically only when Admin explicitly
+         configured resource_opened as the completion method.
+         ===================================================== */
+
+      if (
+        trackProgress
+      ) {
+
+        if (
+          resource
+            .completion
+            ?.method ===
+          "resource_opened"
+        ) {
+
+          await completeResource({
+            userId:
+              req.session.userId,
+
+            courseId:
+              course._id,
+
+            resourceId:
+              resource._id,
+
+            source:
+              "resource_opened",
+          });
+
+        } else {
+
+          await touchResource({
+            userId:
+              req.session.userId,
+
+            courseId:
+              course._id,
+
+            resourceId:
+              resource._id,
+          });
+        }
+      }
+
+
+      return res.redirect(
+        resource.file.fileUrl
+      );
+
+    } catch (error) {
+
+      console.error(
+        "Open Academy resource error:",
+        error
+      );
+
+
+      return res
+        .status(500)
+        .send(
+          "Unable to open this Learning Material."
+        );
+    }
+  };
+
+
+/* =========================================================
+   DOWNLOAD RESOURCE
+   ========================================================= */
+
+exports.downloadResource =
+  async (
+    req,
+    res
+  ) => {
+
+    try {
+
+      const context =
+        await getAccessibleResource(
+          req,
+          res
+        );
+
+
+      if (!context) {
+        return;
+      }
+
+
+      const {
+        course,
+        resource,
+      } =
+        context;
+
+
+      if (
+        !resource
+          .access
           ?.allowDownload
       ) {
+
         return res
           .status(403)
           .send(
@@ -372,9 +610,11 @@ exports.downloadResource =
 
 
       if (
-        !resource.file
+        !resource
+          .file
           ?.fileUrl
       ) {
+
         return res
           .status(404)
           .send(
@@ -391,6 +631,7 @@ exports.downloadResource =
         resource.type ===
         "audio"
       ) {
+
         eventType =
           "AUDIO_DOWNLOADED";
       }
@@ -400,6 +641,7 @@ exports.downloadResource =
         resource.type ===
         "document"
       ) {
+
         eventType =
           "DOCUMENT_DOWNLOADED";
       }
@@ -409,6 +651,7 @@ exports.downloadResource =
         resource.type ===
         "assignment"
       ) {
+
         eventType =
           "ASSIGNMENT_DOWNLOADED";
       }
@@ -416,6 +659,7 @@ exports.downloadResource =
 
       await logAcademyEvent({
         req,
+        res,
         course,
         resource,
         eventType,
@@ -427,10 +671,38 @@ exports.downloadResource =
       });
 
 
+      /*
+       * Downloading proves interaction with the resource,
+       * but it does NOT prove that the learner actually
+       * listened to or read the downloaded file.
+       */
+
+      if (
+        shouldTrackLearnerProgress(
+          req,
+          res
+        )
+      ) {
+
+        await touchResource({
+          userId:
+            req.session.userId,
+
+          courseId:
+            course._id,
+
+          resourceId:
+            resource._id,
+        });
+      }
+
+
       return res.redirect(
         resource.file.fileUrl
       );
+
     } catch (error) {
+
       console.error(
         "Download Academy resource error:",
         error
@@ -455,11 +727,13 @@ exports.submitResourceAssignment =
     req,
     res
   ) => {
+
     let newUpload =
       null;
 
 
     try {
+
       const context =
         await getAccessibleResource(
           req,
@@ -475,13 +749,19 @@ exports.submitResourceAssignment =
       const {
         course,
         resource,
-      } = context;
+      } =
+        context;
 
+
+      /* =====================================================
+         VALIDATION
+         ===================================================== */
 
       if (
         resource.type !==
         "assignment"
       ) {
+
         return res
           .status(400)
           .send(
@@ -496,6 +776,7 @@ exports.submitResourceAssignment =
           ?.submissionRequired ===
         false
       ) {
+
         return res
           .status(400)
           .send(
@@ -505,6 +786,7 @@ exports.submitResourceAssignment =
 
 
       if (!req.file) {
+
         return res
           .status(400)
           .send(
@@ -512,6 +794,10 @@ exports.submitResourceAssignment =
           );
       }
 
+
+      /* =====================================================
+         EXISTING SUBMISSION
+         ===================================================== */
 
       const existingSubmission =
         await AssignmentSubmission.findOne({
@@ -528,6 +814,7 @@ exports.submitResourceAssignment =
           ?.status ===
         "Accepted"
       ) {
+
         return res
           .status(409)
           .send(
@@ -536,7 +823,31 @@ exports.submitResourceAssignment =
       }
 
 
+      /*
+       * Learners should not replace a submission while
+       * it is currently waiting for Admin review.
+       */
+
+      if (
+        existingSubmission &&
+        (
+          existingSubmission.status ===
+            "Submitted" ||
+          existingSubmission.status ===
+            "Reviewed"
+        )
+      ) {
+
+        return res
+          .status(409)
+          .send(
+            "This assignment is already awaiting review."
+          );
+      }
+
+
       const oldFile = {
+
         publicId:
           existingSubmission
             ?.file
@@ -551,7 +862,9 @@ exports.submitResourceAssignment =
       };
 
 
-      /* Upload replacement first */
+      /* =====================================================
+         UPLOAD NEW FILE FIRST
+         ===================================================== */
 
       newUpload =
         await uploadBuffer(
@@ -580,9 +893,14 @@ exports.submitResourceAssignment =
       let submission;
 
 
+      /* =====================================================
+         REVISION
+         ===================================================== */
+
       if (
         existingSubmission
       ) {
+
         const wasRevision =
           existingSubmission
             .status ===
@@ -600,6 +918,7 @@ exports.submitResourceAssignment =
 
 
         existingSubmission.file = {
+
           originalName:
             req.file
               .originalname,
@@ -633,10 +952,31 @@ exports.submitResourceAssignment =
           "Submitted";
 
 
-        if (wasRevision) {
+        if (
+          wasRevision
+        ) {
+
           existingSubmission
-            .revisionCount += 1;
+            .revisionCount =
+            (
+              existingSubmission
+                .revisionCount ||
+              0
+            ) +
+            1;
         }
+
+
+        /*
+         * The previous feedback has now been acted upon.
+         * We intentionally do not preserve old review/file
+         * versions because DBW V2 uses only the current
+         * submission.
+         */
+
+        existingSubmission
+          .reviewFeedback =
+          "";
 
 
         existingSubmission
@@ -657,9 +997,18 @@ exports.submitResourceAssignment =
         submission =
           await existingSubmission
             .save();
-      } else {
+      }
+
+
+      /* =====================================================
+         FIRST SUBMISSION
+         ===================================================== */
+
+      else {
+
         submission =
           await AssignmentSubmission.create({
+
             user:
               req.session.userId,
 
@@ -675,6 +1024,7 @@ exports.submitResourceAssignment =
             submissionNote,
 
             file: {
+
               originalName:
                 req.file
                   .originalname,
@@ -709,21 +1059,28 @@ exports.submitResourceAssignment =
       }
 
 
-      /*
-       * New file is safely stored in MongoDB.
-       * Now remove the old revision from Cloudinary.
-       */
+      /* =====================================================
+         DELETE PREVIOUS CLOUDINARY FILE
+
+         MongoDB already points to the replacement file at
+         this stage.
+         ===================================================== */
+
       if (
         oldFile.publicId
       ) {
+
         try {
+
           await deleteAsset(
             oldFile.publicId,
 
             oldFile.resourceType ||
-              "raw"
+            "raw"
           );
+
         } catch (error) {
+
           console.error(
             "Old assignment file cleanup error:",
             error
@@ -732,8 +1089,14 @@ exports.submitResourceAssignment =
       }
 
 
+      /* =====================================================
+         ANALYTICS
+         ===================================================== */
+
       await logAcademyEvent({
+
         req,
+        res,
         course,
         resource,
 
@@ -744,6 +1107,7 @@ exports.submitResourceAssignment =
           false,
 
         metadata: {
+
           revisionCount:
             submission
               .revisionCount ||
@@ -752,27 +1116,98 @@ exports.submitResourceAssignment =
       });
 
 
+      /* =====================================================
+         ASSIGNMENT PROGRESS
+
+         Default:
+         submission = In Progress
+         acceptance = Completed
+
+         But assignment_submitted remains available as an
+         optional Admin-configured completion rule.
+         ===================================================== */
+
+      if (
+        shouldTrackLearnerProgress(
+          req,
+          res
+        )
+      ) {
+
+        if (
+          resource
+            .completion
+            ?.method ===
+          "assignment_submitted"
+        ) {
+
+          await completeResource({
+
+            userId:
+              req.session.userId,
+
+            courseId:
+              course._id,
+
+            resourceId:
+              resource._id,
+
+            source:
+              "assignment_submitted",
+
+            percentage:
+              100,
+          });
+
+        } else {
+
+          await touchResource({
+
+            userId:
+              req.session.userId,
+
+            courseId:
+              course._id,
+
+            resourceId:
+              resource._id,
+          });
+        }
+      }
+
+
+      /* =====================================================
+         RETURN TO ASSIGNMENT PAGE
+         ===================================================== */
+
       return res.redirect(
-        `/academy/${req.academy.slug}/courses/${course.slug}?assignment=submitted#resource-${resource._id}`
+        `/academy/${req.academy.slug}/documents?assignment=${resource._id}&submitted=success#assignment-upload`
       );
+
     } catch (error) {
 
       /*
-       * MongoDB operation failed after upload.
+       * If anything fails after uploading the new file,
+       * remove that newly-created Cloudinary asset.
        */
+
       if (
         newUpload?.publicId
       ) {
+
         try {
+
           await deleteAsset(
             newUpload.publicId,
 
             newUpload.resourceType ||
-              "raw"
+            "raw"
           );
+
         } catch (
           cleanupError
         ) {
+
           console.error(
             "New assignment cleanup error:",
             cleanupError
@@ -792,5 +1227,238 @@ exports.submitResourceAssignment =
         .send(
           "Unable to submit your assignment."
         );
+    }
+  };
+
+
+/* =========================================================
+   MANUAL RESOURCE COMPLETION
+   ========================================================= */
+
+exports.completeResourceManually =
+  async (
+    req,
+    res
+  ) => {
+
+    try {
+
+      /*
+       * Admin Course previews must never produce learner
+       * progress.
+       */
+
+      if (
+        !shouldTrackLearnerProgress(
+          req,
+          res
+        )
+      ) {
+
+        return res
+          .status(403)
+          .json({
+            success:
+              false,
+
+            message:
+              "Only learner accounts can record Course progress.",
+          });
+      }
+
+
+      const context =
+        await getAccessibleResource(
+          req,
+          res,
+          {
+            json:
+              true,
+          }
+        );
+
+
+      if (!context) {
+        return;
+      }
+
+
+      const {
+        resource,
+      } =
+        context;
+
+
+      const result =
+        await manuallyCompleteResource({
+
+          userId:
+            req.session.userId,
+
+          resource,
+        });
+
+
+      return res.json({
+
+        success:
+          true,
+
+        resourceProgress:
+          result.resourceProgress,
+
+        courseProgress:
+          result.courseProgress,
+      });
+
+    } catch (error) {
+
+      console.error(
+        "Manual resource completion error:",
+        error
+      );
+
+
+      return res
+        .status(400)
+        .json({
+
+          success:
+            false,
+
+          message:
+            error.message ||
+            "Unable to complete this Learning Material.",
+        });
+    }
+  };
+
+
+/* =========================================================
+   AUDIO PROGRESS
+   ========================================================= */
+
+exports.saveAudioProgress =
+  async (
+    req,
+    res
+  ) => {
+
+    try {
+
+      if (
+        !shouldTrackLearnerProgress(
+          req,
+          res
+        )
+      ) {
+
+        return res
+          .status(403)
+          .json({
+
+            success:
+              false,
+
+            message:
+              "Only learner accounts can record Course progress.",
+          });
+      }
+
+
+      const context =
+        await getAccessibleResource(
+          req,
+          res,
+          {
+            json:
+              true,
+          }
+        );
+
+
+      if (!context) {
+        return;
+      }
+
+
+      const {
+        resource,
+      } =
+        context;
+
+
+      if (
+        resource.type !==
+        "audio"
+      ) {
+
+        return res
+          .status(400)
+          .json({
+
+            success:
+              false,
+
+            message:
+              "This Learning Material is not an audio resource.",
+          });
+      }
+
+
+      const body =
+        req.body ||
+        {};
+
+
+      const result =
+        await updateAudioProgress({
+
+          userId:
+            req.session.userId,
+
+          resource,
+
+          positionSeconds:
+            body.positionSeconds,
+
+          durationSeconds:
+            body.durationSeconds,
+
+          engagedDeltaSeconds:
+            body.engagedDeltaSeconds,
+        });
+
+
+      return res.json({
+
+        success:
+          true,
+
+        resourceProgress:
+          result.resourceProgress,
+
+        courseProgress:
+          result.courseProgress,
+      });
+
+    } catch (error) {
+
+      console.error(
+        "Save audio progress error:",
+        error
+      );
+
+
+      return res
+        .status(500)
+        .json({
+
+          success:
+            false,
+
+          message:
+            "Unable to save audio progress.",
+        });
     }
   };

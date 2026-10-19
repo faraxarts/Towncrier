@@ -12,6 +12,8 @@ const {
   openResource,
   downloadResource,
   submitResourceAssignment,
+  completeResourceManually,
+  saveAudioProgress,
 } =
   require(
     "../controllers/academyResourceController"
@@ -49,11 +51,16 @@ const allowedMimeTypes =
   ]);
 
 
+/* =========================================================
+   FILE FILTER
+   ========================================================= */
+
 const fileFilter = (
   req,
   file,
   cb
 ) => {
+
   const extension =
     path
       .extname(
@@ -71,6 +78,7 @@ const fileFilter = (
       file.mimetype
     )
   ) {
+
     return cb(
       null,
       true
@@ -86,13 +94,19 @@ const fileFilter = (
 };
 
 
+/* =========================================================
+   MULTER
+   ========================================================= */
+
 const upload =
   multer({
+
     storage,
 
     fileFilter,
 
     limits: {
+
       fileSize:
         15 *
         1024 *
@@ -120,6 +134,10 @@ router.get(
 );
 
 
+/* =========================================================
+   ASSIGNMENT SUBMISSION
+   ========================================================= */
+
 router.post(
   "/:resourceId/assignment-submit",
 
@@ -128,6 +146,96 @@ router.post(
   ),
 
   submitResourceAssignment
+);
+
+
+/* =========================================================
+   DBW V2 — MANUAL COMPLETION
+   ========================================================= */
+
+router.post(
+  "/:resourceId/complete",
+  completeResourceManually
+);
+
+
+/* =========================================================
+   DBW V2 — AUDIO PROGRESS
+   ========================================================= */
+
+router.post(
+  "/:resourceId/audio-progress",
+
+  express.json({
+    limit:
+      "32kb",
+  }),
+
+  saveAudioProgress
+);
+
+
+/* =========================================================
+   MULTER ERROR HANDLER
+   ========================================================= */
+
+router.use(
+  (
+    error,
+    req,
+    res,
+    next
+  ) => {
+
+    if (!error) {
+      return next();
+    }
+
+
+    if (
+      error instanceof
+      multer.MulterError
+    ) {
+
+      let message =
+        error.message;
+
+
+      if (
+        error.code ===
+        "LIMIT_FILE_SIZE"
+      ) {
+
+        message =
+          "The assignment file is too large. Maximum size is 15 MB.";
+      }
+
+
+      return res
+        .status(400)
+        .send(
+          message
+        );
+    }
+
+
+    if (
+      error.message ===
+      "Only PDF, DOC, and DOCX assignment files are allowed."
+    ) {
+
+      return res
+        .status(400)
+        .send(
+          error.message
+        );
+    }
+
+
+    return next(
+      error
+    );
+  }
 );
 
 
