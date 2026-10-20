@@ -836,664 +836,354 @@ if (
 </section>
 
 <script>
+document.addEventListener("DOMContentLoaded", function () {
+  /* =====================================================
+     COURSE PROGRESS BAR
+     ===================================================== */
 
-document.addEventListener(
+  const courseProgressFill = document.querySelector(
+    "[data-course-progress-fill]"
+  );
 
-  "DOMContentLoaded",
-
-  function () {
-
-    /* =====================================================
-       COURSE PROGRESS BAR
-       ===================================================== */
-
-    const courseProgressFill =
-      document.querySelector(
-        "[data-course-progress-fill]"
-      );
-
-    if (courseProgressFill) {
-      const width =
-        Math.max(
-          0,
-          Math.min(
-            100,
-            Number(
-              courseProgressFill.dataset.progressWidth
-            ) || 0
-          )
-        );
-
-      courseProgressFill.style.width =
-        `${width}%`;
-    }
-
-    /* =====================================================
-
-       MANUAL COMPLETION
-
-       ===================================================== */
-
-    document
-
-      .querySelectorAll(
-
-        "[data-complete-resource]"
-
+  if (courseProgressFill) {
+    const width = Math.max(
+      0,
+      Math.min(
+        100,
+        Number(courseProgressFill.dataset.progressWidth) || 0
       )
+    );
 
-      .forEach(
-
-        function (button) {
-
-          button.addEventListener(
-
-            "click",
-
-            async function () {
-
-              if (button.disabled) {
-
-                return;
-
-              }
-
-              const originalText =
-
-                button.textContent.trim();
-
-              button.disabled =
-
-                true;
-
-              button.textContent =
-
-                "Saving...";
-
-              try {
-
-                const response =
-
-                  await fetch(
-
-                    button.dataset.url,
-
-                    {
-
-                      method:
-
-                        "POST",
-
-                      credentials:
-
-                        "same-origin",
-
-                      headers: {
-
-                        Accept:
-
-                          "application/json",
-
-                      },
-
-                    }
-
-                  );
-
-                const result =
-
-                  await response.json();
-
-                if (!response.ok) {
-
-                  throw new Error(
-
-                    result.message ||
-
-                    "Unable to complete this material."
-
-                  );
-
-                }
-
-                window.location.reload();
-
-              } catch (error) {
-
-                alert(
-
-                  error.message
-
-                );
-
-                button.disabled =
-
-                  false;
-
-                button.textContent =
-
-                  originalText;
-
-              }
-
-            }
-
-          );
-
-        }
-
-      );
-
-    /* =====================================================
-
-       AUDIO PROGRESS
-
-       ===================================================== */
-
-    document
-
-      .querySelectorAll(
-
-        ".dbw-v2-audio[data-progress-url]"
-
-      )
-
-      .forEach(
-
-        function (audio) {
-
-          let lastSaveAt =
-
-            Date.now();
-
-          let accumulatedEngagedSeconds =
-
-            0;
-
-          let playingSince =
-
-            null;
-
-          let saveInFlight =
-
-            false;
-
-          let pendingSave =
-
-            false;
-
-          const resumePosition =
-
-            Number(
-
-              audio.dataset
-
-                .resumePosition ||
-
-              0
-
-            );
-
-          /* -----------------------------------------------
-
-             RESUME
-
-             ----------------------------------------------- */
-
-          audio.addEventListener(
-
-            "loadedmetadata",
-
-            function () {
-
-              if (
-
-                resumePosition > 1 &&
-
-                Number.isFinite(
-
-                  audio.duration
-
-                ) &&
-
-                resumePosition <
-
-                  audio.duration - 3
-
-              ) {
-
-                audio.currentTime =
-
-                  resumePosition;
-
-              }
-
-            },
-
-            {
-
-              once:
-
-                true,
-
-            }
-
-          );
-
-          /* -----------------------------------------------
-
-             ENGAGEMENT CLOCK
-
-             ----------------------------------------------- */
-
-          audio.addEventListener(
-
-            "play",
-
-            function () {
-
-              playingSince =
-
-                Date.now();
-
-            }
-
-          );
-
-          function collectEngagement() {
-
-            if (
-
-              playingSince ===
-
-              null
-
-            ) {
-
-              return;
-
-            }
-
-            const now =
-
-              Date.now();
-
-            const delta =
-
-              (
-
-                now -
-
-                playingSince
-
-              ) /
-
-              1000;
-
-            if (
-
-              delta > 0 &&
-
-              delta < 60
-
-            ) {
-
-              accumulatedEngagedSeconds +=
-
-                delta;
-
-            }
-
-            playingSince =
-
-              audio.paused
-
-                ? null
-
-                : now;
-
-          }
-
-          /* -----------------------------------------------
-
-             SAVE
-
-             ----------------------------------------------- */
-
-          async function saveProgress(
-
-            force = false
-
-          ) {
-
-            collectEngagement();
-
-            const now =
-
-              Date.now();
-
-            if (
-
-              !force &&
-
-              now -
-
-                lastSaveAt <
-
-                20000
-
-            ) {
-
-              return;
-
-            }
-
-            if (saveInFlight) {
-
-              pendingSave =
-
-                true;
-
-              return;
-
-            }
-
-            if (
-
-              !Number.isFinite(
-
-                audio.duration
-
-              ) ||
-
-              audio.duration <= 0
-
-            ) {
-
-              return;
-
-            }
-
-            saveInFlight =
-
-              true;
-
-            const engaged =
-
-              accumulatedEngagedSeconds;
-
-            accumulatedEngagedSeconds =
-
-              0;
-
-            try {
-
-              const response =
-
-                await fetch(
-
-                  audio.dataset
-
-                    .progressUrl,
-
-                  {
-
-                    method:
-
-                      "POST",
-
-                    credentials:
-
-                      "same-origin",
-
-                    headers: {
-
-                      "Content-Type":
-
-                        "application/json",
-
-                      Accept:
-
-                        "application/json",
-
-                    },
-
-                    body:
-
-                      JSON.stringify({
-
-                        positionSeconds:
-
-                          audio.currentTime,
-
-                        durationSeconds:
-
-                          audio.duration,
-
-                        engagedDeltaSeconds:
-
-                          engaged,
-
-                      }),
-
-                  }
-
-                );
-
-              if (
-
-                response.ok
-
-              ) {
-
-                const result =
-
-                  await response.json();
-
-                const percentage =
-
-                  result
-
-                    .resourceProgress
-
-                    ?.progressPercentage;
-
-                const status =
-
-                  result
-
-                    .resourceProgress
-
-                    ?.status;
-
-                const text =
-
-                  document.querySelector(
-
-                    `[data-audio-progress-text="${audio.dataset.resourceId}"]`
-
-                  );
-
-                if (text) {
-
-                  if (
-
-                    status ===
-
-                    "completed"
-
-                  ) {
-
-                    text.innerHTML =
-
-                      "<strong>✓ Listening requirement completed</strong>";
-
-                  }
-
-                  else if (
-
-                    percentage > 0
-
-                  ) {
-
-                    text.innerHTML =
-
-                      `Listening progress: <strong>${percentage}%</strong>`;
-
-                  }
-
-                }
-
-              }
-
-            } catch (error) {
-
-              console.error(
-
-                "Audio progress save failed:",
-
-                error
-
-              );
-
-              /*
-
-               * Restore unsaved listening time so it can
-
-               * be included in the next attempt.
-
-               */
-
-              accumulatedEngagedSeconds +=
-
-                engaged;
-
-            } finally {
-
-              lastSaveAt =
-
-                Date.now();
-
-              saveInFlight =
-
-                false;
-
-              if (pendingSave) {
-
-                pendingSave =
-
-                  false;
-
-                saveProgress(
-
-                  true
-
-                );
-
-              }
-
-            }
-
-          }
-
-          /* -----------------------------------------------
-
-             PERIODIC SAVE
-
-             ----------------------------------------------- */
-
-          audio.addEventListener(
-
-            "timeupdate",
-
-            function () {
-
-              if (
-
-                !audio.paused
-
-              ) {
-
-                saveProgress(
-
-                  false
-
-                );
-
-              }
-
-            }
-
-          );
-
-          audio.addEventListener(
-
-            "pause",
-
-            function () {
-
-              saveProgress(
-
-                true
-
-              );
-
-            }
-
-          );
-
-          audio.addEventListener(
-
-            "ended",
-
-            function () {
-
-              saveProgress(
-
-                true
-
-              );
-
-            }
-
-          );
-
-          /*
-
-           * sendBeacon is intentionally not used here
-
-           * because our JSON progress endpoint and normal
-
-           * saves already cover the meaningful cases.
-
-           */
-
-          window\.addEventListener(
-
-            "pagehide",
-
-            function () {
-
-              if (
-
-                !audio.paused
-
-              ) {
-
-                collectEngagement();
-
-              }
-
-            }
-
-          );
-
-        }
-
-      );
-
+    courseProgressFill.style.width = `${width}%`;
   }
 
-);
 
+  /* =====================================================
+     MANUAL COMPLETION
+     ===================================================== */
+
+  document
+    .querySelectorAll("[data-complete-resource]")
+    .forEach(function (button) {
+      button.addEventListener("click", async function () {
+        if (button.disabled) {
+          return;
+        }
+
+        const originalText = button.textContent.trim();
+
+        button.disabled = true;
+        button.textContent = "Saving...";
+
+        try {
+          const response = await fetch(button.dataset.url, {
+            method: "POST",
+            credentials: "same-origin",
+            headers: {
+              Accept: "application/json",
+            },
+          });
+
+          const contentType =
+            response.headers.get("content-type") || "";
+
+          let result = {};
+
+          if (contentType.includes("application/json")) {
+            result = await response.json();
+          } else {
+            const text = await response.text();
+            result = {
+              message:
+                text ||
+                `Unable to complete this material (${response.status}).`,
+            };
+          }
+
+          if (!response.ok) {
+            throw new Error(
+              result.message ||
+                `Unable to complete this material (${response.status}).`
+            );
+          }
+
+          window.location.reload();
+        } catch (error) {
+          console.error("Manual completion error:", error);
+
+          alert(
+            error.message ||
+              "Unable to complete this Learning Material."
+          );
+
+          button.disabled = false;
+          button.textContent = originalText;
+        }
+      });
+    });
+
+
+  /* =====================================================
+     AUDIO PROGRESS + RESUME
+     ===================================================== */
+
+  document
+    .querySelectorAll(".dbw-v2-audio[data-progress-url]")
+    .forEach(function (audio) {
+      let lastSaveAt = Date.now();
+      let accumulatedEngagedSeconds = 0;
+      let playingSince = null;
+      let saveInFlight = false;
+      let pendingSave = false;
+
+      const resumePosition = Number(
+        audio.dataset.resumePosition || 0
+      );
+
+
+      /* -----------------------------------------------
+         RESUME PLAYBACK
+         ----------------------------------------------- */
+
+      audio.addEventListener(
+        "loadedmetadata",
+        function () {
+          if (
+            resumePosition > 1 &&
+            Number.isFinite(audio.duration) &&
+            resumePosition < audio.duration - 3
+          ) {
+            try {
+              audio.currentTime = resumePosition;
+            } catch (error) {
+              console.warn(
+                "Unable to restore saved audio position:",
+                error
+              );
+            }
+          }
+        },
+        { once: true }
+      );
+
+
+      /* -----------------------------------------------
+         ENGAGEMENT CLOCK
+         ----------------------------------------------- */
+
+      audio.addEventListener("play", function () {
+        if (playingSince === null) {
+          playingSince = Date.now();
+        }
+      });
+
+
+      function collectEngagement() {
+        if (playingSince === null) {
+          return;
+        }
+
+        const now = Date.now();
+        const delta = (now - playingSince) / 1000;
+
+        if (delta > 0 && delta < 60) {
+          accumulatedEngagedSeconds += delta;
+        }
+
+        playingSince = audio.paused ? null : now;
+      }
+
+
+      /* -----------------------------------------------
+         RESPONSE HELPER
+         ----------------------------------------------- */
+
+      async function readProgressResponse(response) {
+        const contentType =
+          response.headers.get("content-type") || "";
+
+        if (contentType.includes("application/json")) {
+          return response.json();
+        }
+
+        const text = await response.text();
+
+        return {
+          success: false,
+          message:
+            text ||
+            `Unable to save audio progress (${response.status}).`,
+        };
+      }
+
+
+      /* -----------------------------------------------
+         UPDATE VISIBLE AUDIO STATUS
+         ----------------------------------------------- */
+
+      function updateAudioStatus(result) {
+        const percentage =
+          result.resourceProgress?.progressPercentage;
+
+        const status =
+          result.resourceProgress?.status;
+
+        const text = document.querySelector(
+          `[data-audio-progress-text="${audio.dataset.resourceId}"]`
+        );
+
+        if (!text) {
+          return;
+        }
+
+        if (status === "completed") {
+          text.innerHTML =
+            "<strong>✓ Listening requirement completed</strong>";
+        } else if (Number(percentage) > 0) {
+          text.innerHTML =
+            `Listening progress: <strong>${percentage}%</strong>`;
+        }
+      }
+
+
+      /* -----------------------------------------------
+         SAVE PROGRESS
+         ----------------------------------------------- */
+
+      async function saveProgress(
+        force = false,
+        useKeepalive = false
+      ) {
+        collectEngagement();
+
+        const now = Date.now();
+
+        if (!force && now - lastSaveAt < 20000) {
+          return;
+        }
+
+        if (saveInFlight) {
+          pendingSave = true;
+          return;
+        }
+
+        if (
+          !Number.isFinite(audio.duration) ||
+          audio.duration <= 0
+        ) {
+          return;
+        }
+
+        const engaged = accumulatedEngagedSeconds;
+
+        /*
+         * Avoid pointless writes before playback has actually
+         * begun, unless we are saving a meaningful resume
+         * position.
+         */
+        if (
+          engaged <= 0 &&
+          audio.currentTime <= 0 &&
+          !force
+        ) {
+          return;
+        }
+
+        saveInFlight = true;
+        accumulatedEngagedSeconds = 0;
+
+        try {
+          const response = await fetch(
+            audio.dataset.progressUrl,
+            {
+              method: "POST",
+              credentials: "same-origin",
+              keepalive: useKeepalive,
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+              },
+              body: JSON.stringify({
+                positionSeconds: audio.currentTime,
+                durationSeconds: audio.duration,
+                engagedDeltaSeconds: engaged,
+              }),
+            }
+          );
+
+          const result = await readProgressResponse(response);
+
+          if (!response.ok) {
+            throw new Error(
+              result.message ||
+                `Unable to save audio progress (${response.status}).`
+            );
+          }
+
+          updateAudioStatus(result);
+        } catch (error) {
+          console.error("Audio progress save failed:", error);
+
+          /*
+           * Do not lose listening time simply because one
+           * request failed. It can be sent again next time.
+           */
+          accumulatedEngagedSeconds += engaged;
+        } finally {
+          lastSaveAt = Date.now();
+          saveInFlight = false;
+
+          if (pendingSave) {
+            pendingSave = false;
+            saveProgress(true, useKeepalive);
+          }
+        }
+      }
+
+
+      /* -----------------------------------------------
+         PERIODIC SAVE
+         ----------------------------------------------- */
+
+      const progressTimer = window.setInterval(
+        function () {
+          if (!audio.paused && !audio.ended) {
+            saveProgress(false);
+          }
+        },
+        5000
+      );
+
+
+      audio.addEventListener("pause", function () {
+        saveProgress(true);
+      });
+
+
+      audio.addEventListener("ended", function () {
+        saveProgress(true);
+      });
+
+
+      /*
+       * Save when the tab/app is backgrounded. keepalive lets
+       * the browser finish the request during navigation.
+       */
+      document.addEventListener("visibilitychange", function () {
+        if (document.visibilityState === "hidden") {
+          saveProgress(true, true);
+        }
+      });
+
+
+      window.addEventListener("pagehide", function () {
+        saveProgress(true, true);
+      });
+
+
+      window.addEventListener("beforeunload", function () {
+        window.clearInterval(progressTimer);
+      });
+    });
+});
 </script>
